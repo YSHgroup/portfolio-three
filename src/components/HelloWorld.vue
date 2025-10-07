@@ -6,6 +6,10 @@
 .test {
   &-hi {
     color: red;
+
+    @include mixins.mq("md") {
+      color: blue;
+    }
   }
 }
 </style>
