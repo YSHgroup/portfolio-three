@@ -1,0 +1,42 @@
+@use "sass:map";
+@use "sass:math";
+
+$breakpoints: (
+  "sm": (
+    width: 480px,
+  ),
+  "md": (
+    width: 768px,
+  ),
+  "lg": (
+    width: 1024px,
+  ),
+  "xl": (
+    width: 1440px,
+  ),
+) !default;
+
+$media-direction: min;
+
+@mixin mq($mq, $direction: $media-direction, $dimension: "width") {
+  @if map.has-key($breakpoints, $mq) {
+    $breakpoint: map.get($breakpoints, $mq);
+    $value: map.get($breakpoint, $dimension);
+
+    @media (#{$direction}-#{$dimension}: $value) {
+      @content;
+    }
+  } @else if math.is-unitless($mq) {
+    $mq: $mq + 0px;
+
+    @media (#{$direction}-#{$dimension}: $mq) {
+      @content;
+    }
+  }
+}
+
+@mixin hover {
+  @media (hover: hover) and (pointer: fine) {
+    @content;
+  }
+}
