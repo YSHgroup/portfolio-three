@@ -1,23 +1,10 @@
 @use "./reset.scss";
-//@use "./variables.scss";
+@use "./variables.scss";
 @use "./colors.scss";
 //@use "./fonts.scss";
 
 html {
-  background: var(--color-background);
+  background: var(--background-beige);
   color: var(--color-text-400);
   font-family: "Nunito";
-
-  --color-accent-400: var(--color-light-accent-blue-400);
-  --color-accent-blue-400: var(--color-light-accent-blue-400);
-
-  /* Background Color */
-  --color-background: var(--color-light-background);
-
-  /* Text Colors */
-  --color-text-400: var(--color-light-text-400);
-  --color-text-300: var(--color-light-text-300);
-
-  /* Grayscale Colors */
-  --color-grayscale-400: var(--color-light-grayscale-400);
 }

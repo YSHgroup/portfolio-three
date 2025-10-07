@@ -1,7 +1,13 @@
 <script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
+import { onMounted } from "vue";
+import sizes from "./utils/Sizes";
+import ThreeCanvas from "./components/ThreeCanvas.vue";
+
+onMounted(() => {
+  sizes.init();
+});
 </script>
 
 <template>
-  <HelloWorld />
+  <ThreeCanvas />
 </template>
