@@ -2,7 +2,7 @@ import gsap from "gsap";
 import Lenis from "lenis";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const lenis = new Lenis();
+export const lenis = new Lenis();
 
 lenis.on("scroll", ScrollTrigger.update);
 

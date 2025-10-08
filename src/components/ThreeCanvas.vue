@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from "vue";
 import { three } from "../three";
+import { resources } from "../utils/Resources";
 
 const canvasRef = ref<HTMLCanvasElement | null>(null);
+const isReady = ref(false);
 
 onMounted(() => {
-  three.init(canvasRef.value as HTMLCanvasElement);
+  resources.once("ready", () => {
+    if (isReady.value) return;
+    three.init(canvasRef.value as HTMLCanvasElement);
+    isReady.value = true;
+  });
 });
 
 onUnmounted(() => {

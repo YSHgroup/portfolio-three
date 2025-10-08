@@ -1,11 +1,9 @@
-import { cube } from "./cube";
+import { room } from "./room";
 
 const init = () => {
-  cube.init();
+  room.init();
 };
 
-const destroy = () => {
-  cube.destroy();
-};
+const destroy = () => {};
 
 export const objects = { init, destroy };
