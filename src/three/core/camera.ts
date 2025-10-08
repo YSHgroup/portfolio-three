@@ -1,3 +1,4 @@
+// camera.ts
 import { PerspectiveCamera, Group } from "three";
 import { sizes } from "../../utils/Sizes";
 import { isTouch } from "../../utils/observer";
@@ -6,15 +7,37 @@ import { scene } from "./scene";
 
 const PARALLAX_INTENSITY = 0.4;
 const PARALLAX_SPEED = 3;
-const PARALLAX_ENABLED = true;
 
 const instance = new PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 100);
 
+// NEW: waypointGroup moves along the scroll path
+const waypointGroup = new Group();
+scene.instance.add(waypointGroup);
+
+// parallaxGroup is child of waypointGroup
 const parallaxGroup = new Group();
+waypointGroup.add(parallaxGroup);
+
+// camera is child of parallaxGroup
+parallaxGroup.add(instance);
+
 const cursor = { x: 0, y: 0 };
 
-parallaxGroup.add(instance);
-scene.instance.add(parallaxGroup);
+const tick = () => {
+  const delta = gsap.ticker.deltaRatio();
+
+  // Apply parallax offset
+  const parallaxX = cursor.x * PARALLAX_INTENSITY;
+  const parallaxY = -cursor.y * PARALLAX_INTENSITY;
+
+  parallaxGroup.position.x += (parallaxX - parallaxGroup.position.x) * PARALLAX_SPEED * 0.1 * delta;
+  parallaxGroup.position.y += (parallaxY - parallaxGroup.position.y) * PARALLAX_SPEED * 0.1 * delta;
+
+  // LookAt
+  if (waypointGroup.userData.lookAt) {
+    instance.lookAt(waypointGroup.userData.lookAt);
+  }
+};
 
 const init = () => {
   sizes.on("resize", resize);
@@ -36,21 +59,8 @@ const resize = () => {
 };
 
 const destroy = () => {
-  if (!instance) return;
   sizes.off("resize", resize);
   gsap.ticker.remove(tick);
 };
 
-const tick = () => {
-  if (!PARALLAX_ENABLED) return;
-
-  const parallaxX = cursor.x * PARALLAX_INTENSITY;
-  const parallaxY = -cursor.y * PARALLAX_INTENSITY;
-
-  const delta = gsap.ticker.deltaRatio();
-
-  //parallaxGroup.position.x += (parallaxX - parallaxGroup.position.x) * PARALLAX_SPEED * 0.1 * delta;
-  //parallaxGroup.position.y += (parallaxY - parallaxGroup.position.y) * PARALLAX_SPEED * 0.1 * delta;
-};
-
-export const camera = { init, destroy, instance };
+export const camera = { init, destroy, instance, parallaxGroup, waypointGroup };
