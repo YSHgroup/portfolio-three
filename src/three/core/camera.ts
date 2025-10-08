@@ -1,5 +1,5 @@
 import { PerspectiveCamera } from "three";
-import sizes from "../../utils/Sizes";
+import { sizes } from "../../utils/Sizes";
 
 const instance = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 

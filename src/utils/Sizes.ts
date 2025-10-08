@@ -31,4 +31,4 @@ class Sizes extends EventEmitter<{
   }
 }
 
-export default new Sizes();
+export const sizes = new Sizes();
