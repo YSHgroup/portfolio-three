@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
-import { sizes } from "./utils/Sizes";
-import { scroll } from "./utils/Scroll";
+import { sizes } from "./utils/sizes";
+import { scroll } from "./utils/scroll";
 import { waypoints } from "./three/core/waypoints";
-import { resources } from "./utils/Resources";
+import { resources } from "./utils/resources";
 
 import ThreeCanvas from "./components/ThreeCanvas.vue";
 import DarkBackground from "./components/DarkBackground.vue";

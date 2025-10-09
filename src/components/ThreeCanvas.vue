@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from "vue";
 import { three } from "../three";
-import { resources } from "../utils/Resources";
+import { resources } from "../utils/resources";
 
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 const isReady = ref(false);

@@ -1,5 +1,5 @@
 import { WebGLRenderer } from "three";
-import { sizes } from "../../utils/Sizes";
+import { sizes } from "../../utils/sizes";
 import gsap from "gsap";
 import { scene } from "./scene";
 import { camera } from "./camera";

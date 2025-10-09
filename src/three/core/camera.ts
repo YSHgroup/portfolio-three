@@ -1,43 +1,24 @@
 // camera.ts
 import { PerspectiveCamera, Group } from "three";
-import { sizes } from "../../utils/Sizes";
+import { sizes } from "../../utils/sizes";
 import { isTouch } from "../../utils/observer";
 import gsap from "gsap";
 import { scene } from "./scene";
 
-const PARALLAX_INTENSITY = 0.4;
-const PARALLAX_SPEED = 3;
+const PARALLAX_INTENSITY = 1;
+const PARALLAX_SPEED = 1;
 
 const instance = new PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 100);
 
-// NEW: waypointGroup moves along the scroll path
 const waypointGroup = new Group();
 scene.instance.add(waypointGroup);
 
-// parallaxGroup is child of waypointGroup
 const parallaxGroup = new Group();
 waypointGroup.add(parallaxGroup);
 
-// camera is child of parallaxGroup
 parallaxGroup.add(instance);
 
 const cursor = { x: 0, y: 0 };
-
-const tick = () => {
-  const delta = gsap.ticker.deltaRatio();
-
-  // Apply parallax offset
-  const parallaxX = cursor.x * PARALLAX_INTENSITY;
-  const parallaxY = -cursor.y * PARALLAX_INTENSITY;
-
-  parallaxGroup.position.x += (parallaxX - parallaxGroup.position.x) * PARALLAX_SPEED * 0.1 * delta;
-  parallaxGroup.position.y += (parallaxY - parallaxGroup.position.y) * PARALLAX_SPEED * 0.1 * delta;
-
-  // LookAt
-  if (waypointGroup.userData.lookAt) {
-    instance.lookAt(waypointGroup.userData.lookAt);
-  }
-};
 
 const init = () => {
   sizes.on("resize", resize);
@@ -50,6 +31,23 @@ const init = () => {
     });
 
     gsap.ticker.add(tick);
+  }
+};
+
+const tick = () => {
+  const delta = gsap.ticker.deltaRatio();
+
+  const parallaxX = cursor.x * PARALLAX_INTENSITY;
+  const parallaxY = -cursor.y * PARALLAX_INTENSITY;
+
+  const byX = (parallaxX - parallaxGroup.position.x) * PARALLAX_SPEED * 0.1 * delta;
+  const byY = (parallaxY - parallaxGroup.position.y) * PARALLAX_SPEED * 0.1 * delta;
+
+  if (byX < 0.05 && byX > -0.05) parallaxGroup.position.x += byX;
+  if (byY < 0.05 && byY > -0.05) parallaxGroup.position.y += byY;
+
+  if (waypointGroup.userData.lookAt) {
+    instance.lookAt(waypointGroup.userData.lookAt);
   }
 };
 
