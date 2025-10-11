@@ -30,7 +30,7 @@ const init = () => {
     // top left
     if (x < 0 && y > 0) activeArray[i + 1]! += 0.5;
     // bottom right
-    if (x > 0 && y < 0) activeArray[i + 1]! -= 0.2;
+    if (x > 0 && y < 0) activeArray[i + 1]! -= 0;
   }
 
   geometry.setAttribute("activePosition", new Float32BufferAttribute(activeArray, 3));
