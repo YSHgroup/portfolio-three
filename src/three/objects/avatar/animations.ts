@@ -63,9 +63,6 @@ const tick = () => {
   const tIdle = actions.get("t-idle");
   if (tIdle) tIdle.weight = avatar.tIdleIntensity.value;
 
-  const mesh = avatar.getMesh();
-  mesh.rotation.z = Math.PI * avatar.tIdleIntensity.value;
-
   const delta = gsap.ticker.deltaRatio(60);
   mixer.update(delta / 60);
 };

@@ -42,6 +42,8 @@ const setupMesh = () => {
     }
   });
 
+  mesh.rotation.z = 0;
+
   scene.instance.add(mesh);
 };
 

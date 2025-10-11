@@ -8,7 +8,7 @@ let geometry: PlaneGeometry | null = null;
 let material: ShaderMaterial | null = null;
 let mesh: Mesh | null = null;
 
-const offset = { value: -2 };
+const progress = { in: 0, out: 0 };
 
 const init = () => {
   geometry = new PlaneGeometry(2, 2);
@@ -27,8 +27,10 @@ const init = () => {
     activeArray[i + 1] = y;
     activeArray[i + 2] = z;
 
+    // top left
     if (x < 0 && y > 0) activeArray[i + 1]! += 0.5;
-    if (x < 0 && y < 0) activeArray[i + 1]! -= 0.5;
+    // bottom right
+    if (x > 0 && y < 0) activeArray[i + 1]! -= 0.2;
   }
 
   geometry.setAttribute("activePosition", new Float32BufferAttribute(activeArray, 3));
@@ -39,7 +41,7 @@ const init = () => {
     depthTest: false,
     depthWrite: false,
     uniforms: {
-      uOffset: { value: offset.value },
+      uOffset: { value: -2 },
       uActive: { value: 0 },
     },
   });
@@ -53,11 +55,21 @@ const init = () => {
 };
 
 const tick = () => {
-  if (!material) return;
-  material.uniforms.uOffset!.value = offset.value;
+  if (!material || !mesh) return;
 
-  const normalized = 1 - Math.min(1, Math.abs(offset.value / 2));
-  material.uniforms.uActive!.value = normalized;
+  material.uniforms.uActive!.value = Math.max(0, Math.min(1, progress.in * (1 - progress.out)));
+
+  if (progress.in > 0 && progress.out === 0) {
+    material.uniforms.uOffset!.value = -2 + 2 * progress.in;
+  } else if (progress.out > 0) {
+    material.uniforms.uOffset!.value = 2 * progress.out;
+  }
+
+  if (progress.in < 0.001 || (progress.in === 1 && progress.out >= 0.999)) {
+    mesh.visible = false;
+  } else {
+    mesh.visible = true;
+  }
 };
 
-export const darkPlane = { init, offset };
+export const darkPlane = { init, progress };

@@ -1,5 +1,4 @@
-// camera.ts
-import { PerspectiveCamera, Group } from "three";
+import { PerspectiveCamera, Group, Vector3 } from "three";
 import { sizes } from "../../utils/sizes";
 import { isTouch } from "../../utils/observer";
 import gsap from "gsap";
@@ -9,13 +8,13 @@ const PARALLAX_INTENSITY = 1;
 const PARALLAX_SPEED = 1;
 
 const instance = new PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 100);
+instance.position.set(5.8, 5.7, 8.3);
 
-const waypointGroup = new Group();
-scene.instance.add(waypointGroup);
+const lookAtPoint = new Vector3(-2.7, 2, 0);
 
 const parallaxGroup = new Group();
-waypointGroup.add(parallaxGroup);
 
+scene.instance.add(parallaxGroup);
 parallaxGroup.add(instance);
 
 const cursor = { x: 0, y: 0 };
@@ -29,9 +28,9 @@ const init = () => {
       cursor.x = event.clientX / sizes.width - 0.5;
       cursor.y = event.clientY / sizes.height - 0.5;
     });
-
-    gsap.ticker.add(tick);
   }
+
+  gsap.ticker.add(tick);
 };
 
 const tick = () => {
@@ -46,9 +45,7 @@ const tick = () => {
   if (byX < 0.05 && byX > -0.05) parallaxGroup.position.x += byX;
   if (byY < 0.05 && byY > -0.05) parallaxGroup.position.y += byY;
 
-  if (waypointGroup.userData.lookAt) {
-    instance.lookAt(waypointGroup.userData.lookAt);
-  }
+  instance.lookAt(lookAtPoint);
 };
 
 const resize = () => {
@@ -61,4 +58,4 @@ const destroy = () => {
   gsap.ticker.remove(tick);
 };
 
-export const camera = { init, destroy, instance, parallaxGroup, waypointGroup };
+export const camera = { init, destroy, instance, parallaxGroup, lookAtPoint };
