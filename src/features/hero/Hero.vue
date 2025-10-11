@@ -4,6 +4,6 @@
 
 <style scoped lang="scss">
 .hero {
-  height: 100vh;
+  height: var(--100vh);
 }
 </style>

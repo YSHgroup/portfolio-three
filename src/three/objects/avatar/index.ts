@@ -7,6 +7,8 @@ import type { Material } from "three";
 
 let mesh: Mesh;
 
+const tIdleIntensity = { value: 0 };
+
 const init = () => {
   setupMesh();
   animations.init();
@@ -28,7 +30,6 @@ const getMaterial = (name: string): Material | null => {
 const setupMesh = () => {
   const resource = resources.items["avatar-model"];
   mesh = resource.scene.children[0];
-  mesh.rotation.z = 0;
 
   mesh.frustumCulled = false;
 
@@ -44,4 +45,4 @@ const setupMesh = () => {
   scene.instance.add(mesh);
 };
 
-export const avatar = { init, getMesh: () => mesh };
+export const avatar = { init, getMesh: () => mesh, tIdleIntensity };

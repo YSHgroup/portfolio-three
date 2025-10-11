@@ -14,7 +14,7 @@ const init = () => {
 
   setupActions();
 
-  play("idle");
+  //play("idle");
 
   gsap.ticker.add(tick);
 };
@@ -28,9 +28,18 @@ const getActionFromMesh = (name: string) => {
 
 const setupActions = () => {
   //idle
-  const idle = mixer.clipAction(getActionFromMesh("idle"));
-  idle.loop = LoopPingPong;
-  actions.set("idle", idle);
+  const desktopIdle = mixer.clipAction(getActionFromMesh("idle"));
+  desktopIdle.loop = LoopPingPong;
+  actions.set("desktop-idle", desktopIdle);
+  desktopIdle.weight = 1;
+  desktopIdle.play();
+
+  //t-idle
+  const tIdle = mixer.clipAction(getActionFromMesh("t-idle"));
+  tIdle.loop = LoopPingPong;
+  actions.set("t-idle", tIdle);
+  tIdle.weight = 0;
+  tIdle.play();
 };
 
 const play = (name: string, transition: number = 0.5) => {
@@ -48,6 +57,15 @@ const play = (name: string, transition: number = 0.5) => {
 };
 
 const tick = () => {
+  const desktopIdle = actions.get("desktop-idle");
+  if (desktopIdle) desktopIdle.weight = 1 - avatar.tIdleIntensity.value;
+
+  const tIdle = actions.get("t-idle");
+  if (tIdle) tIdle.weight = avatar.tIdleIntensity.value;
+
+  const mesh = avatar.getMesh();
+  mesh.rotation.z = Math.PI * avatar.tIdleIntensity.value;
+
   const delta = gsap.ticker.deltaRatio(60);
   mixer.update(delta / 60);
 };

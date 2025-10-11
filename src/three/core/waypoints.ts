@@ -6,7 +6,6 @@ import { lenis } from "../../utils/scroll";
 
 const points = [
   { t: 0, name: "hero", position: new Vector3(5.8, 5.7, 8.3), lookAt: new Vector3(-2.7, 2, 0) },
-  { t: 0.5, name: "about-start", position: new Vector3(6.8, 0, 8.3), lookAt: new Vector3(-2.7, -3.7, 0) },
   { t: 1, name: "about-end", position: new Vector3(7.8, 0, 8.3), lookAt: new Vector3(-2.7, -3.7, 0) },
 ] as const satisfies { t: number; name: string; position: Vector3; lookAt: Vector3 }[];
 

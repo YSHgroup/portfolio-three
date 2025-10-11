@@ -8,5 +8,5 @@ html {
   color: var(--color-text-400);
   font-family: "Nunito";
 
-  height: 200vh;
+  --100vh: min(100vh, 100dvh);
 }

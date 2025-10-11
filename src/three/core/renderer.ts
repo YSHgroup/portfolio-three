@@ -11,8 +11,10 @@ const init = (canvas: HTMLCanvasElement) => {
   instance = new WebGLRenderer({
     canvas,
     antialias: true,
-    alpha: true,
+    alpha: false,
   });
+
+  instance.setClearColor("#f5efe6");
 
   gsap.ticker.add(tick);
 

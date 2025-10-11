@@ -1,11 +1,12 @@
+import { avatar } from "../../three/objects/avatar";
+import { darkPlane } from "../../three/objects/dark-plane";
+
 import gsap from "gsap";
 
 export const setup = () => {
-  const darkBackground = document.querySelector(".dark-background");
   const hero = document.querySelector(".hero");
 
-  gsap.to(darkBackground, {
-    opacity: 1,
+  const tl = gsap.timeline({
     scrollTrigger: {
       trigger: hero,
       start: "top top",
@@ -13,4 +14,22 @@ export const setup = () => {
       scrub: true,
     },
   });
+
+  tl.to(
+    avatar.tIdleIntensity,
+    {
+      value: 1,
+      duration: 1,
+    },
+    0,
+  );
+
+  tl.to(
+    darkPlane.offset,
+    {
+      value: 0,
+      duration: 1,
+    },
+    0,
+  );
 };

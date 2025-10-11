@@ -4,11 +4,9 @@ import { sizes } from "./utils/sizes";
 import { scroll } from "./utils/scroll";
 import { waypoints } from "./three/core/waypoints";
 import { resources } from "./utils/resources";
-
-import ThreeCanvas from "./components/ThreeCanvas.vue";
-import DarkBackground from "./components/DarkBackground.vue";
-import Hero from "./components/Hero.vue";
+import { RouterView } from "vue-router";
 import { useScrollAnimations } from "./animations/useScrollAnimations";
+import ThreeCanvas from "./three/components/ThreeCanvas.vue";
 
 useScrollAnimations();
 
@@ -21,7 +19,6 @@ onMounted(() => {
 </script>
 
 <template>
-  <DarkBackground />
   <ThreeCanvas />
-  <Hero />
+  <RouterView />
 </template>
