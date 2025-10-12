@@ -5,8 +5,14 @@ import { getRoomMaterial } from "../../common/materials";
 
 import type { Object3D } from "three";
 
+/**
+ * TBD: carpet needs own material with
+ *     object.renderOrder = -10;
+    object.material.depthWrite = false;
+ */
+
 const group = new Group();
-group.rotation.y = -Math.PI / 2; 
+group.rotation.y = -Math.PI / 2;
 
 let objects: {
   blackboard: Mesh;
