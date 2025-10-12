@@ -8,6 +8,10 @@ export const points = {
     },
     about: {
       position: { x: 5.8, y: 5.7, z: 8.3 },
+      lookAt: { x: -4, y: 2, z: 0 },
+    },
+    "about-2": {
+      position: { x: 5.8, y: 5.7, z: 8.3 },
       lookAt: { x: -3.5, y: 2, z: 0 },
     },
   },

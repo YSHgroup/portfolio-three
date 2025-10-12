@@ -3,8 +3,7 @@ import gsap from "gsap";
 export const sceneWeights = {
   hero: 1,
   about: 0,
-  "about-0": 0,
-  "about-1": 0,
+  "about-2": 0,
   projects: 0,
   "work-cta": 0,
   footer: 0,
@@ -22,6 +21,10 @@ export const sceneWeightsInOut = {
     out: 0,
   },
   about: {
+    in: 0,
+    out: 0,
+  },
+  "about-2": {
     in: 0,
     out: 0,
   },
