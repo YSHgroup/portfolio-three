@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import "./assets/styles/index.scss";
+import "lenis/dist/lenis.css";
 import App from "./App.vue";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";

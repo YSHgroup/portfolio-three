@@ -4,11 +4,12 @@ import { room } from "../../three/objects/room";
 import { avatarHologram } from "../../three/objects/avatar/hologram";
 import { uniforms as hologramUniforms } from "../../three/objects/avatar/hologram-material";
 import { camera } from "../../three/core/camera";
-
+import { sceneWeights } from "../scenes";
 import gsap from "gsap";
 
 export const setup = () => {
   const hero = document.querySelector(".hero");
+  const aboutOverlay = document.querySelector(".about-overlay");
 
   const tl = gsap.timeline({
     scrollTrigger: {
@@ -18,6 +19,8 @@ export const setup = () => {
       scrub: true,
     },
   });
+
+  tl.to(sceneWeights, { hero: 0, about: 1, ease: "none", duration: 1 }, 0);
 
   tl.to(darkPlane.progress, { in: 1, duration: 1, ease: "none" }, 0);
 
@@ -44,4 +47,6 @@ export const setup = () => {
   tl.to(room.group.position, { y: 4, duration: 1 }, 0);
 
   tl.to(camera.lookAtPoint, { x: -3.5, duration: 1 }, 0);
+
+  tl.to(aboutOverlay, { opacity: 1, duration: 1 }, 0);
 };

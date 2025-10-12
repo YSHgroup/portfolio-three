@@ -2,6 +2,8 @@ import { resources } from "../../../utils/resources";
 import { scene } from "../../core/scene";
 import { Group, Mesh } from "three";
 import { getRoomMaterial } from "../../common/materials";
+import { sceneWeights } from "../../../animations/scenes";
+import gsap from "gsap";
 
 import type { Object3D } from "three";
 
@@ -22,6 +24,8 @@ let objects: {
 };
 
 const init = () => {
+  gsap.ticker.add(tick);
+
   const resource = resources.items["room-model"];
 
   objects = {
@@ -55,6 +59,10 @@ const init = () => {
   });
 
   scene.instance.add(group);
+};
+
+const tick = () => {
+  group.visible = sceneWeights.hero > 0;
 };
 
 export const room = { init, group };
