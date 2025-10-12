@@ -6,7 +6,7 @@ import { getRoomMaterial } from "../../common/materials";
 import type { Object3D } from "three";
 
 const group = new Group();
-group.rotation.y = -Math.PI / 2;
+group.rotation.y = -Math.PI / 2; 
 
 let objects: {
   blackboard: Mesh;
@@ -43,4 +43,4 @@ const init = () => {
   scene.instance.add(group);
 };
 
-export const room = { init };
+export const room = { init, group };

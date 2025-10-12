@@ -4,6 +4,6 @@
 
 <style scoped lang="scss">
 .about {
-  min-height: var(--100vh);
+  min-height: calc(var(--100vh) * 2);
 }
 </style>

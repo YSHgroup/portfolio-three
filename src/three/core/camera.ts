@@ -4,8 +4,8 @@ import { isTouch } from "../../utils/observer";
 import gsap from "gsap";
 import { scene } from "./scene";
 
-const PARALLAX_INTENSITY = 1;
-const PARALLAX_SPEED = 1;
+//const PARALLAX_INTENSITY = 1;
+//const PARALLAX_SPEED = 1;
 
 const instance = new PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 100);
 instance.position.set(5.8, 5.7, 8.3);
@@ -34,16 +34,16 @@ const init = () => {
 };
 
 const tick = () => {
-  const delta = gsap.ticker.deltaRatio();
+  //const delta = gsap.ticker.deltaRatio();
 
-  const parallaxX = cursor.x * PARALLAX_INTENSITY;
-  const parallaxY = -cursor.y * PARALLAX_INTENSITY;
+  //const parallaxX = cursor.x * PARALLAX_INTENSITY;
+  //const parallaxY = -cursor.y * PARALLAX_INTENSITY;
 
-  const byX = (parallaxX - parallaxGroup.position.x) * PARALLAX_SPEED * 0.1 * delta;
-  const byY = (parallaxY - parallaxGroup.position.y) * PARALLAX_SPEED * 0.1 * delta;
+  //const byX = (parallaxX - parallaxGroup.position.x) * PARALLAX_SPEED * 0.1 * delta;
+  //const byY = (parallaxY - parallaxGroup.position.y) * PARALLAX_SPEED * 0.1 * delta;
 
-  if (byX < 0.05 && byX > -0.05) parallaxGroup.position.x += byX;
-  if (byY < 0.05 && byY > -0.05) parallaxGroup.position.y += byY;
+  //if (byX < 0.05 && byX > -0.05) parallaxGroup.position.x += byX;
+  //if (byY < 0.05 && byY > -0.05) parallaxGroup.position.y += byY;
 
   instance.lookAt(lookAtPoint);
 };
