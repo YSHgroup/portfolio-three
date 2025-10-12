@@ -4,6 +4,7 @@ import vertexShader from "../../shaders/dark-plane/vertex.glsl?raw";
 import fragmentShader from "../../shaders/dark-plane/fragment.glsl?raw";
 import gsap from "gsap";
 import { sceneWeightsInOut } from "../../../animations/scenes";
+import { renderTarget } from "../../core/renderTarget";
 
 let geometry: PlaneGeometry | null = null;
 let material: ShaderMaterial | null = null;
@@ -25,11 +26,6 @@ const init = () => {
     activeArray[i] = x;
     activeArray[i + 1] = y;
     activeArray[i + 2] = z;
-
-    // top left
-    if (x < 0 && y > 0) activeArray[i + 1]! += 0.5;
-    // bottom right
-    if (x > 0 && y < 0) activeArray[i + 1]! -= 0;
   }
 
   geometry.setAttribute("activePosition", new Float32BufferAttribute(activeArray, 3));
@@ -40,6 +36,7 @@ const init = () => {
     depthTest: false,
     depthWrite: false,
     uniforms: {
+      uTexture: { value: renderTarget.instance.texture },
       uOffset: { value: -2 },
       uActive: { value: 0 },
     },
@@ -60,14 +57,14 @@ const tick = () => {
     in: sceneWeightsInOut.about.in,
     out: sceneWeightsInOut.about.out,
   };
-
   material.uniforms.uActive!.value = Math.max(0, Math.min(1, progress.in * (1 - progress.out)));
-
   if (progress.in > 0 && progress.out === 0) {
     material.uniforms.uOffset!.value = -2 + 2 * progress.in;
   } else if (progress.out > 0) {
     material.uniforms.uOffset!.value = 2 * progress.out;
   }
+
+  material.uniforms.uOffset!.value = 0;
 
   if (progress.in < 0.001 || (progress.in === 1 && progress.out >= 0.999)) {
     mesh.visible = false;

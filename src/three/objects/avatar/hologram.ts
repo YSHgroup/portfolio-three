@@ -1,6 +1,6 @@
 import { resources } from "../../../utils/resources";
 import { Mesh, MeshBasicMaterial, Matrix4, Vector3, BufferAttribute } from "three";
-import { scene } from "../../core/scene";
+import { renderTarget } from "../../core/renderTarget";
 import { clone as cloneSkeleton } from "three/examples/jsm/utils/SkeletonUtils.js";
 import { getMaterial as getHologramMaterial, uniforms as hologramUniforms } from "./hologram-material";
 import gsap from "gsap";
@@ -70,7 +70,7 @@ const setupMesh = () => {
   mesh.scale.copy(resource.scene.children[0].scale);
   mesh.rotation.z = 0;
 
-  scene.instance.add(mesh);
+  renderTarget.scene.add(mesh);
 };
 
 const tick = () => {

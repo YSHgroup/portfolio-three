@@ -2,6 +2,7 @@ import { WebGLRenderer } from "three";
 import { sizes } from "../../utils/sizes";
 import gsap from "gsap";
 import { scene } from "./scene";
+import { renderTarget } from "./renderTarget";
 import { camera } from "./camera";
 
 let instance: WebGLRenderer | null = null;
@@ -13,8 +14,6 @@ const init = (canvas: HTMLCanvasElement) => {
     antialias: true,
     alpha: false,
   });
-
-  instance.setClearColor("#f5efe6");
 
   gsap.ticker.add(tick);
 
@@ -35,6 +34,8 @@ const resize = () => {
 
 const tick = () => {
   if (!instance) return;
+  renderTarget.render();
+  instance.setClearColor("#f5efe6");
   instance.render(scene.instance, camera.instance);
 };
 

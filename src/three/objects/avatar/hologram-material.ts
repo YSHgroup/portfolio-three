@@ -4,7 +4,6 @@ let material: MeshBasicMaterial;
 
 const uniforms = {
   uTime: { value: 0 },
-  uOpacity: { value: 0 },
 };
 
 const getMaterial = () => {
@@ -12,7 +11,6 @@ const getMaterial = () => {
 
   material = new MeshBasicMaterial({
     transparent: true,
-    blending: 2,
     color: "rgb(0, 213, 255)",
     alphaToCoverage: true,
     side: DoubleSide,
@@ -21,7 +19,6 @@ const getMaterial = () => {
   material.onBeforeCompile = (shader) => {
     // Add custom uniforms
     shader.uniforms.uTime = uniforms.uTime;
-    shader.uniforms.uOpacity = uniforms.uOpacity;
 
     // Inject vertex shader logic
     shader.vertexShader = shader.vertexShader
@@ -66,7 +63,6 @@ const getMaterial = () => {
         `#include <common>`,
         `#include <common>
   
-        uniform float uOpacity;
         uniform float uTime;
 
         varying vec3 vPosition;
@@ -92,7 +88,7 @@ const getMaterial = () => {
         float light = 1.0 - min( min( light3.x, light3.y ), light3.z );
 
 
-        diffuseColor.a = uOpacity * (edge + light * .5);
+        diffuseColor.a = edge;
 
         #ifdef FLIP_SIDED
             diffuseColor.a *= 0.4;

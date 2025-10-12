@@ -42,7 +42,7 @@ export const setup = () => {
   tl.to(hologramMesh.rotation, { z: Math.PI * 0.9, duration: 1 }, 0);
  */
 
-  tl.to(hologramUniforms.uOpacity, { value: 1, duration: 1 }, 0);
+  //tl.to(hologramUniforms.uOpacity, { value: 1, duration: 1 }, 0);
 
   tl.to(room.group.position, { y: 4, duration: 1 }, 0);
 
