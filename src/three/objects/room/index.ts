@@ -5,17 +5,12 @@ import { getRoomMaterial } from "../../common/materials";
 
 import type { Object3D } from "three";
 
-/**
- * TBD: carpet needs own material with
- *     object.renderOrder = -10;
-    object.material.depthWrite = false;
- */
-
 const group = new Group();
 group.rotation.y = -Math.PI / 2;
 
 let objects: {
   blackboard: Mesh;
+  carpet: Mesh;
   chair: Mesh;
   frame: Mesh;
   mouse: Mesh;
@@ -31,6 +26,7 @@ const init = () => {
 
   objects = {
     blackboard: resource.scene.children.find((child: Object3D) => child.name === "blackboard"),
+    carpet: resource.scene.children.find((child: Object3D) => child.name === "carpet"),
     chair: resource.scene.children.find((child: Object3D) => child.name === "chair"),
     frame: resource.scene.children.find((child: Object3D) => child.name === "frame"),
     mouse: resource.scene.children.find((child: Object3D) => child.name === "mouse"),
@@ -42,8 +38,20 @@ const init = () => {
   };
 
   Object.values(objects).forEach((object) => {
-    object.material = getRoomMaterial();
+    const mat = getRoomMaterial();
+    object.material = mat;
     group.add(object);
+
+    if (object.name === "carpet") {
+      object.renderOrder = -10;
+      object.onBeforeRender = () => {
+        mat.depthWrite = false;
+      };
+
+      object.onAfterRender = () => {
+        mat.depthWrite = true;
+      };
+    }
   });
 
   scene.instance.add(group);
