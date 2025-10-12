@@ -51,14 +51,13 @@
     position: sticky;
     top: var(--100vh);
     height: var(--100vh);
-
     width: 100%;
-    background: radial-gradient(
+    /**    background: radial-gradient(
       ellipse at center,
       rgba(0, 14, 47, 0) 70%,
       rgba(0, 14, 47, 0.9) 99%,
       rgba(0, 14, 47, 1) 100%
-    );
+    ); */
   }
 }
 </style>

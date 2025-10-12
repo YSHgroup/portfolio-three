@@ -1,6 +1,9 @@
 varying vec2 vUv;
+varying vec3 vPosition;
 
 uniform sampler2D uTexture;
+uniform float uInProgress;
+uniform float uOutProgress;
 
 void main() {
     vec4 color = texture2D(uTexture, vUv);
@@ -17,14 +20,12 @@ void main() {
         }
     }
 
-    bloom /= 50.0; // normalize samples
+    bloom /= 25.0; 
 
-    // Extract bright areas only (threshold)
     float brightness = max(max(color.r, color.g), color.b);
-    bloom *= smoothstep(0.1, .5, brightness); // adjust 0.7–1.0 threshold
+    bloom *= smoothstep(0.1, .5, brightness); 
 
-    // Combine original + bloom
-    vec3 finalColor = color.rgb + bloom * 1.5; // intensity multiplier
+    vec3 finalColor = color.rgb + bloom * 1.2;
 
-    gl_FragColor = vec4(finalColor, color.a);
+    gl_FragColor = vec4(finalColor, 1.);
 }

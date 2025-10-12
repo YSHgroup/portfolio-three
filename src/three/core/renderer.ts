@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { scene } from "./scene";
 import { renderTarget } from "./renderTarget";
 import { camera } from "./camera";
+import { sceneWeights } from "../../animations/scenes";
 
 let instance: WebGLRenderer | null = null;
 
@@ -34,7 +35,11 @@ const resize = () => {
 
 const tick = () => {
   if (!instance) return;
-  renderTarget.render();
+
+  if (sceneWeights.about > 0.001) {
+    renderTarget.render();
+  }
+
   instance.setClearColor("#f5efe6");
   instance.render(scene.instance, camera.instance);
 };

@@ -44,7 +44,7 @@ export const setup = () => {
 
   //tl.to(hologramUniforms.uOpacity, { value: 1, duration: 1 }, 0);
 
-  tl.to(room.group.position, { y: 4, duration: 1 }, 0);
+  tl.to(room.group.position, { y: 5, duration: 1 }, 0);
 
   tl.to(aboutOverlay, { opacity: 1, duration: 1 }, 0);
 };

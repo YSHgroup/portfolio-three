@@ -62,7 +62,7 @@ const init = () => {
 };
 
 const tick = () => {
-  group.visible = sceneWeights.hero > 0;
+  group.visible = sceneWeights.hero > 0.001;
 };
 
 export const room = { init, group };

@@ -35,10 +35,11 @@ const init = () => {
     fragmentShader,
     depthTest: false,
     depthWrite: false,
+    transparent: true,
     uniforms: {
       uTexture: { value: renderTarget.instance.texture },
-      uOffset: { value: -2 },
-      uActive: { value: 0 },
+      uInProgress: { value: 0 },
+      uOutProgress: { value: 0 },
     },
   });
 
@@ -57,14 +58,9 @@ const tick = () => {
     in: sceneWeightsInOut.about.in,
     out: sceneWeightsInOut.about.out,
   };
-  material.uniforms.uActive!.value = Math.max(0, Math.min(1, progress.in * (1 - progress.out)));
-  if (progress.in > 0 && progress.out === 0) {
-    material.uniforms.uOffset!.value = -2 + 2 * progress.in;
-  } else if (progress.out > 0) {
-    material.uniforms.uOffset!.value = 2 * progress.out;
-  }
 
-  material.uniforms.uOffset!.value = 0;
+  material.uniforms.uInProgress!.value = sceneWeightsInOut.about.in;
+  material.uniforms.uOutProgress!.value = sceneWeightsInOut.about.out;
 
   if (progress.in < 0.001 || (progress.in === 1 && progress.out >= 0.999)) {
     mesh.visible = false;
