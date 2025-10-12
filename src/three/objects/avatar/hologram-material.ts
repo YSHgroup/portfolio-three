@@ -11,6 +11,7 @@ const getMaterial = () => {
 
   material = new MeshBasicMaterial({
     transparent: true,
+    blending: 2,
     color: "rgb(0, 213, 255)",
     alphaToCoverage: true,
     side: DoubleSide,
@@ -69,7 +70,7 @@ const getMaterial = () => {
         varying vec3 vCenter;
         varying vec4 vClipPos;
 
-        #define THICKNESS .85
+        #define THICKNESS .75
         `,
       )
       .replace(
@@ -83,11 +84,13 @@ const getMaterial = () => {
 
         float edge = 1.0 - min( min( edge3.x, edge3.y ), edge3.z );
 
-        diffuseColor.a = edge;
+
+        diffuseColor.a = min(edge + 0.1, 1.);
 
         #ifdef FLIP_SIDED
-            diffuseColor.a *= 0.4;
+            diffuseColor.a *= 0.2;
         #endif
+
 
         `,
       );
