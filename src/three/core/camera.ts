@@ -8,9 +8,8 @@ import { scene } from "./scene";
 //const PARALLAX_SPEED = 1;
 
 const instance = new PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 100);
-instance.position.set(5.8, 5.7, 8.3);
 
-const lookAtPoint = new Vector3(-2.7, 2, 0);
+const lookAtPoint = new Vector3();
 
 const parallaxGroup = new Group();
 

@@ -3,12 +3,11 @@ import { scene } from "../../core/scene";
 import vertexShader from "../../shaders/dark-plane/vertex.glsl?raw";
 import fragmentShader from "../../shaders/dark-plane/fragment.glsl?raw";
 import gsap from "gsap";
+import { sceneWeightsInOut } from "../../../animations/scenes";
 
 let geometry: PlaneGeometry | null = null;
 let material: ShaderMaterial | null = null;
 let mesh: Mesh | null = null;
-
-const progress = { in: 0, out: 0 };
 
 const init = () => {
   geometry = new PlaneGeometry(2, 2);
@@ -57,6 +56,11 @@ const init = () => {
 const tick = () => {
   if (!material || !mesh) return;
 
+  const progress = {
+    in: sceneWeightsInOut.about.in,
+    out: sceneWeightsInOut.about.out,
+  };
+
   material.uniforms.uActive!.value = Math.max(0, Math.min(1, progress.in * (1 - progress.out)));
 
   if (progress.in > 0 && progress.out === 0) {
@@ -72,4 +76,4 @@ const tick = () => {
   }
 };
 
-export const darkPlane = { init, progress };
+export const darkPlane = { init };
