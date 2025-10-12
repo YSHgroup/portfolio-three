@@ -85,14 +85,14 @@ const getMaterial = () => {
 
         vec3 edge3 = smoothstep( ( THICKNESS - 1.0 ) * afwidth, THICKNESS * afwidth, vCenter.xyz );
 
-        vec3 light3 = smoothstep(vec3(0.0), vec3(0.4), vCenter.xyz);
+        vec3 light3 = smoothstep(vec3(0.0), vec3(0.2), vCenter.xyz);
 
 
         float edge = 1.0 - min( min( edge3.x, edge3.y ), edge3.z );
         float light = 1.0 - min( min( light3.x, light3.y ), light3.z );
 
 
-        diffuseColor.a = uOpacity * (edge + light * .3);
+        diffuseColor.a = uOpacity * (edge + light * .5);
 
         #ifdef FLIP_SIDED
             diffuseColor.a *= 0.4;
