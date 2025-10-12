@@ -1,7 +1,6 @@
 import { avatar } from "../../three/objects/avatar";
 import { room } from "../../three/objects/room";
 import { avatarHologram } from "../../three/objects/avatar/hologram";
-import { uniforms as hologramUniforms } from "../../three/objects/avatar/hologram-material";
 import gsap from "gsap";
 import { sceneWeightsInOut } from "../scenes";
 
@@ -17,9 +16,6 @@ export const setup = () => {
       scrub: true,
     },
   });
-
-  //TBD: remove this
-  //tl.to(darkPlane.progress, { in: 1, duration: 1, ease: "none" }, 0);
 
   tl.to(sceneWeightsInOut.hero, { out: 1, ease: "none", duration: 1 }, 0);
   tl.to(sceneWeightsInOut.about, { in: 1, ease: "none", duration: 1 }, 0);
@@ -41,8 +37,6 @@ export const setup = () => {
   tl.to(hologramMesh.position, { x: 2.5, z: 3, y: 1, duration: 1 }, 0);
   tl.to(hologramMesh.rotation, { z: Math.PI * 0.9, duration: 1 }, 0);
  */
-
-  //tl.to(hologramUniforms.uOpacity, { value: 1, duration: 1 }, 0);
 
   tl.to(room.group.position, { y: 5, duration: 1 }, 0);
 
