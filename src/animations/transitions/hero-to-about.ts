@@ -6,7 +6,6 @@ import { sceneWeightsInOut } from "../scenes";
 
 export const setup = () => {
   const hero = document.querySelector(".hero");
-  const aboutOverlay = document.querySelector(".about-overlay");
 
   const tl = gsap.timeline({
     scrollTrigger: {
@@ -31,14 +30,5 @@ export const setup = () => {
   tl.to(hologramMesh.position, { x: 1, z: 5, y: 1, duration: 1 }, 0);
   tl.to(hologramMesh.rotation, { z: Math.PI * 0.6, duration: 1 }, 0);
 
-  /**  tl.to(avatarMesh.position, { x: 2.5, z: 3, y: 1, duration: 1 }, 0);
-  tl.to(avatarMesh.rotation, { z: Math.PI * 0.9, duration: 1 }, 0);
-
-  tl.to(hologramMesh.position, { x: 2.5, z: 3, y: 1, duration: 1 }, 0);
-  tl.to(hologramMesh.rotation, { z: Math.PI * 0.9, duration: 1 }, 0);
- */
-
   tl.to(room.group.position, { y: 5, duration: 1 }, 0);
-
-  tl.to(aboutOverlay, { opacity: 1, duration: 1 }, 0);
 };

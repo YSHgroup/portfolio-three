@@ -24,8 +24,12 @@ const render = () => {
   rendererInstance.setRenderTarget(null);
 };
 
+const destroy = () => {
+  sizes.off("resize", resize);
+};
+
 const resize = () => {
   instance.setSize(sizes.width, sizes.height);
 };
 
-export const renderTarget = { render, scene, init, instance };
+export const renderTarget = { render, scene, init, instance, destroy };
