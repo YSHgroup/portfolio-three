@@ -14,6 +14,12 @@ $breakpoints: (
   "xl": (
     width: 1440px,
   ),
+  "xxl": (
+    width: 1600px,
+  ),
+  "xxxl": (
+    width: 1920px,
+  ),
 ) !default;
 
 $media-direction: min;

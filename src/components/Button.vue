@@ -21,16 +21,22 @@ const classes = computed(() => ["button", `button-size-${props.size ?? "md"}`]);
 </template>
 
 <style scoped lang="scss">
-.button-size-sm {
-  height: 38px;
-  padding: 0 16px;
-}
-.button-size-md {
-  height: 44px;
-  padding: 0 26px;
-}
-.button-size-lg {
-  height: 50px;
-  padding: 0 34px;
+.button {
+  &-size {
+    &-sm {
+      height: 38px;
+      padding: 0 16px;
+    }
+
+    &-md {
+      height: 44px;
+      padding: 0 26px;
+    }
+
+    &-lg {
+      height: 50px;
+      padding: 0 34px;
+    }
+  }
 }
 </style>

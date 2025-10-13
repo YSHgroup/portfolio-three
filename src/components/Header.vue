@@ -1,9 +1,54 @@
 <script setup lang="ts">
 import Button from "./Button.vue";
+import Logo from "./Logo.vue";
+import HeaderLink from "./HeaderLink.vue";
+import { lenis } from "../utils/scroll";
+import { onMounted, ref, computed } from "vue";
+
+let aboutElement: HTMLElement | null = null;
+const isDarkTheme = ref(false);
+
+const handleScroll = () => {
+  if (!aboutElement) {
+    aboutElement = document.querySelector(".about");
+  }
+
+  if (aboutElement) {
+    const aboutBounding = aboutElement.getBoundingClientRect();
+    const isScrolledIntoView = aboutBounding.top - 128 < 0;
+    const isScrolledPast = aboutBounding.bottom - 48 < 0;
+    isDarkTheme.value = isScrolledIntoView && !isScrolledPast;
+  }
+};
+
+const handleLogoClick = () => {
+  lenis.scrollTo(0);
+};
+
+const handleLinkClick = (link: string) => {
+  lenis.scrollTo(link);
+};
+
+const classNames = computed(() => {
+  return {
+    header: true,
+    "header-dark": isDarkTheme.value,
+  };
+});
+
+onMounted(() => {
+  lenis.on("scroll", handleScroll);
+});
 </script>
 
 <template>
-  <header class="header">
+  <header :class="classNames">
+    <Logo class="header-logo" @click="handleLogoClick" />
+    <div class="header-links">
+      <HeaderLink @click="handleLinkClick('.about')">About</HeaderLink>
+      <HeaderLink @click="handleLinkClick('.projects')">Projects</HeaderLink>
+      <HeaderLink @click="handleLinkClick('.contact')">Contact</HeaderLink>
+    </div>
     <Button>Get in touch</Button>
   </header>
 </template>
@@ -15,11 +60,36 @@ import Button from "./Button.vue";
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--space-outer);
   left: 50%;
   transform: translateX(-50%);
   width: var(--breakpoint-xxl);
-  max-width: 100%;
+  max-width: calc(100% - var(--space-outer) * 2);
   z-index: var(--z-index-header);
+
+  &-links {
+    gap: var(--space-xxxl);
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @include mixins.mq("md") {
+      display: flex;
+    }
+  }
+
+  &-dark {
+    color: var(--color-white-400);
+  }
+
+  &-logo {
+    transition: color 0.2s ease-in-out;
+    width: 42px;
+    cursor: pointer;
+
+    @include mixins.mq("md") {
+      width: 48px;
+    }
+  }
 }
 </style>

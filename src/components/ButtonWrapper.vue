@@ -26,8 +26,8 @@ const classes = computed(() => ["button-wrapper", `button-wrapper-${props.varian
   text-transform: uppercase;
 
   &-orange {
-    background-color: var(--color-orange);
-    color: var(--color-white);
+    background-color: var(--color-orange-400);
+    color: var(--color-white-400);
   }
 }
 </style>
