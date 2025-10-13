@@ -1,6 +1,5 @@
 import { avatar } from "../../three/objects/avatar";
 import { room } from "../../three/objects/room";
-import { avatarHologram } from "../../three/objects/avatar/hologram";
 import gsap from "gsap";
 import { sceneWeightsInOut } from "../scenes";
 
@@ -21,14 +20,14 @@ export const setup = () => {
 
   tl.to(avatar.tIdleIntensity, { value: 1, duration: 1 }, 0);
 
-  const avatarMesh = avatar.getMesh();
-  const hologramMesh = avatarHologram.getMesh();
+  //const hologramMesh = avatarHologram.getMesh();
+  const { waypointsPosition, waypointsRotation } = avatar;
 
-  tl.to(avatarMesh.position, { x: 1, z: 5, y: 1, duration: 1 }, 0);
-  tl.to(avatarMesh.rotation, { z: Math.PI * 0.6, duration: 1 }, 0);
+  tl.to(waypointsPosition, { x: 1, z: 5, y: 1, duration: 1 }, 0);
+  tl.to(waypointsRotation, { y: -Math.PI * 0.6, duration: 1 }, 0);
 
-  tl.to(hologramMesh.position, { x: 1, z: 5, y: 1, duration: 1 }, 0);
-  tl.to(hologramMesh.rotation, { z: Math.PI * 0.6, duration: 1 }, 0);
+  //tl.to(hologramMesh.position, { x: 1, z: 5, y: 1, duration: 1 }, 0);
+  //tl.to(hologramMesh.rotation, { z: Math.PI * 0.6, duration: 1 }, 0);
 
   tl.to(room.group.position, { y: 5, duration: 1 }, 0);
 };

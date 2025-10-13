@@ -4,6 +4,10 @@
 
 <style scoped lang="scss">
 .projects {
-  min-height: var(--100vh);
+  //TBD: gap variable
+  padding-top: 100px;
+  padding-bottom: 100px;
+  width: 100%;
+  background-color: var(--background-beige);
 }
 </style>

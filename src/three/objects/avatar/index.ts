@@ -1,7 +1,9 @@
 import { resources } from "../../../utils/resources";
-import { Mesh, MeshMatcapMaterial, MeshBasicMaterial } from "three";
+import { Mesh, MeshMatcapMaterial, MeshBasicMaterial, Vector3, Euler, Group } from "three";
 import { scene } from "../../core/scene";
 import { animations } from "./animations";
+import { sceneWeights } from "../../../animations/scenes";
+import gsap from "gsap";
 
 import type { Material } from "three";
 
@@ -9,9 +11,14 @@ let mesh: Mesh;
 
 const tIdleIntensity = { value: 0 };
 
+const waypointsPosition = new Vector3();
+const waypointsRotation = new Euler();
+const transform = new Group();
+
 const init = () => {
   setupMesh();
   animations.init();
+  gsap.ticker.add(tick);
 };
 
 const getMaterial = (name: string): Material | null => {
@@ -41,10 +48,21 @@ const setupMesh = () => {
       child.frustumCulled = false;
     }
   });
-
   mesh.rotation.z = 0;
 
-  scene.instance.add(mesh);
+  transform.add(mesh);
+
+  scene.instance.add(transform);
 };
 
-export const avatar = { init, getMesh: () => mesh, tIdleIntensity };
+const tick = () => {
+  if (sceneWeights.hero >= 0.001) {
+    transform.position.copy(waypointsPosition);
+    transform.rotation.copy(waypointsRotation);
+  } else {
+    transform.position.set(0, -14, 0);
+    transform.rotation.set(0, -Math.PI, 0);
+  }
+};
+
+export const avatar = { init, getMesh: () => mesh, tIdleIntensity, waypointsPosition, waypointsRotation };

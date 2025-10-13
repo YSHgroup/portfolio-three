@@ -1,4 +1,4 @@
-import { WebGLRenderer } from "three";
+import { WebGLRenderer, Color, Vector3 } from "three";
 import { sizes } from "../../utils/sizes";
 import gsap from "gsap";
 import { scene } from "./scene";
@@ -7,6 +7,10 @@ import { camera } from "./camera";
 import { sceneWeights } from "../../animations/scenes";
 
 let instance: WebGLRenderer | null = null;
+
+const clearColor = new Color("#f5efe6");
+const darkClearColor = new Color("#EEE5DA");
+const emptyVector = new Vector3();
 
 const init = (canvas: HTMLCanvasElement) => {
   if (instance) return;
@@ -34,13 +38,14 @@ const resize = () => {
 };
 
 const tick = () => {
-  if (!instance) return;
+  if (!instance || camera.instance.position.equals(emptyVector)) return;
 
   if (sceneWeights.about > 0.001) {
     renderTarget.render();
   }
 
-  instance.setClearColor("#f5efe6");
+  const color = sceneWeights.contact > 0.001 ? darkClearColor : clearColor;
+  instance.setClearColor(color);
   instance.render(scene.instance, camera.instance);
 };
 

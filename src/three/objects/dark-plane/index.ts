@@ -47,6 +47,13 @@ const init = () => {
   mesh.renderOrder = 10;
   mesh.frustumCulled = false;
 
+  mesh.onBeforeRender = () => {
+    if (!material) return;
+
+    material.uniforms.uInProgress!.value = sceneWeightsInOut.about.in;
+    material.uniforms.uOutProgress!.value = sceneWeightsInOut.about.out;
+  };
+
   scene.instance.add(mesh);
 
   gsap.ticker.add(tick);
@@ -59,9 +66,6 @@ const tick = () => {
     in: sceneWeightsInOut.about.in,
     out: sceneWeightsInOut.about.out,
   };
-
-  material.uniforms.uInProgress!.value = sceneWeightsInOut.about.in;
-  material.uniforms.uOutProgress!.value = sceneWeightsInOut.about.out;
 
   if (progress.in < 0.001 || (progress.in === 1 && progress.out >= 0.999)) {
     mesh.visible = false;

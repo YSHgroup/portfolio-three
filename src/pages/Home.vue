@@ -3,6 +3,7 @@ import Layout from "../components/Layout.vue";
 import Hero from "../features/hero/Hero.vue";
 import About from "../features/about/About.vue";
 import Projects from "../features/projects/Projects.vue";
+import Contact from "../features/contact/Contact.vue";
 </script>
 
 <template>
@@ -10,5 +11,6 @@ import Projects from "../features/projects/Projects.vue";
     <Hero />
     <About />
     <Projects />
+    <Contact />
   </Layout>
 </template>

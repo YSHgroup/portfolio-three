@@ -1,10 +1,13 @@
 import gsap from "gsap";
-import { camera } from "../three/core/camera";
 import { sizes } from "../utils/sizes";
 import { sceneWeights } from "./scenes";
 import { points } from "./waypoints-data";
+import { Vector3, Euler } from "three";
 
 import type { SceneKey } from "./types";
+
+const position = new Vector3();
+const rotation = new Euler();
 
 const init = () => {
   updateReferences();
@@ -55,10 +58,10 @@ const tick = () => {
   updateReferences();
 
   const finalPos = weightedAverage(positions, weights);
-  const finalLook = weightedAverage(rotations, weights);
+  const finalRot = weightedAverage(rotations, weights);
 
-  camera.instance.position.set(finalPos.x, finalPos.y, finalPos.z);
-  camera.instance.rotation.set(finalLook.x, finalLook.y, finalLook.z);
+  position.set(finalPos.x, finalPos.y, finalPos.z);
+  rotation.set(finalRot.x, finalRot.y, finalRot.z);
 };
 
-export const waypoints = { init, points, updateReferences };
+export const waypoints = { init, points, updateReferences, position, rotation };

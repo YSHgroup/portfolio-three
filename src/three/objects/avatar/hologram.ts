@@ -1,11 +1,11 @@
 import { resources } from "../../../utils/resources";
-import { Mesh, MeshBasicMaterial, Matrix4, Vector3, BufferAttribute } from "three";
+import { Mesh, MeshBasicMaterial, Matrix4, Vector3, BufferAttribute, Group } from "three";
 import { renderTarget } from "../../core/renderTarget";
 import { clone as cloneSkeleton } from "three/examples/jsm/utils/SkeletonUtils.js";
 import { getMaterial as getHologramMaterial, uniforms as hologramUniforms } from "./hologram-material";
 import gsap from "gsap";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
-
+import { avatar } from ".";
 import { SkinnedMesh, type BufferGeometry, type Object3D, type Skeleton } from "three";
 
 const GEOMETRY_NAMES: string[] = ["black", "gray", "skin", "white", "head"];
@@ -14,6 +14,8 @@ let mesh: SkinnedMesh;
 let material: MeshBasicMaterial;
 let geometry: BufferGeometry;
 let skeleton: Skeleton;
+
+const transform = new Group();
 
 const init = () => {
   setupSkeleton();
@@ -70,11 +72,17 @@ const setupMesh = () => {
   mesh.scale.copy(resource.scene.children[0].scale);
   mesh.rotation.z = 0;
 
-  renderTarget.scene.add(mesh);
+  renderTarget.scene.add(transform);
+  transform.add(mesh);
 };
 
 const tick = () => {
   hologramUniforms.uTime.value = gsap.ticker.time;
+
+  const { waypointsPosition, waypointsRotation } = avatar;
+
+  transform.position.copy(waypointsPosition);
+  transform.rotation.copy(waypointsRotation);
 };
 
 export const avatarHologram = { init, getMesh: () => mesh, getMaterial: () => material };

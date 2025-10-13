@@ -3,6 +3,8 @@ import { sizes } from "../../utils/sizes";
 import { isTouch } from "../../utils/observer";
 import gsap from "gsap";
 import { scene } from "./scene";
+import { waypoints } from "../../animations/waypoints";
+import { sceneWeights } from "../../animations/scenes";
 
 //const PARALLAX_INTENSITY = 1;
 //const PARALLAX_SPEED = 1;
@@ -28,6 +30,18 @@ const init = () => {
   }
 
   gsap.ticker.add(tick);
+
+  updateTransforms();
+};
+
+const updateTransforms = () => {
+  if (sceneWeights.contact <= 0.001) {
+    instance.position.copy(waypoints.position);
+    instance.rotation.copy(waypoints.rotation);
+  } else {
+    instance.position.set(0, -10, 8);
+    instance.rotation.set(-0.2, 0, 0);
+  }
 };
 
 const tick = () => {
@@ -38,6 +52,7 @@ const tick = () => {
   //const byY = (parallaxY - parallaxGroup.position.y) * PARALLAX_SPEED * 0.1 * delta;
   //if (byX < 0.05 && byX > -0.05) parallaxGroup.position.x += byX;
   //if (byY < 0.05 && byY > -0.05) parallaxGroup.position.y += byY;
+  updateTransforms();
 };
 
 const resize = () => {
