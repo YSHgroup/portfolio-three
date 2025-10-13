@@ -1,6 +1,11 @@
+<script setup lang="ts">
+import Social from "./Social.vue";
+</script>
+
 <template>
   <footer class="footer">
     <div class="footer-content">
+      <Social />
       <div class="footer-credits">
         <p>© {{ new Date().getFullYear() }} David Heckhoff</p>
         <p>
@@ -21,9 +26,9 @@
 
   &-content {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    gap: var(--space-lg);
     width: 100%;
     max-width: var(--breakpoint-xxl);
     padding: calc(var(--space-outer) + var(--space-sm)) var(--space-outer);
