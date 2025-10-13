@@ -56,7 +56,6 @@ const icons = {
       border-radius: var(--radius-md);
       z-index: -1;
       opacity: 0;
-      transition: opacity 0.2s ease-in-out;
     }
 
     @include mixins.hover {
