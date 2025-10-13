@@ -45,6 +45,7 @@ const init = () => {
 
   mesh = new Mesh(geometry, material);
   mesh.renderOrder = 10;
+  mesh.frustumCulled = false;
 
   scene.instance.add(mesh);
 

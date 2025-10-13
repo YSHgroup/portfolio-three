@@ -32,7 +32,7 @@ function weightedAverage<T extends { x: number; y: number; z: number }>(points: 
 
 // cache
 let positions: { x: number; y: number; z: number }[] = [];
-let lookAts: { x: number; y: number; z: number }[] = [];
+let rotations: { x: number; y: number; z: number }[] = [];
 let weights: number[] = [];
 let resolvedPoints: typeof points.lg | typeof points.sm = points.lg;
 
@@ -47,7 +47,7 @@ function updateReferences() {
   ][];
 
   positions = active.map(([key]) => resolvedPoints[key as keyof typeof resolvedPoints]!.position);
-  lookAts = active.map(([key]) => resolvedPoints[key as keyof typeof resolvedPoints]!.lookAt);
+  rotations = active.map(([key]) => resolvedPoints[key as keyof typeof resolvedPoints]!.rotation);
   weights = active.map(([, w]) => w);
 }
 
@@ -55,10 +55,10 @@ const tick = () => {
   updateReferences();
 
   const finalPos = weightedAverage(positions, weights);
-  const finalLook = weightedAverage(lookAts, weights);
+  const finalLook = weightedAverage(rotations, weights);
 
   camera.instance.position.set(finalPos.x, finalPos.y, finalPos.z);
-  camera.lookAtPoint.set(finalLook.x, finalLook.y, finalLook.z);
+  camera.instance.rotation.set(finalLook.x, finalLook.y, finalLook.z);
 };
 
 export const waypoints = { init, points, updateReferences };

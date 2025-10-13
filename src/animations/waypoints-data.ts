@@ -4,21 +4,21 @@ export const points = {
   lg: {
     hero: {
       position: { x: 5.8, y: 5.7, z: 8.3 },
-      lookAt: { x: -2.7, y: 2, z: 0 },
+      rotation: { x: -0.42, y: 0.75, z: 0.3 },
     },
     about: {
       position: { x: 5.8, y: 5.7, z: 8.3 },
-      lookAt: { x: -4, y: 2, z: 0 },
+      rotation: { x: -0.419, y: 0.823, z: 0.316 },
     },
   },
   sm: {
     hero: {
       position: { x: 8.8, y: 7.5, z: 13 },
-      lookAt: { x: 0.3, y: 5.3, z: 0 },
+      rotation: { x: -0.168, y: 0.573, z: 0.091 },
     },
     about: {
       position: { x: 5.8, y: 5.7, z: 8.3 },
-      lookAt: { x: -4, y: 2, z: 0 },
+      rotation: { x: 0, y: 0, z: 0 },
     },
   },
 } as const satisfies Record<
@@ -28,7 +28,7 @@ export const points = {
       SceneKey,
       {
         position: { x: number; y: number; z: number };
-        lookAt: { x: number; y: number; z: number };
+        rotation: { x: number; y: number; z: number };
       }
     >
   >
