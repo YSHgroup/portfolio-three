@@ -9,7 +9,7 @@ import { sceneWeights } from "../../animations/scenes";
 let instance: WebGLRenderer | null = null;
 
 const clearColor = new Color("#f5efe6");
-const darkClearColor = new Color("#EEE5DA");
+const darkClearColor = new Color("rgb(233, 222, 208)");
 const emptyVector = new Vector3();
 
 const init = (canvas: HTMLCanvasElement) => {
