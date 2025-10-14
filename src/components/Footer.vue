@@ -5,7 +5,7 @@ import Link from "./Link.vue";
 import Clickable from "./Clickable.vue";
 import LangSwitch from "./LangSwitch.vue";
 
-const { t } = useTranslationContext();
+const { t, locale } = useTranslationContext();
 </script>
 
 <template>
@@ -15,10 +15,12 @@ const { t } = useTranslationContext();
         <Social />
         <div class="footer-top-links">
           <Clickable renderAs="div">
-            <Link href="/privacy" class="footer-link" external>{{ t("privacy") }}</Link>
+            <Link :href="locale === 'de' ? '/de/privacy' : '/privacy'" class="footer-link" external>{{
+              t("privacy")
+            }}</Link>
           </Clickable>
           <Clickable renderAs="div">
-            <Link href="/legal" class="footer-link" external>{{ t("legal") }}</Link>
+            <Link :href="locale === 'de' ? '/de/legal' : '/legal'" class="footer-link" external>{{ t("legal") }}</Link>
           </Clickable>
           <LangSwitch />
         </div>
@@ -47,7 +49,7 @@ const { t } = useTranslationContext();
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-lg);
+    gap: var(--space-xl);
     width: 100%;
     max-width: var(--breakpoint-xxl);
     padding: calc(var(--space-outer) + var(--space-sm)) var(--space-outer);
@@ -55,16 +57,27 @@ const { t } = useTranslationContext();
 
   &-top {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
     justify-content: space-between;
     align-items: center;
+    gap: var(--space-xl);
+
+    @include mixins.mq("md") {
+      gap: var(--space-md);
+      flex-direction: row;
+    }
 
     &-links {
       display: flex;
-      flex-direction: row;
-      gap: var(--space-lg);
+      flex-direction: column-reverse;
       align-items: center;
+      gap: var(--space-sm);
+
+      @include mixins.mq("md") {
+        gap: var(--space-lg);
+        flex-direction: row;
+      }
     }
   }
 
