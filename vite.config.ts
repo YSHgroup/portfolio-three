@@ -47,6 +47,9 @@ export default defineConfig({
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
+        manualChunks: {
+          pages: ["./src/pages/Home.vue"],
+        },
         inlineDynamicImports: false,
         assetFileNames: "assets/[hash].[ext]",
         entryFileNames: "chunks/[name]-[hash].js",

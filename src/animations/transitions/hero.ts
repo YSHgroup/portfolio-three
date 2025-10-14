@@ -3,9 +3,7 @@ import { room } from "../../three/objects/room";
 import gsap from "gsap";
 import { sceneWeightsInOut } from "../scenes";
 
-export const setup = () => {
-  const hero = document.querySelector(".hero");
-
+export const setup = (hero: HTMLElement) => {
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: hero,

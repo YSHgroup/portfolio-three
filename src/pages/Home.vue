@@ -5,6 +5,9 @@ import About from "../features/about/About.vue";
 import Projects from "../features/projects/Projects.vue";
 import Contact from "../features/contact/Contact.vue";
 import Footer from "../components/Footer.vue";
+import { useTranslations } from "../i18n/composables/useTranslations";
+
+useTranslations();
 </script>
 
 <template>

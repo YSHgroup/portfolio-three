@@ -1,7 +1,18 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
+import { transitions } from "../../animations";
+
+const aboutElement = ref<HTMLElement | null>(null);
+
+onMounted(() => {
+  if (aboutElement.value) {
+    transitions.about(aboutElement.value);
+  }
+});
+</script>
 
 <template>
-  <div class="about">
+  <div class="about" ref="aboutElement">
     <p>about</p>
   </div>
 </template>

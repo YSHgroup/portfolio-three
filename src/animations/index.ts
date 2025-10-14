@@ -1,14 +1,16 @@
-import { setup as heroToAbout } from "./transitions/hero-to-about";
-import { setup as aboutToProjects } from "./transitions/about-to-projects";
-import { setup as contact } from "./transitions/contact";
 import { waypoints } from "./waypoints";
 import { scenes } from "./scenes";
+import { setup as hero } from "./transitions/hero";
+import { setup as about } from "./transitions/about";
+import { setup as contact } from "./transitions/contact";
+
+export const transitions = {
+  hero,
+  about,
+  contact,
+};
 
 const init = () => {
-  heroToAbout();
-  aboutToProjects();
-  contact();
-
   scenes.init();
   waypoints.init();
 };

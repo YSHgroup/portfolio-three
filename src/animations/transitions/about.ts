@@ -2,9 +2,7 @@ import { sceneWeightsInOut } from "../scenes";
 
 import gsap from "gsap";
 
-export const setup = () => {
-  const about = document.querySelector(".about");
-
+export const setup = (about: HTMLElement) => {
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: about,
