@@ -2,7 +2,7 @@
 import { computed } from "vue";
 
 const props = defineProps<{
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xl" | "xxl" | "xxxl";
 }>();
 
 const classes = computed(() => ["layout-content", `layout-content-size-${props.size ?? "lg"}`]);
@@ -14,10 +14,9 @@ const classes = computed(() => ["layout-content", `layout-content-size-${props.s
 
 <style scoped lang="scss">
 .layout-content {
-  width: 100%;
+  width: calc(100% - var(--space-outer) * 2);
   flex: 1;
   max-width: calc(var(--breakpoint-lg) - 1px);
-  padding: var(--space-outer);
   pointer-events: none;
   display: flex;
   flex-direction: column;
@@ -46,6 +45,10 @@ const classes = computed(() => ["layout-content", `layout-content-size-${props.s
 
     &-xxl {
       max-width: calc(var(--breakpoint-xxl) - 1px);
+    }
+
+    &-xxxl {
+      max-width: calc(var(--breakpoint-xxxl) - 1px);
     }
   }
 }

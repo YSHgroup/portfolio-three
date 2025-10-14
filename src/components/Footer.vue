@@ -14,16 +14,18 @@ const { t, locale } = useTranslationContext();
       <div class="footer-top">
         <Social />
         <div class="footer-top-links">
-          <Clickable renderAs="div">
-            <Link :href="locale === 'de' ? '/de/privacy' : '/privacy'" class="footer-link" :external="true">{{
-              t("privacy")
-            }}</Link>
-          </Clickable>
-          <Clickable renderAs="div">
-            <Link :href="locale === 'de' ? '/de/legal' : '/legal'" class="footer-link" :external="true">{{
-              t("legal")
-            }}</Link>
-          </Clickable>
+          <div class="footer-top-links-legal">
+            <Clickable renderAs="div">
+              <Link :href="locale === 'de' ? '/de/privacy' : '/privacy'" class="footer-link" :external="true">{{
+                t("privacy")
+              }}</Link>
+            </Clickable>
+            <Clickable renderAs="div">
+              <Link :href="locale === 'de' ? '/de/legal' : '/legal'" class="footer-link" :external="true">{{
+                t("legal")
+              }}</Link>
+            </Clickable>
+          </div>
           <LangSwitch />
         </div>
       </div>
@@ -74,7 +76,13 @@ const { t, locale } = useTranslationContext();
       display: flex;
       flex-direction: column-reverse;
       align-items: center;
-      gap: var(--space-sm);
+      gap: var(--space-md);
+
+      &-legal {
+        display: flex;
+        flex-direction: row;
+        gap: var(--space-md);
+      }
 
       @include mixins.mq("md") {
         gap: var(--space-lg);

@@ -1,10 +1,21 @@
+<script setup lang="ts">
+import LayoutContent from "../../components/LayoutContent.vue";
+</script>
+
 <template>
-  <div class="projects">projects</div>
+  <div class="projects">
+    <LayoutContent size="xxl" class="projects-content">
+      <p>Projects</p>
+    </LayoutContent>
+  </div>
 </template>
 
 <style scoped lang="scss">
 .projects {
-  //TBD: gap variable
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding-top: 100px;
   padding-bottom: 100px;
   width: 100%;
