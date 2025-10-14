@@ -52,7 +52,7 @@ onMounted(() => {
       <HeaderLink @click="handleLinkClick('.projects')">{{ t("projects") }}</HeaderLink>
       <HeaderLink @click="handleLinkClick('.contact')">{{ t("contact") }}</HeaderLink>
     </div>
-    <Button>Get in touch</Button>
+    <Button>{{ t("get-in-touch") }}</Button>
   </header>
 </template>
 

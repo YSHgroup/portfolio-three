@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import Social from "./Social.vue";
+import { useTranslationContext } from "../i18n/context";
+import Link from "./Link.vue";
+
+const { t } = useTranslationContext();
 </script>
 
 <template>
@@ -9,10 +13,8 @@ import Social from "./Social.vue";
       <div class="footer-credits">
         <p>© {{ new Date().getFullYear() }} David Heckhoff</p>
         <p>
-          Music produced by
-          <a href="https://soundcloud.com/hmsurf" target="_blank" class="footer-link" rel="noopener noreferrer"
-            >HM Surf</a
-          >
+          {{ t("music-produced-by") }}
+          <Link href="https://soundcloud.com/hmsurf" class="footer-link" external>HM Surf</Link>
         </p>
       </div>
     </div>

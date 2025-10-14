@@ -4,6 +4,7 @@ import Linkedin from "./icons/Linkedin.vue";
 import Instagram from "./icons/Instagram.vue";
 import Mail from "./icons/Mail.vue";
 import X from "./icons/X.vue";
+import Link from "./Link.vue";
 
 import { useTranslationContext } from "../i18n/context";
 import { social } from "../content/social";
@@ -24,17 +25,16 @@ const getAriaLabel = (name: string) => `${t("go-to")} ${name.charAt(0).toUpperCa
 
 <template>
   <div class="social">
-    <a
+    <Link
       v-for="item in social"
       :key="item.name"
       :href="item.url"
-      target="_blank"
-      rel="noopener noreferrer"
+      external
       class="social-link"
       :aria-label="getAriaLabel(item.name)"
     >
       <component :is="icons[item.name]" />
-    </a>
+    </Link>
   </div>
 </template>
 
