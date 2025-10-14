@@ -5,6 +5,7 @@ import Instagram from "./icons/Instagram.vue";
 import Mail from "./icons/Mail.vue";
 import X from "./icons/X.vue";
 
+import { useTranslationContext } from "../i18n/context";
 import { social } from "../content/social";
 
 // map icon names to components
@@ -15,6 +16,10 @@ const icons = {
   mail: Mail,
   x: X,
 } as const;
+
+const { t } = useTranslationContext();
+
+const getAriaLabel = (name: string) => `${t("go-to")} ${name.charAt(0).toUpperCase() + name.slice(1)}`;
 </script>
 
 <template>
@@ -26,7 +31,7 @@ const icons = {
       target="_blank"
       rel="noopener noreferrer"
       class="social-link"
-      :aria-label="`Go to ${item.name.charAt(0).toUpperCase() + item.name.slice(1)}`"
+      :aria-label="getAriaLabel(item.name)"
     >
       <component :is="icons[item.name]" />
     </a>

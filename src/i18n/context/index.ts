@@ -8,8 +8,6 @@ export interface TranslationContextType {
 const TRANSLATION_SYMBOL = Symbol("TranslationContext");
 
 export const provideTranslationContext = (context: TranslationContextType) => {
-  // make it available to all child components
-  // (called in the provider component)
   return {
     symbol: TRANSLATION_SYMBOL,
     context,

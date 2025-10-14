@@ -49,8 +49,8 @@ onMounted(() => {
     <Logo class="header-logo" @click="handleLogoClick" />
     <div class="header-links">
       <HeaderLink @click="handleLinkClick('.about')">{{ t("about") }}</HeaderLink>
-      <HeaderLink @click="handleLinkClick('.projects')">Projects</HeaderLink>
-      <HeaderLink @click="handleLinkClick('.contact')">Contact</HeaderLink>
+      <HeaderLink @click="handleLinkClick('.projects')">{{ t("projects") }}</HeaderLink>
+      <HeaderLink @click="handleLinkClick('.contact')">{{ t("contact") }}</HeaderLink>
     </div>
     <Button>Get in touch</Button>
   </header>
