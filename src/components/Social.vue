@@ -52,7 +52,7 @@ const icons = {
       left: -4px;
       width: calc(100% + 8px);
       height: calc(100% + 8px);
-      background-color: var(--background-beige-dark);
+      background-color: var(--color-beige-600);
       border-radius: var(--radius-md);
       z-index: -1;
       opacity: 0;

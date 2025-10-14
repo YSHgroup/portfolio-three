@@ -8,6 +8,6 @@
   padding-top: 100px;
   padding-bottom: 100px;
   width: 100%;
-  background-color: var(--background-beige);
+  background-color: var(--color-beige-400);
 }
 </style>

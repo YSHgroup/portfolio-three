@@ -10,7 +10,9 @@ import Social from "./Social.vue";
         <p>© {{ new Date().getFullYear() }} David Heckhoff</p>
         <p>
           Music produced by
-          <a href="/legal" target="_blank" class="footer-link" rel="noopener noreferrer">HM Surf</a>
+          <a href="https://soundcloud.com/hmsurf" target="_blank" class="footer-link" rel="noopener noreferrer"
+            >HM Surf</a
+          >
         </p>
       </div>
     </div>
@@ -19,7 +21,7 @@ import Social from "./Social.vue";
 
 <style scoped lang="scss">
 .footer {
-  background: var(--background-beige);
+  background: var(--color-beige-400);
   width: 100%;
   display: flex;
   justify-content: center;
