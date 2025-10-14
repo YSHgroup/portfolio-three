@@ -7,6 +7,7 @@ import { camera } from "./camera";
 import { sceneWeights } from "../../animations/scenes";
 
 let instance: WebGLRenderer | null = null;
+let active = false;
 
 const clearColor = new Color("#f5efe6");
 const darkClearColor = new Color("rgb(233, 222, 208)");
@@ -38,7 +39,7 @@ const resize = () => {
 };
 
 const tick = () => {
-  if (!instance || camera.instance.position.equals(emptyVector)) return;
+  if (!instance || camera.instance.position.equals(emptyVector) || !active) return;
 
   if (sceneWeights.about > 0.001) {
     renderTarget.render();
@@ -49,6 +50,10 @@ const tick = () => {
   instance.render(scene.instance, camera.instance);
 };
 
+const setActive = (value: boolean) => {
+  active = value;
+};
+
 const destroy = () => {
   if (!instance) return;
   instance.dispose();
@@ -56,4 +61,4 @@ const destroy = () => {
   instance = null;
 };
 
-export const renderer = { init, destroy, getInstance };
+export const renderer = { init, destroy, getInstance, setActive };

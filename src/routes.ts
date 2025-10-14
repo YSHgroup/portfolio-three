@@ -1,4 +1,5 @@
 export const routes = [
-  { path: "/", component: () => import("./pages/Home.vue"), name: "home", meta: { locale: "en" } },
-  { path: "/de", component: () => import("./pages/Home.vue"), name: "home-de", meta: { locale: "de" } },
+  { path: "/", component: () => import("./pages/Home.vue"), name: "home", meta: { isThreeActive: true } },
+  { path: "/de", component: () => import("./pages/Home.vue"), name: "home-de", meta: { isThreeActive: true } },
+  { path: "/:pathMatch(.*)*", name: "NotFound", component: () => import("./pages/NotFound.vue") },
 ];

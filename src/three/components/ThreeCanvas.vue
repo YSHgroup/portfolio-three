@@ -1,10 +1,17 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from "vue";
+import { onMounted, onUnmounted, ref, watch } from "vue";
 import { three } from "../index";
 import { resources } from "../../utils/resources";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 const isReady = ref(false);
+
+watch(route, () => {
+  three.setActive(!!route.meta?.isThreeActive);
+});
 
 onMounted(() => {
   resources.once("ready", () => {

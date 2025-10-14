@@ -5,8 +5,10 @@ import HeaderLink from "./HeaderLink.vue";
 import { lenis } from "../utils/scroll";
 import { onMounted, ref, computed } from "vue";
 import { useTranslationContext } from "../i18n/context";
+import { useRoute } from "vue-router";
 
 const { t } = useTranslationContext();
+const route = useRoute();
 
 let aboutElement: HTMLElement | null = null;
 const isDarkTheme = ref(false);
@@ -45,7 +47,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <header :class="classNames">
+  <header :class="classNames" v-if="route.name !== 'NotFound'">
     <Logo class="header-logo" @click="handleLogoClick" />
     <div class="header-links">
       <HeaderLink @click="handleLinkClick('.about')">{{ t("about") }}</HeaderLink>

@@ -16,4 +16,4 @@ const destroy = () => {
   objects.destroy();
 };
 
-export const three = { init, destroy };
+export const three = { init, destroy, setActive: renderer.setActive };
