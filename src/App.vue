@@ -8,6 +8,7 @@ import { RouterView } from "vue-router";
 import Header from "./components/Header.vue";
 import ThreeCanvas from "./three/components/ThreeCanvas.vue";
 import { useRoute } from "vue-router";
+import TranslationProvider from "./i18n/context/TranslationProvider.vue";
 
 const route = useRoute();
 console.log(route.fullPath);
@@ -24,7 +25,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <Header />
-  <RouterView />
-  <ThreeCanvas />
+  <TranslationProvider>
+    <Header />
+    <RouterView />
+    <ThreeCanvas />
+  </TranslationProvider>
 </template>

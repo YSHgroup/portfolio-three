@@ -4,13 +4,16 @@ import Logo from "./Logo.vue";
 import HeaderLink from "./HeaderLink.vue";
 import { lenis } from "../utils/scroll";
 import { onMounted, ref, computed } from "vue";
+import { useTranslationContext } from "../i18n/context";
+
+const { t } = useTranslationContext();
 
 let aboutElement: HTMLElement | null = null;
 const isDarkTheme = ref(false);
 
 const handleScroll = () => {
   if (!aboutElement) {
-    aboutElement = document.querySelector(".about");
+    aboutElement = typeof window !== "undefined" ? document.querySelector(".about") : null;
   }
 
   if (aboutElement) {
@@ -45,7 +48,7 @@ onMounted(() => {
   <header :class="classNames">
     <Logo class="header-logo" @click="handleLogoClick" />
     <div class="header-links">
-      <HeaderLink @click="handleLinkClick('.about')">About</HeaderLink>
+      <HeaderLink @click="handleLinkClick('.about')">{{ t("about") }}</HeaderLink>
       <HeaderLink @click="handleLinkClick('.projects')">Projects</HeaderLink>
       <HeaderLink @click="handleLinkClick('.contact')">Contact</HeaderLink>
     </div>

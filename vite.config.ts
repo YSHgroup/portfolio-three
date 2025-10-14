@@ -4,7 +4,6 @@ import { execSync } from "child_process";
 import dotenv from "dotenv";
 import path from "path";
 import glsl from "vite-plugin-glsl";
-import { vitePrerenderPlugin } from "vite-prerender-plugin";
 
 const __dirname = path.resolve();
 dotenv.config({ path: path.resolve(__dirname, ".env") });
@@ -15,9 +14,6 @@ export default defineConfig({
   plugins: [
     vue(),
     glsl(),
-    vitePrerenderPlugin({
-      renderTarget: "#app",
-    }),
   ],
   root: "./src",
   server: {
