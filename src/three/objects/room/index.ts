@@ -4,6 +4,7 @@ import { Group, Mesh } from "three";
 import { getRoomMaterial } from "../../common/materials";
 import { sceneWeights } from "../../../animations/scenes";
 import gsap from "gsap";
+import { shadow } from "./shadow";
 
 import type { Object3D } from "three";
 
@@ -59,6 +60,8 @@ const init = () => {
   });
 
   scene.instance.add(group);
+
+  shadow.init();
 };
 
 const tick = () => {

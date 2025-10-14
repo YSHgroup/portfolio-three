@@ -7,6 +7,7 @@ import matcapGray from "./assets/textures/matcap-gray.jpg";
 import matcapSkin from "./assets/textures/matcap-skin.jpg";
 import matcapWhite from "./assets/textures/matcap-white.jpg";
 import roomTexture from "./assets/textures/room.png";
+import roomShadowTexture from "./assets/textures/room-shadow.png";
 
 type Source = {
   name: string;
@@ -26,4 +27,5 @@ export const sources = [
   { name: "matcap-skin", type: "texture", path: matcapSkin },
   { name: "matcap-white", type: "texture", path: matcapWhite },
   { name: "room-texture", type: "texture", path: roomTexture },
+  { name: "room-shadow-texture", type: "texture", path: roomShadowTexture },
 ] as const satisfies Source[];
