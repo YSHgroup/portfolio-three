@@ -3,12 +3,13 @@ import { provide } from "vue";
 import { TRANSLATION_SYMBOL } from "./index";
 import { useTranslations } from "../composables/useTranslations";
 
-import type { TranslationContextType } from "../types";
+import type { TranslationContextType } from "./index";
 
-const { t, locale } = useTranslations();
+const { t, locale, pathnameWithoutLocale } = useTranslations();
 
 const context: TranslationContextType = {
-  locale: locale.value,
+  locale,
+  pathnameWithoutLocale,
   t,
 };
 
@@ -16,5 +17,5 @@ provide(TRANSLATION_SYMBOL, context);
 </script>
 
 <template>
-  <slot />
+  <slot></slot>
 </template>

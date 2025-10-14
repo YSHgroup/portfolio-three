@@ -1,8 +1,10 @@
 import { inject } from "vue";
+import type { Ref } from "vue";
 
 export interface TranslationContextType {
-  locale: string;
+  locale: Ref<string>;
   t: (key: string, ...args: any[]) => string;
+  pathnameWithoutLocale: Ref<string>;
 }
 
 const TRANSLATION_SYMBOL = Symbol("TranslationContext");

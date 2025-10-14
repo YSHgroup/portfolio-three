@@ -16,12 +16,20 @@ const props = defineProps<{
 }>();
 
 const resolvedTo = computed(() => {
-  const finalLocale = props.locale || currentLocale || LOCALE_DEFAULT;
+  const finalLocale = props.locale || currentLocale.value || LOCALE_DEFAULT;
   const base = props.href || props.to || "/";
+
+  let path = base;
+
   if (finalLocale !== LOCALE_DEFAULT && !base.startsWith(`/${finalLocale}`)) {
-    return `/${finalLocale}${base}`;
+    path = `/${finalLocale}${base}`;
   }
-  return base;
+
+  if (path.length > 1 && path.endsWith("/")) {
+    path = path.slice(0, -1);
+  }
+
+  return path;
 });
 </script>
 
@@ -36,8 +44,8 @@ const resolvedTo = computed(() => {
     <slot></slot>
   </component>
 
-  <RouterLink v-else :to="resolvedTo" custom v-slot="{ navigate }">
-    <component :is="props.renderAs || 'a'" :href="resolvedTo" @click.prevent.stop="navigate">
+  <RouterLink v-else :to="resolvedTo">
+    <component :is="props.renderAs || 'a'" :href="resolvedTo">
       <slot></slot>
     </component>
   </RouterLink>

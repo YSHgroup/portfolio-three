@@ -5,6 +5,7 @@ import Instagram from "./icons/Instagram.vue";
 import Mail from "./icons/Mail.vue";
 import X from "./icons/X.vue";
 import Link from "./Link.vue";
+import Clickable from "./Clickable.vue";
 
 import { useTranslationContext } from "../i18n/context";
 import { social } from "../content/social";
@@ -25,16 +26,17 @@ const getAriaLabel = (name: string) => `${t("go-to")} ${name.charAt(0).toUpperCa
 
 <template>
   <div class="social">
-    <Link
+    <Clickable
       v-for="item in social"
       :key="item.name"
       :href="item.url"
       external
+      renderAs="div"
       class="social-link"
       :aria-label="getAriaLabel(item.name)"
     >
-      <component :is="icons[item.name]" />
-    </Link>
+      <Link external :href="item.url"> <component :is="icons[item.name]" /></Link>
+    </Clickable>
   </div>
 </template>
 
@@ -47,29 +49,6 @@ const getAriaLabel = (name: string) => `${t("go-to")} ${name.charAt(0).toUpperCa
   &-link {
     width: 24px;
     height: 24px;
-    position: relative;
-    z-index: 0;
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: -4px;
-      left: -4px;
-      width: calc(100% + 8px);
-      height: calc(100% + 8px);
-      background-color: var(--color-beige-600);
-      border-radius: var(--radius-md);
-      z-index: -1;
-      opacity: 0;
-    }
-
-    @include mixins.hover {
-      &:hover {
-        &::before {
-          opacity: 1;
-        }
-      }
-    }
   }
 }
 </style>

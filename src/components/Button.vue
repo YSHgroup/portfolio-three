@@ -5,7 +5,6 @@ import ButtonWrapper from "./ButtonWrapper.vue";
 import type { Props as ButtonWrapperProps } from "./ButtonWrapper.vue";
 
 export interface Props extends ButtonWrapperProps {
-  variant?: "orange";
   size?: "sm" | "md" | "lg";
 }
 
@@ -22,6 +21,10 @@ const classes = computed(() => ["button", `button-size-${props.size ?? "md"}`]);
 
 <style scoped lang="scss">
 .button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   &-size {
     &-sm {
       height: 38px;
