@@ -15,12 +15,14 @@ const { t, locale } = useTranslationContext();
         <Social />
         <div class="footer-top-links">
           <Clickable renderAs="div">
-            <Link :href="locale === 'de' ? '/de/privacy' : '/privacy'" class="footer-link" external>{{
+            <Link :href="locale === 'de' ? '/de/privacy' : '/privacy'" class="footer-link" :external="true">{{
               t("privacy")
             }}</Link>
           </Clickable>
           <Clickable renderAs="div">
-            <Link :href="locale === 'de' ? '/de/legal' : '/legal'" class="footer-link" external>{{ t("legal") }}</Link>
+            <Link :href="locale === 'de' ? '/de/legal' : '/legal'" class="footer-link" :external="true">{{
+              t("legal")
+            }}</Link>
           </Clickable>
           <LangSwitch />
         </div>

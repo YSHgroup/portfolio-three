@@ -26,16 +26,10 @@ const getAriaLabel = (name: string) => `${t("go-to")} ${name.charAt(0).toUpperCa
 
 <template>
   <div class="social">
-    <Clickable
-      v-for="item in social"
-      :key="item.name"
-      :href="item.url"
-      external
-      renderAs="div"
-      class="social-link"
-      :aria-label="getAriaLabel(item.name)"
-    >
-      <Link external :href="item.url"> <component :is="icons[item.name]" /></Link>
+    <Clickable v-for="item in social" :key="item.name" :href="item.url" renderAs="div" class="social-link">
+      <Link external :href="item.url">
+        <component :is="icons[item.name]" :aria-label="getAriaLabel(item.name)" external
+      /></Link>
     </Clickable>
   </div>
 </template>
