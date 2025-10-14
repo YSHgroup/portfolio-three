@@ -28,7 +28,7 @@ export interface SkillContent {
 
 export interface ProjectPreview {
   title: string;
-  //thumbnail: string;
+  thumbnail: string;
   slug: string;
   description: string;
 }

@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import LayoutContent from "../../components/LayoutContent.vue";
+import Slider from "./Slider.vue";
 </script>
 
 <template>
   <div class="projects">
-    <LayoutContent size="xxl" class="projects-content">
-      <p>Projects</p>
-    </LayoutContent>
+    <Slider />
   </div>
 </template>
 

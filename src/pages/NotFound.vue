@@ -22,6 +22,7 @@ import Link from "../components/Link.vue";
 <style scoped lang="scss">
 .not-found {
   height: var(--100vh);
+  padding: var(--space-outer);
 
   &-content {
     display: flex;
