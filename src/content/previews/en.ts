@@ -10,25 +10,24 @@ export default [
     title: "CubeWar",
     thumbnail: thumbnailCubeWar,
     slug: "cubewar",
-    description:
-      "CubeWar is a browser-based multiplayer game where players control cube characters in fast, strategic combat.",
+    description: "Multiplayer strategy game",
   },
   {
     title: "Gamedo",
     thumbnail: thumbnailGamedo,
     slug: "gamedo",
-    description: "Gamedo is a platform for creating and sharing games.",
+    description: "Multiplayer Gaming Platform",
   },
   {
     title: "Particles",
     thumbnail: thumbnailParticles,
     slug: "particles",
-    description: "Particles is a project that animates particles.",
+    description: "Dynamic 3D particles",
   },
   {
     title: "Pokedex",
     thumbnail: thumbnailPokedex,
     slug: "pokedex",
-    description: "Pokedex is a project that displays Pokémon.",
+    description: "Open-source learning project",
   },
 ] as const satisfies ProjectPreview[];
