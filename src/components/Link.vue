@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, useAttrs } from "vue";
 import { RouterLink } from "vue-router";
 import { useTranslationContext } from "../i18n/context";
 import { LOCALE_DEFAULT } from "../i18n/constants";
 
 const { locale: currentLocale } = useTranslationContext();
+const attrs = useAttrs();
 
 const props = defineProps<{
   external?: boolean;
@@ -40,13 +41,12 @@ const resolvedTo = computed(() => {
     :href="props.href || props.to"
     target="_blank"
     rel="noopener noreferrer"
+    v-bind="attrs"
   >
     <slot></slot>
   </component>
 
-  <RouterLink v-else :to="resolvedTo">
-    <component :is="props.renderAs || 'a'" :href="resolvedTo">
-      <slot></slot>
-    </component>
+  <RouterLink v-else :to="resolvedTo" v-bind="attrs">
+    <slot></slot>
   </RouterLink>
 </template>

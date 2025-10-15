@@ -64,4 +64,8 @@ const tick = () => {
   rotation.set(finalRot.x, finalRot.y, finalRot.z);
 };
 
-export const waypoints = { init, points, updateReferences, position, rotation };
+const destroy = () => {
+  gsap.ticker.remove(tick);
+};
+
+export const waypoints = { init, points, updateReferences, position, rotation, destroy };

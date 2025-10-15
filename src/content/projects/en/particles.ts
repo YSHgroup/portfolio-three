@@ -7,10 +7,7 @@ import type { ProjectContent } from "../../types";
 
 export const particles = {
   title: "WebGL Particles",
-  slug: "webgl-particles",
-  ["description-small"]: "Dynamic 3D particles",
   //thumbnail: thumbnailWebGLParticles,
-  tags: ["ogl", "javascript", "glsl"],
   live: "https://particles.david-hckh.com/",
   video: videoParticles,
   description:

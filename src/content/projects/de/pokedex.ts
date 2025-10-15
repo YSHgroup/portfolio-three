@@ -7,10 +7,7 @@ import type { ProjectContent } from "../../types";
 
 export const pokedex = {
   title: "Pokédex",
-  slug: "pokedex",
-  ["description-small"]: "Open-Source Lernprojekt",
   //thumbnail: thumbnailPokedex,
-  tags: ["javascript", "html", "css"],
   live: "https://pokedex.david-hckh.com/",
   source: "https://github.com/davidhckh/pokedex",
   video: videoPokedex,

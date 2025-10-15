@@ -2,6 +2,7 @@
 import Button from "../../components/Button.vue";
 import Tag from "../../components/Tag.vue";
 import { useTranslationContext } from "../../i18n/context";
+import Link from "../../components/Link.vue";
 
 import type { ProjectPreview } from "../../content/types";
 
@@ -23,7 +24,10 @@ const { t } = useTranslationContext();
           <Tag v-for="tag in props.preview.tags" :key="tag" :variant="tag" />
         </div>
       </div>
-      <Button class="preview-card-button" size="sm">{{ t("view-project") }}</Button>
+      <Link :to="`/project/${props.preview.slug}`">
+        <Button class="preview-card-button" size="sm" renderAs="div">{{ t("view-project") }}</Button>
+      </Link>
+      
     </div>
   </div>
 </template>

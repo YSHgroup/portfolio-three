@@ -9,10 +9,7 @@ import type { ProjectContent } from "../../types";
 
 export const gamedo = {
   title: "Gamedo",
-  slug: "gamedo",
-  ["description-small"]: "Multiplayer Gaming Platform",
   //thumbnail: thumbnailGamedo,
-  tags: ["three", "node", "kubernetes", "redis", "postgresql"],
   video: videoGamedo,
   description:
     "Gamedo is a platform for <b>fast, round-based multiplayer games</b>. It brings together matchmaking, customizable 3D avatars, and account integration with <b>ranked rewards</b>.<br/><br/>The project started as a <b>technical experiment</b> and grew into a scalable system for testing new game ideas.",

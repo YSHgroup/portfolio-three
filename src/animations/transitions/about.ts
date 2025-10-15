@@ -2,8 +2,10 @@ import { sceneWeightsInOut } from "../scenes";
 
 import gsap from "gsap";
 
-export const setup = (about: HTMLElement) => {
-  const tl = gsap.timeline({
+let tl: gsap.core.Timeline | null = null;
+
+const setup = (about: HTMLElement) => {
+  tl = gsap.timeline({
     scrollTrigger: {
       trigger: about,
       start: "bottom bottom",
@@ -16,3 +18,11 @@ export const setup = (about: HTMLElement) => {
   tl.to(sceneWeightsInOut.about, { out: 1, ease: "none", duration: 1 }, 0);
   //tl.to(sceneWeightsInOut.projects, { in: 1, ease: "none", duration: 1 }, 0);
 };
+
+const destroy = () => {
+  if (tl) {
+    tl.kill();
+  }
+};
+
+export const about = { setup, destroy };

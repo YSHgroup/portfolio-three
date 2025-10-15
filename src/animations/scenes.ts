@@ -41,4 +41,8 @@ const tick = () => {
   }
 };
 
-export const scenes = { init };
+const destroy = () => {
+  gsap.ticker.remove(tick);
+};
+
+export const scenes = { init, destroy };

@@ -1,13 +1,17 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { transitions } from "../../animations";
 
 const aboutElement = ref<HTMLElement | null>(null);
 
 onMounted(() => {
   if (aboutElement.value) {
-    transitions.about(aboutElement.value);
+    transitions.about.setup(aboutElement.value);
   }
+});
+
+onUnmounted(() => {
+  transitions.about.destroy();
 });
 </script>
 

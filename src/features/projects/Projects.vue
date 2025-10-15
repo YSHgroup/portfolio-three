@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, onMounted } from "vue";
-import { previews } from "../../content/previews";
+import { previews } from "../../content/projects/previews";
 import { useTranslationContext } from "../../i18n/context";
 import PreviewCard from "./PreviewCard.vue";
 import LayoutContent from "../../components/LayoutContent.vue";
@@ -16,19 +16,15 @@ const loadPreviews = async () => {
   loadedPreviews.value = module.default;
 };
 
-watch(locale, async () => {
-  await loadPreviews();
-});
+watch(locale, loadPreviews);
 
-onMounted(async () => {
-  await loadPreviews();
-});
+onMounted(loadPreviews);
 </script>
 <template>
   <div class="projects">
     <LayoutContent size="lg">
       <div class="projects-cards">
-        <PreviewCard v-for="preview in loadedPreviews" :key="preview.slug" :preview="preview" />
+        <PreviewCard v-for="preview in loadedPreviews" :key="preview.title" :preview="preview" />
       </div>
     </LayoutContent>
   </div>

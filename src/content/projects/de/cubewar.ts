@@ -9,10 +9,7 @@ import type { ProjectContent } from "../../types";
 
 export const cubewar = {
   title: "CubeWar",
-  slug: "cubewar",
-  ["description-small"]: "Multiplayer-Strategiespiel",
   //thumbnail: thumbnailCubeWar,
-  tags: ["three", "node", "websockets", "kubernetes", "redis"],
   video: videoCubeWar,
   live: "https://cubewar.io",
   description:

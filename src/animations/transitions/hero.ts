@@ -3,8 +3,10 @@ import { room } from "../../three/objects/room";
 import gsap from "gsap";
 import { sceneWeightsInOut } from "../scenes";
 
-export const setup = (hero: HTMLElement) => {
-  const tl = gsap.timeline({
+let tl: gsap.core.Timeline | null = null;
+
+const setup = (hero: HTMLElement) => {
+  tl = gsap.timeline({
     scrollTrigger: {
       trigger: hero,
       start: "top top",
@@ -29,3 +31,11 @@ export const setup = (hero: HTMLElement) => {
 
   tl.to(room.group.position, { y: 5, duration: 1 }, 0);
 };
+
+const destroy = () => {
+  if (tl) {
+    tl.kill();
+  }
+};
+
+export const hero = { setup, destroy };

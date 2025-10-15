@@ -1,8 +1,8 @@
 import { waypoints } from "./waypoints";
 import { scenes } from "./scenes";
-import { setup as hero } from "./transitions/hero";
-import { setup as about } from "./transitions/about";
-import { setup as contact } from "./transitions/contact";
+import { hero } from "./transitions/hero";
+import { about } from "./transitions/about";
+import { contact } from "./transitions/contact";
 
 export const transitions = {
   hero,
@@ -15,4 +15,9 @@ const init = () => {
   waypoints.init();
 };
 
-export const animations = { init };
+const destroy = () => {
+  scenes.destroy();
+  waypoints.destroy();
+};
+
+export const animations = { init, destroy };
