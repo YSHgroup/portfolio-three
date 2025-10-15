@@ -1,13 +1,11 @@
-import type { TagVariant } from "../components/ProjectTag.vue";
+import type { TagVariant } from "../components/Tag.vue";
 import type { ProjectComponents } from "../components/ProjectComponent.vue";
 
 export interface ProjectContent {
   title: string;
   slug: string;
   description?: string;
-  ["description-small"]?: string;
   //thumbnail: ImageMetadata;
-  tags: TagVariant[];
   video: string;
   live?: string;
   source?: string;
@@ -31,4 +29,5 @@ export interface ProjectPreview {
   thumbnail: string;
   slug: string;
   description: string;
+  tags: TagVariant[];
 }

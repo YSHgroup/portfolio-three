@@ -32,7 +32,7 @@ const classes = computed(() => ["button-wrapper", `button-wrapper-${props.varian
   }
 
   &-border {
-    border: 2px solid var(--color-beige-500);
+    border: 2px solid var(--color-grayscale-400);
   }
 }
 </style>

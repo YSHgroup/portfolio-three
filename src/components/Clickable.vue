@@ -25,7 +25,7 @@ const props = defineProps<{
     left: -5px;
     width: calc(100% + 10px);
     height: calc(100% + 10px);
-    background-color: var(--color-beige-500);
+    background-color: var(--color-grayscale-400);
     z-index: -1;
     border-radius: var(--radius-md);
     visibility: hidden;

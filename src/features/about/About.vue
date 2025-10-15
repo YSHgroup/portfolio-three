@@ -19,7 +19,7 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .about {
-  min-height: calc(var(--100vh) + 320px);
+  min-height: var(--100vh);
   position: relative;
   width: 100%;
   display: flex;
