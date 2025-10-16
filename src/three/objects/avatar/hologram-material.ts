@@ -1,4 +1,4 @@
-import { Color, ShaderMaterial, DoubleSide } from "three";
+import { Color, ShaderMaterial, DoubleSide, AdditiveBlending } from "three";
 import vertexShader from "../../shaders/hologram/vertex.glsl?raw";
 import fragmentShader from "../../shaders/hologram/fragment.glsl?raw";
 
@@ -17,7 +17,7 @@ const getMaterial = () => {
     fragmentShader: fragmentShader,
     transparent: true,
     depthWrite: false,
-    blending: 2,
+    blending: AdditiveBlending,
     side: DoubleSide,
     uniforms,
   });

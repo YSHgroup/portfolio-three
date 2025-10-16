@@ -16,13 +16,13 @@ void main() {
     #include <skinning_vertex>
     #include <project_vertex>
 
-    float glitchTime = uTime - transformed.y;
-    float glitchStrength = sin(glitchTime) + sin(glitchTime * 3.5) +  sin(glitchTime * 8.76);
-    glitchStrength /= 3.0;
-    glitchStrength = smoothstep(0.3, 1.0, glitchStrength);
-    glitchStrength *= 0.1;
-    transformed.x += (random2D(transformed.xz + uTime) - 0.5) * glitchStrength;
-    transformed.z += (random2D(transformed.zx + uTime) - 0.5) * glitchStrength;
+    //float glitchTime = uTime - transformed.y;
+    //float glitchStrength = sin(glitchTime) + sin(glitchTime * 3.5) +  sin(glitchTime * 8.76);
+    //glitchStrength /= 3.0;
+    //glitchStrength = smoothstep(0.3, 1.0, glitchStrength);
+    //glitchStrength *= 0.1;
+    //transformed.x += (random2D(transformed.xz + uTime) - 0.5) * glitchStrength;
+    //transformed.z += (random2D(transformed.zx + uTime) - 0.5) * glitchStrength;
 
     vec4 skinnedNormal = vec4(0.0);
     skinnedNormal += boneMatX * vec4(normal, 0.0) * skinWeight.x;

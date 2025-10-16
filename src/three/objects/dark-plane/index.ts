@@ -1,4 +1,4 @@
-import { Mesh, ShaderMaterial, PlaneGeometry, Float32BufferAttribute } from "three";
+import { Mesh, ShaderMaterial, PlaneGeometry, Float32BufferAttribute, Color } from "three";
 import { scene } from "../../core/scene";
 import vertexShader from "../../shaders/dark-plane/vertex.glsl?raw";
 import fragmentShader from "../../shaders/dark-plane/fragment.glsl?raw";
@@ -40,6 +40,7 @@ const init = () => {
       uTexture: { value: renderTarget.instance.texture },
       uInProgress: { value: 0 },
       uOutProgress: { value: 0 },
+      uVignetteColor: { value: new Color("rgb(0, 15, 61)") },
     },
   });
 

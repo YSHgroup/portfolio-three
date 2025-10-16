@@ -18,11 +18,11 @@ const setup = (hero: HTMLElement) => {
   tl.fromTo(sceneWeightsInOut.hero, { out: 0 }, { out: 1, ease: "none", duration: 1 }, 0);
   tl.fromTo(sceneWeightsInOut.about, { in: 0 }, { in: 1, ease: "none", duration: 1 }, 0);
 
-  tl.fromTo(avatar.tIdleIntensity, { value: 0 }, { value: 1, duration: 1, ease: "none" }, 0);
+  tl.fromTo(avatar.tIdleIntensity, { value: 0 }, { value: 1, duration: 1, ease: "power1.out" }, 0);
 
   const { waypointsPosition, waypointsRotation } = avatar;
 
-  tl.fromTo(waypointsPosition, { x: 2, y: 0, z: 0 }, { x: -2, y: 1, z: 2.5, duration: 1, ease: "power1.out" }, 0);
+  tl.fromTo(waypointsPosition, { x: 2, y: 0, z: 0 }, { x: 0, y: 1, z: 6, duration: 1, ease: "power1.out" }, 0);
   tl.fromTo(
     waypointsRotation,
     { x: 0, y: -2.3 + Math.PI / 2, z: 0 },

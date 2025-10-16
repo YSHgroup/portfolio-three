@@ -1,7 +1,7 @@
 import { WebGLRenderTarget, Scene } from "three";
 import { renderer } from "../renderer";
 import { sizes } from "../../../utils/sizes";
-import { sceneWeightsInOut } from "../../../animations/scenes";
+//import { sceneWeightsInOut } from "../../../animations/scenes";
 import { camera as mainCamera } from "../camera";
 import { waypoints } from "../../../animations/waypoints";
 
@@ -22,8 +22,8 @@ const render = () => {
   camera.position.copy(waypoints.position);
   camera.rotation.copy(waypoints.rotation);
 
-  camera.position.y += -3 * sceneWeightsInOut.about.out;
-  camera.rotation.x += 0.3 * sceneWeightsInOut.about.out;
+  //camera.position.y += -3 * sceneWeightsInOut.about.out;
+  //camera.rotation.x += 0.3 * sceneWeightsInOut.about.out;
 
   const rendererInstance = renderer.getInstance();
   rendererInstance.setRenderTarget(instance);

@@ -23,8 +23,11 @@ void main() {
     float falloff = smoothstep(0.8, 0.2, fresnel);
 
     float holographic = stripes * fresnel;
-    holographic += fresnel * 1.25;
+    holographic += fresnel;
     holographic *= falloff;
+
+    if(!gl_FrontFacing)
+        holographic *= 0.5;
 
     gl_FragColor = vec4(uColor, holographic);
 }

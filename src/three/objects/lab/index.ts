@@ -1,7 +1,7 @@
 import { resources } from "../../../utils/resources";
 import { Group, Mesh } from "three";
 import { getLabMaterial } from "../../common/materials";
-import { renderTarget } from "../../core/renderTarget";
+//import { renderTarget } from "../../core/renderTarget";
 
 import type { Object3D } from "three";
 
@@ -24,7 +24,7 @@ const init = () => {
     group.add(object);
   });
 
-  renderTarget.scene.add(group);
+  //renderTarget.scene.add(group);
 };
 
 export const lab = { init, group };

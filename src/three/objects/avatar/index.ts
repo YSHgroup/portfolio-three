@@ -22,6 +22,7 @@ const init = () => {
 };
 
 const getMaterial = (name: string): Material | null => {
+  if (name === "face") return new MeshBasicMaterial({ transparent: true, opacity: 0 });
   if (name === "black") return new MeshMatcapMaterial({ matcap: resources.items["matcap-black"] });
   if (name === "gray") return new MeshMatcapMaterial({ matcap: resources.items["matcap-gray"] });
   if (name === "skin") return new MeshMatcapMaterial({ matcap: resources.items["matcap-skin"] });
