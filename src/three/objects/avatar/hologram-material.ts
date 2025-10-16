@@ -7,7 +7,6 @@ let material: ShaderMaterial;
 const uniforms = {
   uTime: { value: 0 },
   uColor: { value: new Color("rgb(0, 234, 255)") },
-  uFresnelPower: { value: 2 },
 };
 
 const getMaterial = () => {

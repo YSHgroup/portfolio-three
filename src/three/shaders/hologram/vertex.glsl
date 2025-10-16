@@ -17,7 +17,7 @@ void main() {
     #include <project_vertex>
 
     float glitchTime = uTime - transformed.y;
-    float glitchStrength = sin(glitchTime) + sin(glitchTime * 20.) +  sin(glitchTime * 8.76);
+    float glitchStrength = sin(glitchTime) + sin(glitchTime * 3.5) +  sin(glitchTime * 8.76);
     glitchStrength /= 3.0;
     glitchStrength = smoothstep(0.3, 1.0, glitchStrength);
     glitchStrength *= 0.1;
