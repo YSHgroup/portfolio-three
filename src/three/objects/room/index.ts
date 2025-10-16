@@ -9,7 +9,6 @@ import { shadow } from "./shadow";
 import type { Object3D } from "three";
 
 const group = new Group();
-group.rotation.y = -Math.PI / 2;
 
 let objects: {
   blackboard: Mesh;

@@ -1,4 +1,5 @@
 import { sceneWeightsInOut } from "../scenes";
+import { lab } from "../../three/objects/lab";
 
 import gsap from "gsap";
 
@@ -17,6 +18,9 @@ const setup = (about: HTMLElement) => {
   //tl.to(darkPlane.progress, { out: 1, duration: 1, ease: "none" }, 0);
   tl.fromTo(sceneWeightsInOut.about, { out: 0 }, { out: 1, ease: "none", duration: 1 }, 0);
   //tl.to(sceneWeightsInOut.projects, { in: 1, ease: "none", duration: 1 }, 0);
+
+  //tl.fromTo(lab.group.position, { x: -2, y: 0, z: 4 }, { x: -2, y: 0, z: 4, duration: 1 }, 0);
+  //tl.fromTo(lab.group.rotation, { x: 0, y: 0, z: 0 }, { x: 0, y: 0, z: 0, duration: 1 }, 0);
 };
 
 const destroy = () => {

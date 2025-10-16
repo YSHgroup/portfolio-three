@@ -1,4 +1,5 @@
 import avatarModel from "./assets/models/avatar.glb";
+import labModel from "./assets/models/lab.glb";
 import roomModel from "./assets/models/room.glb";
 
 import headTexture from "./assets/textures/head.png";
@@ -18,6 +19,7 @@ type Source = {
 export const sources = [
   //models
   { name: "avatar-model", type: "gltfModel", path: avatarModel },
+  { name: "lab-model", type: "gltfModel", path: labModel },
   { name: "room-model", type: "gltfModel", path: roomModel },
 
   //textures
