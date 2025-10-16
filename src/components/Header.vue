@@ -3,10 +3,9 @@ import Button from "./Button.vue";
 import Logo from "./Logo.vue";
 import HeaderLink from "./HeaderLink.vue";
 import { lenis } from "../utils/scroll";
-import { onMounted, ref, computed } from "vue";
+import { onMounted, ref, computed, watch } from "vue";
 import { useTranslationContext } from "../i18n/context";
 import { useRoute } from "vue-router";
-import { onBeforeRouteLeave } from "vue-router";
 
 const { t } = useTranslationContext();
 const route = useRoute();
@@ -14,7 +13,7 @@ const route = useRoute();
 let aboutElement: HTMLElement | null = null;
 const isDarkTheme = ref(false);
 
-onBeforeRouteLeave(() => {
+watch(route, () => {
   aboutElement = null;
 });
 

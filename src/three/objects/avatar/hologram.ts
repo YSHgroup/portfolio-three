@@ -1,17 +1,18 @@
 import { resources } from "../../../utils/resources";
-import { Mesh, MeshBasicMaterial, Matrix4, Vector3, BufferAttribute, Group } from "three";
+import { Mesh, Matrix4, Vector3, BufferAttribute, Group, SkinnedMesh } from "three";
 import { renderTarget } from "../../core/renderTarget";
 import { clone as cloneSkeleton } from "three/examples/jsm/utils/SkeletonUtils.js";
 import { getMaterial as getHologramMaterial, uniforms as hologramUniforms } from "./hologram-material";
 import gsap from "gsap";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import { avatar } from ".";
-import { SkinnedMesh, type BufferGeometry, type Object3D, type Skeleton } from "three";
+
+import type { Material, BufferGeometry, Object3D, Skeleton } from "three";
 
 const GEOMETRY_NAMES: string[] = ["black", "gray", "skin", "white", "head"];
 
 let mesh: SkinnedMesh;
-let material: MeshBasicMaterial;
+let material: Material;
 let geometry: BufferGeometry;
 let skeleton: Skeleton;
 
@@ -47,7 +48,9 @@ const setupGeometry = () => {
     }
   });
 
-  geometry = mergeGeometries(geometries).toNonIndexed();
+  //geometry = mergeGeometries(geometries).toNonIndexed();
+  geometry = mergeGeometries(geometries);
+  geometry.toNonIndexed();
 
   const vectors = [new Vector3(1, 0, 0), new Vector3(0, 1, 0), new Vector3(0, 0, 1)];
 

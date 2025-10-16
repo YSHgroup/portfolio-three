@@ -1,102 +1,27 @@
-import { DoubleSide, MeshBasicMaterial } from "three";
+import { Color, ShaderMaterial, DoubleSide } from "three";
+import vertexShader from "../../shaders/hologram/vertex.glsl?raw";
+import fragmentShader from "../../shaders/hologram/fragment.glsl?raw";
 
-let material: MeshBasicMaterial;
+let material: ShaderMaterial;
 
 const uniforms = {
   uTime: { value: 0 },
+  uColor: { value: new Color("rgb(0, 234, 255)") },
+  uFresnelPower: { value: 2 },
 };
 
 const getMaterial = () => {
   if (material) return material;
 
-  material = new MeshBasicMaterial({
+  material = new ShaderMaterial({
+    vertexShader: vertexShader,
+    fragmentShader: fragmentShader,
     transparent: true,
+    depthWrite: false,
     blending: 2,
-    color: "rgb(0, 213, 255)",
-    alphaToCoverage: true,
     side: DoubleSide,
+    uniforms,
   });
-
-  material.onBeforeCompile = (shader) => {
-    // Add custom uniforms
-    shader.uniforms.uTime = uniforms.uTime;
-
-    // Inject vertex shader logic
-    shader.vertexShader = shader.vertexShader
-      .replace(
-        `#include <common>`,
-        `#include <common>
-      
-      uniform float uTime;
-
-      attribute vec3 center;
-
-      varying vec3 vPosition;
-      varying vec3 vNormal;
-      varying vec3 vCenter;
-      varying vec4 vClipPos;
-
-      // random2D helper
-      float random2D(vec2 st) {
-        return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
-      }
-      `,
-      )
-      .replace(
-        `#include <begin_vertex>`,
-        `
-        vec4 modelPosition = vec4(position, 1.0);
-
-        vec3 transformed = position;
-
-        // World-space position
-        vec4 worldPosition = modelMatrix * vec4(position, 1.0);
-        vPosition = worldPosition.xyz;
-
-        vNormal = normalize(mat3(modelMatrix) * normal);
-        vClipPos = projectionMatrix * viewMatrix * worldPosition;
-        vCenter = center;
-      `,
-      );
-
-    shader.fragmentShader = shader.fragmentShader
-      .replace(
-        `#include <common>`,
-        `#include <common>
-  
-        uniform float uTime;
-
-        varying vec3 vPosition;
-        varying vec3 vCenter;
-        varying vec4 vClipPos;
-
-        #define THICKNESS .75
-        `,
-      )
-      .replace(
-        "#include <color_fragment>",
-        `
-        #include <color_fragment>
-
-        vec3 afwidth = fwidth( vCenter.xyz );
-
-        vec3 edge3 = smoothstep( ( THICKNESS - 1.0 ) * afwidth, THICKNESS * afwidth, vCenter.xyz );
-
-        float edge = 1.0 - min( min( edge3.x, edge3.y ), edge3.z );
-
-
-        diffuseColor.a = min(edge + 0.1, 1.);
-
-        #ifdef FLIP_SIDED
-            diffuseColor.a *= 0.2;
-        #endif
-
-
-        `,
-      );
-  };
-
-  material.depthTest = false;
 
   return material;
 };

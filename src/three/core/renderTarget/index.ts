@@ -6,8 +6,8 @@ import { camera as mainCamera } from "../camera";
 import { waypoints } from "../../../animations/waypoints";
 
 const instance = new WebGLRenderTarget(window.innerWidth, window.innerHeight, {
-  samples: 0,
-  depthBuffer: false,
+  samples: 1,
+  depthBuffer: true,
   stencilBuffer: false,
 });
 const scene = new Scene();
