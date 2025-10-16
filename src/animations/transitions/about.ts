@@ -15,7 +15,7 @@ const setup = (about: HTMLElement) => {
   });
 
   //tl.to(darkPlane.progress, { out: 1, duration: 1, ease: "none" }, 0);
-  tl.to(sceneWeightsInOut.about, { out: 1, ease: "none", duration: 1 }, 0);
+  tl.fromTo(sceneWeightsInOut.about, { out: 0 }, { out: 1, ease: "none", duration: 1 }, 0);
   //tl.to(sceneWeightsInOut.projects, { in: 1, ease: "none", duration: 1 }, 0);
 };
 

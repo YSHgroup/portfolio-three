@@ -6,12 +6,17 @@ import { lenis } from "../utils/scroll";
 import { onMounted, ref, computed } from "vue";
 import { useTranslationContext } from "../i18n/context";
 import { useRoute } from "vue-router";
+import { onBeforeRouteLeave } from "vue-router";
 
 const { t } = useTranslationContext();
 const route = useRoute();
 
 let aboutElement: HTMLElement | null = null;
 const isDarkTheme = ref(false);
+
+onBeforeRouteLeave(() => {
+  aboutElement = null;
+});
 
 const handleScroll = () => {
   if (!aboutElement) {

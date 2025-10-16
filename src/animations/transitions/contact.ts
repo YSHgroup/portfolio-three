@@ -13,7 +13,7 @@ const setup = (contact: HTMLElement) => {
     },
   });
 
-  tl.to(sceneWeightsInOut.contact, { in: 1, duration: 1 }, 0);
+  tl.fromTo(sceneWeightsInOut.contact, { in: 0 }, { in: 1, duration: 1 }, 0);
 };
 
 const destroy = () => {

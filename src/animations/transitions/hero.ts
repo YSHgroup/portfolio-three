@@ -15,21 +15,21 @@ const setup = (hero: HTMLElement) => {
     },
   });
 
-  tl.to(sceneWeightsInOut.hero, { out: 1, ease: "none", duration: 1 }, 0);
-  tl.to(sceneWeightsInOut.about, { in: 1, ease: "none", duration: 1 }, 0);
+  tl.fromTo(sceneWeightsInOut.hero, { out: 0 }, { out: 1, ease: "none", duration: 1 }, 0);
+  tl.fromTo(sceneWeightsInOut.about, { in: 0 }, { in: 1, ease: "none", duration: 1 }, 0);
 
-  tl.to(avatar.tIdleIntensity, { value: 1, duration: 1 }, 0);
+  tl.fromTo(avatar.tIdleIntensity, { value: 0 }, { value: 1, duration: 1 }, 0);
 
   //const hologramMesh = avatarHologram.getMesh();
   const { waypointsPosition, waypointsRotation } = avatar;
 
-  tl.to(waypointsPosition, { x: 1, z: 5, y: 1, duration: 1 }, 0);
-  tl.to(waypointsRotation, { y: -Math.PI * 0.6, duration: 1 }, 0);
+  tl.fromTo(waypointsPosition, { x: 0, y: 0, z: 0 }, { x: 1, z: 5, y: 1, duration: 1 }, 0);
+  tl.fromTo(waypointsRotation, { x: 0, y: 0, z: 0 }, { y: -Math.PI * 0.6, duration: 1 }, 0);
 
   //tl.to(hologramMesh.position, { x: 1, z: 5, y: 1, duration: 1 }, 0);
   //tl.to(hologramMesh.rotation, { z: Math.PI * 0.6, duration: 1 }, 0);
 
-  tl.to(room.group.position, { y: 5, duration: 1 }, 0);
+  tl.fromTo(room.group.position, { y: 0 }, { y: 5, duration: 1 }, 0);
 };
 
 const destroy = () => {

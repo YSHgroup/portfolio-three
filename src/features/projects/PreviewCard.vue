@@ -41,7 +41,7 @@ const { t } = useTranslationContext();
   &-content {
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
+    gap: var(--space-lg);
     padding-top: var(--space-md);
   }
 
