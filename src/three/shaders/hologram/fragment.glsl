@@ -27,7 +27,7 @@ void main() {
     holographic *= falloff;
 
     if(!gl_FrontFacing)
-        holographic *= 0.5;
+        holographic *= 0.3;
 
     gl_FragColor = vec4(uColor, holographic);
 }

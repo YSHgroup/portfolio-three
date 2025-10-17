@@ -31,6 +31,6 @@ void main() {
     skinnedNormal += boneMatW * vec4(normal, 0.0) * skinWeight.w;
     vNormal = skinnedNormal.xyz;
 
-    vWorldPos = (modelMatrix * vec4(transformed, 1.0)).xyz;
+    vWorldPos = mvPosition.xyz;
     vPosition = transformed;
 }
