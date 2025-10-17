@@ -21,8 +21,8 @@ onUnmounted(() => {
 
 <template>
   <div class="about" ref="aboutRef">
-    <section ref="sectionOneRef"><SectionOne /></section>
-    <section ref="sectionTwoRef"><SectionTwo /></section>
+    <section ref="sectionOneRef" class="section-one"><SectionOne /></section>
+    <section ref="sectionTwoRef" class="section-two"><SectionTwo /></section>
   </div>
 </template>
 
@@ -32,7 +32,6 @@ onUnmounted(() => {
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding-bottom: 96px;
   gap: 160px;
 
   &-lines {

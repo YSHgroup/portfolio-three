@@ -9,7 +9,7 @@ import { sceneWeights } from "../../animations/scenes";
 //const PARALLAX_INTENSITY = 1;
 //const PARALLAX_SPEED = 1;
 
-const instance = new PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 100);
+const instance = new PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.01, 100);
 
 const parallaxGroup = new Group();
 
