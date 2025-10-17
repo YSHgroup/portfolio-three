@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
 import { transitions } from "../../animations";
+import SectionOne from "./SectionOne.vue";
+import SectionTwo from "./SectionTwo.vue";
 
-const aboutElement = ref<HTMLElement | null>(null);
+const aboutRef = ref<HTMLElement | null>(null);
+const sectionOneRef = ref<HTMLElement | null>(null);
+const sectionTwoRef = ref<HTMLElement | null>(null);
 
 onMounted(() => {
-  if (aboutElement.value) {
-    transitions.about.setup(aboutElement.value);
+  if (aboutRef.value && sectionOneRef.value && sectionTwoRef.value) {
+    transitions.about.setup(aboutRef.value, sectionOneRef.value, sectionTwoRef.value);
   }
 });
 
@@ -16,19 +20,20 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="about" ref="aboutElement">
-    <p>about</p>
+  <div class="about" ref="aboutRef">
+    <section ref="sectionOneRef"><SectionOne /></section>
+    <section ref="sectionTwoRef"><SectionTwo /></section>
   </div>
 </template>
 
 <style scoped lang="scss">
 .about {
-  min-height: var(--100vh);
   position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 200px;
+  padding-bottom: 96px;
+  gap: 160px;
 
   &-lines {
     position: absolute;

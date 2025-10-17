@@ -75,6 +75,8 @@ const setupMesh = () => {
   mesh.scale.copy(resource.scene.children[0].scale);
   mesh.rotation.z = 0;
 
+  mesh.frustumCulled = false;
+
   renderTarget.scene.add(transform);
   transform.add(mesh);
 };
