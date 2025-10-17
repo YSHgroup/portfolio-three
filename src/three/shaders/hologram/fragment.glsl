@@ -13,7 +13,7 @@ void main() {
     if(!gl_FrontFacing)
         normal *= - 1.0;
 
-    float stripes = mod((vWorldPos.y - uTime * 0.05) * 20.0, 1.0);
+    float stripes = mod((vWorldPos.y - uTime * 0.1) * 30.0, 1.0);
     stripes = pow(stripes, 3.0);
 
     vec3 viewDir = normalize(cameraPosition - vWorldPos);
@@ -24,6 +24,7 @@ void main() {
 
     float holographic = stripes * fresnel;
     holographic += fresnel;
+    holographic += stripes * 0.05;
     holographic *= falloff;
 
     if(!gl_FrontFacing)

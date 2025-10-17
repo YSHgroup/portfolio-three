@@ -16,8 +16,9 @@ const setup = (hero: HTMLElement) => {
 
   tl.fromTo(sceneWeightsInOut.hero, { out: 0 }, { out: 1, ease: "none", duration: 1 }, 0);
 
-  tl.fromTo(room.group.position, { x: 2, y: 0, z: 0 }, { x: 2, y: 6, z: 0, duration: 1, ease: "none" }, 0);
-  tl.fromTo(room.group.rotation, { x: 0, y: -2.3, z: 0 }, { x: 0, y: -2.3, z: 0, duration: 1, ease: "none" }, 0);
+  tl.fromTo(room.group.position, { x: 2, y: 0, z: 0 }, { x: 3, y: 6, z: 0, duration: 1, ease: "none" }, 0);
+  tl.fromTo(room.group.rotation, { x: 0, y: -2.3, z: 0 }, { x: 0, y: -2.4, z: 0, duration: 1, ease: "none" }, 0);
+  tl.fromTo(room.group.scale, { x: 1, y: 1, z: 1 }, { x: 0.8, y: 0.8, z: 0.8, duration: 1, ease: "none" }, 0);
 };
 
 const destroy = () => {

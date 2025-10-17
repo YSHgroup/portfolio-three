@@ -27,12 +27,19 @@ onUnmounted(() => {
 </template>
 
 <style scoped lang="scss">
+.section {
+  &-two {
+    padding-bottom: 128px;
+  }
+}
+
 .about {
   position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 160px;
+  font-family: "NB-Architekt-Std";
 
   &-lines {
     position: absolute;

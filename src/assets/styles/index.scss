@@ -2,6 +2,7 @@
 @use "./variables.scss";
 @use "./colors.scss";
 @use "./fonts.scss";
+@use "./grid.scss";
 
 html {
   background: var(--color-beige-400);
