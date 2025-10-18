@@ -1,6 +1,6 @@
 import { WebGLRenderTarget, Scene } from "three";
 import { renderer } from "../renderer";
-import { sizes } from "../../../utils/sizes";
+import { threeSizes } from "../../utils/sizes";
 //import { sceneWeightsInOut } from "../../../animations/scenes";
 import { camera as mainCamera } from "../camera";
 import { waypoints } from "../../../animations/waypoints";
@@ -17,7 +17,7 @@ camera.far = 10000;
 camera.updateProjectionMatrix();
 
 const init = () => {
-  sizes.on("resize", resize);
+  threeSizes.on("resize", resize);
   resize();
 };
 
@@ -37,11 +37,11 @@ const render = () => {
 };
 
 const destroy = () => {
-  sizes.off("resize", resize);
+  threeSizes.off("resize", resize);
 };
 
 const resize = () => {
-  const { width, height, pixelRatio } = sizes;
+  const { width, height, pixelRatio } = threeSizes;
   instance.setSize(width * pixelRatio, height * pixelRatio);
   camera.aspect = width / height;
   camera.updateProjectionMatrix();

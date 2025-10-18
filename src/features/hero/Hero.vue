@@ -21,22 +21,10 @@ onUnmounted(() => {
     <LayoutContent>
       <h1 class="hero-title">David</h1>
     </LayoutContent>
-    <div class="test"></div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.test {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 0;
-  width: 40px;
-  aspect-ratio: 1/1;
-  background: red;
-  z-index: 100000;
-}
-
 .hero {
   height: calc(var(--lvh) * 100);
   width: 100%;

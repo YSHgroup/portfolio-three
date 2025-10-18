@@ -39,7 +39,6 @@ const init = () => {
     uniforms: {
       uTexture: { value: renderTarget.instance.texture },
       uInProgress: { value: 0 },
-      uOutProgress: { value: 0 },
       uVignetteColor: { value: new Color("rgb(0, 15, 61)") },
     },
   });
@@ -52,7 +51,6 @@ const init = () => {
     if (!material) return;
 
     material.uniforms.uInProgress!.value = sceneWeightsInOut.about.in;
-    material.uniforms.uOutProgress!.value = sceneWeightsInOut.about.out;
   };
 
   scene.instance.add(mesh);

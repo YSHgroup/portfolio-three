@@ -18,8 +18,6 @@ class Sizes extends EventEmitter<{
   height: number;
   pixelRatio: number;
   breakpoint: keyof typeof breakpoints;
-  canvas: HTMLCanvasElement | null = null;
-  observer: ResizeObserver | null = null;
 
   constructor() {
     super();
@@ -29,10 +27,9 @@ class Sizes extends EventEmitter<{
     this.breakpoint = "md";
   }
 
-  init(canvas: HTMLCanvasElement) {
-    this.canvas = canvas;
-    this.observer = new ResizeObserver(this.resize.bind(this));
-    this.observer.observe(this.canvas);
+  init() {
+    window.addEventListener("resize", this.resize.bind(this));
+    this.resize();
   }
 
   atLeastBreakpoint(breakpoint: keyof typeof breakpoints) {
@@ -47,10 +44,8 @@ class Sizes extends EventEmitter<{
   }
 
   resize() {
-    if (!this.canvas) return;
-    const rect = this.canvas.getBoundingClientRect();
-    this.width = rect.width;
-    this.height = rect.height;
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
     this.pixelRatio = Math.min(window.devicePixelRatio, 2);
 
     this.setViewportUnits();
@@ -61,8 +56,7 @@ class Sizes extends EventEmitter<{
   }
 
   destroy() {
-    this.observer?.disconnect();
-    this.observer = null;
+    window.removeEventListener("resize", this.resize.bind(this));
   }
 }
 

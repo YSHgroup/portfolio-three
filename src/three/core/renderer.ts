@@ -1,11 +1,11 @@
 import { WebGLRenderer, Vector3 } from "three";
-import { sizes } from "../../utils/sizes";
 import gsap from "gsap";
 import { scene } from "./scene";
 import { renderTarget } from "./renderTarget";
 import { camera } from "./camera";
 import { sceneWeights } from "../../animations/scenes";
 import { colors } from "../common/colors";
+import { threeSizes } from "../utils/sizes";
 
 let instance: WebGLRenderer | null = null;
 let active = false;
@@ -22,7 +22,7 @@ const init = (canvas: HTMLCanvasElement) => {
 
   gsap.ticker.add(tick);
 
-  sizes.on("resize", resize);
+  threeSizes.on("resize", resize);
   resize();
 };
 
@@ -33,8 +33,8 @@ const getInstance = () => {
 
 const resize = () => {
   if (!instance) return;
-  instance.setSize(sizes.width, sizes.height, false);
-  instance.setPixelRatio(sizes.pixelRatio);
+  instance.setSize(threeSizes.width, threeSizes.height, false);
+  instance.setPixelRatio(threeSizes.pixelRatio);
 };
 
 const tick = () => {

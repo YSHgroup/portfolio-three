@@ -1,7 +1,6 @@
 varying vec2 vUv;
 
 uniform float uInProgress;
-uniform float uOutProgress;
 
 void main()
 {
@@ -11,9 +10,7 @@ void main()
     float isTopLeft = step(0.5, position.y) * step(position.x, 0.5);
     inY += 0.5 * isTopLeft * uInProgress;
 
-    float finalPos = inY + 2.0 * uOutProgress;
-
-    gl_Position = vec4(position.x, finalPos, position.z, 1.0);
+    gl_Position = vec4(position.x, inY, position.z, 1.0);
 
     // Step 3: Adjust UV to follow the vertex movement
     float yMin = -1.0;

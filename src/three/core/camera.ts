@@ -1,5 +1,5 @@
 import { PerspectiveCamera, Group } from "three";
-import { sizes } from "../../utils/sizes";
+import { threeSizes } from "../utils/sizes";
 import { isTouch } from "../../utils/observer";
 import gsap from "gsap";
 import { scene } from "./scene";
@@ -19,13 +19,13 @@ parallaxGroup.add(instance);
 const cursor = { x: 0, y: 0 };
 
 const init = () => {
-  sizes.on("resize", resize);
+  threeSizes.on("resize", resize);
   resize();
 
   if (!isTouch()) {
     window.addEventListener("mousemove", (event) => {
-      cursor.x = event.clientX / sizes.width - 0.5;
-      cursor.y = event.clientY / sizes.height - 0.5;
+      cursor.x = event.clientX / threeSizes.width - 0.5;
+      cursor.y = event.clientY / threeSizes.height - 0.5;
     });
   }
 
@@ -56,12 +56,12 @@ const tick = () => {
 };
 
 const resize = () => {
-  instance.aspect = sizes.width / sizes.height;
+  instance.aspect = threeSizes.width / threeSizes.height;
   instance.updateProjectionMatrix();
 };
 
 const destroy = () => {
-  sizes.off("resize", resize);
+  threeSizes.off("resize", resize);
   gsap.ticker.remove(tick);
 };
 

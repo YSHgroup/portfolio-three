@@ -15,6 +15,7 @@ class Resources extends EventEmitter<{
   ready: void;
 }> {
   toLoad = sources.length;
+  isReady = false;
   loaded = 0;
   items: Record<string, any> = {};
 
@@ -25,6 +26,8 @@ class Resources extends EventEmitter<{
   };
 
   startLoading() {
+    if (this.isReady) return;
+
     for (const source of sources) {
       if (source.type === "gltfModel") {
         this.loaders.gltfLoader.load(source.path, (file) => {
@@ -45,6 +48,7 @@ class Resources extends EventEmitter<{
     this.loaded++;
 
     if (this.loaded === this.toLoad) {
+      this.isReady = true;
       this.emit("ready");
       this.log("All resources loaded");
     }
