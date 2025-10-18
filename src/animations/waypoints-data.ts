@@ -3,8 +3,6 @@ import type { SceneKey } from "./types";
 export const points = {
   lg: {
     hero: {
-      //position: { x: 5.8, y: 5.7, z: 8.3 },
-      //rotation: { x: -0.42, y: 0.75, z: 0.3 },
       position: { x: 0, y: 5.7, z: 10 },
       rotation: { x: -0.3, y: 0, z: 0 },
     },
@@ -19,8 +17,8 @@ export const points = {
   },
   sm: {
     hero: {
-      position: { x: 8.8, y: 7.5, z: 13 },
-      rotation: { x: -0.168, y: 0.573, z: 0.091 },
+      position: { x: 0, y: 8, z: 16 },
+      rotation: { x: -0.2, y: -0.125, z: 0 },
     },
     "about-one": {
       position: { x: 5.8, y: 5.7, z: 8.3 },
