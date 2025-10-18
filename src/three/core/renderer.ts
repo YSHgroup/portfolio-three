@@ -33,7 +33,7 @@ const getInstance = () => {
 
 const resize = () => {
   if (!instance) return;
-  instance.setSize(sizes.width, sizes.height);
+  instance.setSize(sizes.width, sizes.height, false);
   instance.setPixelRatio(sizes.pixelRatio);
 };
 

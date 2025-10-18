@@ -10,7 +10,7 @@
 
 <style scoped lang="scss">
 .section-one {
-  height: var(--100vh);
+  height: calc(var(--svh) * 100);
   color: var(--color-white-400);
   width: 100%;
   display: flex;

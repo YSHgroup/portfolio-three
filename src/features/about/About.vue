@@ -46,15 +46,5 @@ onUnmounted(() => {
     top: 0;
     left: 0;
   }
-
-  &-overlay {
-    position: absolute;
-    transform: translateY(calc(var(--100vh) * -1));
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: calc(100% + var(--100vh));
-    opacity: 0;
-  }
 }
 </style>

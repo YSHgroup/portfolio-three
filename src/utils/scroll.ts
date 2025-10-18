@@ -2,17 +2,21 @@ import gsap from "gsap";
 import Lenis from "lenis";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-export const lenis = new Lenis();
-
-lenis.on("scroll", ScrollTrigger.update);
+export const lenis = new Lenis({ syncTouch: true });
 
 class Scroll {
-  constructor() {}
+  constructor() {
+    this.init();
+  }
 
   init() {
+    lenis.on("scroll", ScrollTrigger.update);
+
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     });
+
+    gsap.ticker.lagSmoothing(0);
   }
 }
 

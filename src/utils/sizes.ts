@@ -18,33 +18,51 @@ class Sizes extends EventEmitter<{
   height: number;
   pixelRatio: number;
   breakpoint: keyof typeof breakpoints;
+  canvas: HTMLCanvasElement | null = null;
+  observer: ResizeObserver | null = null;
 
   constructor() {
     super();
-    this.width = document.documentElement.clientWidth;
-    this.height = document.documentElement.clientHeight;
-    this.pixelRatio = Math.min(window.devicePixelRatio, 2);
-    this.breakpoint = getBreakpoint() as keyof typeof breakpoints;
+    this.width = 0;
+    this.height = 0;
+    this.pixelRatio = 1;
+    this.breakpoint = "md";
   }
 
-  init() {
-    this.resize();
-    window.addEventListener("resize", this.resize.bind(this));
+  init(canvas: HTMLCanvasElement) {
+    this.canvas = canvas;
+    this.observer = new ResizeObserver(this.resize.bind(this));
+    this.observer.observe(this.canvas);
   }
 
   atLeastBreakpoint(breakpoint: keyof typeof breakpoints) {
     return this.width >= breakpoints[breakpoint];
   }
 
+  setViewportUnits() {
+    document.documentElement.style.setProperty("--vh", 0.01 * window.innerHeight + "px");
+    document.documentElement.style.setProperty("--dvh", 0.01 * window.innerHeight + "px");
+    document.documentElement.style.setProperty("--svh", 0.01 * document.documentElement.clientHeight + "px");
+    document.documentElement.style.setProperty("--lvh", "1vh");
+  }
+
   resize() {
-    this.width = document.documentElement.clientWidth;
-    this.height = document.documentElement.clientHeight;
+    if (!this.canvas) return;
+    const rect = this.canvas.getBoundingClientRect();
+    this.width = rect.width;
+    this.height = rect.height;
     this.pixelRatio = Math.min(window.devicePixelRatio, 2);
+
+    this.setViewportUnits();
+
+    this.breakpoint = getBreakpoint() as keyof typeof breakpoints;
+
     this.emit("resize", { width: this.width, height: this.height, pixelRatio: this.pixelRatio });
   }
 
   destroy() {
-    window.removeEventListener("resize", this.resize.bind(this));
+    this.observer?.disconnect();
+    this.observer = null;
   }
 }
 
