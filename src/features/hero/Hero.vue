@@ -33,7 +33,7 @@ onUnmounted(() => {
   justify-content: center;
 
   &-title {
-    font-size: 100px;
+    font-size: 80px;
     font-weight: 800;
     letter-spacing: 2px;
   }

@@ -38,7 +38,7 @@ onUnmounted(() => {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 160px;
+  gap: 128px;
   font-family: "NB-Architekt-Std";
 
   &-lines {

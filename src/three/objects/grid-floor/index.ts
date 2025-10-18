@@ -40,4 +40,4 @@ const tick = () => {
   mesh.material.uniforms.uOpacity!.value = sceneWeightsInOut.about.in;
 };
 
-export const gridFloor = { init };
+export const gridFloor = { init, getMesh: () => mesh };

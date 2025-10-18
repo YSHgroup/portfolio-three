@@ -1,5 +1,6 @@
 import { avatar } from "../../three/objects/avatar";
 import { sceneWeightsInOut } from "../scenes";
+import { gridFloor } from "../../three/objects/grid-floor";
 
 import gsap from "gsap";
 
@@ -60,6 +61,9 @@ const setupSectionOneAnimation = (sectionOne: HTMLElement) => {
 
   sectionOneTl.fromTo(sceneWeightsInOut["about-one"], { in: 0 }, { in: 1, ease: "none", duration: 0.5 }, 0);
   sectionOneTl.fromTo(sceneWeightsInOut["about-one"], { out: 0 }, { out: 1, ease: "none", duration: 0.5 }, 0.5);
+
+  const gridFloorMesh = gridFloor.getMesh();
+  if (gridFloorMesh) sectionOneTl.fromTo(gridFloorMesh.rotation, { z: 0.1 }, { z: 0, duration: 0.5, ease: "none" }, 0);
 
   const { waypointsPosition, waypointsRotation } = avatar;
 
