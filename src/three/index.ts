@@ -4,12 +4,28 @@ import { objects } from "./objects";
 import { renderTarget } from "./core/renderTarget";
 import { threeSizes } from "./utils/sizes";
 
-const init = (canvas: HTMLCanvasElement) => {
+let canvas: HTMLCanvasElement | null = null;
+
+const getCanvas = () => {
+  if (canvas) return canvas;
+  canvas = document.createElement("canvas");
+  canvas.style.width = "100%";
+  canvas.style.height = "100%";
+  return canvas;
+};
+
+const init = () => {
+  const canvas = getCanvas();
+
   threeSizes.init(canvas);
   renderTarget.init();
   renderer.init(canvas);
   objects.init();
   camera.init();
+};
+
+const updateParent = (parent: HTMLElement) => {
+  parent.appendChild(getCanvas());
 };
 
 const destroy = () => {
@@ -18,6 +34,7 @@ const destroy = () => {
   renderer.destroy();
   objects.destroy();
   camera.destroy();
+  canvas = null;
 };
 
-export const three = { init, destroy, setActive: renderer.setActive };
+export const three = { init, destroy, setActive: renderer.setActive, updateParent };

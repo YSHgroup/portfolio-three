@@ -17,6 +17,7 @@ class ThreeSizes extends EventEmitter<{
 
   resize() {
     const rect = this.canvas?.getBoundingClientRect();
+    if (!rect || !rect.width || !rect.height) return;
     this.width = rect?.width ?? 0;
     this.height = rect?.height ?? 0;
     this.pixelRatio = Math.min(window.devicePixelRatio, 2);

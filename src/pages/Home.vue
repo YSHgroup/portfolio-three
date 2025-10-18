@@ -8,12 +8,10 @@ import Footer from "../components/Footer.vue";
 import { ref, onMounted, onUnmounted, computed } from "vue";
 import { scroll } from "../utils/scroll";
 import { three } from "../three";
-import { resources } from "../utils/resources";
 import { animations } from "../animations";
 
-const canvasRef = ref<HTMLCanvasElement | null>(null);
 const stickyRef = ref<HTMLElement | null>(null);
-const isReady = ref(false);
+const stickyContentRef = ref<HTMLElement | null>(null);
 const observer = ref<IntersectionObserver | null>(null);
 const isStickyVisible = ref(false);
 
@@ -35,32 +33,20 @@ onUnmounted(() => {
   observer.value = null;
 });
 
-const handleReady = () => {
-  if (isReady.value) return;
-  scroll.init();
-  three.init(canvasRef.value as HTMLCanvasElement);
-  animations.init();
-
-  isReady.value = true;
-};
-
 onMounted(() => {
-  if (resources.isReady) {
-    handleReady();
-  } else {
-    resources.once("ready", handleReady);
-  }
+  scroll.init();
+  three.updateParent(stickyContentRef.value as HTMLElement);
+  animations.init();
 });
 
 onUnmounted(() => {
-  three.destroy();
   animations.destroy();
 });
 
-const canvasClassNames = computed(() => {
+const stickyContentClassNames = computed(() => {
   return {
-    "intro-canvas": true,
-    "intro-canvas-fixed": !isStickyVisible.value,
+    "intro-sticky-content": true,
+    "intro-sticky-content-fixed": !isStickyVisible.value,
   };
 });
 </script>
@@ -70,7 +56,7 @@ const canvasClassNames = computed(() => {
     <div class="intro-wrapper">
       <Hero class="intro-hero" />
       <div class="intro-sticky" ref="stickyRef">
-        <canvas ref="canvasRef" :class="canvasClassNames"></canvas>
+        <div ref="stickyContentRef" :class="stickyContentClassNames"></div>
       </div>
       <About />
     </div>
@@ -105,7 +91,7 @@ const canvasClassNames = computed(() => {
   align-items: flex-end;
 }
 
-.intro-canvas {
+.intro-sticky-content {
   width: 100%;
   height: 100%;
 
