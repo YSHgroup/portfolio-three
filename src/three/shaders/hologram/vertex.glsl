@@ -19,7 +19,7 @@ void main() {
     float glitchStrength = sin(glitchTime) + sin(glitchTime * 3.45) + sin(glitchTime * 8.76);
     glitchStrength /= 2.0;
     glitchStrength = smoothstep(0.3, 1.0, glitchStrength); // threshold effect
-    glitchStrength *= 0.02; // intensity
+    glitchStrength *= 0.01; // intensity
     transformed.x += (random2D(transformed.xz + uTime) - 0.5) * glitchStrength;
     transformed.z += (random2D(transformed.zx + uTime) - 0.5) * glitchStrength;
     // ---------------------
