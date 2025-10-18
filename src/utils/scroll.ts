@@ -2,7 +2,7 @@ import gsap from "gsap";
 import Lenis from "lenis";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-export const lenis = new Lenis({ syncTouch: true });
+export const lenis = new Lenis();
 
 class Scroll {
   constructor() {
