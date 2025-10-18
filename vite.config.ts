@@ -1,12 +1,8 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { execSync } from "child_process";
-import dotenv from "dotenv";
-import path from "path";
 import glsl from "vite-plugin-glsl";
 
-const __dirname = path.resolve();
-dotenv.config({ path: path.resolve(__dirname, ".env") });
 
 const buildVersion = execSync("git rev-parse --short HEAD").toString().trim();
 
