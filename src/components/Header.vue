@@ -2,10 +2,10 @@
 import Button from "./Button.vue";
 import Logo from "./Logo.vue";
 import HeaderLink from "./HeaderLink.vue";
-import { lenis } from "../utils/scroll";
 import { onMounted, ref, computed, watch } from "vue";
 import { useTranslationContext } from "../i18n/context";
 import { useRoute } from "vue-router";
+import { lenis } from "../utils/scroll";
 
 const { t } = useTranslationContext();
 const route = useRoute();

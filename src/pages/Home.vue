@@ -6,7 +6,6 @@ import Projects from "../features/projects/Projects.vue";
 import Contact from "../features/contact/Contact.vue";
 import Footer from "../components/Footer.vue";
 import { ref, onMounted, onUnmounted, computed } from "vue";
-import { scroll } from "../utils/scroll";
 import { three } from "../three";
 import { animations } from "../animations";
 
@@ -34,7 +33,6 @@ onUnmounted(() => {
 });
 
 onMounted(() => {
-  scroll.init();
   three.updateParent(stickyContentRef.value as HTMLElement);
   animations.init();
 });
