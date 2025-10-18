@@ -58,6 +58,7 @@ const destroy = () => {
   instance.dispose();
   gsap.ticker.remove(tick);
   instance = null;
+  active = false;
 };
 
 export const renderer = { init, destroy, getInstance, setActive };

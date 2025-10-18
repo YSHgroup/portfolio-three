@@ -11,6 +11,12 @@ let material: ShaderMaterial | null = null;
 let mesh: Mesh | null = null;
 
 const init = () => {
+  initMesh();
+  gsap.ticker.add(tick);
+};
+
+const initMesh = () => {
+  if (geometry) return;
   geometry = new PlaneGeometry(2, 2);
 
   const position = geometry.attributes.position!;
@@ -54,8 +60,6 @@ const init = () => {
   };
 
   scene.instance.add(mesh);
-
-  gsap.ticker.add(tick);
 };
 
 const tick = () => {
@@ -73,4 +77,8 @@ const tick = () => {
   }
 };
 
-export const darkPlane = { init };
+const destroy = () => {
+  gsap.ticker.remove(tick);
+};
+
+export const darkPlane = { init, destroy };

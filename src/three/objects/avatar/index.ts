@@ -4,10 +4,11 @@ import { scene } from "../../core/scene";
 import { animations } from "./animations";
 import { sceneWeights } from "../../../animations/scenes";
 import gsap from "gsap";
+import { clone as cloneSkeleton } from "three/examples/jsm/utils/SkeletonUtils.js";
 
 import type { Material } from "three";
 
-let mesh: Mesh;
+let mesh: Mesh | null = null;
 
 const tIdleIntensity = { value: 0 };
 
@@ -36,8 +37,9 @@ const getMaterial = (name: string): Material | null => {
 };
 
 const setupMesh = () => {
+  if (mesh) return;
   const resource = resources.items["avatar-model"];
-  mesh = resource.scene.children[0];
+  mesh = cloneSkeleton(resource.scene.children[0]) as Mesh;
 
   mesh.frustumCulled = false;
 
@@ -66,4 +68,10 @@ const tick = () => {
   }
 };
 
-export const avatar = { init, getMesh: () => mesh, tIdleIntensity, waypointsPosition, waypointsRotation };
+const destroy = () => {
+  gsap.ticker.remove(tick);
+  //mesh = null;
+  //transform.clear();
+};
+
+export const avatar = { init, destroy, getMesh: () => mesh, tIdleIntensity, waypointsPosition, waypointsRotation };

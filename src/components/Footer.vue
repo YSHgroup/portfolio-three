@@ -30,12 +30,14 @@ const { t, locale } = useTranslationContext();
         </div>
       </div>
       <div class="footer-credits">
-        <p>
-          {{ t("music-produced-by") }}
-          <Clickable>
+        <div class="footer-credits-music">
+          <p>
+            {{ t("music-produced-by") }}
+          </p>
+          <Clickable renderAs="div">
             <Link href="https://soundcloud.com/hmsurf" class="footer-link" external>HM Surf</Link>
           </Clickable>
-        </p>
+        </div>
         <p>© {{ new Date().getFullYear() }} David Heckhoff</p>
       </div>
     </div>
@@ -102,6 +104,13 @@ const { t, locale } = useTranslationContext();
     gap: var(--space-sm);
     width: 100%;
     font-size: var(--font-size-sm);
+
+    &-music {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-xxs);
+    }
   }
 }
 </style>

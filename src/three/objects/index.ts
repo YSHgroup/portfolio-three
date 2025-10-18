@@ -14,6 +14,13 @@ const init = () => {
   room.init();
 };
 
-const destroy = () => {};
+const destroy = () => {
+  avatarHologram.destroy();
+  avatar.destroy();
+  darkPlane.destroy();
+  gridFloor.destroy();
+  lab.destroy();
+  room.destroy();
+};
 
 export const objects = { init, destroy };

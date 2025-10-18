@@ -9,9 +9,10 @@ const group = new Group();
 
 let objects: {
   base: Mesh;
-};
+} | null = null;
 
 const init = () => {
+  if (objects) return;
   const resource = resources.items["lab-model"];
 
   objects = {
@@ -27,4 +28,9 @@ const init = () => {
   //renderTarget.scene.add(group);
 };
 
-export const lab = { init, group };
+const destroy = () => {
+  group.clear();
+  //objects = null;
+};
+
+export const lab = { init, destroy, group };

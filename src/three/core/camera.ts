@@ -23,15 +23,17 @@ const init = () => {
   resize();
 
   if (!isTouch()) {
-    window.addEventListener("mousemove", (event) => {
-      cursor.x = event.clientX / threeSizes.width - 0.5;
-      cursor.y = event.clientY / threeSizes.height - 0.5;
-    });
+    window.addEventListener("mousemove", handleMouseMove);
   }
 
   gsap.ticker.add(tick);
 
   updateTransforms();
+};
+
+const handleMouseMove = (event: MouseEvent) => {
+  cursor.x = event.clientX / threeSizes.width - 0.5;
+  cursor.y = event.clientY / threeSizes.height - 0.5;
 };
 
 const updateTransforms = () => {
@@ -63,6 +65,9 @@ const resize = () => {
 const destroy = () => {
   threeSizes.off("resize", resize);
   gsap.ticker.remove(tick);
+  window.removeEventListener("mousemove", handleMouseMove);
+  cursor.x = 0;
+  cursor.y = 0;
 };
 
 export const camera = { init, destroy, instance, parallaxGroup };

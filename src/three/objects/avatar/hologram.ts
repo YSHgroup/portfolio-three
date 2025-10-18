@@ -11,10 +11,10 @@ import type { Material, BufferGeometry, Object3D, Skeleton } from "three";
 
 const GEOMETRY_NAMES: string[] = ["black", "gray", "skin", "white", "head"];
 
-let mesh: SkinnedMesh;
-let material: Material;
-let geometry: BufferGeometry;
-let skeleton: Skeleton;
+let mesh: SkinnedMesh | null = null;
+let material: Material | null = null;
+let geometry: BufferGeometry | null = null;
+let skeleton: Skeleton | null = null;
 
 const transform = new Group();
 
@@ -27,6 +27,7 @@ const init = () => {
 };
 
 const setupSkeleton = () => {
+  if (skeleton) return;
   const resource = resources.items["avatar-model"];
   const cloned = cloneSkeleton(resource.scene.children[0]);
   const black: SkinnedMesh = cloned.getObjectByName("black") as SkinnedMesh;
@@ -38,6 +39,7 @@ const setupSkeleton = () => {
 };
 
 const setupGeometry = () => {
+  if (geometry) return;
   const resource = resources.items["avatar-model"];
   const geometries: BufferGeometry[] = [];
 
@@ -65,10 +67,11 @@ const setupGeometry = () => {
 };
 
 const setupMesh = () => {
+  if (mesh) return;
   material = getHologramMaterial();
-  mesh = new SkinnedMesh(geometry, material);
-  mesh.bind(skeleton, new Matrix4());
-  mesh.add(skeleton.bones[0] as Object3D);
+  mesh = new SkinnedMesh(geometry!, material!);
+  mesh.bind(skeleton!, new Matrix4());
+  mesh.add(skeleton!.bones[0] as Object3D);
   const resource = resources.items["avatar-model"];
 
   mesh.rotation.copy(resource.scene.children[0].rotation);
@@ -90,4 +93,13 @@ const tick = () => {
   transform.rotation.copy(waypointsRotation);
 };
 
-export const avatarHologram = { init, getMesh: () => mesh, getMaterial: () => material };
+const destroy = () => {
+  gsap.ticker.remove(tick);
+  //transform.clear();
+  //mesh = null;
+  //material = null;
+  //geometry = null;
+  //skeleton = null;
+};
+
+export const avatarHologram = { init, destroy, getMesh: () => mesh, getMaterial: () => material };

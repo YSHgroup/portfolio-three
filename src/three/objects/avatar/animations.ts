@@ -4,7 +4,7 @@ import { AnimationAction, AnimationMixer, LoopPingPong } from "three";
 import gsap from "gsap";
 import { resources } from "../../../utils/resources";
 
-import type { AnimationClip } from "three";
+import type { AnimationClip, Object3D } from "three";
 
 let mixer: AnimationMixer;
 let activeAction: string | null = null;
@@ -14,8 +14,8 @@ let hologramMixer: AnimationMixer;
 const hologramActions = new Map<string, AnimationAction>();
 
 const init = () => {
-  mixer = new AnimationMixer(avatar.getMesh());
-  hologramMixer = new AnimationMixer(avatarHologram.getMesh());
+  mixer = new AnimationMixer(avatar.getMesh() as Object3D);
+  hologramMixer = new AnimationMixer(avatarHologram.getMesh() as Object3D);
 
   setupActions();
   setupHologramActions();

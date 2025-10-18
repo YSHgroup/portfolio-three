@@ -7,7 +7,14 @@ import { colors } from "../../common/colors";
 
 import type { Object3D } from "three";
 
+let material: ShaderMaterial | null = null;
+
 const init = () => {
+  initObjects();
+};
+
+const initObjects = () => {
+  if (material) return;
   const resource = resources.items["room-model"];
   const texture = resources.items["room-shadow-texture"];
   texture.flipY = false;
@@ -15,7 +22,7 @@ const init = () => {
   const mesh = resource.scene.children.find((child: Object3D) => child.name === "shadow-catcher");
   if (!mesh) return;
 
-  const material = new ShaderMaterial({
+  material = new ShaderMaterial({
     vertexShader,
     fragmentShader,
     depthWrite: false,
@@ -34,4 +41,9 @@ const init = () => {
   room.group.add(mesh);
 };
 
-export const shadow = { init };
+const destroy = () => {
+  material?.dispose();
+  material = null;
+};
+
+export const shadow = { init, destroy };

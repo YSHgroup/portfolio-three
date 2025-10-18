@@ -21,11 +21,16 @@ let objects: {
   plant: Mesh;
   room: Mesh;
   shelf: Mesh;
-};
+} | null = null;
 
 const init = () => {
   gsap.ticker.add(tick);
+  initObjects();
+  shadow.init();
+};
 
+const initObjects = () => {
+  if (objects) return;
   const resource = resources.items["room-model"];
 
   objects = {
@@ -59,12 +64,17 @@ const init = () => {
   });
 
   scene.instance.add(group);
-
-  shadow.init();
 };
 
 const tick = () => {
   group.visible = sceneWeights.hero > 0.001;
 };
 
-export const room = { init, group };
+const destroy = () => {
+  gsap.ticker.remove(tick);
+  //shadow.destroy();
+  //group.clear();
+  //objects = null;
+};
+
+export const room = { init, destroy, group };

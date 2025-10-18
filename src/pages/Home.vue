@@ -5,14 +5,11 @@ import About from "../features/about/About.vue";
 import Projects from "../features/projects/Projects.vue";
 import Contact from "../features/contact/Contact.vue";
 import Footer from "../components/Footer.vue";
-import { useRoute } from "vue-router";
-import { ref, onMounted, watch, onUnmounted, computed } from "vue";
+import { ref, onMounted, onUnmounted, computed } from "vue";
 import { scroll } from "../utils/scroll";
 import { three } from "../three";
 import { resources } from "../utils/resources";
 import { animations } from "../animations";
-
-const route = useRoute();
 
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 const stickyRef = ref<HTMLElement | null>(null);
@@ -25,21 +22,18 @@ const handleIntersection = (entries: IntersectionObserverEntry[]) => {
 };
 
 onMounted(() => {
+  three.setActive(true);
+
   observer.value = new IntersectionObserver(handleIntersection);
   observer.value.observe(stickyRef.value as HTMLElement);
 });
 
 onUnmounted(() => {
+  three.setActive(false);
+
   observer.value?.disconnect();
   observer.value = null;
 });
-
-const handleActiveUpdate = () => {
-  three.setActive(!!route.meta?.isThreeActive);
-};
-
-watch(route, handleActiveUpdate);
-onMounted(handleActiveUpdate);
 
 const handleReady = () => {
   if (isReady.value) return;

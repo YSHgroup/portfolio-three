@@ -6,11 +6,14 @@ import gsap from "gsap";
 import { sceneWeightsInOut } from "../../../animations/scenes";
 
 let mesh: Mesh | null = null;
+let geometry: PlaneGeometry | null = null;
+let material: ShaderMaterial | null = null;
 
 const init = () => {
-  const geometry = new PlaneGeometry(20, 20);
+  if (geometry) return;
+  geometry = new PlaneGeometry(20, 20);
 
-  const material = new ShaderMaterial({
+  material = new ShaderMaterial({
     vertexShader,
     fragmentShader,
     transparent: true,
@@ -40,4 +43,13 @@ const tick = () => {
   mesh.material.uniforms.uOpacity!.value = sceneWeightsInOut.about.in;
 };
 
-export const gridFloor = { init, getMesh: () => mesh };
+const destroy = () => {
+  gsap.ticker.remove(tick);
+  //geometry?.dispose();
+  //geometry = null;
+  //material?.dispose();
+  //material = null;
+  //mesh = null;
+};
+
+export const gridFloor = { init, destroy, getMesh: () => mesh };
