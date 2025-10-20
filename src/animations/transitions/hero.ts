@@ -29,8 +29,6 @@ const setup = (hero: HTMLElement) => {
       tl.fromTo(room.group.position, { x: 2, y: 0, z: 0 }, { x: 3, y: 6, z: 0, duration: 1, ease: "none" }, 0);
       tl.fromTo(room.group.rotation, { x: 0, y: -2.3, z: 0 }, { x: 0, y: -2.4, z: 0, duration: 1, ease: "none" }, 0);
     }
-
-    return () => tl.kill();
   });
 };
 

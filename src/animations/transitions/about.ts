@@ -8,7 +8,7 @@ import gsap from "gsap";
 let inTl: gsap.core.Timeline | null = null;
 let outTl: gsap.core.Timeline | null = null;
 let sectionOneMm: gsap.MatchMedia | null = null;
-let sectionTwoTl: gsap.core.Timeline | null = null;
+let sectionTwoMm: gsap.MatchMedia | null = null;
 
 const setup = (about: HTMLElement, sectionOne: HTMLElement, sectionTwo: HTMLElement) => {
   setupInAnimation(about);
@@ -82,36 +82,36 @@ const setupSectionOneAnimation = (sectionOne: HTMLElement) => {
         0,
       );
     }
-
-    return () => tl.kill();
   });
 };
 
 const setupSectionTwoAnimation = (sectionTwo: HTMLElement) => {
-  sectionTwoTl = gsap.timeline({
-    duration: 1,
-    scrollTrigger: {
-      trigger: sectionTwo,
-      start: "top bottom",
-      end: "bottom top",
-      scrub: true,
-    },
+  sectionTwoMm = createMatchMedia((_context) => {
+    const tl = gsap.timeline({
+      duration: 1,
+      scrollTrigger: {
+        trigger: sectionTwo,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+
+    tl.fromTo(sceneWeightsInOut["about-two"], { in: 0 }, { in: 1, ease: "none", duration: 0.5 }, 0);
+    tl.fromTo(sceneWeightsInOut["about-two"], { out: 0 }, { out: 1, ease: "none", duration: 0.5 }, 0.5);
+
+    const { waypointsPosition, waypointsRotation } = avatar;
+
+    tl.to(waypointsPosition, { x: 0, y: 1, z: 6, duration: 0.5, ease: "power1.out" }, 0);
+    tl.to(waypointsRotation, { x: 0, y: -Math.PI, z: 0, duration: 0.5, ease: "power1.out" }, 0);
   });
-
-  sectionTwoTl.fromTo(sceneWeightsInOut["about-two"], { in: 0 }, { in: 1, ease: "none", duration: 0.5 }, 0);
-  sectionTwoTl.fromTo(sceneWeightsInOut["about-two"], { out: 0 }, { out: 1, ease: "none", duration: 0.5 }, 0.5);
-
-  const { waypointsPosition, waypointsRotation } = avatar;
-
-  sectionTwoTl.to(waypointsPosition, { x: 0, y: 1, z: 6, duration: 0.5, ease: "power1.out" }, 0);
-  sectionTwoTl.to(waypointsRotation, { x: 0, y: -Math.PI, z: 0, duration: 0.5, ease: "power1.out" }, 0);
 };
 
 const destroy = () => {
-  if (inTl) inTl.kill();
+  if (inTl) inTl.revert();
   if (sectionOneMm) sectionOneMm.revert();
-  if (sectionTwoTl) sectionTwoTl.kill();
-  if (outTl) outTl.kill();
+  if (sectionTwoMm) sectionTwoMm.revert();
+  if (outTl) outTl.revert();
 };
 
 export const about = { setup, destroy };
