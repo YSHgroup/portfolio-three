@@ -28,7 +28,7 @@ const setupInAnimation = (about: HTMLElement) => {
     },
   });
 
-  inTl.fromTo(avatar.tIdleIntensity, { value: 0 }, { value: 1, duration: 1, ease: "power1.out" }, 0);
+  inTl.fromTo(avatar.tIdleIntensity, { value: 0 }, { value: 1, duration: 0.75, ease: "power1.out" }, 0);
 
   inTl.fromTo(sceneWeightsInOut.about, { in: 0 }, { in: 1, ease: "none", duration: 1 }, 0);
 };

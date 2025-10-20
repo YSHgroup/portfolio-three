@@ -20,6 +20,8 @@ const init = () => {
   setupActions();
   setupHologramActions();
 
+  play("desktop-idle");
+
   gsap.ticker.add(tick);
 };
 
@@ -44,6 +46,13 @@ const setupHologramActions = () => {
   hologramActions.set("t-idle", tIdle);
   tIdle.weight = 0;
   tIdle.play();
+
+  //left-desktop
+  const leftDesktop = hologramMixer.clipAction(getActionFromMesh("left-desktop"));
+  leftDesktop.repetitions = 1;
+  leftDesktop.clampWhenFinished = true;
+  hologramActions.set("left-desktop", leftDesktop);
+  leftDesktop.weight = 0;
 };
 
 const setupActions = () => {
@@ -52,7 +61,6 @@ const setupActions = () => {
   desktopIdle.loop = LoopPingPong;
   actions.set("desktop-idle", desktopIdle);
   desktopIdle.weight = 1;
-  desktopIdle.play();
 
   //t-idle
   const tIdle = mixer.clipAction(getActionFromMesh("t-idle"));
@@ -60,29 +68,54 @@ const setupActions = () => {
   actions.set("t-idle", tIdle);
   tIdle.weight = 0;
   tIdle.play();
+
+  //left-desktop
+  const leftDesktop = mixer.clipAction(getActionFromMesh("left-desktop"));
+  leftDesktop.repetitions = 1;
+  leftDesktop.clampWhenFinished = true;
+  actions.set("left-desktop", leftDesktop);
+  leftDesktop.weight = 0;
 };
 
 const play = (name: string, transition: number = 0.5) => {
   if (activeAction === name) return;
   const newAction = actions.get(name);
-  if (!newAction) throw new Error("[AvatarAnimations] Action not found");
+  const newHologramAction = hologramActions.get(name);
+  if (!newAction || !newHologramAction) throw new Error("[AvatarAnimations] Action not found");
+
+  newAction.reset().play();
+  newHologramAction.reset().play();
 
   if (activeAction) {
     const currentAction = actions.get(activeAction);
     if (currentAction) currentAction.crossFadeTo(newAction, transition);
+
+    const currentHologramAction = hologramActions.get(activeAction);
+    if (currentHologramAction) currentHologramAction.crossFadeTo(newHologramAction, transition);
   }
 
-  newAction.reset().play();
   activeAction = name;
 };
 
 const tick = () => {
   const desktopIdle = actions.get("desktop-idle");
   if (desktopIdle) {
-    desktopIdle.weight = 1 - avatar.tIdleIntensity.value;
+    const sceneWeight = 1 - avatar.tIdleIntensity.value;
+
+    desktopIdle.weight = sceneWeight;
 
     const hologramAction = hologramActions.get("desktop-idle");
-    if (hologramAction) hologramAction.weight = desktopIdle.weight;
+    if (hologramAction) hologramAction.weight = sceneWeight;
+  }
+
+  const leftDesktop = actions.get("left-desktop");
+  if (leftDesktop) {
+    const sceneWeight = 1 - avatar.tIdleIntensity.value;
+
+    leftDesktop.weight = sceneWeight;
+
+    const hologramLeftDesktop = hologramActions.get("left-desktop");
+    if (hologramLeftDesktop) hologramLeftDesktop.weight = leftDesktop.weight;
   }
 
   const tIdle = actions.get("t-idle");

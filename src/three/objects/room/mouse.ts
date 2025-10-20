@@ -37,12 +37,15 @@ const tick = () => {
   if (!bone) return;
 
   bone.getWorldPosition(currentPos);
+
   room.group.worldToLocal(currentPos);
+  if (currentPos.y > 1.8) return;
+  if (currentPos.x < BOUNDS.x.min || currentPos.x > BOUNDS.x.max) return;
+  if (currentPos.z < BOUNDS.z.min || currentPos.z > BOUNDS.z.max) return;
+
   mesh.position.copy(currentPos);
 
-  mesh.position.x = Math.max(BOUNDS.x.min, Math.min(BOUNDS.x.max, mesh.position.x));
   mesh.position.y = initialPos.y;
-  mesh.position.z = Math.max(BOUNDS.z.min, Math.min(BOUNDS.z.max, mesh.position.z));
   mesh.position.z -= 0.15;
 };
 

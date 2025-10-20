@@ -12,6 +12,7 @@ const init = () => {};
 const getMaterial = (): Material | null => {
   const texture = resources.items["face-texture"];
   texture.colorSpace = LinearSRGBColorSpace;
+  texture.generateMipmaps = false;
 
   material = new ShaderMaterial({
     transparent: true,

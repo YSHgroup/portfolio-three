@@ -7,6 +7,7 @@ import vertexShader from "../../shaders/desktops/vertex.glsl?raw";
 import gsap from "gsap";
 import { sceneWeights } from "../../../animations/scenes";
 import { animations as avatarAnimations } from "../avatar/animations";
+import { leftDesktop as avatarLeftDesktop } from "../avatar/left-desktop";
 
 import type { Object3D, Material, BufferGeometry } from "three";
 
@@ -80,6 +81,9 @@ const startScrollInterval = () => {
 
     const idleAction = avatarAnimations.actions.get("desktop-idle");
     if (!idleAction || idleAction.weight < 0.95) return;
+
+    const isAtLeftDesktop = avatarLeftDesktop.getIsActive();
+    if (isAtLeftDesktop) return;
 
     scroll();
 

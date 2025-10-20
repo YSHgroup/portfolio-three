@@ -6,6 +6,7 @@ import { sceneWeights } from "../../../animations/scenes";
 import gsap from "gsap";
 import { clone as cloneSkeleton } from "three/examples/jsm/utils/SkeletonUtils.js";
 import { face } from "./face";
+import { leftDesktop as avatarLeftDesktop } from "./left-desktop";
 
 import type { Material, Bone } from "three";
 
@@ -23,6 +24,7 @@ const init = () => {
   animations.init();
   gsap.ticker.add(tick);
   face.init();
+  avatarLeftDesktop.init();
 };
 
 const getMaterial = (name: string): Material | null => {
