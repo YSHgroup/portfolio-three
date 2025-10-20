@@ -6,6 +6,7 @@ import { sceneWeights } from "../../../animations/scenes";
 import gsap from "gsap";
 import { shadow } from "./shadow";
 import { desktops } from "./desktops";
+import { mouse } from "./mouse";
 
 import type { Object3D } from "three";
 
@@ -29,6 +30,7 @@ const init = () => {
   initObjects();
   shadow.init();
   desktops.init();
+  if (objects?.mouse) mouse.init(objects.mouse);
 };
 
 const initObjects = () => {
@@ -77,6 +79,8 @@ const destroy = () => {
   //shadow.destroy();
   //group.clear();
   //objects = null;
+  desktops.destroy();
+  mouse.destroy();
 };
 
 export const room = { init, destroy, group };

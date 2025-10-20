@@ -76,7 +76,8 @@ const startScrollInterval = () => {
   scrollInterval = gsap.delayedCall(Math.random() * 2 + 3, () => {
     startScrollInterval();
 
-    if (sceneWeights.hero < 0.2) return;
+    if (sceneWeights.hero < 0.95) return;
+
     const idleAction = avatarAnimations.actions.get("desktop-idle");
     if (!idleAction || idleAction.weight < 0.95) return;
 

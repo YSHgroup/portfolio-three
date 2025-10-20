@@ -6,9 +6,10 @@ import { sceneWeights } from "../../../animations/scenes";
 import gsap from "gsap";
 import { clone as cloneSkeleton } from "three/examples/jsm/utils/SkeletonUtils.js";
 
-import type { Material } from "three";
+import type { Material, Bone } from "three";
 
 let mesh: Mesh | null = null;
+let rightHandBone: Bone | null = null;
 
 const tIdleIntensity = { value: 0 };
 
@@ -55,6 +56,8 @@ const setupMesh = () => {
 
   transform.add(mesh);
 
+  rightHandBone = mesh.getObjectByName("bone-right-hand") as Bone;
+
   scene.instance.add(transform);
 };
 
@@ -74,4 +77,12 @@ const destroy = () => {
   //transform.clear();
 };
 
-export const avatar = { init, destroy, getMesh: () => mesh, tIdleIntensity, waypointsPosition, waypointsRotation };
+export const avatar = {
+  init,
+  destroy,
+  getMesh: () => mesh,
+  getRightHandBone: () => rightHandBone,
+  tIdleIntensity,
+  waypointsPosition,
+  waypointsRotation,
+};

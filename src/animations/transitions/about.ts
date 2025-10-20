@@ -77,7 +77,7 @@ const setupSectionOneAnimation = (sectionOne: HTMLElement) => {
       tl.fromTo(waypointsPosition, { x: 0, y: 0, z: 0 }, { x: 0, y: 1, z: 6, duration: 0.5, ease: "power1.out" }, 0);
       tl.fromTo(
         waypointsRotation,
-        { x: 0, y: -2 + Math.PI / 2, z: 0 },
+        { x: 0, y: -2.1 + Math.PI / 2, z: 0 },
         { x: 0, y: -Math.PI, z: 0, duration: 0.5, ease: "power1.out" },
         0,
       );
