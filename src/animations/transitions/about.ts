@@ -1,12 +1,13 @@
 import { avatar } from "../../three/objects/avatar";
 import { sceneWeightsInOut } from "../scenes";
 import { gridFloor } from "../../three/objects/grid-floor";
+import { createMatchMedia } from "../utils/matchMedia";
 
 import gsap from "gsap";
 
 let inTl: gsap.core.Timeline | null = null;
 let outTl: gsap.core.Timeline | null = null;
-let sectionOneTl: gsap.core.Timeline | null = null;
+let sectionOneMm: gsap.MatchMedia | null = null;
 let sectionTwoTl: gsap.core.Timeline | null = null;
 
 const setup = (about: HTMLElement, sectionOne: HTMLElement, sectionTwo: HTMLElement) => {
@@ -43,42 +44,47 @@ const setupOutAnimation = (about: HTMLElement) => {
   });
 
   outTl.fromTo(sceneWeightsInOut.about, { out: 0 }, { out: 1, ease: "none", duration: 1 }, 0);
-
-  //outTl.fromTo(lab.group.position, { x: -2, y: 0, z: 4 }, { x: -2, y: 0, z: 4, duration: 1 }, 0);
-  //outTl.fromTo(lab.group.rotation, { x: 0, y: 0, z: 0 }, { x: 0, y: 0, z: 0, duration: 1 }, 0);
 };
 
 const setupSectionOneAnimation = (sectionOne: HTMLElement) => {
-  sectionOneTl = gsap.timeline({
-    duration: 1,
-    scrollTrigger: {
-      trigger: sectionOne,
-      start: "top bottom",
-      end: "bottom top",
-      scrub: true,
-    },
+  sectionOneMm = createMatchMedia((_context, { mobile, desktop }) => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionOne,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+
+    tl.fromTo(sceneWeightsInOut["about-one"], { in: 0 }, { in: 1, ease: "none", duration: 0.5 }, 0);
+    tl.fromTo(sceneWeightsInOut["about-one"], { out: 0 }, { out: 1, ease: "none", duration: 0.5 }, 0.5);
+
+    const gridFloorMesh = gridFloor.getMesh();
+    if (gridFloorMesh) tl.fromTo(gridFloorMesh.rotation, { z: 0.1 }, { z: 0, duration: 0.5, ease: "none" }, 0);
+
+    const { waypointsPosition, waypointsRotation } = avatar;
+
+    if (desktop) {
+      tl.fromTo(waypointsPosition, { x: 2, y: 0, z: 0 }, { x: 0, y: 1, z: 6, duration: 0.5, ease: "power1.out" }, 0);
+      tl.fromTo(
+        waypointsRotation,
+        { x: 0, y: -2.3 + Math.PI / 2, z: 0 },
+        { x: 0, y: -Math.PI * 0.85, z: 0, duration: 0.5, ease: "power1.out" },
+        0,
+      );
+    } else if (mobile) {
+      tl.fromTo(waypointsPosition, { x: 0, y: 0, z: 0 }, { x: 0, y: 1, z: 6, duration: 0.5, ease: "power1.out" }, 0);
+      tl.fromTo(
+        waypointsRotation,
+        { x: 0, y: -2 + Math.PI / 2, z: 0 },
+        { x: 0, y: -Math.PI, z: 0, duration: 0.5, ease: "power1.out" },
+        0,
+      );
+    }
+
+    return () => tl.kill();
   });
-
-  sectionOneTl.fromTo(sceneWeightsInOut["about-one"], { in: 0 }, { in: 1, ease: "none", duration: 0.5 }, 0);
-  sectionOneTl.fromTo(sceneWeightsInOut["about-one"], { out: 0 }, { out: 1, ease: "none", duration: 0.5 }, 0.5);
-
-  const gridFloorMesh = gridFloor.getMesh();
-  if (gridFloorMesh) sectionOneTl.fromTo(gridFloorMesh.rotation, { z: 0.1 }, { z: 0, duration: 0.5, ease: "none" }, 0);
-
-  const { waypointsPosition, waypointsRotation } = avatar;
-
-  sectionOneTl.fromTo(
-    waypointsPosition,
-    { x: 2, y: 0, z: 0 },
-    { x: 0, y: 1, z: 6, duration: 0.5, ease: "power1.out" },
-    0,
-  );
-  sectionOneTl.fromTo(
-    waypointsRotation,
-    { x: 0, y: -2.3 + Math.PI / 2, z: 0 },
-    { x: 0, y: -Math.PI * 0.85, z: 0, duration: 0.5, ease: "power1.out" },
-    0,
-  );
 };
 
 const setupSectionTwoAnimation = (sectionTwo: HTMLElement) => {
@@ -103,7 +109,7 @@ const setupSectionTwoAnimation = (sectionTwo: HTMLElement) => {
 
 const destroy = () => {
   if (inTl) inTl.kill();
-  if (sectionOneTl) sectionOneTl.kill();
+  if (sectionOneMm) sectionOneMm.revert();
   if (sectionTwoTl) sectionTwoTl.kill();
   if (outTl) outTl.kill();
 };

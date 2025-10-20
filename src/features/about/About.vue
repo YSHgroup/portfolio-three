@@ -29,7 +29,9 @@ onUnmounted(() => {
 <style scoped lang="scss">
 .section {
   &-two {
-    padding-bottom: 128px;
+    @include mixins.mq("md") {
+      padding-bottom: 128px;
+    }
   }
 }
 
@@ -38,8 +40,11 @@ onUnmounted(() => {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 128px;
   font-family: "NB-Architekt-Std";
+
+  @include mixins.mq("md") {
+    gap: 128px;
+  }
 
   &-lines {
     position: absolute;

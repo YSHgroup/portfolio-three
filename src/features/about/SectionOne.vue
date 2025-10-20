@@ -10,12 +10,17 @@
 
 <style scoped lang="scss">
 .section-one {
-  height: calc(var(--svh) * 100);
   color: var(--color-white-400);
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  height: calc(var(--svh) * 100);
+
+  @include mixins.mq("md") {
+    justify-content: center;
+  }
 
   &-title {
     grid-column: 9 / 13;

@@ -1,6 +1,6 @@
 import EventEmitter from "./EventEmitter";
 
-const breakpoints = {
+export const BREAKPOINTS = {
   sm: 480,
   md: 768,
   lg: 1024,
@@ -8,7 +8,7 @@ const breakpoints = {
 } as const satisfies Record<string, number>;
 
 const getBreakpoint = () => {
-  return Object.keys(breakpoints).find((key) => window.innerWidth <= breakpoints[key as keyof typeof breakpoints]);
+  return Object.keys(BREAKPOINTS).find((key) => window.innerWidth <= BREAKPOINTS[key as keyof typeof BREAKPOINTS]);
 };
 
 class Sizes extends EventEmitter<{
@@ -17,7 +17,7 @@ class Sizes extends EventEmitter<{
   width: number;
   height: number;
   pixelRatio: number;
-  breakpoint: keyof typeof breakpoints;
+  breakpoint: keyof typeof BREAKPOINTS;
 
   constructor() {
     super();
@@ -32,8 +32,8 @@ class Sizes extends EventEmitter<{
     this.resize();
   }
 
-  atLeastBreakpoint(breakpoint: keyof typeof breakpoints) {
-    return this.width >= breakpoints[breakpoint];
+  atLeastBreakpoint(breakpoint: keyof typeof BREAKPOINTS) {
+    return this.width >= BREAKPOINTS[breakpoint];
   }
 
   setViewportUnits() {
@@ -50,7 +50,7 @@ class Sizes extends EventEmitter<{
 
     this.setViewportUnits();
 
-    this.breakpoint = getBreakpoint() as keyof typeof breakpoints;
+    this.breakpoint = getBreakpoint() as keyof typeof BREAKPOINTS;
 
     this.emit("resize", { width: this.width, height: this.height, pixelRatio: this.pixelRatio });
   }

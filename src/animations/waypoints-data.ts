@@ -1,7 +1,7 @@
 import type { SceneKey } from "./types";
 
 export const points = {
-  lg: {
+  md: {
     hero: {
       position: { x: 0, y: 5.7, z: 10 },
       rotation: { x: -0.3, y: 0, z: 0 },
@@ -17,20 +17,20 @@ export const points = {
   },
   sm: {
     hero: {
-      position: { x: 0, y: 8, z: 16 },
-      rotation: { x: -0.2, y: -0.125, z: 0 },
+      position: { x: 0, y: 8.4, z: 16 },
+      rotation: { x: -0.2, y: 0, z: 0 },
     },
     "about-one": {
-      position: { x: 5.8, y: 5.7, z: 8.3 },
-      rotation: { x: 0, y: 0, z: 0 },
+      position: { x: 0, y: 5, z: 12 },
+      rotation: { x: -0.2, y: 0, z: 0 },
     },
     "about-two": {
-      position: { x: 0, y: 5.7, z: 10 },
-      rotation: { x: -0.3, y: 0, z: 0 },
+      position: { x: 0, y: 5, z: 19 },
+      rotation: { x: -0.25, y: 0, z: 0 },
     },
   },
 } as const satisfies Record<
-  "lg" | "sm",
+  "md" | "sm",
   Partial<
     Record<
       SceneKey,
