@@ -13,7 +13,7 @@ const BOUNDS = {
   },
   z: {
     max: -0.28,
-    min: -0.7,
+    min: -0.6,
   },
 } as const;
 
