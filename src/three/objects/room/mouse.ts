@@ -48,7 +48,6 @@ const tick = () => {
 
 const destroy = () => {
   gsap.ticker.remove(tick);
-  mesh = null;
 };
 
 export const mouse = { init, destroy };

@@ -97,7 +97,7 @@ const setupSectionTwoAnimation = (sectionTwo: HTMLElement) => {
       },
     });
 
-    tl.fromTo(sceneWeightsInOut["about-two"], { in: 0 }, { in: 1, ease: "none", duration: 0.5 }, 0);
+    tl.fromTo(sceneWeightsInOut["about-two"], { in: 0 }, { in: 1, ease: "power1.inOut", duration: 0.5 }, 0);
     tl.fromTo(sceneWeightsInOut["about-two"], { out: 0 }, { out: 1, ease: "none", duration: 0.5 }, 0.5);
 
     const { waypointsPosition, waypointsRotation } = avatar;

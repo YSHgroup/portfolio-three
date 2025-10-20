@@ -5,6 +5,7 @@ import { animations } from "./animations";
 import { sceneWeights } from "../../../animations/scenes";
 import gsap from "gsap";
 import { clone as cloneSkeleton } from "three/examples/jsm/utils/SkeletonUtils.js";
+import { face } from "./face";
 
 import type { Material, Bone } from "three";
 
@@ -21,10 +22,11 @@ const init = () => {
   setupMesh();
   animations.init();
   gsap.ticker.add(tick);
+  face.init();
 };
 
 const getMaterial = (name: string): Material | null => {
-  if (name === "face") return new MeshBasicMaterial({ transparent: true, opacity: 0 });
+  if (name === "face") return face.getMaterial();
   if (name === "black") return new MeshMatcapMaterial({ matcap: resources.items["matcap-black"] });
   if (name === "gray") return new MeshMatcapMaterial({ matcap: resources.items["matcap-gray"] });
   if (name === "skin") return new MeshMatcapMaterial({ matcap: resources.items["matcap-skin"] });
@@ -34,6 +36,7 @@ const getMaterial = (name: string): Material | null => {
     texture.flipY = false;
     return new MeshBasicMaterial({ map: texture });
   }
+
   return null;
 };
 
@@ -75,6 +78,7 @@ const destroy = () => {
   gsap.ticker.remove(tick);
   //mesh = null;
   //transform.clear();
+  face.destroy();
 };
 
 export const avatar = {
