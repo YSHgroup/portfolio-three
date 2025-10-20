@@ -3,6 +3,7 @@ import labModel from "./assets/models/lab.glb";
 import roomModel from "./assets/models/room.glb";
 
 import headTexture from "./assets/textures/head.png";
+import desktopsTexture from "./assets/textures/desktops.png";
 import matcapBlack from "./assets/textures/matcap-black.jpg";
 import matcapGray from "./assets/textures/matcap-gray.jpg";
 import matcapSkin from "./assets/textures/matcap-skin.jpg";
@@ -24,6 +25,7 @@ export const sources = [
 
   //textures
   { name: "head-texture", type: "texture", path: headTexture },
+  { name: "desktops-texture", type: "texture", path: desktopsTexture },
   { name: "matcap-black", type: "texture", path: matcapBlack },
   { name: "matcap-gray", type: "texture", path: matcapGray },
   { name: "matcap-skin", type: "texture", path: matcapSkin },

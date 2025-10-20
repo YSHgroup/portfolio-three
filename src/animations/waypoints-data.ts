@@ -25,8 +25,8 @@ export const points = {
       rotation: { x: -0.2, y: 0, z: 0 },
     },
     "about-two": {
-      position: { x: 0, y: 5, z: 19 },
-      rotation: { x: -0.25, y: 0, z: 0 },
+      position: { x: 0, y: 7, z: 18 },
+      rotation: { x: -0.4, y: 0, z: 0 },
     },
   },
 } as const satisfies Record<
