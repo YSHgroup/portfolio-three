@@ -98,4 +98,4 @@ const tick = () => {
   hologramMixer.update(delta / 60);
 };
 
-export const animations = { init, play };
+export const animations = { init, play, actions };

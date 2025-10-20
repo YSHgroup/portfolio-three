@@ -5,6 +5,8 @@ import { room } from ".";
 import fragmentShader from "../../shaders/desktops/fragment.glsl?raw";
 import vertexShader from "../../shaders/desktops/vertex.glsl?raw";
 import gsap from "gsap";
+import { sceneWeights } from "../../../animations/scenes";
+import { animations as avatarAnimations } from "../avatar/animations";
 
 import type { Object3D, Material, BufferGeometry } from "three";
 
@@ -12,16 +14,17 @@ let mesh: Mesh | null = null;
 let material: Material | null = null;
 let geometry: BufferGeometry | null = null;
 
+let messageTween: gsap.core.Tween | null = null;
+let scrollInterval: gsap.core.Tween | null = null;
+
 const uniforms = {
   uScrollDepth: { value: 0 },
+  uMessageIntensity: { value: 0 },
 };
 
 const init = () => {
   setupMesh();
-
-  setTimeout(() => {
-    scroll();
-  }, 1000);
+  startScrollInterval();
 };
 
 const setupMesh = () => {
@@ -67,10 +70,38 @@ const setupMesh = () => {
   room.group.add(mesh);
 };
 
+const startScrollInterval = () => {
+  if (scrollInterval) scrollInterval.kill();
+
+  scrollInterval = gsap.delayedCall(Math.random() * 2 + 3, () => {
+    startScrollInterval();
+
+    if (sceneWeights.hero < 0.2) return;
+    const idleAction = avatarAnimations.actions.get("desktop-idle");
+    if (!idleAction || idleAction.weight < 0.95) return;
+
+    scroll();
+
+    //double scroll
+    if (Math.random() <= 0.33) {
+      gsap.delayedCall(0.6, () => {
+        if (sceneWeights.hero < 0.2) return;
+        if (!idleAction || idleAction.weight < 0.95) return;
+        scroll();
+      });
+    }
+  });
+};
+
 const scroll = () => {
   const scrollDepth = Math.random() * (-0.25 - 0.25) + 0.25;
 
   gsap.to(uniforms.uScrollDepth, { value: scrollDepth, duration: 1 });
+};
+
+const showMessage = () => {
+  if (messageTween) messageTween.kill();
+  messageTween = gsap.fromTo(uniforms.uMessageIntensity, { value: 1 }, { value: 0, duration: 1, delay: 2 });
 };
 
 const destroy = () => {
@@ -79,6 +110,10 @@ const destroy = () => {
   geometry?.dispose();
   geometry = null;
   mesh = null;
+  scrollInterval?.kill();
+  scrollInterval = null;
+  messageTween?.kill();
+  messageTween = null;
 };
 
-export const desktops = { init, destroy, scroll };
+export const desktops = { init, destroy, scroll, showMessage };
