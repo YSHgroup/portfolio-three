@@ -13,11 +13,14 @@ const getBreakpoint = () => {
 
 class Sizes extends EventEmitter<{
   resize: { width: number; height: number; pixelRatio: number };
+  hide: void;
+  show: void;
 }> {
   width: number;
   height: number;
   pixelRatio: number;
   breakpoint: keyof typeof BREAKPOINTS;
+  visible: boolean;
 
   constructor() {
     super();
@@ -25,11 +28,22 @@ class Sizes extends EventEmitter<{
     this.height = 0;
     this.pixelRatio = 1;
     this.breakpoint = "md";
+    this.visible = true;
   }
 
   init() {
     window.addEventListener("resize", this.resize.bind(this));
+    window.addEventListener("visibilitychange", this.visibilityChange.bind(this));
     this.resize();
+  }
+
+  visibilityChange() {
+    this.visible = document.visibilityState === "visible";
+    if (this.visible) {
+      this.emit("show");
+    } else {
+      this.emit("hide");
+    }
   }
 
   atLeastBreakpoint(breakpoint: keyof typeof BREAKPOINTS) {

@@ -3,6 +3,7 @@ import { animations as avatarAnimations } from "./animations";
 import { desktops } from "../room/desktops";
 import { sceneWeights } from "../../../animations/scenes";
 import { messagePopup } from "../room/message-popup";
+import { sizes } from "../../../utils/sizes";
 
 let ctx: gsap.Context | null = null;
 const isActive = { value: false };
@@ -31,7 +32,7 @@ const startInterval = () => {
     const delay = calcDelay();
     gsap.delayedCall(delay, playAnimation);
 
-    if (sceneWeights.hero < 0.95) return;
+    if (sceneWeights.hero < 0.95 || !sizes.visible) return;
 
     const tl = gsap.timeline({
       duration: clip.duration + 0.2,
@@ -60,6 +61,7 @@ const startInterval = () => {
 const destroy = () => {
   ctx?.kill();
   ctx = null;
+  sizes.off("show", startInterval);
 };
 
 export const leftDesktop = { init, destroy, getIsActive: () => isActive.value };
