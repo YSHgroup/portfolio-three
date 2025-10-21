@@ -1,18 +1,31 @@
-import { Mesh, ShaderMaterial, PlaneGeometry, Float32BufferAttribute, Color } from "three";
+import { Mesh, ShaderMaterial, PlaneGeometry, Float32BufferAttribute, Color, Vector2 } from "three";
 import { scene } from "../../core/scene";
 import vertexShader from "../../shaders/dark-plane/vertex.glsl?raw";
 import fragmentShader from "../../shaders/dark-plane/fragment.glsl?raw";
 import gsap from "gsap";
 import { sceneWeightsInOut } from "../../../animations/scenes";
 import { renderTarget } from "../../core/renderTarget";
+import { sizes } from "../../../utils/sizes";
+import { mix } from "../../../utils/math";
 
 let geometry: PlaneGeometry | null = null;
 let material: ShaderMaterial | null = null;
 let mesh: Mesh | null = null;
 
+const uniforms = {
+  uAngle: { value: 0 },
+  uRectSize: { value: new Vector2() },
+  uRectCenter: { value: new Vector2() },
+  uRadius: { value: 0.05 },
+  uAspectRatio: { value: sizes.width / sizes.height },
+};
+
 const init = () => {
   initMesh();
   gsap.ticker.add(tick);
+
+  sizes.on("resize", handleResize);
+  handleResize();
 };
 
 const initMesh = () => {
@@ -44,8 +57,8 @@ const initMesh = () => {
     transparent: true,
     uniforms: {
       uTexture: { value: renderTarget.instance.texture },
-      uInProgress: { value: 0 },
       uVignetteColor: { value: new Color("rgb(0, 15, 61)") },
+      ...uniforms,
     },
   });
 
@@ -53,13 +66,14 @@ const initMesh = () => {
   mesh.renderOrder = 10;
   mesh.frustumCulled = false;
 
-  mesh.onBeforeRender = () => {
-    if (!material) return;
-
-    material.uniforms.uInProgress!.value = sceneWeightsInOut.about.in;
-  };
-
   scene.instance.add(mesh);
+};
+
+const handleResize = () => {
+  if (!material) return;
+  const aspectRatio = sizes.width / sizes.height;
+  uniforms.uAspectRatio.value = aspectRatio;
+  uniforms.uRadius.value = 0.05 * aspectRatio;
 };
 
 const tick = () => {
@@ -72,13 +86,21 @@ const tick = () => {
 
   if (progress.in < 0.001 || (progress.in === 1 && progress.out >= 0.999)) {
     mesh.visible = false;
+    return;
   } else {
     mesh.visible = true;
   }
+
+  const aspectRatio = sizes.width / sizes.height;
+  const sizeValue = mix(0.55, 0.45, progress.in);
+  uniforms.uRectSize.value.set(sizeValue * aspectRatio, sizeValue);
+  uniforms.uRectCenter.value.set(0.5 + 0.2 * progress.in, 0.5 + progress.in * 1.05);
+  uniforms.uAngle.value = 0.1 * progress.in;
 };
 
 const destroy = () => {
   gsap.ticker.remove(tick);
+  sizes.off("resize", handleResize);
 };
 
 export const darkPlane = { init, destroy };

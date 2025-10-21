@@ -1,20 +1,23 @@
-varying vec2 vUv;
+uniform vec2 uRectCenter;
+uniform float uAspectRatio;
+uniform float uAngle;
 
-uniform float uInProgress;
+varying vec2 vUv;
+varying vec2 vRectUv;
+
+vec2 rotate(vec2 p, float angle) {
+    float c = cos(angle);
+    float s = sin(angle);
+    return vec2(c * p.x - s * p.y, s * p.x + c * p.y);
+}
 
 void main()
 {
-    float inY = mix(-1.0, position.y, uInProgress);
+    gl_Position = vec4(position.x, position.y, position.z, 1.0);
 
-    float isTopLeft = step(0.5, position.y) * step(position.x, 0.5);
-    inY += 0.5 * isTopLeft * uInProgress;
+    vRectUv = uv - uRectCenter;
+    vRectUv.x *= uAspectRatio;
+    vRectUv = rotate(vRectUv, uAngle);
 
-    gl_Position = vec4(position.x, inY, position.z, 1.0);
-
-    float yMin = -1.0;
-    float yMax = 1.0;
-    vUv = vec2(
-        uv.x,
-        (inY - yMin) / (yMax - yMin)
-    );
+    vUv = uv;
 }

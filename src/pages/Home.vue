@@ -56,7 +56,7 @@ const stickyContentClassNames = computed(() => {
       <div class="intro-sticky" ref="stickyRef">
         <div ref="stickyContentRef" :class="stickyContentClassNames"></div>
       </div>
-      <About />
+      <About class="intro-about" />
     </div>
     <Projects />
     <Contact />
@@ -65,16 +65,18 @@ const stickyContentClassNames = computed(() => {
 </template>
 
 <style scoped lang="scss">
+.intro-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 200px;
+}
+
 .intro-hero {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-}
-
-.intro-wrapper {
-  position: relative;
-  min-height: 100vh;
   width: 100%;
 }
 
