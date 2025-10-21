@@ -1,23 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
-import { transitions } from "../../animations";
 import LayoutContent from "../../components/LayoutContent.vue";
-
-const heroElement = ref<HTMLElement | null>(null);
-
-onMounted(() => {
-  if (heroElement.value) {
-    transitions.hero.setup(heroElement.value);
-  }
-});
-
-onUnmounted(() => {
-  transitions.hero.destroy();
-});
 </script>
 
 <template>
-  <div class="hero" ref="heroElement">
+  <div class="hero">
     <LayoutContent>
       <h1 class="hero-title">David</h1>
     </LayoutContent>
