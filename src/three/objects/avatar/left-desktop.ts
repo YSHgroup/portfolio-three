@@ -6,7 +6,7 @@ import { sceneWeights } from "../../../animations/scenes";
 let ctx: gsap.Context | null = null;
 const isActive = { value: false };
 
-const INTERVAL_DURATION = 8;
+const INTERVAL_DURATION = 10;
 
 const init = () => {
   startInterval();
@@ -22,7 +22,7 @@ const startInterval = () => {
   if (ctx) ctx.kill();
 
   const calcDelay = () => {
-    return 6;
+    //return 6;
     return Math.floor(INTERVAL_DURATION + Math.random() * 6 + clip.duration);
   };
 
