@@ -1,6 +1,6 @@
 import { resources } from "../../../utils/resources";
 import { scene } from "../../core/scene";
-import { Group, Mesh } from "three";
+import { Euler, Group, Mesh } from "three";
 import { getRoomMaterial } from "../../common/materials";
 import { sceneWeights } from "../../../animations/scenes";
 import gsap from "gsap";
@@ -12,6 +12,7 @@ import { messagePopup } from "./message-popup";
 import type { Object3D } from "three";
 
 const group = new Group();
+const chairRotation = new Euler();
 
 let objects: {
   blackboard: Mesh;
@@ -74,6 +75,10 @@ const initObjects = () => {
 
 const tick = () => {
   group.visible = sceneWeights.hero > 0.001;
+
+  if (objects?.chair) {
+    objects.chair.rotation.copy(chairRotation);
+  }
 };
 
 const destroy = () => {
@@ -85,4 +90,4 @@ const destroy = () => {
   mouse.destroy();
 };
 
-export const room = { init, destroy, group };
+export const room = { init, destroy, group, chairRotation };

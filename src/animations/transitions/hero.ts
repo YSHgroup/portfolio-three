@@ -8,6 +8,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 let mm: gsap.MatchMedia | null = null;
 
+/**  objects.chair.rotation.x = -0.6;
+  objects.chair.rotation.y = -0.8;
+  objects.chair.rotation.z = -1.2; */
+
 const setup = (hero: HTMLElement) => {
   mm = createMatchMedia((_context, { mobile, desktop }) => {
     const tl = gsap.timeline({
@@ -18,6 +22,9 @@ const setup = (hero: HTMLElement) => {
         scrub: true,
       },
     });
+
+    tl.fromTo(room.chairRotation, { x: 0, y: 0, z: 0 }, { y: -1.15, duration: 0.6, ease: "power4.out" }, 0);
+    tl.fromTo(room.chairRotation, { x: 0, y: 0, z: 0 }, { x: -0.8, z: -1.5, duration: 0.6 }, 0);
 
     tl.fromTo(sceneWeightsInOut.hero, { out: 0 }, { out: 1, ease: "none", duration: 1 }, 0);
     tl.fromTo(room.group.scale, { x: 1, y: 1, z: 1 }, { x: 0.8, y: 0.8, z: 0.8, duration: 1, ease: "none" }, 0);

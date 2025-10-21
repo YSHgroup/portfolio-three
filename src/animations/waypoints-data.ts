@@ -3,7 +3,7 @@ import type { SceneKey } from "./types";
 export const points = {
   md: {
     hero: {
-      position: { x: 0, y: 5.7, z: 10 },
+      position: { x: 0, y: 6, z: 10 },
       rotation: { x: -0.3, y: 0, z: 0 },
     },
     "about-one": {
