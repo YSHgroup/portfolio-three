@@ -94,7 +94,7 @@ const setupOutAnimation = (about: HTMLElement) => {
 };
 
 const setupSectionOneAnimation = (sectionOne: HTMLElement) => {
-  sectionOneMm = createMatchMedia((_context, { mobile, desktop }) => {
+  sectionOneMm = createMatchMedia((_context) => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionOne,
