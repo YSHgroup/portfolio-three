@@ -92,9 +92,9 @@ const tick = () => {
   }
 
   const aspectRatio = sizes.width / sizes.height;
-  const sizeValue = mix(0.55, 0.45, progress.in);
+  const sizeValue = mix(0.55, 0.475, progress.in);
   uniforms.uRectSize.value.set(sizeValue * aspectRatio, sizeValue);
-  uniforms.uRectCenter.value.set(0.5 + 0.2 * progress.in, 0.5 + progress.in * 1.05);
+  uniforms.uRectCenter.value.set(0.5 + 0.175 * progress.in, 0.5 + progress.in * 1.1);
   uniforms.uAngle.value = 0.1 * progress.in;
 };
 
