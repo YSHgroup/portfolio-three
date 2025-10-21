@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted } from "vue";
 import { resources } from "./utils/resources";
 import { RouterView } from "vue-router";
 import Header from "./components/Header.vue";
@@ -8,27 +8,11 @@ import { sizes } from "./utils/sizes";
 import { three } from "./three";
 import { scroll } from "./utils/scroll";
 
-const isReady = ref(false);
-
 onMounted(() => {
   sizes.init();
+  three.init();
   resources.startLoading();
   scroll.init();
-});
-
-const handleReady = () => {
-  if (isReady.value) return;
-  three.init();
-
-  isReady.value = true;
-};
-
-onMounted(() => {
-  if (resources.isReady) {
-    handleReady();
-  } else {
-    resources.once("ready", handleReady);
-  }
 });
 </script>
 

@@ -5,13 +5,21 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { createWebHistory, createRouter } from "vue-router";
 import { routes } from "./routes";
-import LenisVue from "lenis/vue";
+import { lenis } from "./utils/scroll";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    lenis.scrollTo(savedPosition?.top || 0, { immediate: true, force: true });
+
+    if (savedPosition) {
+      return savedPosition;
+    }
+    return { top: 0 };
+  },
 });
 
-createApp(App).use(router).use(LenisVue).mount("#app");
+createApp(App).use(router).mount("#app");

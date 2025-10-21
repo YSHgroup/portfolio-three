@@ -3,14 +3,10 @@ import vue from "@vitejs/plugin-vue";
 import { execSync } from "child_process";
 import glsl from "vite-plugin-glsl";
 
-
 const buildVersion = execSync("git rev-parse --short HEAD").toString().trim();
 
 export default defineConfig({
-  plugins: [
-    vue(),
-    glsl(),
-  ],
+  plugins: [vue(), glsl()],
   root: "./src",
   server: {
     port: 3000,
@@ -18,12 +14,12 @@ export default defineConfig({
     host: true,
   },
   resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".ogg", ".wav", ".glsl"],
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".ogg", ".wav", ".glsl", ".ktx2"],
   },
   define: {
     "import.meta.env.VITE_BUILD_VERSION": JSON.stringify(buildVersion),
   },
-  assetsInclude: ["**/*.svg", "**/*.gltf", "**/*.glb", "**/*.png", "**/*.jpg", "**/*.glsl"],
+  assetsInclude: ["**/*.svg", "**/*.gltf", "**/*.glb", "**/*.png", "**/*.jpg", "**/*.glsl", "**/*.ktx2"],
   css: {
     preprocessorOptions: {
       scss: {

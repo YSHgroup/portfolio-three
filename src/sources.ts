@@ -9,7 +9,7 @@ import matcapBlack from "./assets/textures/matcap-black.jpg";
 import matcapGray from "./assets/textures/matcap-gray.jpg";
 import matcapSkin from "./assets/textures/matcap-skin.jpg";
 import matcapWhite from "./assets/textures/matcap-white.jpg";
-import roomTexture from "./assets/textures/room.png";
+import roomTexture from "./assets/textures/room.ktx2";
 import roomShadowTexture from "./assets/textures/room-shadow.png";
 
 type Source = {

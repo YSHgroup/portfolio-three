@@ -44,11 +44,11 @@ onMounted(loadPreviews);
 
   &-cards {
     display: grid;
-    gap: var(--space-md);
+    gap: var(--space-lg);
     grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
 
     @include mixins.mq("md") {
-      gap: var(--space-lg);
+      gap: var(--space-xxl);
     }
   }
 }
