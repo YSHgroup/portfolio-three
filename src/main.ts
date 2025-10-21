@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior(_to, _from, savedPosition) {
     lenis.scrollTo(savedPosition?.top || 0, { immediate: true, force: true });
 
     if (savedPosition) {
