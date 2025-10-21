@@ -40,6 +40,7 @@ onMounted(loadPreviews);
   padding-bottom: 100px;
   width: 100%;
   background-color: var(--color-beige-400);
+  min-height: calc(var(--lvh) * 100);
 
   &-cards {
     display: grid;

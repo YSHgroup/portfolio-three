@@ -1,22 +1,8 @@
 varying vec2 vUv;
 
-uniform float uInProgress;
-
 void main()
 {
-    // Step 1: Apply the "in" animation
-    float inY = mix(-1.0, position.y, uInProgress);
+    gl_Position = vec4(position, 1.0);
 
-    float isTopLeft = step(0.5, position.y) * step(position.x, 0.5);
-    inY += 0.5 * isTopLeft * uInProgress;
-
-    gl_Position = vec4(position.x, inY, position.z, 1.0);
-
-    // Step 3: Adjust UV to follow the vertex movement
-    float yMin = -1.0;
-    float yMax = 1.0;
-    vUv = vec2(
-        uv.x,
-        (inY - yMin) / (yMax - yMin)
-    );
+    vUv = uv;
 }
