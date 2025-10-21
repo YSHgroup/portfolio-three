@@ -7,6 +7,7 @@ import gsap from "gsap";
 import { shadow } from "./shadow";
 import { desktops } from "./desktops";
 import { mouse } from "./mouse";
+import { messagePopup } from "./message-popup";
 
 import type { Object3D } from "three";
 
@@ -30,6 +31,7 @@ const init = () => {
   initObjects();
   shadow.init();
   desktops.init();
+  messagePopup.init();
   if (objects?.mouse) mouse.init(objects.mouse);
 };
 

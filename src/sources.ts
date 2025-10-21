@@ -2,9 +2,10 @@ import avatarModel from "./assets/models/avatar.glb";
 import labModel from "./assets/models/lab.glb";
 import roomModel from "./assets/models/room.glb";
 
+import desktopsTexture from "./assets/textures/desktops.png";
 import faceTexture from "./assets/textures/face-spritesheet.png";
 import headTexture from "./assets/textures/head.png";
-import desktopsTexture from "./assets/textures/desktops.png";
+import iconSpritesheet from "./assets/textures/icon-spritesheet.png";
 import matcapBlack from "./assets/textures/matcap-black.jpg";
 import matcapGray from "./assets/textures/matcap-gray.jpg";
 import matcapSkin from "./assets/textures/matcap-skin.jpg";
@@ -25,9 +26,10 @@ export const sources = [
   { name: "room-model", type: "gltfModel", path: roomModel },
 
   //textures
+  { name: "desktops-texture", type: "texture", path: desktopsTexture },
   { name: "face-texture", type: "texture", path: faceTexture },
   { name: "head-texture", type: "texture", path: headTexture },
-  { name: "desktops-texture", type: "texture", path: desktopsTexture },
+  { name: "icon-spritesheet", type: "texture", path: iconSpritesheet },
   { name: "matcap-black", type: "texture", path: matcapBlack },
   { name: "matcap-gray", type: "texture", path: matcapGray },
   { name: "matcap-skin", type: "texture", path: matcapSkin },

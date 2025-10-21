@@ -2,6 +2,7 @@ import gsap from "gsap";
 import { animations as avatarAnimations } from "./animations";
 import { desktops } from "../room/desktops";
 import { sceneWeights } from "../../../animations/scenes";
+import { messagePopup } from "../room/message-popup";
 
 let ctx: gsap.Context | null = null;
 const isActive = { value: false };
@@ -47,6 +48,7 @@ const startInterval = () => {
     }, 0.2);
 
     desktops.showMessage();
+    messagePopup.show();
   };
 
   ctx = gsap.context(() => {

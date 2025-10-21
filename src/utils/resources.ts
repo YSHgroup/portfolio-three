@@ -44,8 +44,6 @@ class Resources extends EventEmitter<{
 
     this.loaders.ktx2Loader.detectSupport(renderer.getInstance());
 
-    console.log("hi");
-
     for (const source of sources) {
       if (source.type === "gltfModel") {
         this.loaders.gltfLoader.load(source.path, (file) => {
