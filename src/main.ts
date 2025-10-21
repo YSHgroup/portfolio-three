@@ -13,12 +13,9 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior(_to, _from, savedPosition) {
-    lenis.scrollTo(savedPosition?.top || 0, { immediate: true, force: true });
-
-    if (savedPosition) {
-      return savedPosition;
+    if (typeof savedPosition?.top === "number") {
+      lenis.scrollTo(savedPosition.top, { immediate: true, force: true });
     }
-    return { top: 0 };
   },
 });
 
