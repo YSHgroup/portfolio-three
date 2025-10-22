@@ -4,12 +4,14 @@ import { useTranslationContext } from "../i18n/context";
 import Link from "./Link.vue";
 import Clickable from "./Clickable.vue";
 import LangSwitch from "./LangSwitch.vue";
+import NotchSection from "./NotchSection.vue";
 
 const { t, locale } = useTranslationContext();
 </script>
 
 <template>
   <footer class="footer">
+    <NotchSection class="footer-notch" />
     <div class="footer-content">
       <div class="footer-top">
         <Social />
@@ -50,6 +52,7 @@ const { t, locale } = useTranslationContext();
   width: 100%;
   display: flex;
   justify-content: center;
+  position: relative;
 
   &-content {
     display: flex;
@@ -111,6 +114,14 @@ const { t, locale } = useTranslationContext();
       align-items: center;
       gap: var(--space-xxs);
     }
+  }
+
+  &-notch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(-100%);
+    color: var(--color-beige-400);
   }
 }
 </style>

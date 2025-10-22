@@ -4,6 +4,7 @@ import { previews } from "../../content/projects/previews";
 import { useTranslationContext } from "../../i18n/context";
 import PreviewCard from "./PreviewCard.vue";
 import LayoutContent from "../../components/LayoutContent.vue";
+import NotchSection from "../../components/NotchSection.vue";
 
 import type { ProjectPreview } from "../../content/types";
 
@@ -22,6 +23,7 @@ onMounted(loadPreviews);
 </script>
 <template>
   <div class="projects">
+    <NotchSection class="projects-notch" />
     <LayoutContent size="lg">
       <div class="projects-cards">
         <PreviewCard v-for="preview in loadedPreviews" :key="preview.title" :preview="preview" />
@@ -36,11 +38,22 @@ onMounted(loadPreviews);
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
   padding-top: 100px;
   padding-bottom: 100px;
   width: 100%;
   background-color: var(--color-beige-400);
   min-height: calc(var(--lvh) * 100);
+  border-bottom-left-radius: var(--radius-xxl);
+  border-bottom-right-radius: var(--radius-xxl);
+
+  &-notch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(-100%);
+    color: var(--color-beige-400);
+  }
 
   &-cards {
     display: grid;
