@@ -73,7 +73,7 @@ const handleResize = () => {
   if (!material) return;
   const aspectRatio = sizes.width / sizes.height;
   uniforms.uAspectRatio.value = aspectRatio;
-  uniforms.uRadius.value = 0.05 * aspectRatio;
+  uniforms.uRadius.value = 48 / sizes.height;
 };
 
 const tick = () => {
