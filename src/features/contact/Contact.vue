@@ -21,6 +21,6 @@ onUnmounted(() => {
 
 <style scoped lang="scss">
 .contact {
-  min-height: calc(var(--svh) * 100);
+  min-height: calc(var(--lvh) * 100);
 }
 </style>
