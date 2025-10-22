@@ -1,4 +1,8 @@
 :root {
+  /* Heights */
+  --height-header: 48px;
+
+
   /* Layout */
   --breakpoint-sm: 480px;
   --breakpoint-md: 768px;
@@ -20,7 +24,7 @@
   --radius-md: 12px;
   --radius-lg: 20px;
   --radius-xl: 32px;
-  --radius-xxl: 48px;
+  --radius-xxl: 32px;
 
   /* Font Sizes */
   --font-size-100: 10px;
@@ -51,6 +55,10 @@
 
   /* Stroke */
   --stroke-md: 2px;
+
+  @media (min-width: 768px) {
+    --radius-xxl: 48px;
+  }
 
   @media (min-width: 1024px) {
     --space-outer: 16px;

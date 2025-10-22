@@ -9,10 +9,12 @@ import gsap from "gsap";
 let inMM: gsap.MatchMedia | null = null;
 let outTl: gsap.core.Timeline | null = null;
 let sectionsMm: gsap.MatchMedia | null = null;
+let sectionsContentMm: gsap.MatchMedia | null = null;
 
 const setup = (about: HTMLElement) => {
   setupInAnimation(about);
   setupSectionsAnimation(about);
+  setupSectionsContent(about);
   setupOutAnimation(about);
 };
 
@@ -100,8 +102,8 @@ const setupOutAnimation = (about: HTMLElement) => {
   outTl.fromTo(sceneWeightsInOut["about-two"], { out: 0 }, { out: 1, ease: "none", duration: 1 }, 0);
 };
 
-const setupSectionsAnimation = (about: HTMLElement) => {
-  sectionsMm = createMatchMedia((_context) => {
+const setupSectionsContent = (about: HTMLElement) => {
+  sectionsContentMm = createMatchMedia((_context) => {
     const tl = gsap.timeline({
       duration: 1,
       scrollTrigger: {
@@ -112,8 +114,26 @@ const setupSectionsAnimation = (about: HTMLElement) => {
       },
     });
 
-    //TBD: move this into a different timeline (that starts earlier)
     tl.fromTo("#section-one-content", { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none" }, 0);
+    tl.to("#section-one-content", { opacity: 0, duration: 0.1, ease: "none" }, 0.4);
+    tl.fromTo("#section-two-content", { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none" }, 0.5);
+
+    const completed = { value: false };
+    tl.to(completed, { value: true, duration: 0 }, 1);
+  });
+};
+
+const setupSectionsAnimation = (about: HTMLElement) => {
+  sectionsMm = createMatchMedia((_context) => {
+    const tl = gsap.timeline({
+      duration: 1,
+      scrollTrigger: {
+        trigger: about,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+      },
+    });
 
     //transition between one and two
     tl.fromTo(sceneWeightsInOut["about-one"], { out: 0 }, { out: 1, ease: "none", duration: 1 }, 0);
@@ -129,6 +149,7 @@ const destroy = () => {
   if (inMM) inMM.revert();
   if (sectionsMm) sectionsMm.revert();
   if (outTl) outTl.revert();
+  if (sectionsContentMm) sectionsContentMm.revert();
 };
 
 export const about = { setup, destroy };

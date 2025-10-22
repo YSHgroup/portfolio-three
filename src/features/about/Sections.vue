@@ -13,12 +13,13 @@ import SectionTwo from "./SectionTwo.vue";
 <style scoped lang="scss">
 .about {
   &-sections {
-    --gap: 32px;
+    --gap: 16px;
     position: sticky;
     bottom: calc(var(--gap) * -1);
     width: 100%;
     font-family: "NB-Architekt-Std";
     height: 0;
+    pointer-events: none;
   }
 
   &-section {

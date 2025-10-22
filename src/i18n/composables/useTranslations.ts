@@ -11,13 +11,10 @@ export const useTranslations = () => {
   const locale = ref<Locale>(extractLocale(window.location.pathname).locale as Locale);
   const pathnameWithoutLocale = ref<string>(extractLocale(window.location.pathname).pathnameWithoutLocale);
 
-  watch(
-    () => route.path,
-    () => {
-      locale.value = extractLocale(route.path).locale as Locale;
-      pathnameWithoutLocale.value = extractLocale(route.path).pathnameWithoutLocale;
-    },
-  );
+  watch(route, () => {
+    locale.value = extractLocale(route.path).locale as Locale;
+    pathnameWithoutLocale.value = extractLocale(route.path).pathnameWithoutLocale;
+  });
 
   const translations = ref<Record<string, string>>({});
 

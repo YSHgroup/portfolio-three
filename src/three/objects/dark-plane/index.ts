@@ -65,6 +65,7 @@ const initMesh = () => {
   mesh = new Mesh(geometry, material);
   mesh.renderOrder = 10;
   mesh.frustumCulled = false;
+  mesh.visible = false;
 
   scene.instance.add(mesh);
 };
@@ -73,7 +74,9 @@ const handleResize = () => {
   if (!material) return;
   const aspectRatio = sizes.width / sizes.height;
   uniforms.uAspectRatio.value = aspectRatio;
-  uniforms.uRadius.value = 48 / sizes.height;
+
+  const isMd = sizes.atLeastBreakpoint("md");
+  uniforms.uRadius.value = (isMd ? 48 : 32) / sizes.height;
 };
 
 const tick = () => {

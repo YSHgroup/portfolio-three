@@ -9,6 +9,7 @@ import Footer from "../components/Footer.vue";
 import { ref, onMounted, onUnmounted, computed } from "vue";
 import { three } from "../three";
 import { animations } from "../animations";
+import HeaderHome from "../components/HeaderHome.vue";
 
 const stickyRef = ref<HTMLElement | null>(null);
 const stickyContentRef = ref<HTMLElement | null>(null);
@@ -51,6 +52,7 @@ const stickyContentClassNames = computed(() => {
 </script>
 
 <template>
+  <HeaderHome />
   <Layout>
     <div class="intro-wrapper">
       <Hero class="intro-hero" />
