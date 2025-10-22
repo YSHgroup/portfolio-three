@@ -2,6 +2,7 @@
 import Layout from "../components/Layout.vue";
 import Hero from "../features/hero/Hero.vue";
 import About from "../features/about/About.vue";
+import AboutSections from "../features/about/Sections.vue";
 import Projects from "../features/projects/Projects.vue";
 import Contact from "../features/contact/Contact.vue";
 import Footer from "../components/Footer.vue";
@@ -56,7 +57,9 @@ const stickyContentClassNames = computed(() => {
       <div class="intro-sticky" ref="stickyRef">
         <div ref="stickyContentRef" :class="stickyContentClassNames"></div>
       </div>
+      <div class="intro-wrapper-spacer"></div>
       <About />
+      <AboutSections />
     </div>
     <Projects />
     <Contact />
@@ -70,7 +73,10 @@ const stickyContentClassNames = computed(() => {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 200px;
+
+  &-spacer {
+    height: 200px;
+  }
 }
 
 .intro-hero {
