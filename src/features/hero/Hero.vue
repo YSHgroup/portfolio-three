@@ -8,7 +8,10 @@ import Button from "../../components/Button.vue";
       <div class="hero-content-inner" id="hero-content-inner">
         <div class="hero-content-copys">
           <h1 class="hero-title">David<br />Heckhoff</h1>
-          <p class="hero-subtitle">Web Developer (WebGL & Node.js)</p>
+          <div class="hero-subtitle">
+            <div class="hero-subtitle-line"></div>
+            <p class="hero-subtitle-copy">Web Developer</p>
+          </div>
         </div>
         <Button class="hero-content-button">Get in touch</Button>
       </div>
@@ -59,12 +62,24 @@ import Button from "../../components/Button.vue";
   }
 
   &-subtitle {
-    font-size: var(--font-size-md);
-    font-weight: 500;
-    color: var(--color-text-300);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
 
-    @include mixins.mq("md") {
-      font-size: var(--font-size-lg);
+    &-line {
+      width: 24px;
+      height: var(--stroke-md);
+      background-color: var(--color-orange-400);
+    }
+
+    &-copy {
+      font-size: var(--font-size-md);
+      font-weight: 500;
+      color: var(--color-text-300);
+
+      @include mixins.mq("md") {
+        font-size: var(--font-size-lg);
+      }
     }
   }
 }
