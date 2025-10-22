@@ -64,7 +64,7 @@ import Button from "../../components/Button.vue";
   &-subtitle {
     display: flex;
     align-items: center;
-    gap: var(--space-md);
+    gap: var(--space-sm);
 
     &-line {
       width: 24px;
