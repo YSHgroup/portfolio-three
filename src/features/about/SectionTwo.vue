@@ -24,7 +24,7 @@ import HologramBox from "../../components/HologramBox.vue";
   align-items: center;
   justify-content: flex-end;
   flex-direction: column;
-  height: 100vh;
+  height: calc(var(--svh) * 100);
   padding: var(--space-outer);
   opacity: 0;
 
