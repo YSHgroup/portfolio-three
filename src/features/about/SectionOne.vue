@@ -1,9 +1,21 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import HologramBox from "../../components/HologramBox.vue";
+</script>
 
 <template>
   <div class="section-one">
     <div class="section-one-content grid">
-      <h2 class="section-one-title">About</h2>
+      <HologramBox class="section-one-hologram-box" title="About">
+        <p>Name: David</p>
+        <p>Location: Germany</p>
+      </HologramBox>
+      <HologramBox class="section-one-hologram-box" footer>
+        <p class="section-one-hologram-box-copy">
+          David focuses on modern web technologies that bridge visuals and performance.
+          <br />With expertise in WebGL, TypeScript, and Node.js, he builds scalable systems and real-time 3D interfaces
+          for the web.
+        </p>
+      </HologramBox>
     </div>
   </div>
 </template>
@@ -22,8 +34,17 @@
     justify-content: center;
   }
 
-  &-title {
-    grid-column: 9 / 13;
+  &-hologram-box {
+    grid-column: 1 / span 12;
+
+    @include mixins.mq("md") {
+      grid-column: 9 / span 3;
+    }
+
+    &-copy {
+      font-size: var(--font-size-md);
+      font-weight: 500;
+    }
   }
 }
 </style>

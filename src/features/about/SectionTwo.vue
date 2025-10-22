@@ -1,9 +1,17 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import HologramBox from "../../components/HologramBox.vue";
+</script>
 
 <template>
   <div class="section-two">
     <div class="section-two-content grid">
-      <h2 class="section-two-title">Services</h2>
+      <HologramBox class="section-two-hologram-box" title="Services" footer>
+        <p>- Frontend Development</p>
+        <p>- Backend Development</p>
+        <p>- Creative Coding</p>
+        <p>- 3D Design</p>
+        <p>- WebGL</p>
+      </HologramBox>
     </div>
   </div>
 </template>
@@ -22,8 +30,12 @@
     justify-content: center;
   }
 
-  &-title {
-    grid-column: 2 / 13;
+  &-hologram-box {
+    grid-column: 1 / span 12;
+
+    @include mixins.mq("md") {
+      grid-column: 2 / span 3;
+    }
   }
 }
 </style>
