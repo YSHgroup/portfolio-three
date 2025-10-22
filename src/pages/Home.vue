@@ -56,7 +56,7 @@ const stickyContentClassNames = computed(() => {
       <div class="intro-sticky" ref="stickyRef">
         <div ref="stickyContentRef" :class="stickyContentClassNames"></div>
       </div>
-      <About class="intro-about" />
+      <About />
     </div>
     <Projects />
     <Contact />

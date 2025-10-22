@@ -8,13 +8,11 @@ import gsap from "gsap";
 
 let inMM: gsap.MatchMedia | null = null;
 let outTl: gsap.core.Timeline | null = null;
-let sectionOneMm: gsap.MatchMedia | null = null;
-let sectionTwoMm: gsap.MatchMedia | null = null;
+let sectionsMm: gsap.MatchMedia | null = null;
 
-const setup = (about: HTMLElement, sectionOne: HTMLElement, sectionTwo: HTMLElement) => {
+const setup = (about: HTMLElement) => {
   setupInAnimation(about);
-  setupSectionOneAnimation(sectionOne);
-  setupSectionTwoAnimation(sectionTwo);
+  setupSectionsAnimation(about);
   setupOutAnimation(about);
 };
 
@@ -99,49 +97,37 @@ const setupOutAnimation = (about: HTMLElement) => {
   });
 
   outTl.fromTo(sceneWeightsInOut.about, { out: 0 }, { out: 1, ease: "none", duration: 1 }, 0);
+  outTl.fromTo(sceneWeightsInOut["about-two"], { out: 0 }, { out: 1, ease: "none", duration: 1 }, 0);
 };
 
-const setupSectionOneAnimation = (sectionOne: HTMLElement) => {
-  sectionOneMm = createMatchMedia((_context) => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionOne,
-        start: "bottom bottom",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
-
-    tl.fromTo(sceneWeightsInOut["about-one"], { out: 0 }, { out: 1, ease: "none", duration: 1 }, 0);
-  });
-};
-
-const setupSectionTwoAnimation = (sectionTwo: HTMLElement) => {
-  sectionTwoMm = createMatchMedia((_context) => {
+const setupSectionsAnimation = (about: HTMLElement) => {
+  sectionsMm = createMatchMedia((_context) => {
     const tl = gsap.timeline({
       duration: 1,
       scrollTrigger: {
-        trigger: sectionTwo,
-        start: "top bottom",
-        end: "bottom top",
+        trigger: about,
+        start: "top center",
+        end: "bottom center",
         scrub: true,
       },
     });
 
-    tl.fromTo(sceneWeightsInOut["about-two"], { in: 0 }, { in: 1, ease: "power1.inOut", duration: 0.5 }, 0);
-    tl.fromTo(sceneWeightsInOut["about-two"], { out: 0 }, { out: 1, ease: "none", duration: 0.5 }, 0.5);
+    //TBD: move this into a different timeline (that starts earlier)
+    tl.fromTo("#section-one-content", { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none" }, 0);
+
+    //transition between one and two
+    tl.fromTo(sceneWeightsInOut["about-one"], { out: 0 }, { out: 1, ease: "none", duration: 1 }, 0);
+    tl.fromTo(sceneWeightsInOut["about-two"], { in: 0 }, { in: 1, ease: "none", duration: 1 }, 0);
 
     const { waypointsPosition, waypointsRotation } = avatar;
-
-    tl.to(waypointsPosition, { x: 0, y: 1, z: 6, duration: 0.5, ease: "power1.out" }, 0);
-    tl.to(waypointsRotation, { x: 0, y: -Math.PI, z: 0, duration: 0.5, ease: "power1.out" }, 0);
+    tl.to(waypointsPosition, { x: 0, y: 1, z: 6, duration: 0.8, ease: "power1.out" }, 0.1);
+    tl.to(waypointsRotation, { x: 0, y: -Math.PI, z: 0, duration: 0.8, ease: "power1.out" }, 0.1);
   });
 };
 
 const destroy = () => {
   if (inMM) inMM.revert();
-  if (sectionOneMm) sectionOneMm.revert();
-  if (sectionTwoMm) sectionTwoMm.revert();
+  if (sectionsMm) sectionsMm.revert();
   if (outTl) outTl.revert();
 };
 

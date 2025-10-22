@@ -45,7 +45,6 @@ const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!pr
   background: linear-gradient(to bottom, rgba(0, 44, 124, 0.6) 30%, rgba(0, 65, 157, 0.8) 95%);
   color: var(--color-cyan-300);
   line-height: 1.1;
-  filter: drop-shadow(0 6px 4px rgba(0, 44, 124, 0.75));
 
   &-has-title {
     padding-top: calc(var(--space-md) + 16px);
