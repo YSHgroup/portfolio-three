@@ -30,7 +30,7 @@ import HologramBox from "../../components/HologramBox.vue";
   align-items: center;
   justify-content: flex-end;
   flex-direction: column;
-  height: calc(var(-lvh) * 100);
+  height: calc(var(--lvh) * 100);
   padding: var(--space-outer);
 
   @include mixins.mq("md") {
