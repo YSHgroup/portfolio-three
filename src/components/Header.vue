@@ -15,7 +15,7 @@ const { isDarkTheme } = useHeaderTheme({
       return;
     }
 
-    if (boundingClientRect.top < 0) {
+    if (boundingClientRect.top - 128 < 0) {
       logoVisible.value = true;
     } else {
       logoVisible.value = false;
@@ -81,9 +81,8 @@ const classNames = computed(() => {
 
   &-logo {
     transition:
-      color 0.2s ease-in-out,
-      opacity 0.2s ease-in-out;
-    // width: 42px;
+      color 0.125s ease-in-out,
+      opacity 0.125s ease-in-out;
     cursor: pointer;
     opacity: var(--logo-visible);
     display: flex;

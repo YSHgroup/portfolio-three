@@ -31,4 +31,5 @@ void main() {
         holographic *= 0.3;
 
     gl_FragColor = vec4(uColor, holographic);
+    //gl_FragColor = vec4(vec3(vWorldPos.y),1.);
 }

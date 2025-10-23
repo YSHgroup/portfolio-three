@@ -12,5 +12,6 @@
   text-transform: uppercase;
   border: none;
   background: none;
+  transition: color 0.125s ease-in-out;
 }
 </style>

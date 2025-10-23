@@ -26,6 +26,8 @@ void main() {
 
     #include <project_vertex>
 
+    vec4 worldPosition = modelMatrix * vec4(transformed, 1.0);
+
     // Normal skinning
     vec4 skinnedNormal = vec4(0.0);
     skinnedNormal += boneMatX * vec4(normal, 0.0) * skinWeight.x;
@@ -34,6 +36,6 @@ void main() {
     skinnedNormal += boneMatW * vec4(normal, 0.0) * skinWeight.w;
     vNormal = skinnedNormal.xyz;
 
-    vWorldPos = mvPosition.xyz;
+    vWorldPos = worldPosition.xyz;
     vPosition = transformed;
 }
