@@ -94,8 +94,18 @@ const setupMesh = () => {
           child.material.uniforms.uMatcap.value = child.userData.matcap;
         };
       }
+
+      if (child.name === "head") {
+        child.onBeforeRender = () => {
+          transform.position.copy(waypointsPosition);
+          transform.rotation.copy(waypointsRotation);
+
+          uniforms.uProgress.value = aboutProgress.value;
+        };
+      }
     }
   });
+
   mesh.rotation.z = 0;
 
   transform.add(mesh);
@@ -107,7 +117,6 @@ const setupMesh = () => {
 
 const tick = () => {
   //TBD: hide when intro isnt visible or progress is 1 but not in contact section
-
   //if (sceneWeights.hero >= 0.001) {
   //  transform.position.copy(waypointsPosition);
   //  transform.rotation.copy(waypointsRotation);
@@ -115,11 +124,6 @@ const tick = () => {
   //  transform.position.set(0, -14, 0);
   //  transform.rotation.set(0, -Math.PI, 0);
   //}
-
-  transform.position.copy(waypointsPosition);
-  transform.rotation.copy(waypointsRotation);
-
-  uniforms.uProgress.value = aboutProgress.value;
 };
 
 const destroy = () => {

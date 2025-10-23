@@ -23,8 +23,6 @@ const init = () => {
   setupSkeleton();
   setupGeometry();
   setupMesh();
-
-  gsap.ticker.add(tick);
 };
 
 const setupSkeleton = () => {
@@ -77,23 +75,22 @@ const setupMesh = () => {
 
   mesh.frustumCulled = false;
 
+  mesh.onBeforeRender = () => {
+    hologramUniforms.uTime.value = gsap.ticker.time;
+
+    const { waypointsPosition, waypointsRotation } = avatar;
+
+    transform.position.copy(waypointsPosition);
+    transform.rotation.copy(waypointsRotation);
+
+    hologramUniforms.uProgress.value = aboutProgress.value;
+  };
+
   renderTarget.scene.add(transform);
   transform.add(mesh);
 };
 
-const tick = () => {
-  hologramUniforms.uTime.value = gsap.ticker.time;
-
-  const { waypointsPosition, waypointsRotation } = avatar;
-
-  transform.position.copy(waypointsPosition);
-  transform.rotation.copy(waypointsRotation);
-
-  hologramUniforms.uProgress.value = aboutProgress.value;
-};
-
 const destroy = () => {
-  gsap.ticker.remove(tick);
   //transform.clear();
   //mesh = null;
   //material = null;
