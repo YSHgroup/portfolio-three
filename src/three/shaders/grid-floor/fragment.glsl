@@ -3,6 +3,7 @@ varying vec2 vUv;
 uniform vec3 uColor;
 uniform vec3 uLineColor;
 uniform float uOpacity;
+uniform float uTime;
 
 #define CELLS 20.0
 #define LINE_WIDTH 0.01
@@ -10,6 +11,7 @@ uniform float uOpacity;
 
 void main() {
     vec2 coord = vUv * CELLS;
+    coord.y += uTime * 0.35;
     vec2 grid = abs(fract(coord) - 0.5);
 
     // grid lines

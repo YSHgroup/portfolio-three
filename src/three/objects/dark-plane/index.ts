@@ -18,6 +18,8 @@ const uniforms = {
   uRectCenter: { value: new Vector2() },
   uRadius: { value: 0.05 },
   uAspectRatio: { value: sizes.width / sizes.height },
+  uBloomStrength: { value: 0.5 },
+  uBloomRadius: { value: 0.002 },
 };
 
 const init = () => {
@@ -94,13 +96,11 @@ const tick = () => {
     mesh.visible = true;
   }
 
-  const isMd = sizes.atLeastBreakpoint("md");
-
   const aspectRatio = sizes.width / sizes.height;
   const sizeValue = mix(0.55, 0.475, progress.in);
   uniforms.uRectSize.value.set(sizeValue * aspectRatio, sizeValue);
-  uniforms.uRectCenter.value.set(0.5 + (isMd ? 0.1 : 0.175) * progress.in, 0.5 + progress.in * 1.1);
-  uniforms.uAngle.value = (isMd ? 0.075 : 0.1) * progress.in;
+  uniforms.uRectCenter.value.set(0.5 + 0.3 * progress.in, 0.5 + progress.in * 1.1);
+  uniforms.uAngle.value = 0.1 * progress.in;
 };
 
 const destroy = () => {

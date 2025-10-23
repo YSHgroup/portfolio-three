@@ -32,7 +32,7 @@ const classNames = computed(() => {
 <style scoped lang="scss">
 .header-links {
   position: fixed;
-  top: var(--space-outer);
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: center;

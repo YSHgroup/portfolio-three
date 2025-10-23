@@ -7,7 +7,7 @@ import { waypoints } from "../../../animations/waypoints";
 
 const instance = new WebGLRenderTarget(window.innerWidth, window.innerHeight, {
   samples: 0,
-  depthBuffer: true, //TBD: set to false
+  depthBuffer: false,
   stencilBuffer: false,
 });
 const scene = new Scene();

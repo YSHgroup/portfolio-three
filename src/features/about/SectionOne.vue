@@ -31,6 +31,7 @@ import HologramBox from "../../components/HologramBox.vue";
   justify-content: flex-end;
   flex-direction: column;
   padding: var(--space-outer);
+  opacity: 0;
 
   @include mixins.mq("md") {
     height: calc(var(--svh) * 100);

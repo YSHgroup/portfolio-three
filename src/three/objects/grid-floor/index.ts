@@ -23,6 +23,7 @@ const init = () => {
       uColor: { value: new Color("#0157A0").convertLinearToSRGB() },
       uLineColor: { value: new Color("#34BCFD").convertLinearToSRGB() },
       uOpacity: { value: 0 },
+      uTime: { value: 0 },
     },
   });
 
@@ -40,7 +41,8 @@ const init = () => {
 const tick = () => {
   if (!mesh || !(mesh.material instanceof ShaderMaterial)) return;
 
-  mesh.material.uniforms.uOpacity!.value = sceneWeightsInOut.about.in;
+  mesh.material.uniforms.uOpacity!.value = 0.2 + 0.8 * sceneWeightsInOut.about.in;
+  mesh.material.uniforms.uTime!.value = gsap.ticker.time;
 };
 
 const destroy = () => {

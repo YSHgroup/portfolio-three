@@ -6,8 +6,14 @@ import glsl from "vite-plugin-glsl";
 const buildVersion = execSync("git rev-parse --short HEAD").toString().trim();
 
 export default defineConfig({
-  plugins: [vue(), glsl()],
-  root: "./src",
+  plugins: [
+    glsl({
+      include: ["**/*.glsl", "**/*.vert", "**/*.frag"],
+      defaultExtension: "glsl",
+      warnDuplicatedImports: false,
+    }),
+    vue(),
+  ],
   server: {
     port: 3000,
     strictPort: true,
@@ -19,17 +25,16 @@ export default defineConfig({
   define: {
     "import.meta.env.VITE_BUILD_VERSION": JSON.stringify(buildVersion),
   },
-  assetsInclude: ["**/*.svg", "**/*.gltf", "**/*.glb", "**/*.png", "**/*.jpg", "**/*.glsl", "**/*.ktx2"],
+  assetsInclude: ["**/*.svg", "**/*.gltf", "**/*.glb", "**/*.png", "**/*.jpg", "**/*.ktx2"],
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "/assets/styles/mixins.scss";`,
+        additionalData: `@use "/src/assets/styles/mixins.scss";`,
       },
     },
   },
-  publicDir: "../public",
   build: {
-    outDir: "../dist",
+    outDir: "./dist",
     sourcemap: false,
     emptyOutDir: true,
     chunkSizeWarningLimit: 1000,

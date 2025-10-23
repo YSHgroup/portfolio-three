@@ -6,6 +6,7 @@ import { getMaterial as getHologramMaterial, uniforms as hologramUniforms } from
 import gsap from "gsap";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import { avatar } from ".";
+import { aboutProgress } from "../../../animations/transitions/about";
 
 import type { Material, BufferGeometry, Object3D, Skeleton } from "three";
 
@@ -32,10 +33,6 @@ const setupSkeleton = () => {
   const cloned = cloneSkeleton(resource.scene.children[0]);
   const black: SkinnedMesh = cloned.getObjectByName("black") as SkinnedMesh;
   skeleton = black.skeleton;
-
-  /**    this.skeleton.bones.forEach((bone: Bone) => {
-      this.bones[bone.name.replace("bone-", "")] = bone;
-    }); */
 };
 
 const setupGeometry = () => {
@@ -91,6 +88,8 @@ const tick = () => {
 
   transform.position.copy(waypointsPosition);
   transform.rotation.copy(waypointsRotation);
+
+  hologramUniforms.uProgress.value = aboutProgress.value;
 };
 
 const destroy = () => {
