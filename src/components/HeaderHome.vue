@@ -39,8 +39,6 @@ const classNames = computed(() => {
   left: 50%;
   gap: var(--space-xxxl);
   transform: translateX(-50%);
-  width: var(--breakpoint-xxl);
-  max-width: calc(100% - var(--space-outer) * 2);
   z-index: var(--z-index-header);
   display: none;
   height: var(--height-header);
