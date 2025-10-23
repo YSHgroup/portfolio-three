@@ -7,6 +7,9 @@ varying vec3 vPosition;
 uniform vec3 uColor;
 uniform float uTime;
 
+#define LINE_WIDTH 0.003
+#define FADE_WIDTH 0.02
+
 void main() {
     vec3 normal = normalize(vNormal);
 
@@ -17,11 +20,10 @@ void main() {
 
     float stripes = mod((vWorldPos.y - uTime * 0.1) * 30.0, 1.0);
     stripes = pow(stripes, 3.0);
-    stripes *= progress;
 
     vec3 viewDir = normalize(cameraPosition - vWorldPos);
 
-    float fresnel = pow(1.0 - dot(viewDir, normal), 3. - progress * 1.);
+    float fresnel = pow(1.0 - dot(viewDir, normal), 3.);
 
     float falloff = smoothstep(0.8, 0.2, fresnel);
 
@@ -31,15 +33,12 @@ void main() {
     holographic *= falloff;
 
     // draw small horizontal line centered at uProgress
-    float lineWidth = 0.001; // total height of the line
-    float fadeWidth = 0.01; // soft fade on edges
 
     float dist = abs(vModelProgress - uProgress);
-    float lineStrength = 1.0 - smoothstep(lineWidth - fadeWidth, lineWidth + fadeWidth, dist);
+    float lineStrength = 1.0 - smoothstep(LINE_WIDTH - FADE_WIDTH, LINE_WIDTH + FADE_WIDTH, dist);
 
     if(!gl_FrontFacing)
-        holographic *= 0.2 + 0.2 * progress;
+        holographic *= 0.4;
 
-    gl_FragColor = vec4(uColor, min(holographic + lineStrength, 1.));
-    //gl_FragColor = vec4(vec3(progress), 1.);
+    gl_FragColor = vec4(uColor, min(holographic  * progress + lineStrength, 1.));
 }
