@@ -10,6 +10,7 @@ import { leftDesktop as avatarLeftDesktop } from "./left-desktop";
 import vertexShader from "../../shaders/avatar-matcap/vertex.glsl";
 import fragmentShader from "../../shaders/avatar-matcap/fragment.glsl";
 import { aboutProgress } from "../../../animations/transitions/about";
+import { avatarHologram } from "./hologram";
 
 import type { Material, Bone, Texture } from "three";
 
@@ -94,15 +95,6 @@ const setupMesh = () => {
           child.material.uniforms.uMatcap.value = child.userData.matcap;
         };
       }
-
-      if (child.name === "head") {
-        child.onBeforeRender = () => {
-          transform.position.copy(waypointsPosition);
-          transform.rotation.copy(waypointsRotation);
-
-          uniforms.uProgress.value = aboutProgress.value;
-        };
-      }
     }
   });
 
@@ -124,6 +116,14 @@ const tick = () => {
   //  transform.position.set(0, -14, 0);
   //  transform.rotation.set(0, -Math.PI, 0);
   //}
+
+  transform.position.copy(waypointsPosition);
+  transform.rotation.copy(waypointsRotation);
+
+  avatarHologram.transform.position.copy(waypointsPosition);
+  avatarHologram.transform.rotation.copy(waypointsRotation);
+
+  uniforms.uProgress.value = aboutProgress.value;
 };
 
 const destroy = () => {

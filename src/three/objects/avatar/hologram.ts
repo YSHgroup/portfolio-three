@@ -5,7 +5,6 @@ import { clone as cloneSkeleton } from "three/examples/jsm/utils/SkeletonUtils.j
 import { getMaterial as getHologramMaterial, uniforms as hologramUniforms } from "./hologram-material";
 import gsap from "gsap";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
-import { avatar } from ".";
 import { aboutProgress } from "../../../animations/transitions/about";
 
 import type { Material, BufferGeometry, Object3D, Skeleton } from "three";
@@ -23,6 +22,8 @@ const init = () => {
   setupSkeleton();
   setupGeometry();
   setupMesh();
+
+  gsap.ticker.add(tick);
 };
 
 const setupSkeleton = () => {
@@ -75,22 +76,18 @@ const setupMesh = () => {
 
   mesh.frustumCulled = false;
 
-  mesh.onBeforeRender = () => {
-    hologramUniforms.uTime.value = gsap.ticker.time;
-
-    const { waypointsPosition, waypointsRotation } = avatar;
-
-    transform.position.copy(waypointsPosition);
-    transform.rotation.copy(waypointsRotation);
-
-    hologramUniforms.uProgress.value = aboutProgress.value;
-  };
-
   renderTarget.scene.add(transform);
   transform.add(mesh);
 };
 
+const tick = () => {
+  hologramUniforms.uTime.value = gsap.ticker.time;
+
+  hologramUniforms.uProgress.value = aboutProgress.value;
+};
+
 const destroy = () => {
+  gsap.ticker.remove(tick);
   //transform.clear();
   //mesh = null;
   //material = null;
@@ -98,4 +95,4 @@ const destroy = () => {
   //skeleton = null;
 };
 
-export const avatarHologram = { init, destroy, getMesh: () => mesh, getMaterial: () => material };
+export const avatarHologram = { init, destroy, getMesh: () => mesh, getMaterial: () => material, transform };
