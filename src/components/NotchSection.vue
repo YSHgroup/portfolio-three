@@ -20,9 +20,10 @@ import Notch from "./Notch.vue";
 
 .notch-element {
   width: var(--radius-xxl);
+  transform: translateY(1px);
 
   &-right {
-    transform: scaleX(-1);
+    transform: scaleX(-1) translateY(1px);
   }
 }
 </style>

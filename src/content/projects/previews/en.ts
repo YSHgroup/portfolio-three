@@ -17,7 +17,7 @@ export default [
     title: "Gamedo",
     slug: "gamedo",
     thumbnail: thumbnailGamedo,
-    description: "Multiplayer Gaming Platform",
+    description: "Multiplayer gaming platform",
     tags: ["three", "node", "kubernetes", "redis", "postgresql"],
   },
   {
