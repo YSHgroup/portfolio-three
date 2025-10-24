@@ -30,19 +30,21 @@ const wrapperClasses = computed(() => {
   &-wrapper {
     width: 100%;
     aspect-ratio: 16 / 9;
+    max-width: 900px;
     height: auto;
     object-fit: cover;
+    justify-self: center;
     border-radius: var(--radius-lg);
     overflow: hidden;
     background-color: var(--color-grayscale-400);
     grid-column: 1 / 13;
 
     @include mixins.mq("md") {
-      grid-column: 3 / 11;
+      grid-column: 2 / 12;
     }
 
     @include mixins.mq("lg") {
-      grid-column: 4 / 10;
+      grid-column: 3 / 11;
     }
 
     &-border {

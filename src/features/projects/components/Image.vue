@@ -35,6 +35,8 @@ const wrapperClasses = computed(() => {
     overflow: hidden;
     border-radius: var(--radius-lg);
     grid-column: 1 / 13;
+    max-width: 900px;
+    justify-self: center;
 
     @include mixins.mq("md") {
       grid-column: 2 / 12;

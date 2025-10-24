@@ -54,7 +54,7 @@ const setupInAnimation = (about: HTMLElement) => {
         0,
       );
     } else if (desktop) {
-      tl.fromTo(room.group.position, { x: 2, y: 0, z: 0 }, { x: 3, y: 6, z: 0, duration: 1, ease: "none" }, 0);
+      tl.fromTo(room.group.position, { x: 2, y: 0, z: 0 }, { x: 3, y: 5.5, z: 0, duration: 1, ease: "none" }, 0);
       tl.fromTo(
         room.group.rotation,
         { x: 0, y: -2.3, z: 0 },
