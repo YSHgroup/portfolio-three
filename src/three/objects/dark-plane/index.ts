@@ -1,7 +1,7 @@
 import { Mesh, ShaderMaterial, PlaneGeometry, Float32BufferAttribute, Color, Vector2 } from "three";
 import { scene } from "../../core/scene";
-import vertexShader from "../../shaders/dark-plane/vertex.glsl?raw";
-import fragmentShader from "../../shaders/dark-plane/fragment.glsl?raw";
+import vertexShader from "../../shaders/dark-plane/vertex.glsl";
+import fragmentShader from "../../shaders/dark-plane/fragment.glsl";
 import gsap from "gsap";
 import { sceneWeightsInOut } from "../../../animations/scenes";
 import { renderTarget } from "../../core/renderTarget";

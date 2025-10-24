@@ -1,7 +1,7 @@
 import { PlaneGeometry, ShaderMaterial, Mesh, Color } from "three";
 import { renderTarget } from "../../core/renderTarget";
-import vertexShader from "../../shaders/grid-floor/vertex.glsl?raw";
-import fragmentShader from "../../shaders/grid-floor/fragment.glsl?raw";
+import vertexShader from "../../shaders/grid-floor/vertex.glsl";
+import fragmentShader from "../../shaders/grid-floor/fragment.glsl";
 import gsap from "gsap";
 import { sceneWeightsInOut } from "../../../animations/scenes";
 

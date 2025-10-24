@@ -1,8 +1,8 @@
 import { resources } from "../../../utils/resources";
 import { room } from ".";
 import { Color, ShaderMaterial } from "three";
-import vertexShader from "../../shaders/room-shadow/vertex.glsl?raw";
-import fragmentShader from "../../shaders/room-shadow/fragment.glsl?raw";
+import vertexShader from "../../shaders/room-shadow/vertex.glsl";
+import fragmentShader from "../../shaders/room-shadow/fragment.glsl";
 import { colors } from "../../common/colors";
 
 import type { Object3D } from "three";

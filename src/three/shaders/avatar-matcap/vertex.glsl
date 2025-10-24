@@ -23,5 +23,5 @@ void main() {
     vViewPosition = viewPosition.xyz;
     vNormal = skinnedNormal.xyz;
 
-    vModelProgress = getModelProgress(transformed, worldPosition.y);
+    vModelProgress = getModelProgress(transformed);
 }

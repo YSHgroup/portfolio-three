@@ -17,12 +17,9 @@ void main() {
 
     vec3 matcapColor = texture2D(uMatcap, uv).rgb;
 
-    //make a smooth transiiton between progress and progress + 0.01
-
-    float smoothWidth = 0.002;
-    float smoothProgress = smoothstep(uProgress, uProgress + smoothWidth, vModelProgress);
+    float progress = getProgress();
 
     matcapColor += AMBIENT_COLOR * uProgress;
 
-    gl_FragColor = vec4(matcapColor, smoothProgress);
+    gl_FragColor = vec4(matcapColor, progress);
 }

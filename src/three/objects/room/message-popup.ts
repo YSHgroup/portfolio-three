@@ -2,8 +2,8 @@ import { Mesh, ShaderMaterial, LinearSRGBColorSpace, LinearFilter } from "three"
 import { room } from ".";
 import { resources } from "../../../utils/resources";
 import { planeGeometry } from "../../common/geometries";
-import vertexShader from "../../shaders/message-popup/vertex.glsl?raw";
-import fragmentShader from "../../shaders/message-popup/fragment.glsl?raw";
+import vertexShader from "../../shaders/message-popup/vertex.glsl";
+import fragmentShader from "../../shaders/message-popup/fragment.glsl";
 import gsap from "gsap";
 
 let mesh: Mesh | null = null;

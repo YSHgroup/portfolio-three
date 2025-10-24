@@ -32,5 +32,5 @@ void main() {
     vWorldPos = worldPosition.xyz;
     vPosition = transformed;
 
-    vModelProgress = getModelProgress(transformed, worldPosition.y);
+    vModelProgress = getModelProgress(transformed);
 }

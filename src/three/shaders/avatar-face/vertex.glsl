@@ -1,4 +1,5 @@
 #include <skinning_pars_vertex>
+#include ../includes/avatar-progress/vertex.glsl;
 
 varying vec2 vUv;
 
@@ -9,5 +10,6 @@ void main() {
 
     #include <project_vertex>
 
+    vModelProgress = getModelProgress(transformed);
     vUv = uv;
 }

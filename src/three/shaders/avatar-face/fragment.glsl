@@ -1,6 +1,9 @@
+#include ../includes/avatar-progress/fragment.glsl;
+
 varying vec2 vUv;
 uniform sampler2D uTexture;
-uniform float uIndex; // which tile you want to sample (0–15 for 4x4)
+uniform float uIndex;
+
 #define ROWS 4.
 #define COLUMNS 4.
 
@@ -18,5 +21,8 @@ void main() {
   uv.y = (uv.y + row) / ROWS;
 
   vec4 textureColor = texture2D(uTexture, uv);
-  gl_FragColor = textureColor;
+
+  float progress = getProgress();
+
+  gl_FragColor = vec4(textureColor.rgb, progress * textureColor.a);
 }

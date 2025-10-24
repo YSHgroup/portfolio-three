@@ -1,7 +1,8 @@
 import { LinearSRGBColorSpace, ShaderMaterial } from "three";
 import { resources } from "../../../utils/resources";
-import fragmentShader from "../../shaders/avatar-face/fragment.glsl?raw";
-import vertexShader from "../../shaders/avatar-face/vertex.glsl?raw";
+import fragmentShader from "../../shaders/avatar-face/fragment.glsl";
+import vertexShader from "../../shaders/avatar-face/vertex.glsl";
+import { avatar } from "./index";
 
 import type { Material } from "three";
 
@@ -20,7 +21,7 @@ const getMaterial = (): Material | null => {
     depthWrite: false,
     fragmentShader,
     vertexShader,
-    uniforms: { uTexture: { value: texture }, uIndex: { value: 0 } },
+    uniforms: { uTexture: { value: texture }, uIndex: { value: 0 }, ...avatar.uniforms },
   });
 
   return material;

@@ -1,5 +1,5 @@
 import { resources } from "../../../utils/resources";
-import { Mesh, MeshBasicMaterial, Vector3, Euler, Group, ShaderMaterial, LinearSRGBColorSpace } from "three";
+import { Mesh, Vector3, Euler, Group, ShaderMaterial, LinearSRGBColorSpace } from "three";
 import { scene } from "../../core/scene";
 import { animations } from "./animations";
 //import { sceneWeights } from "../../../animations/scenes";
@@ -7,8 +7,10 @@ import gsap from "gsap";
 import { clone as cloneSkeleton } from "three/examples/jsm/utils/SkeletonUtils.js";
 import { face } from "./face";
 import { leftDesktop as avatarLeftDesktop } from "./left-desktop";
-import vertexShader from "../../shaders/avatar-matcap/vertex.glsl";
-import fragmentShader from "../../shaders/avatar-matcap/fragment.glsl";
+import matcapVertexShader from "../../shaders/avatar-matcap/vertex.glsl";
+import matcapFragmentShader from "../../shaders/avatar-matcap/fragment.glsl";
+import headVertexShader from "../../shaders/avatar-head/vertex.glsl";
+import headFragmentShader from "../../shaders/avatar-head/fragment.glsl";
 import { aboutProgress } from "../../../animations/transitions/about";
 import { avatarHologram } from "./hologram";
 
@@ -37,15 +39,26 @@ const getMaterial = (name: string): Material | null => {
   if (name === "head") {
     const texture = resources.items["head-texture"];
     texture.flipY = false;
-    return new MeshBasicMaterial({ map: texture, transparent: true });
+    texture.colorSpace = LinearSRGBColorSpace;
+    texture.generateMipmaps = false;
+    return new ShaderMaterial({
+      vertexShader: headVertexShader,
+      fragmentShader: headFragmentShader,
+      transparent: true,
+      uniforms: {
+        uHeadTexture: { value: texture },
+        ...uniforms,
+      },
+    });
   }
 
   const tex = resources.items["matcap-black"];
   tex.colorSpace = LinearSRGBColorSpace;
+  tex.generateMipmaps = false;
 
   return new ShaderMaterial({
-    vertexShader: vertexShader,
-    fragmentShader: fragmentShader,
+    vertexShader: matcapVertexShader,
+    fragmentShader: matcapFragmentShader,
     transparent: true,
     uniforms: {
       uMatcap: { value: tex },
@@ -72,6 +85,7 @@ const assignMatcap = (child: Mesh): boolean => {
     child.userData.matcap = tex;
     return true;
   }
+
   return false;
 };
 
@@ -89,6 +103,7 @@ const setupMesh = () => {
       child.material = mat;
       child.frustumCulled = false;
       child.renderOrder = child.name === "face" ? 21 : 20;
+
       const hasMatcap = assignMatcap(child);
       if (hasMatcap) {
         child.onBeforeRender = () => {
@@ -141,4 +156,5 @@ export const avatar = {
   tIdleIntensity,
   waypointsPosition,
   waypointsRotation,
+  uniforms,
 };
