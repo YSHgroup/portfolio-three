@@ -5,6 +5,9 @@ import { projectModules } from "../../content/projects/index";
 import ProjectContent from "../../features/projects/ProjectContent.vue";
 import Footer from "../../components/Footer.vue";
 import { locale } from "../../i18n/store";
+import Button from "../../components/Button.vue";
+import Link from "../../components/Link.vue";
+import { t } from "../../i18n/utils/translate";
 
 import type { Locale } from "../../i18n/types";
 
@@ -53,15 +56,14 @@ const footerClassNames = computed(() => {
 <template>
   <div :class="classNames">
     <ProjectContent v-if="content" :content="content" :projectId="projectId" class="project-content" />
+    <Link to="/" class="project-back-to-home">
+      <Button renderAs="div" variant="border">{{ t("back-to-home") }}</Button>
+    </Link>
     <Footer :class="footerClassNames" />
   </div>
 </template>
 
 <style scoped lang="scss">
-.project-cubewar {
-  color: var(--color-text-400);
-}
-
 .project {
   min-height: calc(var(--lvh) * 100);
   z-index: var(--z-index-layout);
@@ -69,9 +71,9 @@ const footerClassNames = computed(() => {
   flex-direction: column;
   align-items: center;
   position: relative;
+  gap: 64px;
 
   &-content {
-    padding-bottom: 72px;
     color: var(--color-text-400);
   }
 
