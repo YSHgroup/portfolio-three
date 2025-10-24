@@ -6,8 +6,8 @@ import Mail from "./icons/Mail.vue";
 import X from "./icons/X.vue";
 import Link from "./Link.vue";
 import Clickable from "./Clickable.vue";
+import { t } from "../i18n/utils/translate";
 
-import { useTranslationContext } from "../i18n/context";
 import { social } from "../content/social";
 
 // map icon names to components
@@ -18,8 +18,6 @@ const icons = {
   mail: Mail,
   x: X,
 } as const;
-
-const { t } = useTranslationContext();
 
 const getAriaLabel = (name: string) => `${t("go-to")} ${name.charAt(0).toUpperCase() + name.slice(1)}`;
 </script>

@@ -2,11 +2,10 @@
 import Button from "./Button.vue";
 import Logo from "./Logo.vue";
 import { computed, ref } from "vue";
-import { useTranslationContext } from "../i18n/context";
+import { t } from "../i18n/utils/translate";
 import { lenis } from "../utils/scroll";
 import { useHeaderTheme } from "../composables/useHeaderTheme";
 
-const { t } = useTranslationContext();
 const logoVisible = ref(false);
 const { isDarkTheme } = useHeaderTheme({
   onAboutElementChange: (element, boundingClientRect) => {

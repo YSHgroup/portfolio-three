@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { computed, useAttrs } from "vue";
 import { RouterLink } from "vue-router";
-import { useTranslationContext } from "../i18n/context";
+import { locale as currentLocale } from "../i18n/store";
 import { LOCALE_DEFAULT } from "../i18n/constants";
 
-const { locale: currentLocale } = useTranslationContext();
 const attrs = useAttrs();
 
 const props = defineProps<{
@@ -46,7 +45,7 @@ const resolvedTo = computed(() => {
     <slot></slot>
   </component>
 
-  <RouterLink v-else :to="resolvedTo" v-bind="attrs">
+  <RouterLink v-else :to="resolvedTo" v-bind="attrs" :replace="props.replace">
     <slot></slot>
   </RouterLink>
 </template>

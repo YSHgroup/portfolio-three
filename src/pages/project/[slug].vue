@@ -2,14 +2,13 @@
 import { ref, watch, computed } from "vue";
 import { useRoute } from "vue-router";
 import { projectModules } from "../../content/projects/index";
-import { useTranslationContext } from "../../i18n/context";
 import ProjectContent from "../../features/projects/ProjectContent.vue";
 import Footer from "../../components/Footer.vue";
+import { locale } from "../../i18n/store";
 
 import type { Locale } from "../../i18n/types";
 
 const route = useRoute();
-const { locale } = useTranslationContext();
 const projectId = computed(() => route.meta.project as string);
 
 const loading = ref(true);
@@ -28,8 +27,13 @@ const fetchProject = async (project: string | undefined) => {
   }
 };
 
-watch(projectId, fetchProject, { immediate: true });
-watch(locale, fetchProject);
+watch(
+  [projectId, locale],
+  () => {
+    fetchProject(projectId.value);
+  },
+  { immediate: true },
+);
 
 const classNames = computed(() => {
   return {
@@ -59,7 +63,7 @@ const footerClassNames = computed(() => {
 }
 
 .project {
-  min-height: 100vh;
+  min-height: calc(var(--lvh) * 100);
   z-index: var(--z-index-layout);
   display: flex;
   flex-direction: column;

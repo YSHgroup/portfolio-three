@@ -1,5 +1,4 @@
 <script setup lang="ts">
-//import { useTranslationContext } from "../../i18n/context";
 import Link from "../../components/Link.vue";
 import Notch from "../../components/Notch.vue";
 import ArrowRight from "../../components/icons/ArrowRight.vue";
@@ -9,8 +8,6 @@ import type { ProjectPreview } from "../../content/types";
 const props = defineProps<{
   preview: ProjectPreview;
 }>();
-
-//const { t } = useTranslationContext();
 </script>
 
 <template>

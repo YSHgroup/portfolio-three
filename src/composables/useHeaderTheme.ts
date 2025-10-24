@@ -1,7 +1,7 @@
 import { ref, watch, onMounted } from "vue";
 import { lenis } from "../utils/scroll";
 import { useRoute } from "vue-router";
-import { useTranslationContext } from "../i18n/context";
+import { pathnameWithoutLocale } from "../i18n/store";
 
 export const useHeaderTheme = ({
   onAboutElementChange,
@@ -11,7 +11,6 @@ export const useHeaderTheme = ({
   let aboutElement: HTMLElement | null = null;
   const isDarkTheme = ref(false);
   const route = useRoute();
-  const { pathnameWithoutLocale } = useTranslationContext();
 
   watch(route, () => {
     aboutElement = null;

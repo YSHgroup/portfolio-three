@@ -4,12 +4,18 @@
 
   --color-grayscale-400: #bed4e5;
 
-  --color-background-400: #e9f5ff;
+  --color-background-400: #f2f9ff;
   --color-background-300: #d9ebfa;
 }
 
 .project-gamedo {
-  --color-text-400: blue;
+  --color-text-400: rgb(20, 29, 37);
+  --color-text-300: rgb(72, 85, 97);
+
+  --color-grayscale-400: rgb(226, 233, 238);
+
+  --color-background-400: white;
+  --color-background-300: #f7f9fd;
 }
 
 .project-particles {

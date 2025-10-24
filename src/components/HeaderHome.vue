@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import HeaderLink from "./HeaderLink.vue";
 import { computed } from "vue";
-import { useTranslationContext } from "../i18n/context";
+import { t } from "../i18n/utils/translate";
 
 import { lenis } from "../utils/scroll";
 import { useHeaderTheme } from "../composables/useHeaderTheme";
 
-const { t } = useTranslationContext();
 const { isDarkTheme } = useHeaderTheme();
 
 const handleLinkClick = (link: string) => {

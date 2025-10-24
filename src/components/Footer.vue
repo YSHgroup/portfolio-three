@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import Social from "./Social.vue";
-import { useTranslationContext } from "../i18n/context";
 import Link from "./Link.vue";
 import Clickable from "./Clickable.vue";
 import LangSwitch from "./LangSwitch.vue";
 import NotchSection from "./NotchSection.vue";
-
-const { t, locale } = useTranslationContext();
+import { t } from "../i18n/utils/translate";
+import { locale } from "../i18n/store";
 </script>
 
 <template>

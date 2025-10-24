@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { ref, watch, onMounted } from "vue";
 import { previews } from "../../content/projects/previews";
-import { useTranslationContext } from "../../i18n/context";
+import { locale } from "../../i18n/store";
 import PreviewCard from "./PreviewCard.vue";
 import NotchSection from "../../components/NotchSection.vue";
 
 import type { ProjectPreview } from "../../content/types";
-
-const { locale } = useTranslationContext();
 
 const loadedPreviews = ref<ProjectPreview[] | null>(null);
 
