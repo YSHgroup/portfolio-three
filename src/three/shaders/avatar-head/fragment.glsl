@@ -1,4 +1,5 @@
 #include ../includes/avatar-progress/fragment.glsl;
+#include ../includes/about-ambient.glsl;
 
 uniform sampler2D uHeadTexture;
 uniform vec2 uHeadTextureSize;
@@ -10,5 +11,5 @@ void main() {
 
     float progress = getProgress();
 
-    gl_FragColor = vec4(tex.rgb, progress);
+    gl_FragColor = vec4(applyAmbient(tex.rgb), progress);
 }

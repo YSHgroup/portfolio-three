@@ -23,17 +23,15 @@ void main() {
 
     vec3 viewDir = normalize(cameraPosition - vWorldPos);
 
-    float fresnel = pow(1.0 - dot(viewDir, normal), 3.);
+    float fresnel = pow(1.0 - dot(viewDir, normal), 2.);
 
     float falloff = smoothstep(0.8, 0.2, fresnel);
 
     float holographic = stripes * fresnel;
     holographic += fresnel;
-    holographic += stripes * 0.1;
+    holographic += stripes * 0.02;
     holographic *= falloff;
-
-    // draw small horizontal line centered at uProgress
-
+    
     float dist = abs(vModelProgress - uProgress);
     float lineStrength = 1.0 - smoothstep(LINE_WIDTH - FADE_WIDTH, LINE_WIDTH + FADE_WIDTH, dist);
 

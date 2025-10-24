@@ -1,12 +1,11 @@
 #include ../includes/avatar-progress/fragment.glsl;
+#include ../includes/about-ambient.glsl;
 
 uniform sampler2D uMatcap;
 
 varying vec3 vViewNormal;
 varying vec3 vViewPosition;
 varying vec3 vNormal;
-
-#define AMBIENT_COLOR vec3(0.,0.141,0.455)
 
 void main() {
     vec3 viewDir = normalize(vViewPosition);
@@ -19,7 +18,7 @@ void main() {
 
     float progress = getProgress();
 
-    matcapColor += AMBIENT_COLOR * uProgress;
+    matcapColor = applyAmbient(matcapColor);
 
     gl_FragColor = vec4(matcapColor, progress);
 }
