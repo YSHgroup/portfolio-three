@@ -2,7 +2,7 @@ import EventEmitter from "./EventEmitter";
 
 export const BREAKPOINTS = {
   sm: 480,
-  md: 768,
+  md: 840,
   lg: 1024,
   xl: 1440,
 } as const satisfies Record<string, number>;

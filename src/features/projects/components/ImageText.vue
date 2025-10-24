@@ -50,12 +50,12 @@ const contentClasses = computed(() => {
 <style scoped lang="scss">
 .imageText {
   &-image {
-    width: 100%;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     grid-row: 1;
+    grid-column: 1 / 13;
 
     &-content {
       overflow: hidden;
@@ -67,11 +67,23 @@ const contentClasses = computed(() => {
     }
 
     &-left {
-      grid-column: 2 / 7;
+      @include mixins.mq("md") {
+        grid-column: 1 / 7;
+      }
+
+      @include mixins.mq("lg") {
+        grid-column: 2 / 7;
+      }
     }
 
     &-right {
-      grid-column: 7 / 12;
+      @include mixins.mq("md") {
+        grid-column: 7 / 13;
+      }
+
+      @include mixins.mq("lg") {
+        grid-column: 7 / 12;
+      }
     }
   }
 
@@ -80,18 +92,31 @@ const contentClasses = computed(() => {
     min-height: 100%;
     display: flex;
     align-items: center;
-    grid-row: 1;
+    grid-row: 2;
+    grid-column: 1 / 13;
 
     &-left {
-      grid-column: 3 / 7;
+      @include mixins.mq("md") {
+        grid-column: 1 / 7;
+      }
+
+      @include mixins.mq("lg") {
+        grid-column: 2 / 7;
+      }
     }
 
     &-right {
-      grid-column:  7 / 11;
+      @include mixins.mq("md") {
+        grid-column: 7 / 13;
+      }
+
+      @include mixins.mq("lg") {
+        grid-column: 7 / 11;
+      }
     }
 
     @include mixins.mq("md") {
-      flex: 0.475;
+      grid-row: 1;
     }
   }
 }

@@ -27,7 +27,15 @@ const classes = computed(() => {
 <style scoped lang="scss">
 .text {
   line-height: var(--line-height-copy);
-  grid-column: 4 / 10;
+  grid-column: 1 / 13;
+
+  @include mixins.mq("md") {
+    grid-column: 3 / 11;
+  }
+
+  @include mixins.mq("lg") {
+    grid-column: 4 / 10;
+  }
 
   &-with-title {
     display: flex;

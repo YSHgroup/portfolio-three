@@ -29,18 +29,33 @@ const classes = computed(() => {
   flex-direction: column;
   gap: var(--space-md);
   max-width: 100%;
+  grid-column: 1 / 13;
 
   &-size {
     &-sm {
-      grid-column: 6 / 8;
+      @include mixins.mq("md") {
+        grid-column: 4 / 10;
+      }
+
+      @include mixins.mq("lg") {
+        grid-column: 6 / 8;
+      }
     }
 
     &-md {
-      grid-column: 4 / 10;
+      @include mixins.mq("md") {
+        grid-column: 3 / 11;
+      }
+
+      @include mixins.mq("lg") {
+        grid-column: 4 / 10;
+      }
     }
 
     &-lg {
-      grid-column: 4 / 10;
+      @include mixins.mq("md") {
+        grid-column: 3 / 11;
+      }
     }
   }
 

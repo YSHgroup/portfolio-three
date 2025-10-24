@@ -29,25 +29,15 @@ const { content } = defineProps<{
 </template>
 
 <style scoped lang="scss">
-.project-content-components {
-  padding: 0 var(--space-outer);
-  background-color: var(--color-background-400);
-  width: 100%;
-  padding: 64px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-xxl);
-  gap: var(--space-xxl);
-}
-
 .project-content {
   color: var(--color-text-400);
 
   &-grid {
-    padding: 0 var(--space-outer);
-    row-gap: var(--space-xxl);
+    row-gap: var(--space-sm);
+
+    @include mixins.mq("md") {
+      row-gap: var(--space-xxl);
+    }
   }
 
   &-back-to-home {
@@ -55,6 +45,22 @@ const { content } = defineProps<{
 
     @include mixins.mq("md") {
       width: auto;
+    }
+  }
+
+  &-components {
+    padding: 20px var(--space-outer);
+    background-color: var(--color-background-400);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-xxl);
+    gap: var(--space-xxl);
+
+    @include mixins.mq("md") {
+      padding: 64px var(--space-outer);
     }
   }
 }

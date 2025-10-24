@@ -27,14 +27,22 @@ const { content } = defineProps<{
 <style scoped lang="scss">
 .project-hero {
   padding: 0 var(--space-outer);
-  padding-bottom: 64px;
+  padding-bottom: 48px;
   padding-top: calc(var(--height-header));
+
+  @include mixins.mq("md") {
+    padding-bottom: 64px;
+  }
 
   &-video {
     grid-column: 1 / span 12;
     align-self: center;
 
     @include mixins.mq("md") {
+      grid-column: 1 / 8;
+    }
+
+    @include mixins.mq("lg") {
       grid-column: 2 / 8;
     }
   }
@@ -64,7 +72,7 @@ const { content } = defineProps<{
     align-self: center;
 
     @include mixins.mq("md") {
-      grid-column: 9 / 13;
+      grid-column: 8 / 13;
     }
 
     @include mixins.mq("lg") {
