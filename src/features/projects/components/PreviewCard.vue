@@ -54,7 +54,7 @@ const props = defineProps<{
     position: absolute;
     color: var(--color-beige-400);
     transform: scale(-1) rotate(90deg);
-    height: 20px;
+    height: var(--radius-lg);
 
     &-left {
       bottom: 0;
@@ -102,8 +102,8 @@ const props = defineProps<{
     transform: scale(calc(1 + var(--hover) * 0.02));
 
     &-wrapper {
-      border-radius: var(--radius-md);
-      overflow: hidden;
+      border-radius: var(--radius-lg);
+      overflow: hidden
     }
   }
 
