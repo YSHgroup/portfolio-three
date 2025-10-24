@@ -48,7 +48,7 @@ const { t, locale } = useTranslationContext();
 
 <style scoped lang="scss">
 .footer {
-  background: var(--color-beige-400);
+  background: var(--color-background-300, var(--color-beige-400));
   width: 100%;
   display: flex;
   justify-content: center;
@@ -121,7 +121,7 @@ const { t, locale } = useTranslationContext();
     top: 0;
     left: 0;
     transform: translateY(-100%);
-    color: var(--color-beige-400);
+    color: var(--color-background-300, var(--color-beige-400));
   }
 }
 </style>

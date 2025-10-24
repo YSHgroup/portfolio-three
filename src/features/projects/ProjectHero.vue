@@ -50,6 +50,11 @@ const { content } = defineProps<{
 
   &-title {
     font-size: var(--font-size-title-md);
+    color: var(--color-text-400);
+  }
+
+  &-description {
+    color: var(--color-text-400);
   }
 
   &-content {

@@ -58,7 +58,8 @@ const classNames = computed(() => {
   left: 50%;
   transform: translateX(-50%);
   width: var(--breakpoint-xxl);
-  max-width: calc(100% - var(--space-outer) * 2);
+  padding: 0 var(--space-outer);
+  max-width: 100%;
   z-index: var(--z-index-header);
   height: var(--height-header);
 
@@ -70,7 +71,7 @@ const classNames = computed(() => {
 
   &-right {
     position: absolute;
-    right: 0;
+    right: var(--space-outer);
     top: 50%;
     transform: translateY(-50%);
   }

@@ -4,6 +4,7 @@ import { useRoute } from "vue-router";
 import { projectModules } from "../../content/projects/index";
 import { useTranslationContext } from "../../i18n/context";
 import ProjectContent from "../../features/projects/ProjectContent.vue";
+import Footer from "../../components/Footer.vue";
 
 import type { Locale } from "../../i18n/types";
 
@@ -29,8 +30,51 @@ const fetchProject = async (project: string | undefined) => {
 
 watch(projectId, fetchProject, { immediate: true });
 watch(locale, fetchProject);
+
+const classNames = computed(() => {
+  return {
+    project: true,
+    [`project-${projectId.value}`]: true,
+  };
+});
+
+const footerClassNames = computed(() => {
+  return {
+    "project-footer": true,
+    [`project-${projectId.value}`]: true,
+  };
+});
 </script>
 
 <template>
-  <ProjectContent v-if="content" :content="content" :projectId="projectId" />
+  <div :class="classNames">
+    <ProjectContent v-if="content" :content="content" :projectId="projectId" class="project-content" />
+    <Footer :class="footerClassNames" />
+  </div>
 </template>
+
+<style scoped lang="scss">
+.project-cubewar {
+  color: var(--color-text-400);
+}
+
+.project {
+  min-height: 100vh;
+  z-index: var(--z-index-layout);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  &-content {
+    padding-bottom: 72px;
+    color: var(--color-text-400);
+  }
+
+  &-footer {
+    position: relative;
+    margin-top: auto;
+    color: var(--color-text-400);
+  }
+}
+</style>

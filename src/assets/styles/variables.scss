@@ -1,6 +1,6 @@
 :root {
   /* Heights */
-  --height-header: 80px;
+  --height-header: 72px;
 
   /* Layout */
   --breakpoint-sm: 480px;
@@ -11,8 +11,9 @@
   --breakpoint-xxxl: 1920px;
 
   /* Z-index */
-  --z-index-layout: 0;
-  --z-index-header: 10;
+  --z-index-background: 0;
+  --z-index-layout: 10;
+  --z-index-header: 20;
 
   /* Line Heights */
   --line-height-copy: 1.3;

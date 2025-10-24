@@ -7,6 +7,7 @@ import TranslationProvider from "./i18n/context/TranslationProvider.vue";
 import { sizes } from "./utils/sizes";
 import { three } from "./three";
 import { scroll } from "./utils/scroll";
+import ProjectBackground from "./features/projects/ProjectBackground.vue";
 
 onMounted(() => {
   sizes.init();
@@ -19,6 +20,7 @@ onMounted(() => {
 <template>
   <TranslationProvider>
     <Header />
+    <ProjectBackground />
     <RouterView />
   </TranslationProvider>
 </template>
