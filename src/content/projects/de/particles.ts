@@ -5,7 +5,7 @@ import videoParticles from "../../../assets/videos/particles.mp4";
 
 import type { ProjectContent } from "../../types";
 
-export const particles = {
+export default {
   title: "WebGL Particles",
   //thumbnail: thumbnailWebGLParticles,
   live: "https://particles.david-hckh.com/",

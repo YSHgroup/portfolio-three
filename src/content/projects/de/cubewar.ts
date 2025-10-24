@@ -7,7 +7,7 @@ import videoCubeWar from "../../../assets/videos/cubewar.mp4";
 
 import type { ProjectContent } from "../../types";
 
-export const cubewar = {
+export default {
   title: "CubeWar",
   //thumbnail: thumbnailCubeWar,
   video: videoCubeWar,

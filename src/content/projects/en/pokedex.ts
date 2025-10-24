@@ -5,7 +5,7 @@ import videoPokedex from "../../../assets/videos/pokedex.mp4";
 
 import type { ProjectContent } from "../../types";
 
-export const pokedex = {
+export default {
   title: "Pokédex",
   //thumbnail: thumbnailPokedex,
   live: "https://pokedex.david-hckh.com/",

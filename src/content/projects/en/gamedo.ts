@@ -7,7 +7,7 @@ import videoGamedo from "../../../assets/videos/gamedo.mp4";
 
 import type { ProjectContent } from "../../types";
 
-export const gamedo = {
+export default {
   title: "Gamedo",
   //thumbnail: thumbnailGamedo,
   video: videoGamedo,
