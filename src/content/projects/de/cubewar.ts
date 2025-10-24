@@ -1,8 +1,8 @@
 import videoCubeWar from "../../../assets/videos/cubewar.mp4";
 
-//import engine from "../../../assets/images/projects/cubewar/engine.png";
-//import maps from "../../../assets/images/projects/cubewar/maps.png";
-//import party from "../../../assets/images/projects/cubewar/party.png";
+import engine from "../../../assets/images/projects/cubewar/engine.png";
+import maps from "../../../assets/images/projects/cubewar/maps.png";
+import party from "../../../assets/images/projects/cubewar/party.png";
 
 import type { ProjectContent } from "../../types";
 
@@ -14,19 +14,17 @@ export default {
   live: "https://cubewar.io",
   description:
     "CubeWar ist ein browserbasiertes Multiplayer-Spiel, in dem Spieler in schnellen, strategischen Kämpfen gegeneinander antreten.<br/><br/>Ich habe den gesamten Stack selbst entwickelt, inklusive der Spiel-Engine, des Client-Timeline-Systems und des Echtzeit-Netzwerks mit Redis-basiertem Matchmaking für flüssiges Gameplay.",
-
-  components: [],
-  /**  components: [
+  components: [
     {
       type: "imageText",
       props: {
         imagePosition: "right",
-        image: engine,
+        src: engine,
         alt: "Features",
         component: {
           type: "list",
           props: {
-            headline: "Features",
+            title: "Features",
             items: [
               "Game-Engine, die alle Regeln und Spielmechaniken verwaltet",
               "Client-Engine mit Timeline-System für flüssige, synchronisierte Animationen",
@@ -43,12 +41,12 @@ export default {
       props: {
         imagePosition: "left",
         border: true,
-        image: maps,
+        src: maps,
         alt: "Spielkarten & Themen",
         component: {
           type: "list",
           props: {
-            headline: "Flexible Spielkarten",
+            title: "Flexible Spielkarten",
             items: [
               "32x32 Raster mit Höhenangaben auf der Y-Achse",
               "Individuelle Spielkarten mit flexiblem Layout",
@@ -63,7 +61,7 @@ export default {
       type: "imageText",
       props: {
         imagePosition: "right",
-        image: party,
+        src: party,
         alt: "Party System",
         component: {
           type: "text",
@@ -88,17 +86,15 @@ export default {
     {
       type: "list",
       props: {
-        headline: "Learnings",
-        width: "md",
+        title: "Learnings",
+        size: "md",
         items: [
-          "Monorepo mit gemeinsamen Paketen für Engines, Services und UI-Komponenten organisieren",
-          "Zuverlässiges Matchmaking mit Redis, Lua-Skripten und WebSockets implementieren",
-          "Synchronisierte Client-Server-Timeline für flüssige Animationen entwickeln",
-          "Mehrere Spielmodi und ein Party-System für Teamwork erstellen",
-          "Alle Spiel-Assets produzieren: 3D-Elemente, Icons, UI-Komponenten",
-          "Performance für schnelle Browser-Matches optimieren",
+          "Monorepo mit gemeinsamen Paketen für Engines, Services und UI-Komponenten strukturieren",
+          "Matchmaking mit Redis, Lua-Skripten und WebSockets umsetzen",
+          "Synchronisierte Client-Server-Timeline für synchronisierte Animationen entwickeln",
+          "Alle Spiel-Assets erstellen: 3D-Elemente, Icons, UI-Komponenten",
         ],
       },
     },
-  ], */
+  ],
 } as const satisfies ProjectContent;

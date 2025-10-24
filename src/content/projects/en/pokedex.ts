@@ -1,6 +1,6 @@
 import videoPokedex from "../../../assets/videos/pokedex.mp4";
 
-//import mobile from "../../../assets/images/projects/pokedex/mobile.png";
+import mobile from "../../../assets/images/projects/pokedex/mobile.png";
 
 import type { ProjectContent } from "../../types";
 
@@ -12,19 +12,18 @@ export default {
   video: videoPokedex,
   videoBorder: true,
   description:
-    "One of my first web projects to practice core web development concepts. The Pokédex is open source so other developers can learn the same way I did.<br/><br/>It also interacts with a public API, to get more experience with asynchronous data fetching.",
-  components: [],
-  /**  components: [
+    "One of my first web projects to practice basic web development concepts. The Pokédex is open source so other developers can learn the same way I did.<br/><br/>It also interacts with a public API, to get more experience with asynchronous data fetching.",
+  components: [
     {
       type: "imageText",
       props: {
         imagePosition: "right",
-        image: mobile,
+        src: mobile,
         alt: "Pokédex App",
         component: {
           type: "list",
           props: {
-            headline: "Features",
+            title: "Features",
             items: [
               "Lazy loading of Pokémon entries and images on scroll",
               "Expandable detail view for each Pokémon",
@@ -39,8 +38,8 @@ export default {
     {
       type: "list",
       props: {
-        headline: "Learnings",
-        width: "md",
+        title: "Learnings",
+        size: "md",
         items: [
           "Hands-on experience with DOM manipulation and event handling",
           "Implementing lazy loading for performance optimization",
@@ -51,5 +50,5 @@ export default {
         ],
       },
     },
-  ], */
+  ],
 } as const satisfies ProjectContent;

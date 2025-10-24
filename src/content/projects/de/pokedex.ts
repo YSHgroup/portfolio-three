@@ -1,6 +1,6 @@
 import videoPokedex from "../../../assets/videos/pokedex.mp4";
 
-//import mobile from "../../../assets/images/projects/pokedex/mobile.png";
+import mobile from "../../../assets/images/projects/pokedex/mobile.png";
 
 import type { ProjectContent } from "../../types";
 
@@ -13,18 +13,17 @@ export default {
   videoBorder: true,
   description:
     "Eines meiner ersten Webprojekte, um Kernkonzepte der Webentwicklung zu üben. Der Pokédex ist Open Source, damit andere Entwickler auf dieselbe Weise lernen können wie ich.<br/><br/>Er interagiert außerdem mit einer öffentlichen API, um zusätzliche Erfahrung zu sammeln.",
-  components: [],
-  /**  components: [
+  components: [
     {
       type: "imageText",
       props: {
         imagePosition: "right",
-        image: mobile,
+        src: mobile,
         alt: "Pokédex App",
         component: {
           type: "list",
           props: {
-            headline: "Features",
+            title: "Features",
             items: [
               "Lazy Loading von Pokémon-Einträgen und Bildern beim Scrollen",
               "Erweiterbare Detailansicht für jedes Pokémon",
@@ -39,8 +38,8 @@ export default {
     {
       type: "list",
       props: {
-        headline: "Learnings",
-        width: "md",
+        title: "Learnings",
+        size: "md",
         items: [
           "Praktische Erfahrung mit DOM-Manipulation und Event Handling",
           "Implementierung von Lazy Loading zur Performance-Optimierung",
@@ -51,5 +50,5 @@ export default {
         ],
       },
     },
-  ], */
+  ],
 } as const satisfies ProjectContent;

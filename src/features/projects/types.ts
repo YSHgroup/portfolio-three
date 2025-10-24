@@ -1,10 +1,11 @@
 import type { Props as ImageTextProps } from "./components/ImageText.vue";
 import type { Props as TextProps } from "./components/Text.vue";
+import type { Props as ListProps } from "./components/List.vue";
 
 export interface ProjectComponents {
   imageText: ImageTextProps;
   text: TextProps;
-  //list: ListProps;
+  list: ListProps;
 }
 
 export type ProjectComponent = {

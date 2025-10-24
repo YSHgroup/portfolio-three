@@ -1,8 +1,8 @@
 import videoGamedo from "../../../assets/videos/gamedo.mp4";
 
-//import avatars from "../../../assets/images/projects/gamedo/avatar-creator.png";
-//import games from "../../../assets/images/projects/gamedo/games.png";
-//import brand from "../../../assets/images/projects/gamedo/brand-design.png";
+import avatars from "../../../assets/images/projects/gamedo/avatar-creator.png";
+import games from "../../../assets/images/projects/gamedo/games.png";
+import brand from "../../../assets/images/projects/gamedo/brand-design.png";
 
 import type { ProjectContent } from "../../types";
 
@@ -13,18 +13,17 @@ export default {
   videoBorder: true,
   description:
     "Gamedo is a platform for fast, round-based multiplayer games. It brings together matchmaking, customizable 3D avatars, and account integration with ranked rewards.<br/><br/>The project started as a technical experiment and grew into a scalable system for testing new game ideas.",
-  components: [],
-  /**  components: [
+  components: [
     {
       type: "imageText",
       props: {
         imagePosition: "right",
-        image: games,
+        src: games,
         alt: "Platform",
         component: {
           type: "list",
           props: {
-            headline: "Platform & Games",
+            title: "Platform & Games",
             items: [
               "Classic round-based games like Tic Tac Toe",
               "Quiz titles including Flag Quiz, Trivia, and Emoji Math",
@@ -42,7 +41,7 @@ export default {
       props: {
         imagePosition: "left",
         border: true,
-        image: avatars,
+        src: avatars,
         alt: "Avatars",
         component: {
           type: "text",
@@ -57,7 +56,7 @@ export default {
       type: "imageText",
       props: {
         imagePosition: "right",
-        image: brand,
+        src: brand,
         alt: "Brand Design",
         component: {
           type: "text",
@@ -71,8 +70,8 @@ export default {
     {
       type: "list",
       props: {
-        headline: "Learnings",
-        width: "md",
+        title: "Learnings",
+        size: "md",
         items: [
           "Organizing a monorepo with shared packages for games, services, and UI components",
           "Building reliable matchmaking with Redis, Lua Scripts and WebSockets",
@@ -83,5 +82,5 @@ export default {
         ],
       },
     },
-  ], */
+  ],
 } as const satisfies ProjectContent;

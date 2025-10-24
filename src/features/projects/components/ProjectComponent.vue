@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ImageText from "./ImageText.vue";
 import Text from "./Text.vue";
+import List from "./List.vue";
 
 import type { ProjectComponents, ProjectComponentProps } from "../types";
 
@@ -11,6 +12,7 @@ const { type, props } = defineProps<Props>();
 const components = {
   imageText: ImageText,
   text: Text,
+  list: List,
 } as const satisfies Record<keyof ProjectComponents, any>;
 
 const Component = components[type];

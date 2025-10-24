@@ -1,8 +1,8 @@
 import videoGamedo from "../../../assets/videos/gamedo.mp4";
 
-//import avatars from "../../../assets/images/projects/gamedo/avatar-creator.png";
-//import games from "../../../assets/images/projects/gamedo/games.png";
-//import brand from "../../../assets/images/projects/gamedo/brand-design.png";
+import avatars from "../../../assets/images/projects/gamedo/avatar-creator.png";
+import games from "../../../assets/images/projects/gamedo/games.png";
+import brand from "../../../assets/images/projects/gamedo/brand-design.png";
 
 import type { ProjectContent } from "../../types";
 
@@ -13,18 +13,17 @@ export default {
   videoBorder: true,
   description:
     "Gamedo ist eine Plattform für schnelle, rundenbasierte Multiplayer-Spiele. Sie verbindet Matchmaking, anpassbare 3D-Avatare und Account-Integration mit einem Rangsystem auf ELO-Basis.<br/><br/>Das Projekt begann als technisches Experiment und entwickelte sich zu einem skalierbaren System, um neue Spielideen auszuprobieren.",
-  components: [],
-  /**  components: [
+  components: [
     {
       type: "imageText",
       props: {
         imagePosition: "right",
-        image: games,
+        src: games,
         alt: "Plattform",
         component: {
           type: "list",
           props: {
-            headline: "Plattform & Spiele",
+            title: "Plattform & Spiele",
             items: [
               "Klassische rundenbasierte Spiele wie Tic Tac Toe",
               "Quiz-Spiele wie Flag Quiz, Trivia und Emoji Math",
@@ -42,7 +41,7 @@ export default {
       props: {
         imagePosition: "left",
         border: true,
-        image: avatars,
+        src: avatars,
         alt: "Avatare",
         component: {
           type: "text",
@@ -57,7 +56,7 @@ export default {
       type: "imageText",
       props: {
         imagePosition: "right",
-        image: brand,
+        src: brand,
         alt: "Brand Design",
         component: {
           type: "text",
@@ -71,8 +70,8 @@ export default {
     {
       type: "list",
       props: {
-        headline: "Learnings",
-        width: "md",
+        title: "Learnings",
+        size: "md",
         items: [
           "Strukturierung einer Monorepo mit geteilten Paketen für Spiele, Services und UI",
           "Umsetzung von stabilem Matchmaking mit Redis und WebSockets",
@@ -83,5 +82,5 @@ export default {
         ],
       },
     },
-  ], */
+  ],
 } as const satisfies ProjectContent;

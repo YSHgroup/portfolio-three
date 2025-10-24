@@ -83,11 +83,11 @@ const contentClasses = computed(() => {
     grid-row: 1;
 
     &-left {
-      grid-column: 2 / 6;
+      grid-column: 3 / 7;
     }
 
     &-right {
-      grid-column: 10 / 13;
+      grid-column:  7 / 11;
     }
 
     @include mixins.mq("md") {

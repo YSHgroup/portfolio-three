@@ -21,10 +21,10 @@ export default {
         imagePosition: "right",
         src: engine,
         alt: "Core & Client Engine",
-        /**        component: {
+        component: {
           type: "list",
           props: {
-            headline: "Features",
+            title: "Features",
             items: [
               "Game engine handling all rules and mechanics",
               "Client engine with a timeline system for smooth, synced animations",
@@ -33,7 +33,7 @@ export default {
               "Party system for 1-4 players",
             ],
           },
-        }, */
+        },
       },
     },
     {
@@ -43,10 +43,10 @@ export default {
         border: false,
         src: maps,
         alt: "Maps & Themes",
-        /**        component: {
+        component: {
           type: "list",
           props: {
-            headline: "Flexible Maps",
+            title: "Flexible Maps",
             items: [
               "32x32 grid system with elevation on the Y-axis",
               "Custom maps with flexible layouts",
@@ -54,7 +54,7 @@ export default {
               "Randomized tiles that can include weapons, buffs, or traps",
             ],
           },
-        }, */
+        },
       },
     },
     {
@@ -83,15 +83,11 @@ export default {
         `,
       },
     },
-  ],
-  /**  components: [
-   
-
     {
       type: "list",
       props: {
-        headline: "Learnings",
-        width: "md",
+        title: "Learnings",
+        size: "md",
         items: [
           "Organizing a monorepo with shared packages for engines, services, and UI components",
           "Building reliable matchmaking with Redis, Lua Scripts and WebSockets",
@@ -102,5 +98,5 @@ export default {
         ],
       },
     },
-  ], */
+  ],
 } as const satisfies ProjectContent;

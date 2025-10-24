@@ -1,6 +1,6 @@
 import videoParticles from "../../../assets/videos/particles.mp4";
 
-//import shapes from "../../../assets/images/projects/particles/shapes.png";
+import shapes from "../../../assets/images/projects/particles/shapes.png";
 
 import type { ProjectContent } from "../../types";
 
@@ -12,19 +12,17 @@ export default {
   videoBorder: false,
   description:
     "An experimental WebGL project built with OGL.js, animating particles through mathematical formulas and noise functions.<br/><br/>The particles transition smoothly between multiple 3D shapes that blend into one another.",
-
-  components: [],
-  /**  components: [
+  components: [
     {
       type: "imageText",
       props: {
         imagePosition: "right",
-        image: shapes,
+        src: shapes,
         alt: "Particle shapes",
         component: {
           type: "list",
           props: {
-            headline: "Features",
+            title: "Features",
             items: [
               "Scroll-based interpolation between different shapes (Torus, Knot, Sphere)",
               "Shapes defined by mathematical formulas for seamless transitions",
@@ -38,8 +36,8 @@ export default {
     {
       type: "list",
       props: {
-        headline: "Learnings",
-        width: "md",
+        title: "Learnings",
+        size: "md",
         items: [
           "Experimental use of OGL.js instead of Three.js",
           "Mathematical interpolation between complex 3D shapes",
@@ -47,5 +45,5 @@ export default {
         ],
       },
     },
-  ], */
+  ],
 } as const satisfies ProjectContent;
