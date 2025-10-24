@@ -3,8 +3,10 @@ import Button from "./Button.vue";
 import Logo from "./Logo.vue";
 import { computed, ref } from "vue";
 import { t } from "../i18n/utils/translate";
-import { lenis } from "../utils/scroll";
 import { useHeaderTheme } from "../composables/useHeaderTheme";
+import { useLenis } from "lenis/vue";
+
+const lenis = useLenis();
 
 const logoVisible = ref(false);
 const { isDarkTheme } = useHeaderTheme({
@@ -23,7 +25,7 @@ const { isDarkTheme } = useHeaderTheme({
 });
 
 const handleLogoClick = () => {
-  lenis.scrollTo(0);
+  lenis.value?.scrollTo(0);
 };
 
 const classNames = computed(() => {

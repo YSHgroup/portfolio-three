@@ -1,7 +1,7 @@
-import { ref, watch, onMounted } from "vue";
-import { lenis } from "../utils/scroll";
+import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { pathnameWithoutLocale } from "../i18n/store";
+import { useLenis } from "lenis/vue";
 
 export const useHeaderTheme = ({
   onAboutElementChange,
@@ -12,17 +12,7 @@ export const useHeaderTheme = ({
   const isDarkTheme = ref(false);
   const route = useRoute();
 
-  watch(route, () => {
-    aboutElement = null;
-  });
-
-  watch(pathnameWithoutLocale, () => {
-    if (pathnameWithoutLocale.value !== "/") {
-      isDarkTheme.value = false;
-    }
-  });
-
-  const handleScroll = () => {
+  useLenis(() => {
     if (pathnameWithoutLocale.value !== "/") {
       if (typeof onAboutElementChange === "function") {
         onAboutElementChange(null, null);
@@ -44,10 +34,16 @@ export const useHeaderTheme = ({
         onAboutElementChange(aboutElement, aboutBounding);
       }
     }
-  };
+  });
 
-  onMounted(() => {
-    lenis.on("scroll", handleScroll);
+  watch(route, () => {
+    aboutElement = null;
+  });
+
+  watch(pathnameWithoutLocale, () => {
+    if (pathnameWithoutLocale.value !== "/") {
+      isDarkTheme.value = false;
+    }
   });
 
   return {

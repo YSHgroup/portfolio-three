@@ -5,18 +5,13 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { createWebHistory, createRouter } from "vue-router";
 import { routes } from "./routes";
-//import { lenis } from "./utils/scroll";
+import LenisVue from "lenis/vue";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior(_to, _from, savedPosition) {
-    if (typeof savedPosition?.top === "number") {
-      //lenis.scrollTo(savedPosition.top, { immediate: true, force: true });
-    }
-  },
 });
 
-createApp(App).use(router).mount("#app");
+createApp(App).use(router).use(LenisVue).mount("#app");

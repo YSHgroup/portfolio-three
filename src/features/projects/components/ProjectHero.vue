@@ -26,6 +26,7 @@ const { content } = defineProps<{
 
 <style scoped lang="scss">
 .project-hero {
+  padding: 0 var(--space-outer);
   padding-top: calc(var(--height-header));
 
   &-video {

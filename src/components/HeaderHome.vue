@@ -2,14 +2,15 @@
 import HeaderLink from "./HeaderLink.vue";
 import { computed } from "vue";
 import { t } from "../i18n/utils/translate";
-
-import { lenis } from "../utils/scroll";
 import { useHeaderTheme } from "../composables/useHeaderTheme";
+import { useLenis } from "lenis/vue";
+
+const lenis = useLenis();
 
 const { isDarkTheme } = useHeaderTheme();
 
 const handleLinkClick = (link: string) => {
-  lenis.scrollTo(link);
+  lenis.value?.scrollTo(link);
 };
 
 const classNames = computed(() => {
