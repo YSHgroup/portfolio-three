@@ -5,9 +5,6 @@ import { projectModules } from "../../content/projects/index";
 import ProjectContent from "../../features/projects/components/ProjectContent.vue";
 import Footer from "../../components/Footer.vue";
 import { locale } from "../../i18n/store";
-import Button from "../../components/Button.vue";
-import Link from "../../components/Link.vue";
-import { t } from "../../i18n/utils/translate";
 
 import type { Locale } from "../../i18n/types";
 
@@ -55,10 +52,7 @@ const footerClassNames = computed(() => {
 
 <template>
   <div :class="classNames">
-    <ProjectContent v-if="content" :content="content" :projectId="projectId" class="project-content" />
-    <Link to="/" class="project-back-to-home">
-      <Button renderAs="div" variant="border">{{ t("back-to-home") }}</Button>
-    </Link>
+    <ProjectContent v-if="content" :content="content" :projectId="projectId" />
     <Footer :class="footerClassNames" />
   </div>
 </template>
@@ -67,24 +61,6 @@ const footerClassNames = computed(() => {
 .project {
   min-height: calc(var(--lvh) * 100);
   z-index: var(--z-index-layout);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  gap: 64px;
-
-  &-back-to-home {
-    padding: 0 var(--space-outer);
-    width: 100%;
-
-    @include mixins.mq("md") {
-      width: auto;
-    }
-  }
-
-  &-content {
-    color: var(--color-text-400);
-  }
 
   &-footer {
     position: relative;

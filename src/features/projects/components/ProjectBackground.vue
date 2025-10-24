@@ -26,7 +26,7 @@ const classNames = computed(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--color-background-400);
+  background-color: var(--color-background-300);
   z-index: var(--z-index-background);
 }
 </style>

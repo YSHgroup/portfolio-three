@@ -27,6 +27,7 @@ const { content } = defineProps<{
 <style scoped lang="scss">
 .project-hero {
   padding: 0 var(--space-outer);
+  padding-bottom: 64px;
   padding-top: calc(var(--height-header));
 
   &-video {
@@ -34,7 +35,7 @@ const { content } = defineProps<{
     align-self: center;
 
     @include mixins.mq("md") {
-      grid-column: 1 / 8;
+      grid-column: 2 / 8;
     }
   }
 
@@ -67,7 +68,7 @@ const { content } = defineProps<{
     }
 
     @include mixins.mq("lg") {
-      grid-column: 9 / 12;
+      grid-column: 8 / 12;
     }
 
     &-top {
