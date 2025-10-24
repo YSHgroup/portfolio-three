@@ -6,8 +6,6 @@ import { ref } from "vue";
 export const lenis = ref<Lenis | null>(null);
 
 class Scroll {
-
-
   constructor() {
     this.init();
   }
