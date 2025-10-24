@@ -1,4 +1,3 @@
-//import thumbnailPokedex from "../../../assets/images/thumbnails/pokedex.png";
 import videoPokedex from "../../../assets/videos/pokedex.mp4";
 
 //import mobile from "../../../assets/images/projects/pokedex/mobile.png";
@@ -7,13 +6,12 @@ import type { ProjectContent } from "../../types";
 
 export default {
   title: "Pokédex",
-  //thumbnail: thumbnailPokedex,
+  tags: ["javascript", "html", "css"],
   live: "https://pokedex.david-hckh.com/",
   source: "https://github.com/davidhckh/pokedex",
   video: videoPokedex,
   description:
-    "One of my first web projects to <b>practice core web development concepts</b>. The Pokédex is <b>open source</b> so other developers can learn the same way I did.<br/><br/>It also interacts with a public API, providing additional experience with asynchronous data fetching.",
-
+    "One of my first web projects to practice core web development concepts. The Pokédex is open source so other developers can learn the same way I did.<br/><br/>It also interacts with a public API, to get more experience with asynchronous data fetching.",
   components: [],
   /**  components: [
     {

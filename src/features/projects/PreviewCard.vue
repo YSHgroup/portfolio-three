@@ -102,7 +102,7 @@ const props = defineProps<{
     object-fit: cover;
     aspect-ratio: 16/9;
     transition: transform 0.125s ease-in-out;
-    transform: scale(calc(1 + var(--hover) * 0.03));
+    transform: scale(calc(1 + var(--hover) * 0.02));
 
     &-wrapper {
       border-radius: var(--radius-md);

@@ -6,11 +6,12 @@ import type { ProjectContent } from "../../content/types";
 
 const { content } = defineProps<{
   content: ProjectContent;
+  projectId: string;
 }>();
 </script>
 
 <template>
   <Layout>
-    <ProjectHero :content="content" />
+    <ProjectHero :content="content" :projectId="projectId" />
   </Layout>
 </template>

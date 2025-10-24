@@ -1,4 +1,3 @@
-//import thumbnailWebGLParticles from "../../../assets/images/thumbnails/particles.png";
 import videoParticles from "../../../assets/videos/particles.mp4";
 
 //import shapes from "../../../assets/images/projects/particles/shapes.png";
@@ -7,11 +6,11 @@ import type { ProjectContent } from "../../types";
 
 export default {
   title: "WebGL Particles",
-  //thumbnail: thumbnailWebGLParticles,
+  tags: ["ogl", "javascript", "glsl"],
   live: "https://particles.david-hckh.com/",
   video: videoParticles,
   description:
-    "An experimental WebGL project built with <b>OGL.js</b>, animating particles through mathematical formulas and noise functions.<br/><br/>The particles transition smoothly between multiple 3D shapes that blend seamlessly into one another.",
+    "An experimental WebGL project built with OGL.js, animating particles through mathematical formulas and noise functions.<br/><br/>The particles transition smoothly between multiple 3D shapes that blend seamlessly into one another.",
 
   components: [],
   /**  components: [

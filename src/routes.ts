@@ -1,17 +1,17 @@
-import { projectSlugs } from "./content/projects";
+import { projectIds } from "./content/projects";
 
 export const routes = [
-  ...projectSlugs.map((slug) => ({
-    path: `/project/${slug}`,
+  ...projectIds.map((id) => ({
+    path: `/project/${id}`,
     component: () => import(`./pages/project/[slug].vue`),
-    name: `${slug}-en`,
-    meta: { project: slug },
+    name: `${id}-en`,
+    meta: { project: id },
   })),
-  ...projectSlugs.map((slug) => ({
-    path: `/de/project/${slug}`,
+  ...projectIds.map((id) => ({
+    path: `/de/project/${id}`,
     component: () => import(`./pages/project/[slug].vue`),
-    name: `${slug}-de`,
-    meta: { project: slug },
+    name: `${id}-de`,
+    meta: { project: id },
   })),
   { path: "/", component: () => import("./pages/Home.vue"), name: "home-en", meta: { isThreeActive: true } },
   { path: "/de", component: () => import("./pages/Home.vue"), name: "home-de", meta: { isThreeActive: true } },

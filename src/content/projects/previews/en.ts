@@ -11,27 +11,23 @@ export default [
     slug: "cubewar",
     thumbnail: thumbnailCubeWar,
     description: "Multiplayer strategy game",
-    tags: ["three", "node", "websockets", "kubernetes", "redis"],
   },
   {
     title: "Gamedo",
     slug: "gamedo",
     thumbnail: thumbnailGamedo,
     description: "Multiplayer gaming platform",
-    tags: ["three", "node", "kubernetes", "redis", "postgresql"],
   },
   {
     title: "Particles",
     slug: "particles",
     thumbnail: thumbnailParticles,
     description: "Dynamic 3D particles",
-    tags: ["ogl", "javascript", "glsl"],
   },
   {
     title: "Pokedex",
     slug: "pokedex",
     thumbnail: thumbnailPokedex,
     description: "Open-source learning project",
-    tags: ["javascript", "html", "css"],
   },
 ] as const satisfies ProjectPreview[];

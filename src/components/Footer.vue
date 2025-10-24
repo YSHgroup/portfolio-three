@@ -60,7 +60,7 @@ const { t, locale } = useTranslationContext();
     align-items: center;
     gap: var(--space-xl);
     width: 100%;
-    max-width: var(--breakpoint-xxl);
+    max-width: calc(var(--breakpoint-xxl));
     padding: calc(var(--space-outer) + var(--space-sm)) var(--space-outer);
   }
 

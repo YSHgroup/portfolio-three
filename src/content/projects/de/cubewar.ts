@@ -1,4 +1,3 @@
-//import thumbnailCubeWar from "../../../assets/images/thumbnails/cubewar.png";
 import videoCubeWar from "../../../assets/videos/cubewar.mp4";
 
 //import engine from "../../../assets/images/projects/cubewar/engine.png";
@@ -9,11 +8,11 @@ import type { ProjectContent } from "../../types";
 
 export default {
   title: "CubeWar",
-  //thumbnail: thumbnailCubeWar,
+  tags: ["three", "node", "websockets", "kubernetes", "redis"],
   video: videoCubeWar,
   live: "https://cubewar.io",
   description:
-    "CubeWar ist ein <b>browserbasiertes Multiplayer-Spiel</b>, in dem Spieler Würfel-Charaktere in schnellen, strategischen Kämpfen steuern.<br/><br/>Ich habe den gesamten Stack selbst entwickelt, inklusive der Spiel-Engine, des Client-Timeline-Systems und des Echtzeit-Netzwerks mit Redis-basiertem Matchmaking für flüssiges Gameplay.",
+    "CubeWar ist ein browserbasiertes Multiplayer-Spiel, in dem Spieler in schnellen, strategischen Kämpfen gegeneinander antreten.<br/><br/>Ich habe den gesamten Stack selbst entwickelt, inklusive der Spiel-Engine, des Client-Timeline-Systems und des Echtzeit-Netzwerks mit Redis-basiertem Matchmaking für flüssiges Gameplay.",
 
   components: [],
   /**  components: [

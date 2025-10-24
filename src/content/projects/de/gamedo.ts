@@ -1,4 +1,3 @@
-//import thumbnailGamedo from "../../../assets/images/thumbnails/gamedo.png";
 import videoGamedo from "../../../assets/videos/gamedo.mp4";
 
 //import avatars from "../../../assets/images/projects/gamedo/avatar-creator.png";
@@ -9,10 +8,10 @@ import type { ProjectContent } from "../../types";
 
 export default {
   title: "Gamedo",
-  //thumbnail: thumbnailGamedo,
+  tags: ["three", "node", "kubernetes", "redis", "postgresql"],
   video: videoGamedo,
   description:
-    "Gamedo ist eine Plattform für <b>schnelle, rundenbasierte Multiplayer-Spiele</b>. Sie verbindet Matchmaking, anpassbare 3D-Avatare und Account-Integration mit einem <b>Rangsystem auf ELO-Basis</b>.<br/><br/>Das Projekt begann als <b>technisches Experiment</b> und entwickelte sich zu einem skalierbaren System, um neue Spielideen auszuprobieren.",
+    "Gamedo ist eine Plattform für schnelle, rundenbasierte Multiplayer-Spiele. Sie verbindet Matchmaking, anpassbare 3D-Avatare und Account-Integration mit einem Rangsystem auf ELO-Basis.<br/><br/>Das Projekt begann als technisches Experiment und entwickelte sich zu einem skalierbaren System, um neue Spielideen auszuprobieren.",
   components: [],
   /**  components: [
     {

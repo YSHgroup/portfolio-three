@@ -1,4 +1,3 @@
-//import thumbnailGamedo from "../../../assets/images/thumbnails/gamedo.png";
 import videoGamedo from "../../../assets/videos/gamedo.mp4";
 
 //import avatars from "../../../assets/images/projects/gamedo/avatar-creator.png";
@@ -9,10 +8,10 @@ import type { ProjectContent } from "../../types";
 
 export default {
   title: "Gamedo",
-  //thumbnail: thumbnailGamedo,
+  tags: ["three", "node", "kubernetes", "redis", "postgresql"],
   video: videoGamedo,
   description:
-    "Gamedo is a platform for <b>fast, round-based multiplayer games</b>. It brings together matchmaking, customizable 3D avatars, and account integration with <b>ranked rewards</b>.<br/><br/>The project started as a <b>technical experiment</b> and grew into a scalable system for testing new game ideas.",
+    "Gamedo is a platform for fast, round-based multiplayer games. It brings together matchmaking, customizable 3D avatars, and account integration with ranked rewards.<br/><br/>The project started as a technical experiment and grew into a scalable system for testing new game ideas.",
   components: [],
   /**  components: [
     {
