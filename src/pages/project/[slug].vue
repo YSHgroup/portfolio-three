@@ -78,7 +78,6 @@ const footerClassNames = computed(() => {
     width: 100%;
 
     @include mixins.mq("md") {
-      padding: 0;
       width: auto;
     }
   }

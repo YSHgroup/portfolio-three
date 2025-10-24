@@ -11,7 +11,7 @@ const { content } = defineProps<{
 
 <template>
   <div class="project-hero grid">
-    <ProjectVideo :src="content.video" class="project-hero-video" />
+    <ProjectVideo :src="content.video" :border="content.videoBorder" class="project-hero-video" />
     <div class="project-hero-content">
       <div class="project-hero-content-top">
         <h2 class="project-hero-title">{{ content.title }}</h2>
@@ -26,7 +26,6 @@ const { content } = defineProps<{
 
 <style scoped lang="scss">
 .project-hero {
-  padding: var(--space-outer);
   padding-top: calc(var(--height-header));
 
   &-video {
@@ -35,10 +34,6 @@ const { content } = defineProps<{
 
     @include mixins.mq("md") {
       grid-column: 1 / 8;
-    }
-
-    @include mixins.mq("lg") {
-      grid-column: 1 / 7;
     }
   }
 
@@ -51,10 +46,12 @@ const { content } = defineProps<{
   &-title {
     font-size: var(--font-size-title-md);
     color: var(--color-text-400);
+    line-height: var(--line-height-title);
   }
 
   &-description {
     color: var(--color-text-400);
+    line-height: var(--line-height-copy);
   }
 
   &-content {
@@ -65,11 +62,11 @@ const { content } = defineProps<{
     align-self: center;
 
     @include mixins.mq("md") {
-      grid-column: 8 / 13;
+      grid-column: 9 / 13;
     }
 
     @include mixins.mq("lg") {
-      grid-column: 8 / 12;
+      grid-column: 9 / 12;
     }
 
     &-top {

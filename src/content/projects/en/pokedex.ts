@@ -10,6 +10,7 @@ export default {
   live: "https://pokedex.david-hckh.com/",
   source: "https://github.com/davidhckh/pokedex",
   video: videoPokedex,
+  videoBorder: true,
   description:
     "One of my first web projects to practice core web development concepts. The Pokédex is open source so other developers can learn the same way I did.<br/><br/>It also interacts with a public API, to get more experience with asynchronous data fetching.",
   components: [],

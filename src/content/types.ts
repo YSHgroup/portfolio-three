@@ -1,7 +1,7 @@
-import type { TagVariant } from "../components/Tag.vue";
-import type { ProjectComponents } from "../components/ProjectComponent.vue";
-
 import { projectIds } from "./projects/index";
+
+import type { TagVariant } from "../components/Tag.vue";
+import type { ProjectComponent } from "../features/projects/types";
 
 export type ProjectId = (typeof projectIds)[number];
 
@@ -9,19 +9,12 @@ export interface ProjectContent {
   title: string;
   tags: TagVariant[];
   description?: string;
-  //thumbnail: ImageMetadata;
   video: string;
+  videoBorder?: boolean;
   live?: string;
   source?: string;
-  components?: ProjectComponents[];
+  components?: ProjectComponent[];
 }
-
-export type ProjectComponent = {
-  [K in keyof ProjectComponents]: {
-    type: K;
-    props: ProjectComponents[K];
-  };
-}[keyof ProjectComponents];
 
 export interface SkillContent {
   name: string;

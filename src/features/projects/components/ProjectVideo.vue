@@ -1,11 +1,21 @@
 <script setup lang="ts">
-const { src } = defineProps<{
+import { computed } from "vue";
+
+const props = defineProps<{
   src: string;
+  border?: boolean;
 }>();
+
+const videoClasses = computed(() => {
+  return {
+    "project-video": true,
+    "project-video-border": props.border,
+  };
+});
 </script>
 
 <template>
-  <video :src="src" autoplay muted loop playsinline preload="metadata" class="project-video"></video>
+  <video :src="props.src" autoplay muted loop playsinline preload="metadata" :class="videoClasses"></video>
 </template>
 
 <style scoped lang="scss">
@@ -16,11 +26,14 @@ const { src } = defineProps<{
   object-fit: cover;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: var(--stroke-md) solid var(--color-grayscale-400);
   background-color: var(--color-grayscale-400);
 
   @include mixins.mq("md") {
     border-radius: var(--radius-lg);
+  }
+
+  &-border {
+    border: var(--stroke-md) solid var(--color-grayscale-400);
   }
 }
 </style>

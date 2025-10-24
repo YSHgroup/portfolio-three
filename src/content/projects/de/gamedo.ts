@@ -10,6 +10,7 @@ export default {
   title: "Gamedo",
   tags: ["three", "node", "kubernetes", "redis", "postgresql"],
   video: videoGamedo,
+  videoBorder: true,
   description:
     "Gamedo ist eine Plattform für schnelle, rundenbasierte Multiplayer-Spiele. Sie verbindet Matchmaking, anpassbare 3D-Avatare und Account-Integration mit einem Rangsystem auf ELO-Basis.<br/><br/>Das Projekt begann als technisches Experiment und entwickelte sich zu einem skalierbaren System, um neue Spielideen auszuprobieren.",
   components: [],
