@@ -27,7 +27,7 @@ export const useHeaderTheme = ({
     if (aboutElement) {
       const aboutBounding = aboutElement.getBoundingClientRect();
       const isScrolledIntoView = aboutBounding.top - 128 < 0;
-      const isScrolledPast = aboutBounding.bottom - 48 < 0;
+      const isScrolledPast = aboutBounding.bottom - 36 < 0;
       isDarkTheme.value = isScrolledIntoView && !isScrolledPast;
 
       if (typeof onAboutElementChange === "function") {

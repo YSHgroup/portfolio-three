@@ -8,7 +8,6 @@ import { locale } from "../../i18n/store";
 import Button from "../../components/Button.vue";
 import Link from "../../components/Link.vue";
 import { t } from "../../i18n/utils/translate";
-import Lenis from "../../components/Lenis.vue";
 
 import type { Locale } from "../../i18n/types";
 
@@ -55,7 +54,6 @@ const footerClassNames = computed(() => {
 </script>
 
 <template>
-  <Lenis />
   <div :class="classNames">
     <ProjectContent v-if="content" :content="content" :projectId="projectId" class="project-content" />
     <Link to="/" class="project-back-to-home">

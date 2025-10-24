@@ -7,6 +7,7 @@ import { sizes } from "./utils/sizes";
 import { three } from "./three";
 import ProjectBackground from "./features/projects/components/ProjectBackground.vue";
 import { useTranslations } from "./i18n/composables/useTranslations";
+import Lenis from "./components/Lenis.vue";
 
 useTranslations();
 
@@ -20,5 +21,6 @@ onMounted(() => {
 <template>
   <Header />
   <ProjectBackground />
+  <Lenis />
   <RouterView />
 </template>
