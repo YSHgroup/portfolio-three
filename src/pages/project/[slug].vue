@@ -2,7 +2,7 @@
 import { ref, watch, computed } from "vue";
 import { useRoute } from "vue-router";
 import { projectModules } from "../../content/projects/index";
-import ProjectContent from "../../features/projects/ProjectContent.vue";
+import ProjectContent from "../../features/projects/components/ProjectContent.vue";
 import Footer from "../../components/Footer.vue";
 import { locale } from "../../i18n/store";
 import Button from "../../components/Button.vue";
@@ -72,6 +72,16 @@ const footerClassNames = computed(() => {
   align-items: center;
   position: relative;
   gap: 64px;
+
+  &-back-to-home {
+    padding: 0 var(--space-outer);
+    width: 100%;
+
+    @include mixins.mq("md") {
+      padding: 0;
+      width: auto;
+    }
+  }
 
   &-content {
     color: var(--color-text-400);

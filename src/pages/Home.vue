@@ -3,7 +3,7 @@ import Layout from "../components/Layout.vue";
 import Hero from "../features/hero/Hero.vue";
 import About from "../features/about/About.vue";
 import AboutSections from "../features/about/Sections.vue";
-import Projects from "../features/projects/Projects.vue";
+import Projects from "../features/projects/components/Projects.vue";
 import Contact from "../features/contact/Contact.vue";
 import Footer from "../components/Footer.vue";
 import { ref, onMounted, onUnmounted, computed } from "vue";

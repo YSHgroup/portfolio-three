@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import ProjectVideo from "./ProjectVideo.vue";
-import Tag from "../../components/Tag.vue";
+import Tag from "../../../components/Tag.vue";
 
-import type { ProjectContent } from "../../content/types";
+import type { ProjectContent } from "../../../content/types";
 
 const { content } = defineProps<{
   content: ProjectContent;

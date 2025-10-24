@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Link from "../../components/Link.vue";
-import Notch from "../../components/Notch.vue";
-import ArrowRight from "../../components/icons/ArrowRight.vue";
+import Link from "../../../components/Link.vue";
+import Notch from "../../../components/Notch.vue";
+import ArrowRight from "../../../components/icons/ArrowRight.vue";
 
-import type { ProjectPreview } from "../../content/types";
+import type { ProjectPreview } from "../../../content/types";
 
 const props = defineProps<{
   preview: ProjectPreview;

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref, watch, onMounted } from "vue";
-import { previews } from "../../content/projects/previews";
-import { locale } from "../../i18n/store";
+import { previews } from "../../../content/projects/previews";
+import { locale } from "../../../i18n/store";
 import PreviewCard from "./PreviewCard.vue";
-import NotchSection from "../../components/NotchSection.vue";
+import NotchSection from "../../../components/NotchSection.vue";
 
-import type { ProjectPreview } from "../../content/types";
+import type { ProjectPreview } from "../../../content/types";
 
 const loadedPreviews = ref<ProjectPreview[] | null>(null);
 

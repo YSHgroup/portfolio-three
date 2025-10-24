@@ -6,7 +6,7 @@ import Header from "./components/Header.vue";
 import { sizes } from "./utils/sizes";
 import { three } from "./three";
 import { scroll } from "./utils/scroll";
-import ProjectBackground from "./features/projects/ProjectBackground.vue";
+import ProjectBackground from "./features/projects/components/ProjectBackground.vue";
 import { useTranslations } from "./i18n/composables/useTranslations";
 
 useTranslations();
