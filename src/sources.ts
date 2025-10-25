@@ -4,6 +4,7 @@ import roomModel from "./assets/models/room.glb";
 import contactModel from "./assets/models/contact.glb";
 
 import contactTexture from "./assets/textures/contact.jpg";
+import contactShadowTexture from "./assets/textures/contact-shadow.jpg";
 import desktopsTexture from "./assets/textures/desktops.png";
 import faceTexture from "./assets/textures/face-spritesheet.png";
 import headTexture from "./assets/textures/head.png";
@@ -30,6 +31,7 @@ export const sources = [
 
   //textures
   { name: "contact-texture", type: "texture", path: contactTexture },
+  { name: "contact-shadow-texture", type: "texture", path: contactShadowTexture },
   { name: "desktops-texture", type: "texture", path: desktopsTexture },
   { name: "face-texture", type: "texture", path: faceTexture },
   { name: "head-texture", type: "texture", path: headTexture },

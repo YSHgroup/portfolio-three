@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { sceneWeights } from "../../../animations/scenes";
 import { scene } from "../../core/scene";
 import { getContactMaterial } from "../../common/materials";
+import { shadow } from "./shadow";
 
 import type { Object3D } from "three";
 
@@ -17,7 +18,7 @@ let objects: {
 
 const init = () => {
   initObjects();
-  //shadow.init();
+  shadow.init();
 };
 
 const initObjects = () => {
@@ -43,7 +44,7 @@ const tick = () => {
 
 const destroy = () => {
   gsap.ticker.remove(tick);
-  //shadow.destroy();
+  shadow.destroy();
 };
 
-export const contact = { init, tick, destroy };
+export const contact = { init, tick, destroy, group };
