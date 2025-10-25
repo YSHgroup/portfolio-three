@@ -4,6 +4,8 @@ import Notch from "../../../components/Notch.vue";
 import ArrowRight from "../../../components/icons/ArrowRight.vue";
 import gsap from "gsap";
 import { onMounted, onUnmounted, ref } from "vue";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import type { ProjectPreview } from "../../../content/types";
 
 const tlRef = ref<gsap.core.Timeline | null>(null);
@@ -15,14 +17,18 @@ const props = defineProps<{
 }>();
 
 onMounted(async () => {
+  if (!wrapperRef.value || ScrollTrigger.isInViewport(wrapperRef.value)) {
+    return;
+  }
+
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: wrapperRef.value,
       start: "top bottom",
     },
   });
-  tl.fromTo(wrapperRef.value, { scale: 0.6 }, { scale: 1, duration: 0.4, ease: "power1.out" }, 0);
-  tl.fromTo(imageRef.value, { scale: 1.4 }, { scale: 1, duration: 0.4, ease: "power1.out" }, 0);
+  tl.fromTo(wrapperRef.value, { scale: 0.8 }, { scale: 1, duration: 0.4, ease: "power1.out" }, 0);
+  tl.fromTo(imageRef.value, { scale: 1.2 }, { scale: 1, duration: 0.4, ease: "power1.out" }, 0);
 
   tlRef.value = tl;
 });

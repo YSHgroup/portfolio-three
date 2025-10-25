@@ -1,5 +1,6 @@
 <script setup>
 import Button from "../../components/Button.vue";
+import { t } from "../../i18n/utils/translate";
 </script>
 
 <template>
@@ -10,10 +11,10 @@ import Button from "../../components/Button.vue";
           <h1 class="hero-title">David<br />Heckhoff</h1>
           <div class="hero-subtitle">
             <div class="hero-subtitle-line"></div>
-            <p class="hero-subtitle-copy">Web Developer</p>
+            <p class="hero-subtitle-copy">{{ t("job-title") }}</p>
           </div>
         </div>
-        <Button class="hero-content-button">Get in touch</Button>
+        <Button class="hero-content-button">{{ t("get-in-touch") }}</Button>
       </div>
     </div>
   </div>

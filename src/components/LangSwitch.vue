@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import Button from "./Button.vue";
-import Link from "./Link.vue";
-import { pathnameWithoutLocale, locale } from "../i18n/store";
+import { locale } from "../i18n/store";
+import { changeLocale } from "../i18n/utils/locale";
+
+const handleLangSwitch = () => {
+  changeLocale(locale.value === "de" ? "en" : "de");
+};
 </script>
 
 <template>
-  <Link :href="pathnameWithoutLocale" :locale="locale === 'de' ? 'en' : 'de'" replace>
-    <Button variant="border" size="sm" renderAs="div">{{ locale === "de" ? "EN" : "DE" }}</Button>
-  </Link>
+  <Button variant="border" size="sm" renderAs="div" @click="handleLangSwitch">{{
+    locale === "de" ? "EN" : "DE"
+  }}</Button>
 </template>

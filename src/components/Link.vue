@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { computed, useAttrs } from "vue";
 import { RouterLink } from "vue-router";
-import { locale as currentLocale } from "../i18n/store";
-import { LOCALE_DEFAULT } from "../i18n/constants";
 
 const attrs = useAttrs();
 
@@ -11,19 +9,13 @@ const props = defineProps<{
   renderAs?: "a" | "button" | "div";
   href?: string;
   to?: string;
-  locale?: string;
   replace?: boolean;
 }>();
 
 const resolvedTo = computed(() => {
-  const finalLocale = props.locale || currentLocale.value || LOCALE_DEFAULT;
   const base = props.href || props.to || "/";
 
   let path = base;
-
-  if (finalLocale !== LOCALE_DEFAULT && !base.startsWith(`/${finalLocale}`)) {
-    path = `/${finalLocale}${base}`;
-  }
 
   if (path.length > 1 && path.endsWith("/")) {
     path = path.slice(0, -1);

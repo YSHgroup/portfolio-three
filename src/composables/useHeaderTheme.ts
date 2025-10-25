@@ -1,6 +1,5 @@
 import { ref, watch, watchEffect } from "vue";
 import { useRoute } from "vue-router";
-import { pathnameWithoutLocale } from "../i18n/store";
 import { lenis } from "../utils/scroll";
 
 export const useHeaderTheme = ({
@@ -13,7 +12,7 @@ export const useHeaderTheme = ({
   const route = useRoute();
 
   const handleScroll = () => {
-    if (pathnameWithoutLocale.value !== "/") {
+    if (route.path !== "/") {
       if (typeof onAboutElementChange === "function") {
         onAboutElementChange(null, null);
       }
@@ -48,15 +47,21 @@ export const useHeaderTheme = ({
     });
   });
 
-  watch(route, () => {
-    aboutElement = null;
-  });
+  watch(
+    () => route.path,
+    () => {
+      aboutElement = null;
+    },
+  );
 
-  watch(pathnameWithoutLocale, () => {
-    if (pathnameWithoutLocale.value !== "/") {
-      isDarkTheme.value = false;
-    }
-  });
+  watch(
+    () => route.path,
+    () => {
+      if (route.path !== "/") {
+        isDarkTheme.value = false;
+      }
+    },
+  );
 
   return {
     isDarkTheme,

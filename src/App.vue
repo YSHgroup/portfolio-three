@@ -8,9 +8,10 @@ import { three } from "./three";
 import ProjectBackground from "./features/projects/components/ProjectBackground.vue";
 import { useTranslations } from "./i18n/composables/useTranslations";
 import { scroll } from "./utils/scroll";
-import { pathnameWithoutLocale } from "./i18n/store";
+import { useRoute } from "vue-router";
 
 useTranslations();
+const route = useRoute();
 
 onMounted(() => {
   sizes.init();
@@ -20,7 +21,7 @@ onMounted(() => {
 });
 
 watch(
-  pathnameWithoutLocale,
+  route,
   () => {
     scroll.createNewLenis();
   },
