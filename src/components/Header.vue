@@ -5,22 +5,26 @@ import { computed, ref } from "vue";
 import { t } from "../i18n/utils/translate";
 import { useHeaderTheme } from "../composables/useHeaderTheme";
 import { lenis } from "../utils/scroll";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import { social } from "../content/social";
+import ButtonRound from "./ButtonRound.vue";
+import ArrowRight from "./icons/ArrowRight.vue";
 
 const route = useRoute();
+const router = useRouter();
 
-const logoVisible = ref(false);
+const scrolledPastHeroVisible = ref(false);
 const { isDarkTheme } = useHeaderTheme({
   onAboutElementChange: (element, boundingClientRect) => {
     if (!element || !boundingClientRect) {
-      logoVisible.value = false;
+      scrolledPastHeroVisible.value = false;
       return;
     }
 
     if (boundingClientRect.top - 128 < 0) {
-      logoVisible.value = true;
+      scrolledPastHeroVisible.value = true;
     } else {
-      logoVisible.value = false;
+      scrolledPastHeroVisible.value = false;
     }
   },
 });
@@ -30,24 +34,44 @@ const handleLogoClick = () => {
   lenis.value.scrollTo(0);
 };
 
+const isProjectPage = computed(() => route.meta.project !== undefined);
+
 const classNames = computed(() => {
   return {
     header: true,
     "header-dark": isDarkTheme.value,
-    "header-logo-visible": logoVisible.value,
-    [`project-${route.meta.project as string}`]: route.meta.project !== undefined,
+    "header-scrolled": scrolledPastHeroVisible.value,
+    [`project-${route.meta.project as string}`]: isProjectPage.value,
+  };
+});
+
+const getInTouchClassNames = computed(() => {
+  return {
+    "header-get-in-touch": true,
+    "header-get-in-touch-isProjectPage": isProjectPage.value,
   };
 });
 </script>
 
 <template>
   <header :class="classNames">
-    <div class="header-logo" @click="handleLogoClick">
+    <div class="header-left">
+      <ButtonRound @click="router.back()" :class="{ 'header-back': true, 'header-back-isProjectPage': isProjectPage }">
+        <ArrowRight class="header-back-icon" />
+      </ButtonRound>
+    </div>
+    <div :class="{ 'header-logo': true, 'header-logo-isProjectPage': isProjectPage }" @click="handleLogoClick">
       <Logo class="header-logo-image" />
       <p class="header-logo-text">David</p>
     </div>
     <div class="header-right">
-      <Button>{{ t("get-in-touch") }}</Button>
+      <Button
+        renderAs="a"
+        :href="social.find((item) => item.name === 'mail')?.url ?? ''"
+        external
+        :class="getInTouchClassNames"
+        >{{ t("get-in-touch") }}</Button
+      >
     </div>
   </header>
 </template>
@@ -67,10 +91,42 @@ const classNames = computed(() => {
   z-index: var(--z-index-header);
   height: var(--height-header);
 
-  --logo-visible: 0;
+  --scrolled: 0;
 
-  &-logo-visible {
-    --logo-visible: 1;
+  &-scrolled {
+    --scrolled: 1;
+  }
+
+  &-back {
+    pointer-events: none;
+    visibility: hidden;
+
+    &-icon {
+      width: 24px;
+      height: 24px;
+      color: var(--color-accent-text-400);
+      transform: rotate(180deg);
+    }
+
+    &-isProjectPage {
+      pointer-events: auto;
+      visibility: visible;
+    }
+  }
+
+  &-left {
+    position: absolute;
+    left: var(--space-outer);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &-get-in-touch {
+    width: fit-content;
+
+    &-isProjectPage {
+      opacity: 1 !important;
+    }
   }
 
   &-right {
@@ -84,17 +140,32 @@ const classNames = computed(() => {
     color: var(--color-white-400);
   }
 
+  &-get-in-touch {
+    display: none;
+
+    @include mixins.mq("md") {
+      display: flex;
+    }
+  }
+
+  &-logo,
+  &-get-in-touch {
+    transition: color 0.125s ease-in-out;
+    opacity: var(--scrolled);
+  }
+
   &-logo {
-    transition:
-      color 0.125s ease-in-out,
-      opacity 0.125s ease-in-out;
     cursor: pointer;
-    opacity: var(--logo-visible);
+    opacity: var(--scrolled);
     display: flex;
     gap: var(--space-xs);
 
     @include mixins.mq("md") {
       gap: var(--space-sm);
+    }
+
+    &-isProjectPage {
+      pointer-events: none;
     }
 
     &-image {

@@ -58,11 +58,11 @@ const props = defineProps<{
 
     &-left {
       bottom: 0;
-      right: 54px;
+      right: 50px;
     }
 
     &-right {
-      bottom: 54px;
+      bottom: 50px;
       right: 0;
     }
   }
@@ -81,7 +81,7 @@ const props = defineProps<{
     aspect-ratio: 1;
     border-radius: 50%;
     background-color: var(--color-orange-400);
-    width: 48px;
+    width: 44px;
     color: var(--color-white-400);
     display: flex;
     align-items: center;
@@ -103,7 +103,7 @@ const props = defineProps<{
 
     &-wrapper {
       border-radius: var(--radius-lg);
-      overflow: hidden
+      overflow: hidden;
     }
   }
 

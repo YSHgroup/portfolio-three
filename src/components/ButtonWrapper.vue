@@ -4,11 +4,16 @@ import { computed } from "vue";
 export interface Props {
   renderAs?: "button" | "a" | "div";
   variant?: "accent" | "border";
+  rounded?: boolean;
 }
 
 const props = defineProps<Props>();
 
-const classes = computed(() => ["button-wrapper", `button-wrapper-${props.variant ?? "accent"}`]);
+const classes = computed(() => [
+  "button-wrapper",
+  `button-wrapper-${props.variant ?? "accent"}`,
+  { "button-wrapper-rounded": props.rounded },
+]);
 </script>
 
 <template>
@@ -32,14 +37,26 @@ const classes = computed(() => ["button-wrapper", `button-wrapper-${props.varian
     background-color 0.125s ease-in-out,
     color 0.125s ease-in-out;
 
+  &-rounded {
+    border-radius: 50%;
+    aspect-ratio: 1;
+  }
+
   &-accent {
     background-color: var(--color-accent-400, var(--color-orange-400));
     color: var(--color-accent-text-400, var(--color-white-400));
   }
 
   &-border {
-    border: 2px solid var(--color-grayscale-400);
+    border: 2px solid var(--color-accent-400, var(--color-grayscale-400));
     color: var(--color-text-400);
+
+    @include mixins.hover {
+      &:hover {
+        background-color: var(--color-accent-400, var(--color-orange-400));
+        color: var(--color-accent-text-400, var(--color-white-400));
+      }
+    }
   }
 }
 </style>

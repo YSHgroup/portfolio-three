@@ -13,14 +13,14 @@ const router = createRouter({
   routes,
   scrollBehavior(to, _from, savedPosition) {
     if (savedPosition) {
-      return savedPosition;
+      return { ...savedPosition, scrollBehavior: "auto" };
     }
 
     if (to.hash) {
-      return { el: to.hash, behavior: "smooth" };
+      return { el: to.hash, scrollBehavior: "auto" };
     }
 
-    return { top: 0 };
+    return { top: 0, scrollBehavior: "auto" };
   },
 });
 
