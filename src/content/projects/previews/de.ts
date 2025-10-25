@@ -25,7 +25,7 @@ export default [
     description: "Dynamische 3D Partikel",
   },
   {
-    title: "Pokedex",
+    title: "Pokédex",
     slug: "pokedex",
     thumbnail: thumbnailPokedex,
     description: "Open-Source Lernprojekt",

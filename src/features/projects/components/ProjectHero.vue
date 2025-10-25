@@ -24,7 +24,7 @@ const { content } = defineProps<{
 .project-hero {
   padding: 0 var(--space-outer);
   padding-bottom: 48px;
-  padding-top: calc(var(--height-header));
+  padding-top: calc(var(--height-header) + 24px);
 
   @include mixins.mq("md") {
     padding-bottom: 64px;

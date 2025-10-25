@@ -18,7 +18,11 @@ const { content } = defineProps<{
   <Layout class="project-content">
     <ProjectHero :content="content" :projectId="projectId" />
     <div class="project-content-components">
-      <div v-for="component in content.components" :key="component.type" class="grid project-content-grid">
+      <div
+        v-for="(component, index) in content.components"
+        :key="`${component.type}-${index}`"
+        class="grid project-content-grid"
+      >
         <ProjectComponent :type="component.type" :props="component.props" />
       </div>
       <Link to="/" class="project-content-back-to-home">
