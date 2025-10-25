@@ -1,4 +1,4 @@
-import { PerspectiveCamera, Group, Vector3 } from "three";
+import { PerspectiveCamera, Group, Vector3, Object3D } from "three";
 import { threeSizes } from "../utils/sizes";
 import { isTouch } from "../../utils/observer";
 import gsap from "gsap";
@@ -6,15 +6,14 @@ import { scene } from "./scene";
 import { waypoints } from "../../animations/waypoints";
 import { sceneWeights } from "../../animations/scenes";
 
-const PARALLAX_INTENSITY = 1;
-const PARALLAX_SPEED = 0.5;
-const contactPosition = new Vector3(0, -9, 9);
-const contactFocus = new Vector3(0, -11, 0);
+const PARALLAX_INTENSITY = 1.5;
+const PARALLAX_SPEED = 0.3;
+const contactPosition = new Vector3(0, -8.5, 9);
+const contactFocus = new Vector3(0, -10.5, 0);
 
 const instance = new PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.01, 100);
 
 const parallaxGroup = new Group();
-
 scene.instance.add(parallaxGroup);
 parallaxGroup.add(instance);
 
@@ -37,14 +36,14 @@ const handleMouseMove = (event: MouseEvent) => {
   cursor.y = event.clientY / threeSizes.height - 0.5;
 };
 
-const updateParallax = () => {
+const updateParallax = (object: Object3D) => {
   const delta = gsap.ticker.deltaRatio();
   const parallaxX = cursor.x * PARALLAX_INTENSITY;
   const parallaxY = -cursor.y * PARALLAX_INTENSITY;
-  const byX = (parallaxX - parallaxGroup.position.x) * PARALLAX_SPEED * 0.1 * delta;
-  const byY = (parallaxY - parallaxGroup.position.y) * PARALLAX_SPEED * 0.1 * delta;
-  if (byX < 0.05 && byX > -0.05) parallaxGroup.position.x += byX;
-  if (byY < 0.05 && byY > -0.05) parallaxGroup.position.y += byY;
+  const byX = (parallaxX - object.position.x) * PARALLAX_SPEED * 0.1 * delta;
+  const byY = (parallaxY - object.position.y) * PARALLAX_SPEED * 0.1 * delta;
+  if (byX < 0.05 && byX > -0.05) object.position.x += byX;
+  if (byY < 0.05 && byY > -0.05) object.position.y += byY;
 };
 
 const tick = () => {
@@ -54,7 +53,7 @@ const tick = () => {
     instance.position.copy(waypoints.position);
   }
 
-  updateParallax();
+  updateParallax(parallaxGroup);
 
   if (isContact) {
     instance.position.copy(contactPosition);
@@ -77,4 +76,4 @@ const destroy = () => {
   cursor.y = 0;
 };
 
-export const camera = { init, destroy, instance, parallaxGroup };
+export const camera = { init, destroy, instance, parallaxGroup, updateParallax };

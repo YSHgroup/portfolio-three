@@ -8,7 +8,7 @@ export const points = {
     },
     about: {
       position: { x: 0, y: 4.7, z: 14.5 },
-      focus: { x: 0, y: 1, z: 0 },
+      focus: { x: 0, y: 2.5, z: 6 },
     },
   },
   sm: {

@@ -8,7 +8,7 @@ import { t } from "../../i18n/utils/translate";
     <div class="hero-content grid">
       <div class="hero-content-inner" id="hero-content-inner">
         <div class="hero-content-copys">
-          <h1 class="hero-title">David<br />Heckhoff</h1>
+          <h1 class="hero-title">Hi, my name<br />is David.</h1>
           <div class="hero-subtitle">
             <div class="hero-subtitle-line"></div>
             <p class="hero-subtitle-copy">{{ t("job-title") }}</p>

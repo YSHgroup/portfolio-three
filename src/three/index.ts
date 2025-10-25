@@ -19,8 +19,8 @@ const init = () => {
   const canvas = getCanvas();
 
   threeSizes.init(canvas);
-  renderTarget.init();
   camera.init();
+  renderTarget.init();
   renderer.init(canvas);
 
   resources.once("ready", () => {

@@ -58,8 +58,7 @@ const setupInAnimation = (about: HTMLElement) => {
       );
     }
 
-    tl.to("#hero-content-inner", { x: 300, duration: 1, ease: "none" }, 0);
-    tl.to("#hero-content-inner", { rotate: 5, duration: 1, ease: "none" }, 0);
+    tl.to("#hero-content-inner", { x: 650, rotate: 5, duration: 1, ease: "none" }, 0);
 
     const { waypointsPosition, waypointsRotation } = avatar;
 

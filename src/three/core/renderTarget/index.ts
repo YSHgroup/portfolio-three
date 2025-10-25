@@ -9,6 +9,7 @@ const instance = new WebGLRenderTarget(window.innerWidth, window.innerHeight, {
   stencilBuffer: false,
 });
 const scene = new Scene();
+scene.add(mainCamera.parallaxGroup);
 
 const init = () => {
   threeSizes.on("resize", resize);
