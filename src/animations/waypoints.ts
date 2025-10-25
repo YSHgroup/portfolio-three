@@ -2,12 +2,12 @@ import gsap from "gsap";
 import { sizes } from "../utils/sizes";
 import { sceneWeights } from "./scenes";
 import { points } from "./waypoints-data";
-import { Vector3, Euler } from "three";
+import { Vector3 } from "three";
 
 import type { SceneKey } from "./types";
 
 const position = new Vector3();
-const rotation = new Euler();
+const focus = new Vector3();
 
 const init = () => {
   updateReferences();
@@ -35,7 +35,7 @@ function weightedAverage<T extends { x: number; y: number; z: number }>(points: 
 
 // cache
 let positions: { x: number; y: number; z: number }[] = [];
-let rotations: { x: number; y: number; z: number }[] = [];
+let focuses: { x: number; y: number; z: number }[] = [];
 let weights: number[] = [];
 let resolvedPoints: typeof points.md | typeof points.sm = points.md;
 
@@ -50,7 +50,7 @@ function updateReferences() {
   ][];
 
   positions = active.map(([key]) => resolvedPoints[key as keyof typeof resolvedPoints]!.position);
-  rotations = active.map(([key]) => resolvedPoints[key as keyof typeof resolvedPoints]!.rotation);
+  focuses = active.map(([key]) => resolvedPoints[key as keyof typeof resolvedPoints]!.focus);
   weights = active.map(([, w]) => w);
 }
 
@@ -58,14 +58,14 @@ const tick = () => {
   updateReferences();
 
   const finalPos = weightedAverage(positions, weights);
-  const finalRot = weightedAverage(rotations, weights);
+  const finalFocus = weightedAverage(focuses, weights);
 
   position.set(finalPos.x, finalPos.y, finalPos.z);
-  rotation.set(finalRot.x, finalRot.y, finalRot.z);
+  focus.set(finalFocus.x, finalFocus.y, finalFocus.z);
 };
 
 const destroy = () => {
   gsap.ticker.remove(tick);
 };
 
-export const waypoints = { init, points, updateReferences, position, rotation, destroy };
+export const waypoints = { init, points, updateReferences, position, focus, destroy };

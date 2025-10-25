@@ -20,8 +20,8 @@ const init = () => {
 
   threeSizes.init(canvas);
   renderTarget.init();
-  renderer.init(canvas);
   camera.init();
+  renderer.init(canvas);
 
   resources.once("ready", () => {
     objects.init();

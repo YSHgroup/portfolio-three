@@ -39,7 +39,9 @@ onUnmounted(() => {
   <Link class="preview-card" :to="`/project/${props.preview.slug}`">
     <div class="preview-card-top" ref="wrapperRef">
       <div class="preview-card-image-wrapper">
-        <img :src="props.preview.thumbnail" :alt="props.preview.title" class="preview-card-image" ref="imageRef" />
+        <div class="preview-card-image-container">
+          <img :src="props.preview.thumbnail" :alt="props.preview.title" class="preview-card-image" ref="imageRef" />
+        </div>
       </div>
       <div class="preview-card-edge">
         <div class="preview-card-button">
@@ -126,8 +128,11 @@ onUnmounted(() => {
     width: 100%;
     object-fit: cover;
     aspect-ratio: 16/9;
-    //transition: transform 0.125s ease-in-out;
-    transform: scale(calc(1 + var(--hover) * 0.02));
+
+    &-container {
+      transition: transform 0.125s ease-in-out;
+      transform: scale(calc(1 + var(--hover) * 0.02));
+    }
 
     &-wrapper {
       border-radius: var(--radius-lg);
@@ -138,7 +143,6 @@ onUnmounted(() => {
   &-top {
     position: relative;
     width: 100%;
-    
   }
 
   &-copys {

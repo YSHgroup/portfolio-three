@@ -1,7 +1,9 @@
 import avatarModel from "./assets/models/avatar.glb";
 import labModel from "./assets/models/lab.glb";
 import roomModel from "./assets/models/room.glb";
+import contactModel from "./assets/models/contact.glb";
 
+import contactTexture from "./assets/textures/contact.jpg";
 import desktopsTexture from "./assets/textures/desktops.png";
 import faceTexture from "./assets/textures/face-spritesheet.png";
 import headTexture from "./assets/textures/head.png";
@@ -24,8 +26,10 @@ export const sources = [
   { name: "avatar-model", type: "gltfModel", path: avatarModel },
   { name: "lab-model", type: "gltfModel", path: labModel },
   { name: "room-model", type: "gltfModel", path: roomModel },
+  { name: "contact-model", type: "gltfModel", path: contactModel },
 
   //textures
+  { name: "contact-texture", type: "texture", path: contactTexture },
   { name: "desktops-texture", type: "texture", path: desktopsTexture },
   { name: "face-texture", type: "texture", path: faceTexture },
   { name: "head-texture", type: "texture", path: headTexture },

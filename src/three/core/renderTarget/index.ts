@@ -3,7 +3,6 @@ import { renderer } from "../renderer";
 import { threeSizes } from "../../utils/sizes";
 //import { sceneWeightsInOut } from "../../../animations/scenes";
 import { camera as mainCamera } from "../camera";
-import { waypoints } from "../../../animations/waypoints";
 
 const instance = new WebGLRenderTarget(window.innerWidth, window.innerHeight, {
   samples: 0,
@@ -22,8 +21,8 @@ const init = () => {
 };
 
 const render = () => {
-  camera.position.copy(waypoints.position);
-  camera.rotation.copy(waypoints.rotation);
+  mainCamera.instance.getWorldPosition(camera.position);
+  camera.rotation.copy(mainCamera.instance.rotation);
 
   //TBD: make this a tween
   //camera.position.y += -4 * sceneWeightsInOut.about.out;

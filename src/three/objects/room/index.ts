@@ -83,7 +83,7 @@ const tick = () => {
 
 const destroy = () => {
   gsap.ticker.remove(tick);
-  //shadow.destroy();
+  shadow.destroy();
   //group.clear();
   //objects = null;
   desktops.destroy();
