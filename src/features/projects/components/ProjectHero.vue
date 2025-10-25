@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import ProjectVideo from "./ProjectVideo.vue";
 import Tag from "../../../components/Tag.vue";
 
 import type { ProjectContent } from "../../../content/types";
@@ -11,16 +10,13 @@ const { content } = defineProps<{
 
 <template>
   <div class="project-hero grid">
-    <ProjectVideo :src="content.video" :border="content.videoBorder" class="project-hero-video" />
-    <div class="project-hero-content">
-      <div class="project-hero-content-top">
-        <h2 class="project-hero-title">{{ content.title }}</h2>
-        <div class="project-hero-tags">
-          <Tag v-for="tag in content.tags" :key="tag" :variant="tag" />
-        </div>
+    <div class="project-hero-top">
+      <h1 class="project-hero-title">{{ content.title }}</h1>
+      <div class="project-hero-tags">
+        <Tag v-for="tag in content.tags" :key="tag" :variant="tag" />
       </div>
-      <p class="project-hero-description" v-html="content.description"></p>
     </div>
+    <p class="project-hero-description" v-html="content.description"></p>
   </div>
 </template>
 
@@ -54,35 +50,51 @@ const { content } = defineProps<{
   }
 
   &-title {
-    font-size: var(--font-size-title-md);
+    font-size: var(--font-size-title-lg);
     color: var(--color-text-400);
     line-height: var(--line-height-title);
+
+    @include mixins.mq("md") {
+      font-size: var(--font-size-title-xl);
+    }
   }
 
   &-description {
     color: var(--color-text-400);
     line-height: var(--line-height-copy);
-  }
-
-  &-content {
     grid-column: 1 / 13;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
     align-self: center;
 
     @include mixins.mq("md") {
-      grid-column: 8 / 13;
+      grid-row: 1;
+      grid-column: 6 / 12;
     }
 
     @include mixins.mq("lg") {
-      grid-column: 8 / 12;
+      grid-row: 1;
+      grid-column: 7 / 12;
     }
 
-    &-top {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-sm);
+    @include mixins.mq("xl") {
+      grid-row: 1;
+      grid-column: 7 / 11;
+    }
+  }
+
+  &-top {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    grid-row: 1;
+    grid-column: 1 / 13;
+    align-self: top;
+
+    @include mixins.mq("md") {
+      grid-column: 1 / 6;
+    }
+
+    @include mixins.mq("lg") {
+      grid-column: 2 / 6;
     }
   }
 }

@@ -13,7 +13,7 @@ export default {
   videoBorder: false,
   live: "https://cubewar.io",
   description:
-    "CubeWar is a browser-based multiplayer game where players control cube avatars in fast-paced strategic battles.<br/><br/>I built the full stack myself, including the game engine, the client-side timeline system, and real-time networking with Redis-based matchmaking for smooth, high-concurrency gameplay.",
+    "CubeWar is a browser-based multiplayer game where players control cube avatars in fast-paced strategic battles.<br/>I built the full stack myself, including the game engine, the client-side timeline system, and real-time networking with Redis-based matchmaking for smooth, high-concurrency gameplay.",
   components: [
     {
       type: "media",
