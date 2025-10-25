@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import Tag from "../../../components/Tag.vue";
+import Button from "../../../components/Button.vue";
+import { t } from "../../../i18n/utils/translate";
+import Link from "../../../components/Link.vue";
 
 import type { ProjectContent } from "../../../content/types";
 
@@ -17,6 +20,14 @@ const { content } = defineProps<{
       </div>
     </div>
     <p class="project-hero-description" v-html="content.description"></p>
+    <div class="project-hero-buttons">
+      <Link v-if="content.live" :href="content.live" external class="project-hero-button">
+        <Button renderAs="div" variant="accent">{{ t("live-view") }}</Button>
+      </Link>
+      <Link v-if="content.source" :href="content.source" external class="project-hero-button">
+        <Button renderAs="div" variant="border">{{ t("source-code") }}</Button>
+      </Link>
+    </div>
   </div>
 </template>
 
@@ -28,6 +39,32 @@ const { content } = defineProps<{
 
   @include mixins.mq("md") {
     padding-bottom: 64px;
+  }
+
+  &-button {
+    flex: 0.5;
+
+    @include mixins.mq("md") {
+      width: fit-content;
+    }
+  }
+
+  &-buttons {
+    grid-row: 3;
+    grid-column: 1 / 13;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+
+    @include mixins.mq("md") {
+      gap: var(--space-md);
+      width: fit-content;
+      grid-column: 2 / 13;
+      grid-row: 2;
+      margin-top: 0;
+    }
   }
 
   &-video {

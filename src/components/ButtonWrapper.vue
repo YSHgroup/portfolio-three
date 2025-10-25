@@ -3,12 +3,12 @@ import { computed } from "vue";
 
 export interface Props {
   renderAs?: "button" | "a" | "div";
-  variant?: "orange" | "border";
+  variant?: "accent" | "border";
 }
 
 const props = defineProps<Props>();
 
-const classes = computed(() => ["button-wrapper", `button-wrapper-${props.variant ?? "orange"}`]);
+const classes = computed(() => ["button-wrapper", `button-wrapper-${props.variant ?? "accent"}`]);
 </script>
 
 <template>
@@ -22,13 +22,19 @@ const classes = computed(() => ["button-wrapper", `button-wrapper-${props.varian
   border: none;
   border-radius: 100px;
   letter-spacing: 0.02em;
+  font-size: var(--font-size-md);
   font-weight: 800;
+  text-align: center;
+  white-space: nowrap;
   text-transform: uppercase;
   background-color: transparent;
+  transition:
+    background-color 0.125s ease-in-out,
+    color 0.125s ease-in-out;
 
-  &-orange {
-    background-color: var(--color-orange-400);
-    color: var(--color-white-400);
+  &-accent {
+    background-color: var(--color-accent-400, var(--color-orange-400));
+    color: var(--color-accent-text-400, var(--color-white-400));
   }
 
   &-border {

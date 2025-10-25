@@ -55,16 +55,16 @@ const stickyContentClassNames = computed(() => {
   <HeaderHome />
   <Layout>
     <div class="intro-wrapper">
-      <Hero class="intro-hero" />
+      <Hero class="intro-hero" id="hero" />
       <div class="intro-sticky" ref="stickyRef">
         <div ref="stickyContentRef" :class="stickyContentClassNames"></div>
       </div>
       <div class="intro-wrapper-spacer"></div>
-      <About />
+      <About id="about" />
       <AboutSections />
     </div>
-    <Projects />
-    <Contact />
+    <Projects id="projects" />
+    <Contact id="contact" />
     <Footer />
   </Layout>
 </template>

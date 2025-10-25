@@ -5,6 +5,9 @@ import { computed, ref } from "vue";
 import { t } from "../i18n/utils/translate";
 import { useHeaderTheme } from "../composables/useHeaderTheme";
 import { lenis } from "../utils/scroll";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 
 const logoVisible = ref(false);
 const { isDarkTheme } = useHeaderTheme({
@@ -32,6 +35,7 @@ const classNames = computed(() => {
     header: true,
     "header-dark": isDarkTheme.value,
     "header-logo-visible": logoVisible.value,
+    [`project-${route.meta.project as string}`]: route.meta.project !== undefined,
   };
 });
 </script>
