@@ -1,4 +1,4 @@
-import { PerspectiveCamera, Group } from "three";
+import { PerspectiveCamera, Group, Vector3 } from "three";
 import { threeSizes } from "../utils/sizes";
 import { isTouch } from "../../utils/observer";
 import gsap from "gsap";
@@ -8,6 +8,8 @@ import { sceneWeights } from "../../animations/scenes";
 
 const PARALLAX_INTENSITY = 0.75;
 const PARALLAX_SPEED = 0.5;
+const contactPosition = new Vector3(0, -9, 9);
+const contactFocus = new Vector3(0, -11, 0);
 
 const instance = new PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.01, 100);
 
@@ -46,7 +48,11 @@ const updateTransforms = () => {
 };
 
 const tick = () => {
-  updateTransforms();
+  const isContact = sceneWeights.contact > 0.001;
+
+  if (!isContact) {
+    instance.position.copy(waypoints.position);
+  }
 
   const delta = gsap.ticker.deltaRatio();
   const parallaxX = cursor.x * PARALLAX_INTENSITY;
@@ -56,7 +62,12 @@ const tick = () => {
   if (byX < 0.05 && byX > -0.05) parallaxGroup.position.x += byX;
   if (byY < 0.05 && byY > -0.05) parallaxGroup.position.y += byY;
 
-  instance.lookAt(waypoints.focus);
+  if (!isContact) {
+    instance.lookAt(waypoints.focus);
+  } else {
+    instance.position.copy(contactPosition);
+    instance.lookAt(contactFocus);
+  }
 };
 
 const resize = () => {

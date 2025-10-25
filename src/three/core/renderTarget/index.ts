@@ -1,7 +1,6 @@
 import { WebGLRenderTarget, Scene } from "three";
 import { renderer } from "../renderer";
 import { threeSizes } from "../../utils/sizes";
-//import { sceneWeightsInOut } from "../../../animations/scenes";
 import { camera as mainCamera } from "../camera";
 
 const instance = new WebGLRenderTarget(window.innerWidth, window.innerHeight, {
@@ -10,10 +9,6 @@ const instance = new WebGLRenderTarget(window.innerWidth, window.innerHeight, {
   stencilBuffer: false,
 });
 const scene = new Scene();
-const camera = mainCamera.instance.clone();
-camera.near = 0.000001;
-camera.far = 10000;
-camera.updateProjectionMatrix();
 
 const init = () => {
   threeSizes.on("resize", resize);
@@ -21,17 +16,10 @@ const init = () => {
 };
 
 const render = () => {
-  mainCamera.instance.getWorldPosition(camera.position);
-  camera.rotation.copy(mainCamera.instance.rotation);
-
-  //TBD: make this a tween
-  //camera.position.y += -4 * sceneWeightsInOut.about.out;
-  //camera.rotation.x += 0.5 * sceneWeightsInOut.about.out;
-
   const rendererInstance = renderer.getInstance();
   rendererInstance.setRenderTarget(instance);
   rendererInstance.setClearColor("#0169b4");
-  rendererInstance.render(scene, camera);
+  rendererInstance.render(scene, mainCamera.instance);
   rendererInstance.setRenderTarget(null);
 };
 
@@ -42,8 +30,6 @@ const destroy = () => {
 const resize = () => {
   const { width, height, pixelRatio } = threeSizes;
   instance.setSize(width * pixelRatio, height * pixelRatio);
-  camera.aspect = width / height;
-  camera.updateProjectionMatrix();
 };
 
-export const renderTarget = { render, scene, init, instance, destroy, camera };
+export const renderTarget = { render, scene, init, instance, destroy };

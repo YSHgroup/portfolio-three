@@ -8,7 +8,7 @@ import { getContactMaterial } from "../../common/materials";
 import type { Object3D } from "three";
 
 const group = new Group();
-group.position.set(0, -13, 0);
+group.position.set(1, -13, 0);
 group.rotation.set(0, -0.8, 0);
 
 let objects: {

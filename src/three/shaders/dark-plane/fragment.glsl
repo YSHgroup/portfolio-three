@@ -19,7 +19,7 @@ void main() {
 
     // Vignette
     float distToCenter = distance(vUv, vec2(0.5));
-    distToCenter = smoothstep(0.4, 0.8, distToCenter * 0.8);
+    distToCenter = smoothstep(0.3, 0.8, distToCenter * 0.8);
     color.rgb = mix(color.rgb, uVignetteColor, distToCenter);
 
     // Compute SDF and alpha
