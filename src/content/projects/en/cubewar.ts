@@ -16,31 +16,39 @@ export default {
     "CubeWar is a browser-based multiplayer game where players control cube avatars in fast-paced strategic battles.<br/><br/>I built the full stack myself, including the game engine, the client-side timeline system, and real-time networking with Redis-based matchmaking for smooth, high-concurrency gameplay.",
   components: [
     {
-      type: "video",
+      type: "media",
       props: {
+        type: "video",
         src: videoCubeWar,
         border: false,
+        caption: "Gameplay",
       },
     },
     {
-      type: "image",
+      type: "media",
       props: {
+        type: "image",
         src: engine,
         alt: "Core & Client Engine",
+        caption: "Gameplay",
       },
     },
     {
-      type: "image",
+      type: "media",
       props: {
+        type: "image",
         src: maps,
         alt: "Maps & Themes",
+        caption: "Map Themes",
       },
     },
     {
-      type: "image",
+      type: "media",
       props: {
+        type: "image",
         src: party,
         alt: "Party System",
+        caption: "Party System",
       },
     },
   ],

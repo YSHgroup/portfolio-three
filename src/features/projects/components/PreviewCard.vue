@@ -58,11 +58,11 @@ const props = defineProps<{
 
     &-left {
       bottom: 0;
-      right: 53px;
+      right: 54px;
     }
 
     &-right {
-      bottom: 53px;
+      bottom: 54px;
       right: 0;
     }
   }

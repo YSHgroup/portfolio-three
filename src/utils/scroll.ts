@@ -20,15 +20,19 @@ class Scroll {
     gsap.ticker.lagSmoothing(0);
   }
 
+  handleScroll() {
+    ScrollTrigger.update();
+  }
+
   createNewLenis() {
     if (lenis.value instanceof Lenis) {
-      lenis.value.off("scroll", ScrollTrigger.update);
+      lenis.value.off("scroll", this.handleScroll.bind(this));
       lenis.value.destroy();
       lenis.value = null;
     }
 
     lenis.value = new Lenis();
-    lenis.value.on("scroll", ScrollTrigger.update);
+    lenis.value.on("scroll", this.handleScroll.bind(this));
   }
 }
 

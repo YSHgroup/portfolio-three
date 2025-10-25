@@ -1,15 +1,13 @@
 import type { Props as ImageTextProps } from "./components/ImageText.vue";
 import type { Props as TextProps } from "./components/Text.vue";
 import type { Props as ListProps } from "./components/List.vue";
-import type { Props as ImageProps } from "./components/Image.vue";
-import type { Props as VideoProps } from "./components/Video.vue";
+import type { Props as MediaProps } from "./components/Media.vue";
 
 export interface ProjectComponents {
   imageText: ImageTextProps;
   text: TextProps;
   list: ListProps;
-  image: ImageProps;
-  video: VideoProps;
+  media: MediaProps;
 }
 
 export type ProjectComponent = {
