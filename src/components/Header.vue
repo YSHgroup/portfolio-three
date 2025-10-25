@@ -127,6 +127,10 @@ const getInTouchClassNames = computed(() => {
 
   &-get-in-touch {
     width: fit-content;
+
+    &-isProjectPage {
+      opacity: 1 !important;
+    }
   }
 
   &-right {
@@ -148,9 +152,13 @@ const getInTouchClassNames = computed(() => {
     }
   }
 
+  &-logo,
+  &-get-in-touch {
+    opacity: var(--scrolled);
+  }
+
   &-logo {
     cursor: pointer;
-    transition: color 0.125s ease-in-out;
     opacity: var(--scrolled);
     display: flex;
     gap: var(--space-xs);
