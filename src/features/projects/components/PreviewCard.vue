@@ -2,19 +2,44 @@
 import Link from "../../../components/Link.vue";
 import Notch from "../../../components/Notch.vue";
 import ArrowRight from "../../../components/icons/ArrowRight.vue";
-
+import gsap from "gsap";
+import { onMounted, onUnmounted, ref } from "vue";
 import type { ProjectPreview } from "../../../content/types";
+
+const tlRef = ref<gsap.core.Timeline | null>(null);
+const wrapperRef = ref<HTMLDivElement | null>(null);
+const imageRef = ref<HTMLImageElement | null>(null);
 
 const props = defineProps<{
   preview: ProjectPreview;
 }>();
+
+onMounted(async () => {
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: wrapperRef.value,
+      start: "top bottom",
+    },
+  });
+  tl.fromTo(wrapperRef.value, { scale: 0.6 }, { scale: 1, duration: 0.4, ease: "power1.out" }, 0);
+  tl.fromTo(imageRef.value, { scale: 1.4 }, { scale: 1, duration: 0.4, ease: "power1.out" }, 0);
+
+  tlRef.value = tl;
+});
+
+onUnmounted(() => {
+  if (tlRef.value) {
+    tlRef.value.kill();
+    tlRef.value = null;
+  }
+});
 </script>
 
 <template>
   <Link class="preview-card" :to="`/project/${props.preview.slug}`">
-    <div class="preview-card-top">
+    <div class="preview-card-top" ref="wrapperRef">
       <div class="preview-card-image-wrapper">
-        <img :src="props.preview.thumbnail" :alt="props.preview.title" class="preview-card-image" />
+        <img :src="props.preview.thumbnail" :alt="props.preview.title" class="preview-card-image" ref="imageRef" />
       </div>
       <div class="preview-card-edge">
         <div class="preview-card-button">
@@ -36,6 +61,7 @@ const props = defineProps<{
 <style scoped lang="scss">
 .preview-card {
   --hover: 0;
+  position: relative;
 
   @include mixins.hover {
     &:hover {
@@ -69,12 +95,14 @@ const props = defineProps<{
 
   &-edge {
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: -1px;
+    right: -1px;
     background-color: var(--color-beige-400);
     padding-left: 6px;
     padding-top: 6px;
     border-radius: 32px 0 0 0;
+    padding-right: 1px;
+    padding-bottom: 1px;
   }
 
   &-button {
@@ -98,7 +126,7 @@ const props = defineProps<{
     width: 100%;
     object-fit: cover;
     aspect-ratio: 16/9;
-    transition: transform 0.125s ease-in-out;
+    //transition: transform 0.125s ease-in-out;
     transform: scale(calc(1 + var(--hover) * 0.02));
 
     &-wrapper {
@@ -109,6 +137,8 @@ const props = defineProps<{
 
   &-top {
     position: relative;
+    width: 100%;
+    
   }
 
   &-copys {

@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted } from "vue";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Notch from "../../../components/Notch.vue";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const tlRef = ref<gsap.core.Timeline | null>(null);
 const wrapperRef = ref<HTMLDivElement | null>(null);
@@ -84,6 +81,26 @@ onUnmounted(() => {
 
 <style scoped lang="scss">
 .project-media {
+  width: 100%;
+  height: 100%;
+  grid-column: 1 / 13;
+  max-width: 900px;
+  justify-self: center;
+  position: relative;
+  aspect-ratio: 16 / 9;
+
+  @include mixins.mq("md") {
+    grid-column: 2 / 12;
+  }
+
+  @include mixins.mq("lg") {
+    grid-column: 3 / 11;
+  }
+
+  &-border {
+    border: var(--stroke-md) solid var(--color-grayscale-400);
+  }
+
   &-caption {
     position: absolute;
     bottom: -1px;
@@ -91,7 +108,6 @@ onUnmounted(() => {
     background-color: var(--color-background-400);
     padding: var(--space-xxs) var(--space-sm);
     border-radius: var(--radius-md) 0 0 0;
-    font-weight: 500;
 
     @include mixins.mq("md") {
       padding: var(--space-xxs) var(--space-sm);
@@ -126,7 +142,7 @@ onUnmounted(() => {
 
     &-copy {
       font-size: var(--font-size-sm);
-      font-weight: 500;
+      font-weight: 700;
 
       @include mixins.mq("md") {
         font-size: var(--font-size-md);
@@ -138,38 +154,20 @@ onUnmounted(() => {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    aspect-ratio: 16 / 9;
   }
 
   &-video {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    aspect-ratio: 16 / 9;
   }
 
   &-content {
     overflow: hidden;
     border-radius: var(--radius-lg);
-  }
-
-  width: 100%;
-  height: 100%;
-  grid-column: 1 / 13;
-  max-width: 900px;
-  justify-self: center;
-  position: relative;
-
-  @include mixins.mq("md") {
-    grid-column: 2 / 12;
-  }
-
-  @include mixins.mq("lg") {
-    grid-column: 3 / 11;
-  }
-
-  &-border {
-    border: var(--stroke-md) solid var(--color-grayscale-400);
+    background-color: var(--color-background-300);
+    width: 100%;
+    height: 100%;
   }
 }
 </style>

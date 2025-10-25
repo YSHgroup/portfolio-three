@@ -35,7 +35,8 @@ const classes = computed(() => [
   background-color: transparent;
   transition:
     background-color 0.125s ease-in-out,
-    color 0.125s ease-in-out;
+    color 0.125s ease-in-out,
+    border-color 0.125s ease-in-out;
 
   &-rounded {
     border-radius: 50%;
@@ -48,11 +49,12 @@ const classes = computed(() => [
   }
 
   &-border {
-    border: 2px solid var(--color-accent-400, var(--color-grayscale-400));
+    border: 2px solid var(--color-grayscale-400);
     color: var(--color-text-400);
 
     @include mixins.hover {
       &:hover {
+        border-color: var(--color-accent-400, var(--color-orange-400));
         background-color: var(--color-accent-400, var(--color-orange-400));
         color: var(--color-accent-text-400, var(--color-white-400));
       }
