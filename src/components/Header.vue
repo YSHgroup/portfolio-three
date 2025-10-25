@@ -56,7 +56,11 @@ const getInTouchClassNames = computed(() => {
 <template>
   <header :class="classNames">
     <div class="header-left">
-      <ButtonRound @click="router.back()" :class="{ 'header-back': true, 'header-back-isProjectPage': isProjectPage }">
+      <ButtonRound
+        v-if="isProjectPage"
+        @click="router.back()"
+        :class="{ 'header-back': true, 'header-back-isProjectPage': isProjectPage }"
+      >
         <ArrowRight class="header-back-icon" />
       </ButtonRound>
     </div>
@@ -123,10 +127,6 @@ const getInTouchClassNames = computed(() => {
 
   &-get-in-touch {
     width: fit-content;
-
-    &-isProjectPage {
-      opacity: 1 !important;
-    }
   }
 
   &-right {
@@ -148,14 +148,9 @@ const getInTouchClassNames = computed(() => {
     }
   }
 
-  &-logo,
-  &-get-in-touch {
-    transition: color 0.125s ease-in-out;
-    opacity: var(--scrolled);
-  }
-
   &-logo {
     cursor: pointer;
+    transition: color 0.125s ease-in-out;
     opacity: var(--scrolled);
     display: flex;
     gap: var(--space-xs);

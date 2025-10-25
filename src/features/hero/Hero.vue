@@ -1,7 +1,3 @@
-<script setup>
-import Button from "../../components/Button.vue";
-</script>
-
 <template>
   <div class="hero">
     <div class="hero-content grid">
@@ -13,7 +9,6 @@ import Button from "../../components/Button.vue";
             <p class="hero-subtitle-copy">Web Developer</p>
           </div>
         </div>
-        <Button class="hero-content-button">Get in touch</Button>
       </div>
     </div>
   </div>
