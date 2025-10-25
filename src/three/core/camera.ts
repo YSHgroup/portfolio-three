@@ -6,7 +6,7 @@ import { scene } from "./scene";
 import { waypoints } from "../../animations/waypoints";
 import { sceneWeights } from "../../animations/scenes";
 
-const PARALLAX_INTENSITY = 0.75;
+const PARALLAX_INTENSITY = 1;
 const PARALLAX_SPEED = 0.5;
 const contactPosition = new Vector3(0, -9, 9);
 const contactFocus = new Vector3(0, -11, 0);
@@ -29,8 +29,7 @@ const init = () => {
   }
 
   gsap.ticker.add(tick);
-
-  updateTransforms();
+  tick();
 };
 
 const handleMouseMove = (event: MouseEvent) => {
@@ -38,22 +37,7 @@ const handleMouseMove = (event: MouseEvent) => {
   cursor.y = event.clientY / threeSizes.height - 0.5;
 };
 
-const updateTransforms = () => {
-  if (sceneWeights.contact <= 0.001) {
-    instance.position.copy(waypoints.position);
-  } else {
-    instance.position.set(0, -10, 9);
-    instance.rotation.set(-0.15, 0, 0);
-  }
-};
-
-const tick = () => {
-  const isContact = sceneWeights.contact > 0.001;
-
-  if (!isContact) {
-    instance.position.copy(waypoints.position);
-  }
-
+const updateParallax = () => {
   const delta = gsap.ticker.deltaRatio();
   const parallaxX = cursor.x * PARALLAX_INTENSITY;
   const parallaxY = -cursor.y * PARALLAX_INTENSITY;
@@ -61,12 +45,22 @@ const tick = () => {
   const byY = (parallaxY - parallaxGroup.position.y) * PARALLAX_SPEED * 0.1 * delta;
   if (byX < 0.05 && byX > -0.05) parallaxGroup.position.x += byX;
   if (byY < 0.05 && byY > -0.05) parallaxGroup.position.y += byY;
+};
 
-  if (!isContact) {
-    instance.lookAt(waypoints.focus);
-  } else {
+const tick = () => {
+  const isContact = sceneWeights.contact > 0.001;
+
+  if (isContact === false) {
+    instance.position.copy(waypoints.position);
+  }
+
+  updateParallax();
+
+  if (isContact) {
     instance.position.copy(contactPosition);
     instance.lookAt(contactFocus);
+  } else {
+    instance.lookAt(waypoints.focus);
   }
 };
 

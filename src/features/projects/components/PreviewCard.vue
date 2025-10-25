@@ -149,6 +149,7 @@ onUnmounted(() => {
   &-top {
     position: relative;
     width: 100%;
+    aspect-ratio: 16/9;
   }
 
   &-copys {

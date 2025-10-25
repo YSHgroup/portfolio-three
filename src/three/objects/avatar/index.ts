@@ -2,7 +2,7 @@ import { resources } from "../../../utils/resources";
 import { Mesh, Vector3, Euler, Group, ShaderMaterial, LinearSRGBColorSpace } from "three";
 import { scene } from "../../core/scene";
 import { animations } from "./animations";
-//import { sceneWeights } from "../../../animations/scenes";
+import { sceneWeights } from "../../../animations/scenes";
 import gsap from "gsap";
 import { clone as cloneSkeleton } from "three/examples/jsm/utils/SkeletonUtils.js";
 import { face } from "./face";
@@ -25,6 +25,8 @@ const waypointsPosition = new Vector3();
 const waypointsRotation = new Euler();
 const transform = new Group();
 const uniforms = { uProgress: { value: 0 } };
+const contactPosition = new Vector3(0, -13, 0);
+const contactRotation = new Euler(0, -Math.PI, 0);
 
 const init = () => {
   setupMesh();
@@ -123,14 +125,17 @@ const setupMesh = () => {
 };
 
 const tick = () => {
-  //TBD: hide when intro isnt visible or progress is 1 but not in contact section
-  //if (sceneWeights.hero >= 0.001) {
-  //  transform.position.copy(waypointsPosition);
-  //  transform.rotation.copy(waypointsRotation);
-  //} else {
-  //  transform.position.set(0, -14, 0);
-  //  transform.rotation.set(0, -Math.PI, 0);
-  //}
+  //TBD: hide when intro or contact is not visible
+
+  const isContact = sceneWeights.contact > 0.001;
+
+  if (isContact) {
+    transform.position.copy(contactPosition);
+    transform.rotation.copy(contactRotation);
+    uniforms.uProgress.value = 0;
+    transform.visible = true;
+    return;
+  }
 
   transform.position.copy(waypointsPosition);
   transform.rotation.copy(waypointsRotation);

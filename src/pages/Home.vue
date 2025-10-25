@@ -15,6 +15,7 @@ const stickyRef = ref<HTMLElement | null>(null);
 const stickyContentRef = ref<HTMLElement | null>(null);
 const observer = ref<IntersectionObserver | null>(null);
 const isStickyVisible = ref(false);
+const projectsLoaded = ref(false);
 
 const handleIntersection = (entries: IntersectionObserverEntry[]) => {
   isStickyVisible.value = entries[0]?.isIntersecting ?? false;
@@ -43,6 +44,10 @@ onUnmounted(() => {
   animations.destroy();
 });
 
+const handleProjectsLoaded = () => {
+  projectsLoaded.value = true;
+};
+
 const stickyContentClassNames = computed(() => {
   return {
     "intro-sticky-content": true,
@@ -63,8 +68,8 @@ const stickyContentClassNames = computed(() => {
       <About id="about" />
       <AboutSections />
     </div>
-    <Projects id="projects" />
-    <Contact id="contact" />
+    <Projects id="projects" @loaded="handleProjectsLoaded" />
+    <Contact id="contact" v-if="projectsLoaded" />
     <Footer />
   </Layout>
 </template>

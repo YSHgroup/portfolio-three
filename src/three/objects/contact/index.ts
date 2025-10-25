@@ -32,6 +32,7 @@ const initObjects = () => {
   Object.values(objects).forEach((object) => {
     const mat = getContactMaterial();
     object.material = mat;
+
     group.add(object);
   });
 

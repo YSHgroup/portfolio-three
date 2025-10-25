@@ -16,11 +16,13 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="contact" ref="contactElement">contact</div>
+  <div class="contact" ref="contactElement"></div>
 </template>
 
 <style scoped lang="scss">
 .contact {
+  width: 100%;
   min-height: calc(var(--lvh) * 100);
+  max-height: calc(var(--lvh) * 100);
 }
 </style>

@@ -9,9 +9,14 @@ import type { ProjectPreview } from "../../../content/types";
 
 const loadedPreviews = ref<ProjectPreview[] | null>(null);
 
+const emit = defineEmits<{
+  (e: "loaded", previews: ProjectPreview[]): void;
+}>();
+
 const loadPreviews = async () => {
   const module = await previews[locale.value as keyof typeof previews]();
   loadedPreviews.value = module.default;
+  emit("loaded", module.default);
 };
 
 watch(locale, loadPreviews);
@@ -42,7 +47,7 @@ onMounted(loadPreviews);
   padding-left: var(--space-outer);
   padding-right: var(--space-outer);
   background-color: var(--color-beige-400);
-  min-height: calc(var(--lvh) * 100);
+  min-height: calc(var(--lvh) * 100 + 40px);
   border-bottom-left-radius: var(--radius-xxl);
   border-bottom-right-radius: var(--radius-xxl);
 
