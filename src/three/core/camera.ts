@@ -54,7 +54,6 @@ const calculateContactTransform = () => {
   instance.position.copy(contactPosition);
   instance.position.y += inProgress * 7;
   instance.position.y -= outProgress * 5;
-  instance.position.z += outProgress * 2;
 
   currentContactFocus.copy(contactFocus);
   currentContactFocus.y += inProgress * 7;

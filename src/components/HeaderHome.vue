@@ -19,9 +19,9 @@ const classNames = computed(() => {
 <template>
   <header :class="classNames">
     <div class="header-home-links">
-      <HeaderLink @click="handleLinkClick('.about')">{{ t("about") }}</HeaderLink>
-      <HeaderLink @click="handleLinkClick('.projects')">{{ t("projects") }}</HeaderLink>
-      <HeaderLink @click="handleLinkClick('.contact')">{{ t("contact") }}</HeaderLink>
+      <HeaderLink @click="handleLinkClick('.about')" class="header-home-link">{{ t("about") }}</HeaderLink>
+      <HeaderLink @click="handleLinkClick('.projects')" class="header-home-link">{{ t("projects") }}</HeaderLink>
+      <HeaderLink @click="handleLinkClick('.contact')" class="header-home-link">{{ t("contact") }}</HeaderLink>
     </div>
   </header>
 </template>
@@ -48,7 +48,7 @@ const classNames = computed(() => {
     flex-direction: row;
   }
 
-  @include mixins.mq("md") {
+  @include mixins.mq("lg") {
     display: flex;
   }
 }
