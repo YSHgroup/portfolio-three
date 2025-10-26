@@ -9,19 +9,21 @@ import { threeSizes } from "../utils/sizes";
 
 let instance: WebGLRenderer | null = null;
 let active = false;
+let canvas: HTMLCanvasElement | null = null;
+let visible = true;
 
 const emptyVector = new Vector3();
 
-const init = (canvas: HTMLCanvasElement) => {
+const init = (_canvas: HTMLCanvasElement | null) => {
   if (instance) return;
+  canvas = _canvas;
   instance = new WebGLRenderer({
-    canvas,
+    canvas: canvas!,
     antialias: true,
     alpha: false,
   });
 
   gsap.ticker.add(tick);
-
   threeSizes.on("resize", resize);
   resize();
 };
@@ -38,7 +40,14 @@ const resize = () => {
 };
 
 const tick = () => {
-  if (!instance || camera.instance.position.equals(emptyVector) || !active) return;
+  const shouldBeVisible = !camera.instance.position.equals(emptyVector);
+
+  if (canvas && shouldBeVisible !== visible) {
+    canvas.style.visibility = shouldBeVisible ? "visible" : "hidden";
+    visible = shouldBeVisible;
+  }
+
+  if (!instance || !active || !shouldBeVisible) return;
 
   if (sceneWeights.about > 0.001) {
     renderTarget.render();
@@ -59,6 +68,7 @@ const destroy = () => {
   gsap.ticker.remove(tick);
   instance = null;
   active = false;
+  visible = true;
 };
 
 export const renderer = { init, destroy, getInstance, setActive };

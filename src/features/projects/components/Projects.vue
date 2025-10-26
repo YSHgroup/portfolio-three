@@ -47,7 +47,7 @@ onMounted(loadPreviews);
   padding-left: var(--space-outer);
   padding-right: var(--space-outer);
   background-color: var(--color-beige-400);
-  min-height: calc(var(--lvh) * 100 + 40px);
+  min-height: calc(var(--lvh) * 100 + var(--radius-xxl));
   border-bottom-left-radius: var(--radius-xxl);
   border-bottom-right-radius: var(--radius-xxl);
 
