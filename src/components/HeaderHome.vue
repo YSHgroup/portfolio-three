@@ -40,7 +40,7 @@ const classNames = computed(() => {
   height: var(--height-header);
 
   &-links {
-    background-color: var(--color-white-400);
+    background-color: var(--color-beige-500);
     border-radius: var(--radius-md);
     display: flex;
     gap: var(--space-xxl);

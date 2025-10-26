@@ -89,7 +89,7 @@ const getInTouchClassNames = computed(() => {
   justify-content: space-between;
   left: 50%;
   transform: translateX(-50%);
-  width: var(--breakpoint-xxl);
+  width: var(--breakpoint-xxxl);
   padding: 0 var(--space-outer);
   max-width: 100%;
   z-index: var(--z-index-header);

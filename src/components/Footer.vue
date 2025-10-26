@@ -59,7 +59,7 @@ import { locale } from "../i18n/store";
     align-items: center;
     gap: var(--space-xl);
     width: 100%;
-    max-width: calc(var(--breakpoint-xxl));
+    max-width: calc(var(--breakpoint-xxxl));
     padding: calc(var(--space-outer) + var(--space-sm)) var(--space-outer);
   }
 
