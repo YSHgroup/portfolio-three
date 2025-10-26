@@ -89,10 +89,7 @@ const tick = () => {
     out: sceneWeightsInOut.about.out,
   };
 
-  console.log(progress.in, progress.out);
-
   if (progress.in < 0.001 || (progress.in === 1 && progress.out >= 0.999) || progress.out === 1) {
-    console.log("hidden");
     mesh.visible = false;
     return;
   } else {

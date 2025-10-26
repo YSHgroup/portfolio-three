@@ -11,8 +11,9 @@
   border: none;
   background: none;
   transition: color 0.125s ease-in-out;
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-md);
   width: 80px;
   white-space: nowrap;
+  text-transform: uppercase;
 }
 </style>

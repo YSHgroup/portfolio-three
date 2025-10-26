@@ -33,7 +33,9 @@ const setup = (contact: HTMLElement) => {
     trigger: contact,
     start: "center 75%",
     onEnter: () => {
-      avatarAnimations.wakeUp();
+      gsap.delayedCall(0.25, () => {
+        avatarAnimations.wakeUp();
+      });
     },
   });
 };

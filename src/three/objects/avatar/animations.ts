@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { resources } from "../../../utils/resources";
 import { sceneWeights } from "../../../animations/scenes";
 import { face } from "./face";
+import { sleepingSprite } from "../contact/sleeping-sprite";
 
 import type { AnimationClip, Object3D } from "three";
 
@@ -153,6 +154,7 @@ const wakeUp = () => {
   }, wakeUpDuration * 1000);
 
   face.wakeUp();
+  sleepingSprite.hide();
 };
 
 const updateContact = () => {

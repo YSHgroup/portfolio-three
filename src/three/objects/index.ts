@@ -5,6 +5,7 @@ import { darkPlane } from "./dark-plane";
 import { gridFloor } from "./grid-floor";
 import { lab } from "./lab";
 import { room } from "./room";
+import { sleepingSprite } from "./contact/sleeping-sprite";
 
 const init = () => {
   avatarHologram.init();
@@ -14,6 +15,7 @@ const init = () => {
   gridFloor.init();
   lab.init();
   room.init();
+  sleepingSprite.init();
 };
 
 const destroy = () => {
@@ -24,6 +26,7 @@ const destroy = () => {
   gridFloor.destroy();
   lab.destroy();
   room.destroy();
+  sleepingSprite.destroy();
 };
 
 export const objects = { init, destroy };
