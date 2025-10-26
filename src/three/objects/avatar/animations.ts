@@ -21,8 +21,6 @@ const init = () => {
   setupHologramActions();
 
   play("desktop-idle");
-
-  gsap.ticker.add(tick);
 };
 
 const getActionFromMesh = (name: string) => {
@@ -97,7 +95,7 @@ const play = (name: string, transition: number = 0.5) => {
   activeAction = name;
 };
 
-const tick = () => {
+const update = () => {
   const desktopIdle = actions.get("desktop-idle");
   if (desktopIdle) {
     const sceneWeight = 1 - avatar.tIdleIntensity.value;
@@ -131,4 +129,4 @@ const tick = () => {
   hologramMixer.update(delta / 60);
 };
 
-export const animations = { init, play, actions };
+export const animations = { init, play, actions, update };

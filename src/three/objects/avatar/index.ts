@@ -3,7 +3,6 @@ import { Mesh, Vector3, Euler, Group, ShaderMaterial, LinearSRGBColorSpace } fro
 import { scene } from "../../core/scene";
 import { animations } from "./animations";
 import { sceneWeights } from "../../../animations/scenes";
-import gsap from "gsap";
 import { clone as cloneSkeleton } from "three/examples/jsm/utils/SkeletonUtils.js";
 import { face } from "./face";
 import { leftDesktop as avatarLeftDesktop } from "./left-desktop";
@@ -31,7 +30,6 @@ const contactRotation = new Euler(0, -Math.PI, 0);
 const init = () => {
   setupMesh();
   animations.init();
-  gsap.ticker.add(tick);
   face.init();
   avatarLeftDesktop.init();
 };
@@ -115,6 +113,11 @@ const setupMesh = () => {
     }
   });
 
+  const face = mesh.getObjectByName("face") as Mesh;
+  face.onBeforeRender = () => {
+    update();
+  };
+
   mesh.rotation.z = 0;
 
   transform.add(mesh);
@@ -124,8 +127,9 @@ const setupMesh = () => {
   scene.instance.add(transform);
 };
 
-const tick = () => {
+const update = () => {
   //TBD: hide when intro or contact is not visible
+  animations.update();
 
   const isContact = sceneWeights.contact > 0.001;
 
@@ -147,7 +151,6 @@ const tick = () => {
 };
 
 const destroy = () => {
-  gsap.ticker.remove(tick);
   //mesh = null;
   //transform.clear();
   face.destroy();
