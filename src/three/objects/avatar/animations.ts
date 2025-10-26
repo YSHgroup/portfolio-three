@@ -4,12 +4,14 @@ import { AnimationAction, AnimationMixer, LoopPingPong } from "three";
 import gsap from "gsap";
 import { resources } from "../../../utils/resources";
 import { sceneWeights } from "../../../animations/scenes";
+import { face } from "./face";
 
 import type { AnimationClip, Object3D } from "three";
 
 let mixer: AnimationMixer;
 let activeAction: string | null = null;
 const actions = new Map<string, AnimationAction>();
+let isAwake = false;
 
 let hologramMixer: AnimationMixer;
 const hologramActions = new Map<string, AnimationAction>();
@@ -130,8 +132,6 @@ const updateIntro = () => {
   setWeight("wake-up", 0);
 };
 
-let isAwake = false;
-
 const wakeUp = () => {
   if (isAwake) return;
   isAwake = true;
@@ -151,6 +151,8 @@ const wakeUp = () => {
     wakeUpAction.crossFadeTo(contactIdleAction, 0.5);
     contactIdleAction.play();
   }, wakeUpDuration * 1000);
+
+  face.wakeUp();
 };
 
 const updateContact = () => {
@@ -175,4 +177,4 @@ const update = () => {
   hologramMixer.update(delta / 60);
 };
 
-export const animations = { init, play, actions, update, wakeUp };
+export const animations = { init, play, actions, update, wakeUp, getIsAwake: () => isAwake };

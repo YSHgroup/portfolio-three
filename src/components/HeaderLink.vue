@@ -13,5 +13,6 @@
   transition: color 0.125s ease-in-out;
   font-size: var(--font-size-lg);
   width: 80px;
+  white-space: nowrap;
 }
 </style>

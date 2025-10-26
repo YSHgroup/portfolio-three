@@ -2,15 +2,15 @@
 
 varying vec2 vUv;
 uniform sampler2D uTexture;
-uniform float uIndex;
+uniform float uFrame;
 
 #define ROWS 4.
 #define COLUMNS 4.
 
 void main() {
   // Calculate tile position
-  float column = mod(uIndex, COLUMNS);
-  float row = floor(uIndex / COLUMNS);
+  float column = mod(uFrame, COLUMNS);
+  float row = floor(uFrame / COLUMNS);
 
   // Flip Y because texture atlases often start from top-left
   row = (ROWS - 1.0) - row;
