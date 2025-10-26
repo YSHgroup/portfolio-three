@@ -4,12 +4,13 @@ import { isTouch } from "../../utils/observer";
 import gsap from "gsap";
 import { scene } from "./scene";
 import { waypoints } from "../../animations/waypoints";
-import { sceneWeights } from "../../animations/scenes";
+import { sceneWeights, sceneWeightsInOut } from "../../animations/scenes";
 
 const PARALLAX_INTENSITY = 1.5;
 const PARALLAX_SPEED = 0.3;
 const contactPosition = new Vector3(0, -8.5, 9);
 const contactFocus = new Vector3(0, -10.5, 0);
+const currentContactFocus = new Vector3(0, -10.5, 0);
 
 const instance = new PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.01, 100);
 
@@ -46,6 +47,22 @@ const updateParallax = (object: Object3D) => {
   if (byY < 0.05 && byY > -0.05) object.position.y += byY;
 };
 
+const calculateContactTransform = () => {
+  const inProgress = 1 - sceneWeightsInOut.contact.in;
+  const outProgress = sceneWeightsInOut.contact.out;
+
+  instance.position.copy(contactPosition);
+  instance.position.y += inProgress * 7;
+  instance.position.y -= outProgress * 5;
+  instance.position.z += outProgress * 2;
+
+  currentContactFocus.copy(contactFocus);
+  currentContactFocus.y += inProgress * 7;
+  currentContactFocus.y -= outProgress * 5;
+
+  instance.lookAt(currentContactFocus);
+};
+
 const tick = () => {
   const isContact = sceneWeights.contact > 0.001;
 
@@ -56,8 +73,7 @@ const tick = () => {
   updateParallax(parallaxGroup);
 
   if (isContact) {
-    instance.position.copy(contactPosition);
-    instance.lookAt(contactFocus);
+    calculateContactTransform();
   } else {
     instance.lookAt(waypoints.focus);
   }

@@ -9,7 +9,5 @@ const handleLangSwitch = () => {
 </script>
 
 <template>
-  <Button variant="border" size="sm" renderAs="div" @click="handleLangSwitch">{{
-    locale === "de" ? "EN" : "DE"
-  }}</Button>
+  <Button variant="border" size="sm" @click="handleLangSwitch">{{ locale === "de" ? "EN" : "DE" }}</Button>
 </template>

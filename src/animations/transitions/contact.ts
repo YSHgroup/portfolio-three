@@ -8,13 +8,13 @@ const setup = (contact: HTMLElement) => {
   inTl = gsap.timeline({
     scrollTrigger: {
       trigger: contact,
-      start: "top-=40 bottom",
-      end: "bottom top",
+      start: "top bottom",
+      end: "bottom bottom",
       scrub: true,
     },
   });
 
-  inTl.fromTo(sceneWeightsInOut.contact, { in: 0 }, { in: 1, duration: 1 }, 0);
+  inTl.fromTo(sceneWeightsInOut.contact, { in: 0 }, { in: 1, duration: 1, ease: "none" }, 0);
 
   outTl = gsap.timeline({
     scrollTrigger: {
@@ -24,7 +24,7 @@ const setup = (contact: HTMLElement) => {
       scrub: true,
     },
   });
-  outTl.fromTo(sceneWeightsInOut.contact, { out: 0 }, { out: 1, duration: 1 }, 0);
+  outTl.fromTo(sceneWeightsInOut.contact, { out: 0 }, { out: 1, duration: 1, ease: "none" }, 0);
 };
 
 const destroy = () => {

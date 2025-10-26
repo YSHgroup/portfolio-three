@@ -2,10 +2,7 @@
 import HeaderLink from "./HeaderLink.vue";
 import { computed } from "vue";
 import { t } from "../i18n/utils/translate";
-import { useHeaderTheme } from "../composables/useHeaderTheme";
 import { lenis } from "../utils/scroll";
-
-const { isDarkTheme } = useHeaderTheme();
 
 const handleLinkClick = (link: string) => {
   if (!lenis.value) return;
@@ -14,40 +11,45 @@ const handleLinkClick = (link: string) => {
 
 const classNames = computed(() => {
   return {
-    "header-links": true,
-    "header-links-dark": isDarkTheme.value,
+    "header-home": true,
   };
 });
 </script>
 
 <template>
   <header :class="classNames">
-    <HeaderLink @click="handleLinkClick('.about')">{{ t("about") }}</HeaderLink>
-    <HeaderLink @click="handleLinkClick('.projects')">{{ t("projects") }}</HeaderLink>
-    <HeaderLink @click="handleLinkClick('.contact')">{{ t("contact") }}</HeaderLink>
+    <div class="header-home-links">
+      <HeaderLink @click="handleLinkClick('.about')">{{ t("about") }}</HeaderLink>
+      <HeaderLink @click="handleLinkClick('.projects')">{{ t("projects") }}</HeaderLink>
+      <HeaderLink @click="handleLinkClick('.contact')">{{ t("contact") }}</HeaderLink>
+    </div>
   </header>
 </template>
 
 <style scoped lang="scss">
-.header-links {
+.header-home {
   position: fixed;
   top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   left: 50%;
-  gap: var(--space-xxxl);
   transform: translateX(-50%);
   z-index: var(--z-index-header);
   display: none;
   height: var(--height-header);
 
-  @include mixins.mq("md") {
+  &-links {
+    background-color: var(--color-white-400);
+    border-radius: var(--radius-md);
     display: flex;
+    gap: var(--space-xxl);
+    padding: var(--space-sm) var(--space-lg);
+    flex-direction: row;
   }
 
-  &-dark {
-    color: var(--color-white-400);
+  @include mixins.mq("md") {
+    display: flex;
   }
 }
 </style>

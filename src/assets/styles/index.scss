@@ -12,3 +12,15 @@ html {
   font-family: "Quicksand";
   overflow-y: scroll;
 }
+
+::selection {
+  background: #2d2a24;
+  color: rgb(255, 255, 255);
+  text-shadow: none;
+}
+
+::-moz-selection {
+  background: #2d2a24;
+  color: rgb(255, 255, 255);
+  text-shadow: none;
+}

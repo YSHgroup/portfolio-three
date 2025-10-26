@@ -14,7 +14,6 @@ import { t } from "../../i18n/utils/translate";
             <p class="hero-subtitle-copy">{{ t("job-title") }}</p>
           </div>
         </div>
-        <Button class="hero-content-button">{{ t("get-in-touch") }}</Button>
       </div>
     </div>
   </div>
