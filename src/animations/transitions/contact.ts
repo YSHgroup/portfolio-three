@@ -1,8 +1,11 @@
 import gsap from "gsap";
 import { sceneWeightsInOut } from "../scenes";
+import { animations as avatarAnimations } from "../../three/objects/avatar/animations";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
 let inTl: gsap.core.Timeline | null = null;
 let outTl: gsap.core.Timeline | null = null;
+let wakeUpTrigger: ScrollTrigger | null = null;
 
 const setup = (contact: HTMLElement) => {
   inTl = gsap.timeline({
@@ -25,6 +28,14 @@ const setup = (contact: HTMLElement) => {
     },
   });
   outTl.fromTo(sceneWeightsInOut.contact, { out: 0 }, { out: 1, duration: 1, ease: "none" }, 0);
+
+  wakeUpTrigger = ScrollTrigger.create({
+    trigger: contact,
+    start: "center 75%",
+    onEnter: () => {
+      avatarAnimations.wakeUp();
+    },
+  });
 };
 
 const destroy = () => {
@@ -35,6 +46,10 @@ const destroy = () => {
   if (outTl) {
     outTl.kill();
     outTl = null;
+  }
+  if (wakeUpTrigger) {
+    wakeUpTrigger.kill();
+    wakeUpTrigger = null;
   }
 };
 

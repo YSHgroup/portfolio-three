@@ -2,7 +2,7 @@ import { resources } from "../../../utils/resources";
 import { Mesh, Vector3, Euler, Group, ShaderMaterial, LinearSRGBColorSpace } from "three";
 import { scene } from "../../core/scene";
 import { animations } from "./animations";
-import { sceneWeights } from "../../../animations/scenes";
+import { sceneWeights, sceneWeightsInOut } from "../../../animations/scenes";
 import { clone as cloneSkeleton } from "three/examples/jsm/utils/SkeletonUtils.js";
 import { face } from "./face";
 import { leftDesktop as avatarLeftDesktop } from "./left-desktop";
@@ -23,7 +23,7 @@ const tIdleIntensity = { value: 0 };
 const waypointsPosition = new Vector3();
 const waypointsRotation = new Euler();
 const transform = new Group();
-const uniforms = { uProgress: { value: 0 } };
+const uniforms = { uProgress: { value: 0 }, uAmbientStrength: { value: 0 } };
 const contactPosition = new Vector3(0, -13, 0);
 const contactRotation = new Euler(0, -Math.PI, 0);
 
@@ -137,6 +137,7 @@ const update = () => {
     transform.position.copy(contactPosition);
     transform.rotation.copy(contactRotation);
     uniforms.uProgress.value = 0;
+    uniforms.uAmbientStrength.value = 0;
     transform.visible = true;
     return;
   }
@@ -148,6 +149,7 @@ const update = () => {
   avatarHologram.transform.rotation.copy(waypointsRotation);
 
   uniforms.uProgress.value = aboutProgress.value;
+  uniforms.uAmbientStrength.value = sceneWeightsInOut.about.in;
 };
 
 const destroy = () => {
