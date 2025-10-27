@@ -19,7 +19,7 @@ export default [
     description: "Multiplayer gaming platform",
   },
   {
-    title: "Particles",
+    title: "WebGL Particles",
     slug: "particles",
     thumbnail: thumbnailParticles,
     description: "Dynamic 3D particles",

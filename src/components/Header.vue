@@ -189,7 +189,6 @@ const getInTouchClassNames = computed(() => {
     &-text {
       font-weight: 900;
       font-size: 18px;
-      letter-spacing: -1px;
 
       @include mixins.mq("md") {
         font-size: 20px;

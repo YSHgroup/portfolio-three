@@ -16,7 +16,6 @@ import SectionTwo from "./SectionTwo.vue";
     position: sticky;
     bottom: 0;
     width: 100%;
-    font-family: "NB-Architekt-Std";
     height: 0;
     pointer-events: none;
   }

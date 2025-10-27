@@ -107,11 +107,13 @@ const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!pr
     height: calc(var(--radius-md) + 34px - var(--stroke-md));
 
     &-title {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
 
       @include mixins.mq("md") {
-        font-size: 22px;
+        font-size: 20px;
       }
     }
 

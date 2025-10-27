@@ -49,7 +49,7 @@ import HologramBox from "../../components/HologramBox.vue";
 
   &-hologram-box {
     &-copy {
-      font-size: var(--font-size-lg);
+      font-size: var(--font-size-md);
       font-weight: 400;
     }
   }

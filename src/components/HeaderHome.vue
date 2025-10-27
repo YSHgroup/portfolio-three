@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import HeaderLink from "./HeaderLink.vue";
-import { onMounted, ref, nextTick } from "vue";
+import { onMounted, ref } from "vue";
 import { t } from "../i18n/utils/translate";
 import { lenis } from "../utils/scroll";
 import { ScrollTrigger } from "gsap/ScrollTrigger";

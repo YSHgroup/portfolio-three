@@ -8,7 +8,7 @@ import { t } from "../../i18n/utils/translate";
     <div class="hero-content grid">
       <div class="hero-content-inner" id="hero-content-inner">
         <div class="hero-content-copys">
-          <h1 class="hero-title">Hi, my name<br />is David.</h1>
+          <h1 class="hero-title">David</h1>
           <div class="hero-subtitle">
             <div class="hero-subtitle-line"></div>
             <p class="hero-subtitle-copy">{{ t("job-title") }}</p>
@@ -53,11 +53,12 @@ import { t } from "../../i18n/utils/translate";
   &-title {
     font-weight: 700;
     font-size: var(--font-size-title-lg);
-    letter-spacing: 1px;
+    font-size: 72px;
+    letter-spacing: 0.02em;
 
     @include mixins.mq("md") {
       font-size: var(--font-size-title-xxl);
-      letter-spacing: 2px;
+      font-size: 96px;
     }
   }
 
