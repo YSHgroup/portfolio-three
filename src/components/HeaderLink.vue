@@ -12,8 +12,10 @@
   background: none;
   transition: color 0.125s ease-in-out;
   font-size: var(--font-size-md);
-  width: 80px;
+  width: 128px;
   white-space: nowrap;
   text-transform: uppercase;
+  z-index: 2;
+  padding: var(--space-xs) var(--space-md);
 }
 </style>

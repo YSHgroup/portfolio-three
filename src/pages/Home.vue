@@ -57,7 +57,6 @@ const stickyContentClassNames = computed(() => {
 </script>
 
 <template>
-  <HeaderHome />
   <Layout>
     <div class="intro-wrapper">
       <Hero class="intro-hero" id="hero" />
@@ -72,6 +71,7 @@ const stickyContentClassNames = computed(() => {
     <Contact id="contact" v-if="projectsLoaded" />
     <Footer />
   </Layout>
+  <HeaderHome v-if="projectsLoaded" />
 </template>
 
 <style scoped lang="scss">
