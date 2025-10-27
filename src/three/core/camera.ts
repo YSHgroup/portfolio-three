@@ -6,8 +6,8 @@ import { scene } from "./scene";
 import { waypoints } from "../../animations/waypoints";
 import { sceneWeights, sceneWeightsInOut } from "../../animations/scenes";
 
-const PARALLAX_INTENSITY = 1.5;
-const PARALLAX_SPEED = 0.3;
+const PARALLAX_INTENSITY = 1;
+const PARALLAX_SPEED = 0.6;
 const contactPosition = new Vector3(0, -8.5, 9);
 const contactFocus = new Vector3(0, -10.5, 0);
 const currentContactFocus = new Vector3(0, -10.5, 0);
