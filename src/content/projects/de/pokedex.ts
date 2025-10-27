@@ -1,6 +1,9 @@
 import videoPokedex from "../../../assets/videos/pokedex.mp4";
 
-import mobile from "../../../assets/images/projects/pokedex/mobile.png";
+import pokedex0 from "../../../assets/images/projects/pokedex/pokedex-0.png";
+import pokedex1 from "../../../assets/images/projects/pokedex/pokedex-1.png";
+import pokedex2 from "../../../assets/images/projects/pokedex/pokedex-2.png";
+import pokedex3 from "../../../assets/images/projects/pokedex/pokedex-3.png";
 
 import type { ProjectContent } from "../../types";
 
@@ -15,39 +18,47 @@ export default {
     "Eines meiner ersten Webprojekte, um Kernkonzepte der Webentwicklung zu üben. Der Pokédex ist Open Source, damit andere Entwickler auf dieselbe Weise lernen können wie ich.<br/><br/>Er interagiert außerdem mit einer öffentlichen API, um zusätzliche Erfahrung zu sammeln.",
   components: [
     {
-      type: "imageText",
+      type: "media",
       props: {
-        imagePosition: "right",
-        src: mobile,
-        alt: "Pokédex App",
-        component: {
-          type: "list",
-          props: {
-            title: "Features",
-            items: [
-              "Lazy Loading von Pokémon-Einträgen und Bildern beim Scrollen",
-              "Erweiterbare Detailansicht für jedes Pokémon",
-              "Vollständige mobile Unterstützung mit responsive Layout",
-              "Open Source – für Entwickler, die den Aufbau nachvollziehen möchten",
-              "Interagiert mit einer öffentlichen API, um Pokémon-Daten dynamisch zu laden",
-            ],
-          },
-        },
+        type: "video",
+        src: videoPokedex,
+        caption: "Pokédex Anwendung",
       },
     },
     {
-      type: "list",
+      type: "media",
       props: {
-        title: "Learnings",
-        size: "md",
-        items: [
-          "Praktische Erfahrung mit DOM-Manipulation und Event Handling",
-          "Implementierung von Lazy Loading zur Performance-Optimierung",
-          "State-Management für erweiterbare Detailansichten",
-          "Aufbau von responsiven, mobile-first Layouts",
-          "Arbeiten mit APIs: Abrufen und Verarbeiten asynchroner Daten",
-          "Learning by doing: meine eigenen Fähigkeiten verbessern und gleichzeitig eine Ressource für andere schaffen, um daraus zu lernen",
-        ],
+        type: "image",
+        src: pokedex0,
+        alt: "Standardansicht",
+        caption: "Standardansicht",
+      },
+    },
+    {
+      type: "media",
+      props: {
+        type: "image",
+        src: pokedex1,
+        alt: "Suchfunktion",
+        caption: "Suchfunktion",
+      },
+    },
+    {
+      type: "media",
+      props: {
+        type: "image",
+        src: pokedex2,
+        alt: "Responsives Design",
+        caption: "Responsives Design",
+      },
+    },
+    {
+      type: "media",
+      props: {
+        type: "image",
+        src: pokedex3,
+        alt: "Lazy-Loading",
+        caption: "Lazy-Loading",
       },
     },
   ],

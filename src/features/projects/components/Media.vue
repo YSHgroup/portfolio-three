@@ -12,7 +12,6 @@ export interface Props {
   type: "image" | "video";
   src: string;
   alt?: string;
-  border?: boolean;
   caption?: string;
 }
 
@@ -21,7 +20,6 @@ const props = defineProps<Props>();
 const wrapperClasses = computed(() => {
   return {
     "project-media": true,
-    "project-media-border": props.border,
   };
 });
 
@@ -100,10 +98,6 @@ onUnmounted(() => {
 
   @include mixins.mq("lg") {
     grid-column: 3 / 11;
-  }
-
-  &-border {
-    border: var(--stroke-md) solid var(--color-grayscale-400);
   }
 
   &-caption {

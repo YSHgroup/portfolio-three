@@ -1,6 +1,9 @@
 import videoPokedex from "../../../assets/videos/pokedex.mp4";
 
-import mobile from "../../../assets/images/projects/pokedex/mobile.png";
+import pokedex0 from "../../../assets/images/projects/pokedex/pokedex-0.png";
+import pokedex1 from "../../../assets/images/projects/pokedex/pokedex-1.png";
+import pokedex2 from "../../../assets/images/projects/pokedex/pokedex-2.png";
+import pokedex3 from "../../../assets/images/projects/pokedex/pokedex-3.png";
 
 import type { ProjectContent } from "../../types";
 
@@ -15,39 +18,47 @@ export default {
     "One of my first web projects to practice basic web development concepts. The Pokédex is open source so other developers can learn the same way I did.<br/><br/>It also interacts with a public API, to get more experience with asynchronous data fetching.",
   components: [
     {
-      type: "imageText",
+      type: "media",
       props: {
-        imagePosition: "right",
-        src: mobile,
-        alt: "Pokédex App",
-        component: {
-          type: "list",
-          props: {
-            title: "Features",
-            items: [
-              "Lazy loading of Pokémon entries and images on scroll",
-              "Expandable detail view for each Pokémon",
-              "Full mobile support with responsive layout",
-              "Open source – for developers to study and learn from",
-              "Interacts with a public API to fetch Pokémon data dynamically",
-            ],
-          },
-        },
+        type: "video",
+        src: videoPokedex,
+        caption: "Pokédex App",
       },
     },
     {
-      type: "list",
+      type: "media",
       props: {
-        title: "Learnings",
-        size: "md",
-        items: [
-          "Hands-on experience with DOM manipulation and event handling",
-          "Implementing lazy loading for performance optimization",
-          "Managing component state for expandable detail views",
-          "Building responsive, mobile-first layouts",
-          "Working with APIs: fetching and handling asynchronous data",
-          "Learning by doing: improving my own skills while creating a resource for others to learn from",
-        ],
+        type: "image",
+        src: pokedex0,
+        alt: "Default View",
+        caption: "Default View",
+      },
+    },
+    {
+      type: "media",
+      props: {
+        type: "image",
+        src: pokedex1,
+        alt: "Search Function",
+        caption: "Search Function",
+      },
+    },
+    {
+      type: "media",
+      props: {
+        type: "image",
+        src: pokedex2,
+        alt: "Responsive Design",
+        caption: "Responsive Design",
+      },
+    },
+    {
+      type: "media",
+      props: {
+        type: "image",
+        src: pokedex3,
+        alt: "Lazy Loading",
+        caption: "Lazy Loading",
       },
     },
   ],

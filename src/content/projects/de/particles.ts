@@ -1,6 +1,8 @@
 import videoParticles from "../../../assets/videos/particles.mp4";
 
-import shapes from "../../../assets/images/projects/particles/shapes.png";
+import particles0 from "../../../assets/images/projects/particles/particles-0.png";
+import particles1 from "../../../assets/images/projects/particles/particles-1.png";
+import particles2 from "../../../assets/images/projects/particles/particles-2.png";
 
 import type { ProjectContent } from "../../types";
 
@@ -14,35 +16,38 @@ export default {
     "Ein experimentelles WebGL-Projekt mit OGL.js, das Partikel mithilfe mathematischer Formeln und Noise-Funktionen animiert.<br/><br/>Die Partikel bewegen sich fließend zwischen verschiedenen 3D-Formen, die ineinander übergehen.",
   components: [
     {
-      type: "imageText",
+      type: "media",
       props: {
-        imagePosition: "right",
-        src: shapes,
-        alt: "Partikel-Formen",
-        component: {
-          type: "list",
-          props: {
-            title: "Features",
-            items: [
-              "Scroll-basierte Interpolation zwischen einzelnen Formen (Torus, Knot, Sphere)",
-              "Formen definiert durch mathematische Formeln für nahtlose Übergänge",
-              "Integration von Noise für dynamischere Bewegungen",
-              "Minimalistisch umgesetzt mit OGL.js",
-            ],
-          },
-        },
+        type: "video",
+        src: videoParticles,
+        caption: "Animiertes Partikelsystem",
       },
     },
     {
-      type: "list",
+      type: "media",
       props: {
-        title: "Learnings",
-        size: "md",
-        items: [
-          "Experimenteller Einsatz von OGL.js statt Three.js",
-          "Interpolation zwischen komplexen 3D-Formen rein mathematisch umgesetzt",
-          "Feintuning von Noise-Funktionen für natürliche Partikelbewegungen",
-        ],
+        type: "image",
+        src: particles0,
+        alt: "Knoten Form",
+        caption: "Knoten Form",
+      },
+    },
+    {
+      type: "media",
+      props: {
+        type: "image",
+        src: particles1,
+        alt: "Donut Form",
+        caption: "Donut Form",
+      },
+    },
+    {
+      type: "media",
+      props: {
+        type: "image",
+        src: particles2,
+        alt: "Kugel Form",
+        caption: "Kugel Form",
       },
     },
   ],

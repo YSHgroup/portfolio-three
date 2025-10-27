@@ -28,9 +28,7 @@ const updateBarPosition = () => {
   };
 };
 
-onMounted(async () => {
-  await nextTick();
-
+onMounted(() => {
   sections.forEach((section) => {
     ScrollTrigger.create({
       trigger: `#${section}`,

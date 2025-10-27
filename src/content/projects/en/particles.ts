@@ -1,6 +1,8 @@
 import videoParticles from "../../../assets/videos/particles.mp4";
 
-import shapes from "../../../assets/images/projects/particles/shapes.png";
+import particles0 from "../../../assets/images/projects/particles/particles-0.png";
+import particles1 from "../../../assets/images/projects/particles/particles-1.png";
+import particles2 from "../../../assets/images/projects/particles/particles-2.png";
 
 import type { ProjectContent } from "../../types";
 
@@ -14,35 +16,38 @@ export default {
     "An experimental WebGL project built with OGL.js, animating particles through mathematical formulas and noise functions.<br/><br/>The particles transition smoothly between multiple 3D shapes that blend into one another.",
   components: [
     {
-      type: "imageText",
+      type: "media",
       props: {
-        imagePosition: "right",
-        src: shapes,
-        alt: "Particle shapes",
-        component: {
-          type: "list",
-          props: {
-            title: "Features",
-            items: [
-              "Scroll-based interpolation between different shapes (Torus, Knot, Sphere)",
-              "Shapes defined by mathematical formulas for seamless transitions",
-              "Integration of noise for more dynamic movements",
-              "Minimal implementation using OGL.js",
-            ],
-          },
-        },
+        type: "video",
+        src: videoParticles,
+        caption: "Animated Particle System",
       },
     },
     {
-      type: "list",
+      type: "media",
       props: {
-        title: "Learnings",
-        size: "md",
-        items: [
-          "Experimental use of OGL.js instead of Three.js",
-          "Mathematical interpolation between complex 3D shapes",
-          "Fine-tuning noise functions for natural particle motion",
-        ],
+        type: "image",
+        src: particles0,
+        alt: "Knot Shape",
+        caption: "Knot Shape",
+      },
+    },
+    {
+      type: "media",
+      props: {
+        type: "image",
+        src: particles1,
+        alt: "Donut Shape",
+        caption: "Donut Shape",
+      },
+    },
+    {
+      type: "media",
+      props: {
+        type: "image",
+        src: particles2,
+        alt: "Sphere Shape",
+        caption: "Sphere Shape",
       },
     },
   ],

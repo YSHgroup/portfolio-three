@@ -67,5 +67,17 @@ const footerClassNames = computed(() => {
     margin-top: auto;
     color: var(--color-text-400);
   }
+
+  ::selection {
+    background: var(--color-accent-400);
+    color: var(--color-accent-text-400);
+    text-shadow: none;
+  }
+
+  ::-moz-selection {
+    background: var(--color-accent-400);
+    color: var(--color-accent-text-400);
+    text-shadow: none;
+  }
 }
 </style>
