@@ -16,6 +16,6 @@
   white-space: nowrap;
   text-transform: uppercase;
   z-index: 2;
-  padding: var(--space-xs) var(--space-md);
+  padding: var(--space-xxs) 0;
 }
 </style>

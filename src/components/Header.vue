@@ -15,13 +15,13 @@ const router = useRouter();
 
 const scrolledPastHeroVisible = ref(false);
 const { isDarkTheme } = useHeaderTheme({
-  onAboutElementChange: (element, boundingClientRect) => {
+  onAboutElementChange: (element, boundingClientRect, hasScrolledIntoView) => {
     if (!element || !boundingClientRect) {
       scrolledPastHeroVisible.value = false;
       return;
     }
 
-    if (boundingClientRect.top - 128 < 0) {
+    if (hasScrolledIntoView) {
       scrolledPastHeroVisible.value = true;
     } else {
       scrolledPastHeroVisible.value = false;

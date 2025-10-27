@@ -13,9 +13,8 @@ import SectionTwo from "./SectionTwo.vue";
 <style scoped lang="scss">
 .about {
   &-sections {
-    --gap: 16px;
     position: sticky;
-    bottom: calc(var(--gap) * -1);
+    bottom: 0;
     width: 100%;
     font-family: "NB-Architekt-Std";
     height: 0;
@@ -24,7 +23,7 @@ import SectionTwo from "./SectionTwo.vue";
 
   &-section {
     position: absolute;
-    bottom: var(--gap);
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;

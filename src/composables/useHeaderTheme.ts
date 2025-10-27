@@ -1,20 +1,26 @@
 import { ref, watch, watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import { lenis } from "../utils/scroll";
+import { sizes } from "../utils/sizes";
 
 export const useHeaderTheme = ({
   onAboutElementChange,
 }: {
-  onAboutElementChange?: (element: HTMLElement | null, boundingClientRect: DOMRect | null) => void;
+  onAboutElementChange?: (
+    element: HTMLElement | null,
+    boundingClientRect: DOMRect | null,
+    hasScrolledIntoView: boolean,
+  ) => void;
 } = {}) => {
   let aboutElement: HTMLElement | null = null;
   const isDarkTheme = ref(false);
+  const hasScrolledIntoView = ref(false);
   const route = useRoute();
 
   const handleScroll = () => {
     if (route.path !== "/") {
       if (typeof onAboutElementChange === "function") {
-        onAboutElementChange(null, null);
+        onAboutElementChange(null, null, false);
       }
       return;
     }
@@ -25,12 +31,14 @@ export const useHeaderTheme = ({
 
     if (aboutElement) {
       const aboutBounding = aboutElement.getBoundingClientRect();
-      const isScrolledIntoView = aboutBounding.top - 128 < 0;
+      const isScrolledIntoView = aboutBounding.top - sizes.height * 0.225 < 0;
       const isScrolledPast = aboutBounding.bottom - 36 < 0;
+
+      hasScrolledIntoView.value = isScrolledIntoView;
       isDarkTheme.value = isScrolledIntoView && !isScrolledPast;
 
       if (typeof onAboutElementChange === "function") {
-        onAboutElementChange(aboutElement, aboutBounding);
+        onAboutElementChange(aboutElement, aboutBounding, isScrolledIntoView);
       }
     }
   };
@@ -65,5 +73,6 @@ export const useHeaderTheme = ({
 
   return {
     isDarkTheme,
+    hasScrolledIntoView,
   };
 };
