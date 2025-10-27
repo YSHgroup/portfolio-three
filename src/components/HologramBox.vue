@@ -46,19 +46,22 @@ const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!pr
 
 <style scoped lang="scss">
 .hologram-box {
-  color: var(--color-cyan-300);
+  color: var(--color-text-cyan-400);
 
   &-content {
+    padding: var(--space-sm) var(--space-md);
+    padding-top: calc(var(--space-sm) - var(--radius-md));
     width: 100%;
-    padding: var(--space-md);
-    padding-top: calc(var(--space-md) - var(--radius-md));
     border: var(--stroke-md) solid var(--color-cyan-400);
     position: relative;
     border-radius: 0 0 var(--radius-md) var(--radius-md);
     border-top-width: 0;
     background: linear-gradient(to bottom, var(--color-hologram-top) 0%, var(--color-hologram-bottom) 95%);
-    color: var(--color-cyan-300);
-    line-height: 1.1;
+
+    @include mixins.mq("md") {
+      padding: var(--space-md);
+      padding-top: calc(var(--space-md) - var(--radius-md));
+    }
   }
 
   &-curve {
@@ -104,7 +107,7 @@ const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!pr
     height: calc(var(--radius-md) + 34px - var(--stroke-md));
 
     &-title {
-      font-size: 16px;
+      font-size: 20px;
       font-weight: 700;
 
       @include mixins.mq("md") {
