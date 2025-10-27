@@ -7,10 +7,6 @@ import HologramBox from "../../components/HologramBox.vue";
     <div class="section-one-content grid">
       <div class="section-one-content-inner" id="section-one-content">
         <HologramBox class="section-one-hologram-box" title="About">
-          <p>Name: David</p>
-          <p>Location: Germany</p>
-        </HologramBox>
-        <HologramBox class="section-one-hologram-box" footer>
           <p class="section-one-hologram-box-copy">
             David focuses on modern web technologies that bridge visuals and performance.
             <br />With expertise in WebGL, TypeScript, and Node.js, he builds scalable systems and real-time 3D
@@ -31,7 +27,6 @@ import HologramBox from "../../components/HologramBox.vue";
   justify-content: flex-end;
   flex-direction: column;
   padding: var(--space-outer);
-  opacity: 0;
 
   @include mixins.mq("md") {
     height: calc(var(--svh) * 100);

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
+//TBD: without title, dont add top element
+
 const props = defineProps<{
   title?: string;
   footer?: boolean;
@@ -12,16 +14,24 @@ const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!pr
 <template>
   <div :class="classes">
     <div class="hologram-box-header" v-if="props.title">
-      <h3 class="hologram-box-header-title">{{ props.title }}</h3>
-      <svg viewBox="0 0 257 42" fill="none" xmlns="http://www.w3.org/2000/svg" class="hologram-box-header-svg">
-        <path
-          d="M13.929 3.92893L3.92898 13.9289C0.023735 17.8342 0.023735 24.1658 3.92898 28.0711L13.929 38.0711C15.8043 39.9464 18.3479 41 21 41H226.716C229.368 41 231.911 39.9464 233.787 38.0711L243.787 28.0711C247.692 24.1658 247.692 17.8342 243.787 13.9289L233.787 3.92893C231.911 2.05357 229.368 1 226.716 1H21C18.3479 1 15.8043 2.05357 13.929 3.92893Z"
-          vector-effect="non-scaling-stroke"
-          class="hologram-box-header-path"
-        />
-      </svg>
+      <div class="hologram-box-header-content">
+        <h3 class="hologram-box-header-title">{{ props.title }}</h3>
+      </div>
+      <div class="hologram-box-curve">
+        <svg viewBox="0 0 51 34" fill="none" xmlns="http://www.w3.org/2000/svg" class="hologram-box-curve-svg">
+          <path d="M47.6098 33C24.1951 33 26.5366 1 3.12195 1H0V33H47.6098Z" class="hologram-box-curve-fill" />
+          <path
+            d="M0 1H3.12195C26.5366 1 24.1951 33 47.6098 33H50.7317"
+            vector-effect="non-scaling-stroke"
+            class="hologram-box-curve-path"
+          />
+        </svg>
+      </div>
+      <div class="hologram-box-header-notch-right"></div>
     </div>
-    <slot></slot>
+    <div class="hologram-box-content">
+      <slot></slot>
+    </div>
     <div class="hologram-box-footer" v-if="props.footer">
       <svg class="hologram-box-footer-svg" viewBox="0 0 255 13" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -36,45 +46,95 @@ const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!pr
 
 <style scoped lang="scss">
 .hologram-box {
-  width: 100%;
-  padding: var(--space-md);
-  padding-top: var(--space-md);
-  border: 1px solid var(--color-cyan-400);
-  position: relative;
-  border-radius: var(--radius-sm);
-  background: linear-gradient(to bottom, rgba(0, 44, 124, 0.6) 30%, rgba(0, 65, 157, 0.8) 95%);
   color: var(--color-cyan-300);
-  line-height: 1.1;
 
-  &-has-title {
-    padding-top: calc(var(--space-md) + 16px);
+  &-content {
+    width: 100%;
+    padding: var(--space-md);
+    padding-top: calc(var(--space-md) - var(--radius-md));
+    border: var(--stroke-md) solid var(--color-cyan-400);
+    position: relative;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    border-top-width: 0;
+    background: linear-gradient(to bottom, var(--color-hologram-top) 0%, var(--color-hologram-bottom) 95%);
+    color: var(--color-cyan-300);
+    line-height: 1.1;
   }
 
-  &-header {
-    position: absolute;
-    top: 0;
-    left: var(--space-xs);
-    transform: translate(0, -50%);
-    width: 200px;
+  &-curve {
+    padding-bottom: var(--radius-md);
+    max-width: 43px;
+    display: flex;
+    justify-content: center;
+    position: relative;
 
-    &-title {
-      font-size: var(--font-size-title-sm);
-      font-weight: 700;
+    &::after {
+      content: "";
       position: absolute;
-      top: 50%;
-      left: 0;
-      padding-left: var(--space-md);
-      transform: translate(0, -50%);
-    }
-
-    &-path {
-      fill: rgb(0, 65, 158);
-      stroke: var(--color-cyan-400);
-      stroke-width: 1px;
+      bottom: var(--stroke-md);
+      left: -1px;
+      width: calc(100% + 2px);
+      height: var(--radius-md);
+      background-color: var(--color-hologram-top);
+      z-index: -1;
     }
 
     &-svg {
       overflow: visible;
+      min-width: 51px;
+      height: 34px;
+      z-index: 2;
+    }
+
+    &-fill {
+      fill: var(--color-hologram-top);
+    }
+
+    &-path {
+      stroke: var(--color-cyan-400);
+      stroke-width: var(--stroke-md);
+    }
+  }
+
+  &-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    height: calc(var(--radius-md) + 34px - var(--stroke-md));
+
+    &-title {
+      font-size: 16px;
+      font-weight: 700;
+
+      @include mixins.mq("md") {
+        font-size: 22px;
+      }
+    }
+
+    &-content {
+      //top left border radius
+      border-radius: var(--radius-md) 0 0 0;
+      border: var(--stroke-md) solid var(--color-cyan-400);
+      border-bottom-width: 0;
+      border-right-width: 0;
+      width: fit-content;
+      height: 100%;
+      padding: var(--space-xxs) var(--space-md);
+      background-color: var(--color-hologram-top);
+    }
+
+    &-notch-right {
+      position: relative;
+      align-self: flex-end;
+      width: 100%;
+      height: var(--radius-md);
+      border: var(--stroke-md) solid var(--color-cyan-400);
+      border-left-width: 0;
+      border-bottom-width: 0;
+      border-radius: 0 var(--radius-md) 0 0;
+      background-color: var(--color-hologram-top);
+      z-index: -2;
     }
   }
 

@@ -24,7 +24,7 @@ void main() {
 
     float progress = fract(uTime * 0.2 + aIndex);
 
-    float scale = SCALE * (1.0 - progress * 0.2);
+    float scale = SCALE * (1.0 - progress * 0.4);
 
     spriteViewMatrix[0][0] = 1.0 * scale;
     spriteViewMatrix[0][1] = 0.0;
@@ -40,8 +40,8 @@ void main() {
     pos = rotate2D(pos, progress * PI * 0.4);
     transformed.xy = pos;
 
-    transformed.x += progress * 2.5;
-    transformed.y += progress * 3.5;
+    transformed.x += progress * 3.5;
+    transformed.y += progress * 4.5;
 
     gl_Position = projectionMatrix * spriteViewMatrix * vec4(transformed, 1.0);
 
