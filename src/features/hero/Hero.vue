@@ -48,10 +48,14 @@ import { t } from "../../i18n/utils/translate";
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      width: 100%;
+      width: fit-content;
       position: relative;
+      left: 50%;
+      transform: translateX(-50%);
 
       @include mixins.mq("md") {
+        left: 0;
+        transform: translateX(0);
         grid-column: 2 / 13;
         width: fit-content;
       }
@@ -70,16 +74,16 @@ import { t } from "../../i18n/utils/translate";
 
   &-title {
     font-weight: 900;
-    font-size: var(--font-size-title-lg);
     font-size: 72px;
     letter-spacing: 0.02em;
+    font-size: var(--font-size-title-lg);
 
-    @include mixins.mq("md") {
-      font-size: var(--font-size-title-xxl);
+    @include mixins.mq("sm") {
+      font-size: var(--font-size-title-xl);
     }
 
-    @include mixins.mq("lg") {
-      font-size: var(--font-size-title-xxxl);
+    @include mixins.mq("xl") {
+      font-size: var(--font-size-title-xxl);
     }
   }
 
@@ -88,17 +92,21 @@ import { t } from "../../i18n/utils/translate";
     width: fit-content;
     position: absolute;
     bottom: 0;
-    right: 50%;
-    transform: rotate(-7deg) translate(90%, 100%);
+    right: 0;
     outline: var(--stroke-md) solid var(--color-beige-400);
     z-index: 10;
     padding: var(--space-xxs) var(--space-xs);
+    transform: rotate(-4deg) translate(8px, 75%);
 
-    @include mixins.mq("md") {
+    @include mixins.mq("sm") {
+      transform: rotate(-4deg) translate(0, 60%);
+    }
+
+    @include mixins.mq("lg") {
       padding: var(--space-xs) var(--space-sm);
       outline-width: var(--stroke-lg);
-      right: 0;
-      transform: rotate(-7deg) translate(32px, 60%);
+      right: -16px;
+      transform: rotate(-5deg) translate(0, 70%);
     }
 
     &-copy {
@@ -107,11 +115,11 @@ import { t } from "../../i18n/utils/translate";
       color: var(--color-white-400);
       font-family: "NB-Architekt-Std";
 
-      @include mixins.mq("md") {
+      @include mixins.mq("lg") {
         font-size: var(--font-size-title-xs);
       }
 
-      @include mixins.mq("lg") {
+      @include mixins.mq("xl") {
         font-size: var(--font-size-title-sm);
       }
     }

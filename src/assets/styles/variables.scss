@@ -6,7 +6,7 @@
   --breakpoint-sm: 480px;
   --breakpoint-md: 840px;
   --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1440px;
+  --breakpoint-xl: 1280px;
   --breakpoint-xxl: 1600px;
   --breakpoint-xxxl: 1920px;
 
@@ -41,7 +41,7 @@
   --font-size-title-xxs: 18px;
   --font-size-title-xs: 22px;
   --font-size-title-sm: 28px;
-  --font-size-title-md: 40px;
+  --font-size-title-md: 44px;
   --font-size-title-lg: 56px;
   --font-size-title-xl: 72px;
   --font-size-title-xxl: 96px;
@@ -70,7 +70,7 @@
     --height-header: 96px;
   }
 
-  @media (min-width: 1440px) {
+  @media (min-width: 1280px) {
     --space-outer: 20px;
   }
 

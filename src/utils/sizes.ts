@@ -4,7 +4,7 @@ export const BREAKPOINTS = {
   sm: 480,
   md: 840,
   lg: 1024,
-  xl: 1440,
+  xl: 1280,
 } as const satisfies Record<string, number>;
 
 const getBreakpoint = () => {
