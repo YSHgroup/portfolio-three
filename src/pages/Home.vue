@@ -82,7 +82,11 @@ const stickyContentClassNames = computed(() => {
   flex-direction: column;
 
   &-spacer {
-    height: 200px;
+    height: 100px;
+    
+    @include mixins.mq("md") {
+      height: 200px;
+    }
   }
 }
 
