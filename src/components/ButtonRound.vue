@@ -20,18 +20,23 @@ const classes = computed(() => ["button-round", `button-round-size-${props.size 
   display: flex;
   align-items: center;
   justify-content: center;
+  aspect-ratio: 1;
+  border-radius: 50%;
 
   &-size {
     &-sm {
       width: 32px;
+      padding: 6px;
     }
 
     &-md {
       width: 44px;
+      padding: 10px;
     }
 
     &-lg {
       width: 52px;
+      padding: 14px;
     }
   }
 }

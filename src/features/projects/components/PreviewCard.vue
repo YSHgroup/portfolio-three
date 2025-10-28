@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import Link from "../../../components/Link.vue";
 import Notch from "../../../components/Notch.vue";
-import ArrowRight from "../../../components/icons/ArrowRight.vue";
+import ArrowRightLong from "../../../components/icons/ArrowRightLong.vue";
 import gsap from "gsap";
 import { onMounted, onUnmounted, ref } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ButtonRound from "../../../components/ButtonRound.vue";
 
 import type { ProjectPreview } from "../../../content/types";
 
@@ -50,9 +51,9 @@ onUnmounted(() => {
         </div>
       </div>
       <div class="preview-card-edge">
-        <div class="preview-card-button">
-          <ArrowRight class="preview-card-button-arrow" />
-        </div>
+        <ButtonRound class="preview-card-button">
+          <ArrowRightLong class="preview-card-button-arrow" />
+        </ButtonRound>
       </div>
       <Notch class="preview-card-notch preview-card-notch-left" />
       <Notch class="preview-card-notch preview-card-notch-right" />
@@ -114,18 +115,9 @@ onUnmounted(() => {
   }
 
   &-button {
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background-color: var(--color-orange-400);
-    width: 44px;
-    color: var(--color-white-400);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
     &-arrow {
       transition: transform 0.125s ease-in-out;
-      width: 28px;
+      width: 100%;
       transform: rotate(calc(var(--hover) * -45deg));
     }
   }

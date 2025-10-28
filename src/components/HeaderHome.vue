@@ -15,6 +15,8 @@ type ActiveLink = "about" | "projects" | "contact";
 const activeLink = ref<ActiveLink | null>(null);
 const sections: ActiveLink[] = ["about", "projects", "contact"];
 
+const isMounted = ref(false);
+
 const barStyle = ref({ transform: "" });
 const ITEM_WIDTH = 128;
 
@@ -46,11 +48,15 @@ onMounted(() => {
       onLeaveBack: () => (activeLink.value = null),
     });
   });
+
+  ScrollTrigger.refresh();
+
+  isMounted.value = true;
 });
 </script>
 
 <template>
-  <header class="header-home">
+  <header :class="['header-home', { 'header-home-mounted': isMounted }]">
     <div :class="['header-home-links', { 'header-home-links-dark': isDarkTheme }]">
       <div
         :class="[
@@ -82,6 +88,13 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  transition-delay: 0.3s;
+
+  &-mounted {
+    opacity: 1;
+  }
 
   @include mixins.mq("lg") {
     display: flex;

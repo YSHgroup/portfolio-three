@@ -3,15 +3,41 @@ import Layout from "../../../components/Layout.vue";
 import ProjectHero from "./ProjectHero.vue";
 import ProjectComponent from "./ProjectComponent.vue";
 import Link from "../../../components/Link.vue";
-import Button from "../../../components/Button.vue";
-import { t } from "../../../i18n/utils/translate";
+import NextProject from "./NextProject.vue";
+import { locale } from "../../../i18n/store";
+import { previews } from "../../../content/projects/previews";
+import { ref, computed, watch, onMounted } from "vue";
 
-import type { ProjectContent } from "../../../content/types";
+import type { ProjectContent, ProjectPreview } from "../../../content/types";
 
-const { content } = defineProps<{
+const { content, projectId } = defineProps<{
   content: ProjectContent;
   projectId: string;
 }>();
+
+const loadedPreviews = ref<ProjectPreview[] | null>(null);
+
+const loadPreviews = async () => {
+  const module = await previews[locale.value as keyof typeof previews]();
+  loadedPreviews.value = module.default;
+  console.log(module.default);
+};
+
+const nextProject = computed(() => {
+  const previews = loadedPreviews.value;
+  if (!previews) return null;
+
+  const currentIndex = previews.findIndex((p) => p.slug === projectId);
+  if (currentIndex === -1) return null;
+
+  const nextIndex = (currentIndex + 1) % previews.length;
+
+  return previews[nextIndex];
+});
+
+watch(locale, loadPreviews);
+
+onMounted(loadPreviews);
 </script>
 
 <template>
@@ -25,8 +51,10 @@ const { content } = defineProps<{
       >
         <ProjectComponent :type="component.type" :props="component.props" />
       </div>
-      <Link to="/" class="project-content-back-to-home">
-        <Button renderAs="div" variant="border">{{ t("back-to-home") }}</Button>
+    </div>
+    <div class="grid project-content-next-project-grid">
+      <Link v-if="nextProject" :to="`/project/${nextProject.slug}`" replace class="project-content-next-project">
+        <NextProject :project="nextProject" />
       </Link>
     </div>
   </Layout>
@@ -44,11 +72,25 @@ const { content } = defineProps<{
     }
   }
 
-  &-back-to-home {
-    width: 100%;
+  &-next-project {
+    grid-column: 1 / 13;
 
     @include mixins.mq("md") {
-      width: auto;
+      grid-column: 3 / 11;
+    }
+
+    @include mixins.mq("lg") {
+      grid-column: 4 / 10;
+    }
+
+    @include mixins.mq("xl") {
+      grid-column: 5 / 9;
+    }
+
+    &-grid {
+      padding: 0 var(--space-outer);
+      padding-top: var(--space-xl);
+      padding-bottom: var(--space-xxxl);
     }
   }
 

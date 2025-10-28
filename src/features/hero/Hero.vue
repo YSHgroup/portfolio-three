@@ -91,16 +91,16 @@ import { t } from "../../i18n/utils/translate";
     bottom: 0;
     right: 0;
     z-index: 10;
-    transform: rotate(-4deg) translate(8px, 75%);
+    transform: rotate(-3deg) translate(8px, 75%);
 
     @include mixins.mq("sm") {
-      transform: rotate(-4deg) translate(0, 60%);
+      transform: rotate(-3deg) translate(0, 60%);
     }
 
     @include mixins.mq("lg") {
       outline-width: var(--stroke-lg);
       right: -16px;
-      transform: rotate(-5deg) translate(0, 70%);
+      transform: rotate(-4deg) translate(0, 70%);
     }
   }
 }

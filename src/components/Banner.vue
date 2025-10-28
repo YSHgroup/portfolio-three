@@ -6,7 +6,7 @@
 
 <style scoped lang="scss">
 .banner {
-  background-color: #2a395a;
+  background-color: #25365d;
   width: fit-content;
   outline: var(--stroke-md) solid var(--color-beige-400);
   padding: var(--space-xxs) var(--space-xs);
