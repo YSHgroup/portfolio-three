@@ -72,7 +72,7 @@ const setupInAnimation = (about: HTMLElement) => {
 
       tl.to("#hero-content-inner", { x: "27vw", rotate: 4, duration: 1, ease: "none" }, 0);
     } else if (mobile) {
-      tl.to("#hero-content-inner", { y: "40vh", scale: 0.7, duration: 1, ease: "none" }, 0);
+      //tl.to("#hero-content-inner", { y: "40vh", scale: 0.7, duration: 1, ease: "none" }, 0);
 
       tl.fromTo(waypointsPosition, { x: 0, y: 0, z: 0 }, { x: 0, y: 0, z: 6, duration: 1, ease: "power1.out" }, 0);
       tl.fromTo(
