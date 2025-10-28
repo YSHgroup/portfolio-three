@@ -21,6 +21,6 @@ onUnmounted(() => {
 
 <style scoped lang="scss">
 .about {
-  height: calc(var(--lvh) * 200);
+  height: calc(var(--lvh) * 300);
 }
 </style>

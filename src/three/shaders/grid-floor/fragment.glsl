@@ -5,7 +5,7 @@ uniform vec3 uLineColor;
 uniform float uOpacity;
 uniform float uTime;
 
-#define CELLS 20.0
+#define CELLS 15.0
 #define LINE_WIDTH 0.01
 #define FOG_START 0.25
 
@@ -15,8 +15,6 @@ void main() {
     vec2 grid = abs(fract(coord) - 0.5);
 
     // grid lines
- 
-    //float line = max(smoothstep(0.0, 0.5, grid.x), smoothstep(0.0, 0.5, grid.y));
     float lineX = smoothstep(0.0, 0.5, grid.x);
     float lineY = smoothstep(0.0, 0.5, grid.y);
     float dots = lineX * lineY;
@@ -34,6 +32,14 @@ void main() {
     // fade to edges
     float distToCenter = distance(vUv, vec2(0.5));
     float alpha = 1.0 - smoothstep(FOG_START * 0.5, 0.5, distToCenter);
+
+    // center circle
+    vec2 center = vec2(0.5);
+    float centerDist = distance(vUv, center);
+    float centerAlpha = smoothstep(0.1, 0.0, centerDist);
+    centerAlpha *= 0.7;
+
+    pattern = max(pattern, centerAlpha);
 
     gl_FragColor = vec4(mix(uColor, uLineColor, pattern), alpha * uOpacity);
 }

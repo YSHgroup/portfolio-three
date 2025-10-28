@@ -99,9 +99,9 @@ const tick = () => {
   const isMd = sizes.atLeastBreakpoint("md");
 
   const aspectRatio = sizes.width / sizes.height;
-  const sizeValue = mix(0.55, isMd ? 0.475 : 0.35, progress.in);
-  uniforms.uRectSize.value.set(sizeValue * aspectRatio, sizeValue);
-  uniforms.uRectCenter.value.set(0.5 + (isMd ? 0.2 : 0) * progress.in, 0.5 + progress.in * 1.1);
+  const sizeValue = mix(0.55, isMd ? 0.5 : 0.35, progress.in);
+  uniforms.uRectSize.value.set(sizeValue * aspectRatio, 0.5);
+  uniforms.uRectCenter.value.set(0.5 + (isMd ? 0.2 : 0) * progress.in, 0.5 + progress.in * (isMd ? 1.1 : 1.02));
   uniforms.uAngle.value = (isMd ? 0.075 : 0) * progress.in;
 };
 

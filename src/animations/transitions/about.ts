@@ -45,16 +45,15 @@ const setupInAnimation = (about: HTMLElement) => {
     if (gridFloorMesh) tl.fromTo(gridFloorMesh.rotation, { z: 0.1 }, { z: 0, duration: 1, ease: "none" }, 0);
 
     tl.fromTo(room.group.scale, { x: 1, y: 1, z: 1 }, { x: 0.85, y: 0.85, z: 0.85, duration: 1, ease: "none" }, 0);
-
     if (mobile) {
-      tl.fromTo(room.group.position, { x: 0, y: 0, z: 0 }, { x: 0, y: 6, z: 0, duration: 1, ease: "none" }, 0);
+      tl.fromTo(room.group.position, { x: 0, y: 0, z: 0 }, { x: 0, y: 6.8, z: 0, duration: 1, ease: "none" }, 0);
       tl.fromTo(room.group.rotation, { x: 0, y: -2.1, z: 0 }, { x: 0, y: -2.1, z: 0, duration: 1, ease: "none" }, 0);
     } else if (desktop) {
-      tl.fromTo(room.group.position, { x: 2, y: 0, z: 0 }, { x: 3, y: 4.5, z: 0, duration: 1, ease: "none" }, 0);
+      tl.fromTo(room.group.position, { x: 2, y: 0, z: 0 }, { x: 3, y: 6, z: 0, duration: 1, ease: "none" }, 0);
       tl.fromTo(
         room.group.rotation,
         { x: 0, y: -2.3, z: 0 },
-        { x: 0.1, y: -2.4, z: 0.15, duration: 1, ease: "none" },
+        { x: 0.1, y: -2.3, z: 0.09, duration: 1, ease: "none" },
         0,
       );
     }
@@ -131,7 +130,7 @@ const setupSectionsAnimation = (about: HTMLElement) => {
       },
     });
 
-    tl.to(aboutProgress, { value: 1, duration: 0.9, ease: "none" }, 0);
+    tl.to(aboutProgress, { value: 1, duration: 0.8, ease: "none" }, 0);
 
     const completed = { value: false };
     tl.to(completed, { value: true, duration: 0 }, 1);

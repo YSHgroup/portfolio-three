@@ -82,7 +82,6 @@ const setupMesh = () => {
 
 const tick = () => {
   hologramUniforms.uTime.value = gsap.ticker.time;
-
   hologramUniforms.uProgress.value = aboutProgress.value;
 };
 
