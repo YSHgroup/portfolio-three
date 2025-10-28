@@ -26,7 +26,7 @@ const setupInAnimation = (about: HTMLElement) => {
       duration: 1,
       scrollTrigger: {
         trigger: about,
-        start: "-=200px bottom",
+        start: mobile ? "-=100px bottom" : "-=200px bottom",
         end: "top top",
         scrub: true,
       },
