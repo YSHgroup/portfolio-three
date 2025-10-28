@@ -10,6 +10,9 @@
   --breakpoint-xxl: 1600px;
   --breakpoint-xxxl: 1920px;
 
+  /* Eases */
+  --ease-smooth: cubic-bezier(0.6, 0, 0.25, 1);
+
   /* Z-index */
   --z-index-background: 0;
   --z-index-layout: 10;
@@ -27,7 +30,7 @@
   --radius-xxl: 32px;
 
   /* Font Sizes */
-  --font-size-100: 10px;
+  --font-size-xxs: 12px;
   --font-size-xs: 12px;
   --font-size-sm: 14px;
   --font-size-md: 16px;
@@ -35,11 +38,14 @@
   --font-size-xl: 20px;
   --font-size-xxl: 26px;
 
-  --font-size-title-sm: 24px;
-  --font-size-title-md: 32px;
-  --font-size-title-lg: 40px;
-  --font-size-title-xl: 56px;
-  --font-size-title-xxl: 72px;
+  --font-size-title-xxs: 18px;
+  --font-size-title-xs: 24px;
+  --font-size-title-sm: 28px;
+  --font-size-title-md: 40px;
+  --font-size-title-lg: 56px;
+  --font-size-title-xl: 72px;
+  --font-size-title-xxl: 96px;
+  --font-size-title-xxxl: 112px;
 
   /* Space */
   --space-outer: 16px;

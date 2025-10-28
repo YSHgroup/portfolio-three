@@ -164,7 +164,7 @@ onUnmounted(() => {
   }
 
   &-description {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-md);
     color: var(--color-text-300);
     font-weight: 500;
   }

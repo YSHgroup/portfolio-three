@@ -47,6 +47,7 @@ const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!pr
 <style scoped lang="scss">
 .hologram-box {
   color: var(--color-text-cyan-400);
+  font-family: "NB-Architekt-Std";
 
   &-content {
     padding: var(--space-sm) var(--space-md);

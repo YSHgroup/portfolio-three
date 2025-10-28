@@ -164,9 +164,7 @@ const getInTouchClassNames = computed(() => {
     cursor: pointer;
     display: flex;
     gap: var(--space-xs);
-    transition:
-      opacity 0.2s ease-in-out,
-      color 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out;
 
     @include mixins.mq("md") {
       gap: var(--space-sm);

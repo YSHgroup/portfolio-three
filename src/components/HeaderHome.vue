@@ -92,7 +92,7 @@ onMounted(() => {
     display: flex;
     padding: 3px;
     background-color: var(--color-beige-500);
-    border-radius: var(--radius-md);
+    border-radius: 100px;
     color: var(--color-text-400);
     transition:
       color 0.125s ease-in-out,
@@ -111,9 +111,9 @@ onMounted(() => {
     height: calc(100% - 6px);
     width: 128px;
     background: var(--color-orange-400);
-    border-radius: calc(var(--radius-md) - 3px);
+    border-radius: 100px;
     transition:
-      transform 0.3s ease-out,
+      transform 0.3s var(--ease-smooth),
       opacity 0.125s ease-in-out,
       background-color 0.125s ease-in-out;
     z-index: 1;

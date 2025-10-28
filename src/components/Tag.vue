@@ -52,8 +52,9 @@ const classes = computed(() => ["tag", `tag-variant-${props.variant}`]);
   border: var(--stroke-md) solid transparent;
 
   &-copy {
-    font-size: var(--font-size-xs);
+    font-size: var(--font-size-sm);
     font-weight: 700;
+    font-family: "NB-Architekt-Std";
   }
 
   &-variant {

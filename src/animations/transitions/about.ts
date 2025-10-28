@@ -58,8 +58,6 @@ const setupInAnimation = (about: HTMLElement) => {
       );
     }
 
-    tl.to("#hero-content-inner", { x: 650, rotate: 5, duration: 1, ease: "none" }, 0);
-
     const { waypointsPosition, waypointsRotation } = avatar;
 
     if (desktop) {
@@ -70,7 +68,11 @@ const setupInAnimation = (about: HTMLElement) => {
         { x: 0, y: -Math.PI, z: 0, duration: 1, ease: "power1.out" },
         0,
       );
+
+      tl.to("#hero-content-inner", { x: "35vw", rotate: 5, duration: 1, ease: "none" }, 0);
     } else if (mobile) {
+      tl.to("#hero-content-inner", { x: "55vw", rotate: 5, y: 140, duration: 1, ease: "none" }, 0);
+
       tl.fromTo(waypointsPosition, { x: 0, y: 0, z: 0 }, { x: 0, y: 0, z: 6, duration: 1, ease: "power1.out" }, 0);
       tl.fromTo(
         waypointsRotation,
