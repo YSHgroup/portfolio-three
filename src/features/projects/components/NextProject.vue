@@ -7,8 +7,6 @@ import type { ProjectPreview } from "../../../content/types";
 const { project } = defineProps<{
   project: ProjectPreview;
 }>();
-
-console.log(project);
 </script>
 
 <template>
@@ -36,7 +34,7 @@ console.log(project);
   position: relative;
   justify-content: space-between;
   height: 64px;
-  
+
   @include mixins.mq("sm") {
     height: 80px;
   }

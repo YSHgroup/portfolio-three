@@ -6,9 +6,11 @@ import Media from "./Media.vue";
 
 import type { ProjectComponents, ProjectComponentProps } from "../types";
 
-type Props = ProjectComponentProps;
+type Props = ProjectComponentProps & {
+  index: number;
+};
 
-const { type, props } = defineProps<Props>();
+const { type, props, index } = defineProps<Props>();
 
 const components = {
   imageText: ImageText,
@@ -21,5 +23,5 @@ const Component = components[type];
 </script>
 
 <template>
-  <Component v-bind="props" />
+  <Component v-bind="props" :index="index" />
 </template>

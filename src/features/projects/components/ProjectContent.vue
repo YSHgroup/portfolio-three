@@ -20,7 +20,6 @@ const loadedPreviews = ref<ProjectPreview[] | null>(null);
 const loadPreviews = async () => {
   const module = await previews[locale.value as keyof typeof previews]();
   loadedPreviews.value = module.default;
-  console.log(module.default);
 };
 
 const nextProject = computed(() => {
@@ -49,7 +48,7 @@ onMounted(loadPreviews);
         :key="`${component.type}-${index}`"
         class="grid project-content-grid"
       >
-        <ProjectComponent :type="component.type" :props="component.props" />
+        <ProjectComponent :type="component.type" :props="component.props" :index="index" />
       </div>
     </div>
     <div class="grid project-content-next-project-grid">

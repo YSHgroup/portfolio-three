@@ -43,7 +43,7 @@ const contentClasses = computed(() => {
     <img :src="props.src" :alt="props.alt" loading="lazy" fetchpriority="high" :class="imageContentClasses" />
   </div>
   <div :class="contentClasses" v-if="props.component">
-    <ProjectComponent :type="props.component.type" :props="props.component.props" />
+    <ProjectComponent :type="props.component.type" :props="props.component.props" :index="0" />
   </div>
 </template>
 

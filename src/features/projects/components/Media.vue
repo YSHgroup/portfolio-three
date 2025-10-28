@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted } from "vue";
+import { computed, ref, onMounted, watchEffect } from "vue";
 import gsap from "gsap";
 import Notch from "../../../components/Notch.vue";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const tlRef = ref<gsap.core.Timeline | null>(null);
 const wrapperRef = ref<HTMLDivElement | null>(null);
 const mediaRef = ref<HTMLVideoElement | HTMLImageElement | null>(null);
+const isMounted = ref(false);
 
 export interface Props {
   type: "image" | "video";
   src: string;
   alt?: string;
   caption?: string;
+  index: number;
 }
 
 const props = defineProps<Props>();
@@ -23,8 +23,8 @@ const wrapperClasses = computed(() => {
   };
 });
 
-onMounted(async () => {
-  if (!wrapperRef.value || ScrollTrigger.isInViewport(wrapperRef.value)) {
+watchEffect(async (onInvalidate) => {
+  if (!wrapperRef.value) {
     return;
   }
 
@@ -32,19 +32,20 @@ onMounted(async () => {
     scrollTrigger: {
       trigger: wrapperRef.value,
       start: "top bottom",
+      end: "bottom bottom",
+      toggleActions: "play none none reset",
     },
   });
   tl.fromTo(wrapperRef.value, { scale: 0.8 }, { scale: 1, duration: 0.4, ease: "power1.out" }, 0);
   tl.fromTo(mediaRef.value, { scale: 1.2 }, { scale: 1, duration: 0.4, ease: "power1.out" }, 0);
 
-  tlRef.value = tl;
+  onInvalidate(() => {
+    tl.kill();
+  });
 });
 
-onUnmounted(() => {
-  if (tlRef.value) {
-    tlRef.value.kill();
-    tlRef.value = null;
-  }
+onMounted(async () => {
+  isMounted.value = true;
 });
 </script>
 

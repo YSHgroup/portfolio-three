@@ -5,6 +5,7 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { createWebHistory, createRouter } from "vue-router";
 import { routes } from "./routes";
+import { lenis } from "./utils/scroll";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,6 +13,10 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior(to, _from, savedPosition) {
+    if (to.path.startsWith("/project")) {
+      lenis.value?.scrollTo(0, { immediate: true, force: true });
+      return { top: 0, scrollBehavior: "auto" };
+    }
     if (savedPosition) {
       return { ...savedPosition, scrollBehavior: "auto" };
     }
