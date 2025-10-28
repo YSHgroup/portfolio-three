@@ -157,14 +157,11 @@ const getInTouchClassNames = computed(() => {
   }
 
   &-logo {
-    opacity: var(--scrolled);
-  }
-
-  &-logo {
     cursor: pointer;
     display: flex;
     gap: var(--space-xs);
     transition: color 0.2s ease-in-out;
+    opacity: var(--scrolled);
 
     @include mixins.mq("md") {
       gap: var(--space-sm);

@@ -158,8 +158,8 @@ onUnmounted(() => {
   }
 
   &-title {
-    font-size: var(--font-size-title-sm);
-    font-weight: 800;
+    font-size: var(--font-size-title-xs);
+    font-weight: 700;
     color: var(--color-text-400);
   }
 
