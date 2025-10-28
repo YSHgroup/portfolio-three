@@ -7,7 +7,7 @@ export interface ProjectComponents {
   imageText: ImageTextProps;
   text: TextProps;
   list: ListProps;
-  media: MediaProps;
+  media: Omit<MediaProps, "index">;
 }
 
 export type ProjectComponent = {
