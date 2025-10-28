@@ -11,6 +11,10 @@
   outline: var(--stroke-md) solid var(--color-beige-400);
   padding: var(--space-xxs) var(--space-xs);
 
+  @include mixins.mq("md") {
+    outline-width: var(--stroke-lg);
+  }
+
   @include mixins.mq("lg") {
     padding: var(--space-xs) var(--space-sm);
   }
