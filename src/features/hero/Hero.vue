@@ -89,18 +89,22 @@ import { t } from "../../i18n/utils/translate";
   &-banner {
     position: absolute;
     bottom: 0;
-    right: 0;
+    right: -8px;
     z-index: 10;
-    transform: rotate(-3deg) translate(8px, 75%);
+    transform: rotate(-6deg) translate(8px, 60%);
 
     @include mixins.mq("sm") {
-      transform: rotate(-3deg) translate(0, 60%);
+      right: -12px;
+      transform: rotate(-6deg) translate(0, 40%);
     }
 
     @include mixins.mq("lg") {
-      outline-width: var(--stroke-lg);
+      transform: rotate(-6deg) translate(0, 65%);
+    }
+
+    @include mixins.mq("xl") {
       right: -16px;
-      transform: rotate(-4deg) translate(0, 70%);
+      transform: rotate(-6deg) translate(0, 55%);
     }
   }
 }

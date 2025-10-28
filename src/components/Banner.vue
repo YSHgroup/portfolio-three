@@ -8,12 +8,8 @@
 .banner {
   background-color: #25365d;
   width: fit-content;
-  outline: var(--stroke-md) solid var(--color-beige-400);
+  outline: var(--stroke-lg) solid var(--color-beige-400);
   padding: var(--space-xxs) var(--space-xs);
-
-  @include mixins.mq("md") {
-    outline-width: var(--stroke-lg);
-  }
 
   @include mixins.mq("lg") {
     padding: var(--space-xs) var(--space-sm);
