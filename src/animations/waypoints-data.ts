@@ -17,8 +17,8 @@ export const points = {
       focus: { x: 0, y: 5.4, z: 0 },
     },
     about: {
-      position: { x: 0, y: 4.5, z: 20 },
-      focus: { x: 0, y: 0.5, z: 0 },
+      position: { x: 0, y: 5, z: 20 },
+      focus: { x: 0, y: 0.45, z: 0 },
     },
   },
 } as const satisfies Record<

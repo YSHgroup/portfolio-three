@@ -1,5 +1,6 @@
 <script setup>
 import Button from "../../components/Button.vue";
+import Banner from "../../components/Banner.vue";
 import { t } from "../../i18n/utils/translate";
 </script>
 
@@ -9,9 +10,7 @@ import { t } from "../../i18n/utils/translate";
       <div class="hero-content-inner" id="hero-content-inner">
         <div class="hero-content-copys">
           <h1 class="hero-title">David<br />Heckhoff</h1>
-          <div class="hero-subtitle">
-            <p class="hero-subtitle-copy">{{ t("job-title") }}</p>
-          </div>
+          <Banner class="hero-banner">{{ t("job-title") }}</Banner>
         </div>
       </div>
     </div>
@@ -87,15 +86,11 @@ import { t } from "../../i18n/utils/translate";
     }
   }
 
-  &-subtitle {
-    background-color: #2a395a;
-    width: fit-content;
+  &-banner {
     position: absolute;
     bottom: 0;
     right: 0;
-    outline: var(--stroke-md) solid var(--color-beige-400);
     z-index: 10;
-    padding: var(--space-xxs) var(--space-xs);
     transform: rotate(-4deg) translate(8px, 75%);
 
     @include mixins.mq("sm") {
@@ -103,25 +98,9 @@ import { t } from "../../i18n/utils/translate";
     }
 
     @include mixins.mq("lg") {
-      padding: var(--space-xs) var(--space-sm);
       outline-width: var(--stroke-lg);
       right: -16px;
       transform: rotate(-5deg) translate(0, 70%);
-    }
-
-    &-copy {
-      font-size: var(--font-size-title-xxs);
-      font-weight: 700;
-      color: var(--color-white-400);
-      font-family: "NB-Architekt-Std";
-
-      @include mixins.mq("lg") {
-        font-size: var(--font-size-title-xs);
-      }
-
-      @include mixins.mq("xl") {
-        font-size: var(--font-size-title-sm);
-      }
     }
   }
 }
