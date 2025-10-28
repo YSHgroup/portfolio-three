@@ -1,8 +1,11 @@
 import videoGamedo from "../../../assets/videos/gamedo.mp4";
 
-import avatars from "../../../assets/images/projects/gamedo/avatar-creator.png";
-import games from "../../../assets/images/projects/gamedo/games.png";
-import brand from "../../../assets/images/projects/gamedo/brand-design.png";
+import gamedo0 from "../../../assets/images/projects/gamedo/gamedo-0.png";
+import gamedo1 from "../../../assets/images/projects/gamedo/gamedo-1.png";
+import gamedo2 from "../../../assets/images/projects/gamedo/gamedo-2.png";
+import gamedo3 from "../../../assets/images/projects/gamedo/gamedo-3.png";
+import gamedo4 from "../../../assets/images/projects/gamedo/gamedo-4.png";
+import gamedo5 from "../../../assets/images/projects/gamedo/gamedo-5.png";
 
 import type { ProjectContent } from "../../types";
 
@@ -15,71 +18,65 @@ export default {
     "Gamedo ist eine Plattform für schnelle, rundenbasierte Multiplayer-Spiele. Sie verbindet Matchmaking, anpassbare 3D-Avatare und Account-Integration mit einem Rangsystem auf ELO-Basis.<br/><br/>Das Projekt begann als technisches Experiment und entwickelte sich zu einem skalierbaren System, um neue Spielideen auszuprobieren.",
   components: [
     {
-      type: "imageText",
+      type: "media",
       props: {
-        imagePosition: "right",
-        src: games,
-        alt: "Plattform",
-        component: {
-          type: "list",
-          props: {
-            title: "Plattform & Spiele",
-            items: [
-              "Klassische rundenbasierte Spiele wie Tic Tac Toe",
-              "Quiz-Spiele wie Flag Quiz, Trivia und Emoji Math",
-              "Ein 3D-Minispiel, bei dem Würfel gezählt werden müssen",
-              "Echtzeit-Matchmaking mit Redis + WebSockets",
-              "Rangbelohnungen auf Basis eines ELO-Systems",
-              "Account-System mit dauerhaftem Spielfortschritt",
-            ],
-          },
-        },
+        type: "video",
+        src: videoGamedo,
+        caption: "Benutzeroberfläche",
       },
     },
     {
-      type: "imageText",
+      type: "media",
       props: {
-        imagePosition: "left",
-        border: true,
-        src: avatars,
-        alt: "Avatare",
-        component: {
-          type: "text",
-          props: {
-            title: "3D-Avatar Editor",
-            text: "Spieler können ihr Aussehen über ein modulares Avatar-System individuell gestalten.<br/>Der Fokus lag auf Performance und Flexibilität, sodass neue Optionen leicht ergänzt werden können, ohne die Performance zu beeinträchtigen.",
-          },
-        },
+        type: "image",
+        src: gamedo0,
+        alt: "Avatar Ersteller",
+        caption: "Avatar Ersteller",
       },
     },
     {
-      type: "imageText",
+      type: "media",
       props: {
-        imagePosition: "right",
-        src: brand,
-        alt: "Brand Design",
-        component: {
-          type: "text",
-          props: {
-            title: "Brand Design",
-            text: "Neben der technischen Entwicklung habe ich auch das Marken-Design von Gamedo entworfen.<br/>Der Look ist schlicht und verspielt zugleich und gibt der Plattform ein klares, wiedererkennbares Profil.",
-          },
-        },
+        type: "image",
+        src: gamedo1,
+        alt: "Mehrspieler Tic-Tac-Toe",
+        caption: "Mehrspieler Tic-Tac-Toe",
       },
     },
     {
-      type: "list",
+      type: "media",
       props: {
-        title: "Learnings",
-        size: "md",
-        items: [
-          "Strukturierung einer Monorepo mit geteilten Paketen für Spiele, Services und UI",
-          "Umsetzung von stabilem Matchmaking mit Redis und WebSockets",
-          "Entwicklung eines Rang- und Belohnungssystems auf ELO-Basis",
-          "Aufbau eines modularen 3D-Avatar Editors",
-          "Integration unterschiedlicher Spieltypen, von Quiz bis 3D-Minispiele",
-          "Performance-Optimierung für Multiplayer-Spiele im Browser",
-        ],
+        type: "image",
+        src: gamedo2,
+        alt: "Verschiedene Minispiele",
+        caption: "Verschiedene Minispiele",
+      },
+    },
+    {
+      type: "media",
+      props: {
+        type: "image",
+        src: gamedo3,
+        alt: "Avatar Variationen",
+        caption: "Avatar Variationen",
+      },
+    },
+    {
+      type: "media",
+      props: {
+        type: "image",
+        src: gamedo4,
+        alt: "Responsives Design",
+        caption: "Responsives Design",
+      },
+    },
+    {
+      type: "media",
+      props: {
+        type: "image",
+        src: gamedo5,
+        alt: "Dunkles Design",
+        caption: "Dunkles Design",
       },
     },
   ],
