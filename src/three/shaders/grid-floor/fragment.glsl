@@ -10,10 +10,6 @@ uniform float uTime;
 #define LINE_WIDTH 0.01
 #define FOG_START 0.25
 
-// directional light
-#define DIRECTIONAL_LIGHT_COLOR vec3(1.0, 0.6, 0.3)
-#define DIRECTIONAL_LIGHT_DIR normalize(vec3(0.5, 0.5, 0.))
-
 void main() {
     vec2 coord = vUv * CELLS;
     coord.y += uTime * 0.35;
@@ -46,15 +42,7 @@ void main() {
 
     pattern = max(pattern, centerAlpha);
 
-    // --- Directional lighting simulation ---
-    // Fake a simple "3D" light by using UV direction as pseudo-normal
-    vec3 fakeNormal = normalize(vec3(vUv - 0.5, 0.25));
-    float lightIntensity = max(dot(fakeNormal, DIRECTIONAL_LIGHT_DIR), 0.0);
-    lightIntensity = smoothstep(0.3, 0.8, lightIntensity) * 0.2;
-
-    // Combine colors with lighting
-    vec3 litColor = mix(uColor, DIRECTIONAL_LIGHT_COLOR, lightIntensity);
-    vec3 finalColor = mix(litColor, uLineColor, pattern);
+    vec3 finalColor = mix(uColor, uLineColor, pattern);
 
     gl_FragColor = vec4(finalColor, alpha * uOpacity);
 }
