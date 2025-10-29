@@ -5,18 +5,22 @@ import Instagram from "./icons/Instagram.vue";
 import Mail from "./icons/Mail.vue";
 import X from "./icons/X.vue";
 import Link from "./Link.vue";
-import Clickable from "./Clickable.vue";
 import { t } from "../i18n/utils/translate";
+import ButtonRound from "./ButtonRound.vue";
 
 import { social } from "../content/social";
 
+const props = defineProps<{
+  variant?: "theme" | "background";
+}>();
+
 // map icon names to components
 const icons = {
+  mail: Mail,
   github: Github,
   linkedin: Linkedin,
-  instagram: Instagram,
-  mail: Mail,
   x: X,
+  instagram: Instagram,
 } as const;
 
 const getAriaLabel = (name: string) => `${t("go-to")} ${name.charAt(0).toUpperCase() + name.slice(1)}`;
@@ -24,11 +28,18 @@ const getAriaLabel = (name: string) => `${t("go-to")} ${name.charAt(0).toUpperCa
 
 <template>
   <div class="social">
-    <Clickable v-for="item in social" :key="item.name" :href="item.url" renderAs="div" class="social-link">
-      <Link external :href="item.url">
-        <component :is="icons[item.name]" :aria-label="getAriaLabel(item.name)" external
-      /></Link>
-    </Clickable>
+    <Link
+      v-for="item in social"
+      :key="item.name"
+      external
+      :href="item.url"
+      :aria-label="getAriaLabel(item.name)"
+      class="social-link"
+    >
+      <ButtonRound renderAs="div" :variant="props.variant ?? 'theme'">
+        <component :is="icons[item.name]" :aria-label="getAriaLabel(item.name)" external />
+      </ButtonRound>
+    </Link>
   </div>
 </template>
 
@@ -36,11 +47,5 @@ const getAriaLabel = (name: string) => `${t("go-to")} ${name.charAt(0).toUpperCa
 .social {
   display: flex;
   gap: var(--space-md);
-  color: var(--color-text-300);
-
-  &-link {
-    width: 24px;
-    height: 24px;
-  }
 }
 </style>

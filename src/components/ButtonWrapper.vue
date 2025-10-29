@@ -3,7 +3,7 @@ import { computed } from "vue";
 
 export interface Props {
   renderAs?: "button" | "a" | "div";
-  variant?: "accent" | "border";
+  variant?: "accent" | "border" | "theme" | "background";
   rounded?: boolean;
 }
 
@@ -11,7 +11,7 @@ const props = defineProps<Props>();
 
 const classes = computed(() => [
   "button-wrapper",
-  `button-wrapper-${props.variant ?? "accent"}`,
+  { [`button-wrapper-${props.variant}`]: props.variant !== undefined },
   { "button-wrapper-rounded": props.rounded },
 ]);
 </script>
@@ -46,6 +46,16 @@ const classes = computed(() => [
   &-accent {
     background-color: var(--color-accent-400, var(--color-orange-400));
     color: var(--color-accent-text-400, var(--color-white-400));
+  }
+
+  &-theme {
+    background-color: var(--color-grayscale-400);
+    color: var(--color-text-400);
+  }
+
+  &-background {
+    background-color: var(--color-background-400);
+    color: var(--color-text-400);
   }
 
   &-border {

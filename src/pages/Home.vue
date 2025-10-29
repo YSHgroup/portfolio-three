@@ -69,7 +69,7 @@ const stickyContentClassNames = computed(() => {
     </div>
     <Projects id="projects" @loaded="handleProjectsLoaded" />
     <Contact id="contact" v-if="projectsLoaded" />
-    <Footer />
+    <Footer :withSocial="false" />
   </Layout>
   <HeaderHome v-if="projectsLoaded" />
 </template>

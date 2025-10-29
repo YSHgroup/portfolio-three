@@ -61,8 +61,8 @@ onMounted(loadPreviews);
   padding-bottom: 96px;
 
   @include mixins.mq("md") {
-    padding-top: 128px;
-    padding-bottom: 128px;
+    padding-top: 144px;
+    padding-bottom: 144px;
     gap: var(--space-xxl);
   }
 

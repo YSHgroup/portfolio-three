@@ -51,7 +51,7 @@ onUnmounted(() => {
         </div>
       </div>
       <div class="preview-card-edge">
-        <ButtonRound class="preview-card-button">
+        <ButtonRound class="preview-card-button" variant="accent">
           <ArrowRightLong class="preview-card-button-arrow" />
         </ButtonRound>
       </div>

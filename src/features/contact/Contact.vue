@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import { transitions } from "../../animations";
 import { t } from "../../i18n/utils/translate";
+import Social from "../../components/Social.vue";
 
 const contactElement = ref<HTMLElement | null>(null);
 
@@ -18,8 +19,9 @@ onUnmounted(() => {
 
 <template>
   <div class="contact grid" ref="contactElement">
-    <div class="contact-title">
-      <h2 class="contact-title-copy" v-html="t('lets-work-together')"></h2>
+    <div class="contact-content">
+      <h2 class="contact-title" v-html="t('lets-work-together')"></h2>
+      <Social variant="background" />
     </div>
   </div>
 </template>
@@ -32,13 +34,16 @@ onUnmounted(() => {
   padding-top: var(--space-lg);
 
   @include mixins.mq("md") {
-    padding-top: var(--space-xl);
+    padding-top: var(--space-xxl);
   }
 
-  &-title {
+  &-content {
     position: relative;
     padding-top: var(--space-md);
     grid-column: 1 / 13;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
 
     @include mixins.mq("sm") {
       grid-column: 1 / 8;
@@ -52,31 +57,19 @@ onUnmounted(() => {
     @include mixins.mq("lg") {
       grid-column: 2 / 6;
     }
+  }
 
-    &-copy {
-      font-weight: 900;
-      letter-spacing: 0.02em;
-      font-size: var(--font-size-title-md);
+  &-title {
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    font-size: var(--font-size-title-md);
 
-      @include mixins.mq("sm") {
-        font-size: var(--font-size-title-lg);
-      }
-
-      @include mixins.mq("xl") {
-        font-size: var(--font-size-title-xl);
-      }
+    @include mixins.mq("sm") {
+      font-size: var(--font-size-title-lg);
     }
 
-    &-banner {
-      position: absolute;
-      top: 0;
-      left: -8px;
-      transform: translate(0, -20%) rotate(-5deg);
-
-      @include mixins.mq("lg") {
-        left: -16px;
-        transform: translate(0, -20%) rotate(-7deg);
-      }
+    @include mixins.mq("xl") {
+      font-size: var(--font-size-title-xl);
     }
   }
 }

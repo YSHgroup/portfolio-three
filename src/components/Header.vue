@@ -58,6 +58,7 @@ const getInTouchClassNames = computed(() => {
     <div class="header-left">
       <ButtonRound
         v-if="isProjectPage"
+        variant="accent"
         @click="router.back()"
         :class="{ 'header-back': true, 'header-back-isProjectPage': isProjectPage }"
       >
@@ -71,6 +72,7 @@ const getInTouchClassNames = computed(() => {
     <div class="header-right">
       <Button
         renderAs="a"
+        variant="accent"
         :href="social.find((item) => item.name === 'mail')?.url ?? ''"
         external
         :class="getInTouchClassNames"

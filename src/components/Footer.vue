@@ -6,6 +6,12 @@ import LangSwitch from "./LangSwitch.vue";
 import NotchSection from "./NotchSection.vue";
 import { t } from "../i18n/utils/translate";
 import { locale } from "../i18n/store";
+
+interface Props {
+  withSocial?: boolean;
+}
+
+const { withSocial = true } = defineProps<Props>();
 </script>
 
 <template>
@@ -13,7 +19,7 @@ import { locale } from "../i18n/store";
     <NotchSection class="footer-notch" />
     <div class="footer-content">
       <div class="footer-top">
-        <Social />
+        <Social v-if="withSocial" />
         <div class="footer-top-links">
           <div class="footer-top-links-legal">
             <Clickable renderAs="div">

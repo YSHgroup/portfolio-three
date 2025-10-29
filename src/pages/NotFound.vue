@@ -11,7 +11,7 @@ import Link from "../components/Link.vue";
       <p>Page not found</p>
     </div>
     <Link to="/" class="not-found-button">
-      <Button renderAs="div">Back to home</Button>
+      <Button renderAs="div" variant="accent">Back to home</Button>
     </Link>
   </Layout>
 </template>
