@@ -10,7 +10,7 @@ import { t } from "../../i18n/utils/translate";
       <div class="hero-content-inner" id="hero-content-inner">
         <div class="hero-content-copys">
           <h1 class="hero-title">David<br />Heckhoff</h1>
-          <Banner class="hero-banner">{{ t("job-title") }}</Banner>
+          <Banner class="hero-banner" :copy="t('job-title')" />
         </div>
       </div>
     </div>
@@ -66,7 +66,11 @@ import { t } from "../../i18n/utils/translate";
     &-copys {
       display: flex;
       flex-direction: column;
-      gap: var(--space-md);
+      gap: var(--space-sm);
+
+      @include mixins.mq("md") {
+        gap: var(--space-md);
+      }
     }
 
     &-button {
@@ -76,7 +80,6 @@ import { t } from "../../i18n/utils/translate";
 
   &-title {
     font-weight: 900;
-    font-size: 72px;
     letter-spacing: 0.02em;
     font-size: var(--font-size-title-lg);
 
@@ -92,22 +95,18 @@ import { t } from "../../i18n/utils/translate";
   &-banner {
     position: absolute;
     bottom: 0;
-    right: -8px;
+    right: -16px;
     z-index: 10;
-    transform: rotate(-6deg) translate(8px, 60%);
+    transform: rotate(-5deg) translate(0, 65%);
 
     @include mixins.mq("sm") {
-      right: -12px;
-      transform: rotate(-6deg) translate(0, 40%);
+      right: -24px;
+      transform: rotate(-5deg) translate(0, 70%);
     }
 
     @include mixins.mq("lg") {
-      transform: rotate(-6deg) translate(0, 65%);
-    }
-
-    @include mixins.mq("xl") {
-      right: -16px;
-      transform: rotate(-6deg) translate(0, 55%);
+      right: -32px;
+      transform: rotate(-5deg) translate(0, 80%);
     }
   }
 }

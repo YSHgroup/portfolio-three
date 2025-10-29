@@ -50,7 +50,7 @@ void main() {
     // Fake a simple "3D" light by using UV direction as pseudo-normal
     vec3 fakeNormal = normalize(vec3(vUv - 0.5, 0.25));
     float lightIntensity = max(dot(fakeNormal, DIRECTIONAL_LIGHT_DIR), 0.0);
-    lightIntensity = smoothstep(0.3, 0.8, lightIntensity) * 0.15;
+    lightIntensity = smoothstep(0.3, 0.8, lightIntensity) * 0.2;
 
     // Combine colors with lighting
     vec3 litColor = mix(uColor, DIRECTIONAL_LIGHT_COLOR, lightIntensity);

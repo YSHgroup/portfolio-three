@@ -54,7 +54,6 @@ const classes = computed(() => ["tag", `tag-variant-${props.variant}`]);
   &-copy {
     font-size: var(--font-size-xs);
     font-weight: 700;
-    font-family: "NB-Architekt-Std";
   }
 
   &-variant {

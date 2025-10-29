@@ -4,6 +4,8 @@ import { previews } from "../../../content/projects/previews";
 import { locale } from "../../../i18n/store";
 import PreviewCard from "./PreviewCard.vue";
 import NotchSection from "../../../components/NotchSection.vue";
+import Banner from "../../../components/Banner.vue";
+import { t } from "../../../i18n/utils/translate";
 
 import type { ProjectPreview } from "../../../content/types";
 
@@ -27,6 +29,12 @@ onMounted(loadPreviews);
   <div class="projects">
     <NotchSection class="projects-notch" />
     <div class="grid">
+      <div class="projects-title">
+        <Banner class="projects-title-banner" :copy="t('selected')" size="sm" />
+        <h2 class="projects-title-copy">{{ t("projects") }}</h2>
+      </div>
+    </div>
+    <div class="grid">
       <div class="projects-cards">
         <PreviewCard v-for="preview in loadedPreviews" :key="preview.title" :preview="preview" />
       </div>
@@ -41,15 +49,66 @@ onMounted(loadPreviews);
   align-items: center;
   justify-content: center;
   position: relative;
-  padding-top: 100px;
-  padding-bottom: 100px;
   width: 100%;
+  gap: var(--space-xl);
   padding-left: var(--space-outer);
   padding-right: var(--space-outer);
   background-color: var(--color-beige-400);
   min-height: calc(var(--lvh) * 100 + var(--radius-xxl));
   border-bottom-left-radius: var(--radius-xxl);
   border-bottom-right-radius: var(--radius-xxl);
+  padding-top: 96px;
+  padding-bottom: 96px;
+
+  @include mixins.mq("md") {
+    padding-top: 128px;
+    padding-bottom: 128px;
+    gap: var(--space-xxl);
+  }
+
+  @include mixins.mq("lg") {
+    gap: var(--space-xxxl);
+  }
+
+  &-title {
+    position: relative;
+    padding-top: var(--space-md);
+    grid-column: 1 / 13;
+
+    @include mixins.mq("md") {
+      grid-column: 1 / 10;
+    }
+
+    @include mixins.mq("lg") {
+      grid-column: 2 / 8;
+    }
+
+    &-copy {
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      font-size: var(--font-size-title-md);
+
+      @include mixins.mq("sm") {
+        font-size: var(--font-size-title-lg);
+      }
+
+      @include mixins.mq("xl") {
+        font-size: var(--font-size-title-xl);
+      }
+    }
+
+    &-banner {
+      position: absolute;
+      top: 0;
+      left: -8px;
+      transform: translate(0, -20%) rotate(-4deg);
+
+      @include mixins.mq("lg") {
+        left: -16px;
+        transform: translate(0, -20%) rotate(-6deg);
+      }
+    }
+  }
 
   &-notch {
     position: absolute;
