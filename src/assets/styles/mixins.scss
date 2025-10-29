@@ -46,3 +46,9 @@ $media-direction: min;
     @content;
   }
 }
+
+@mixin landscape {
+  @media (min-aspect-ratio: 12/10) {
+    @content;
+  }
+}

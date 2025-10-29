@@ -21,11 +21,13 @@ class Sizes extends EventEmitter<{
   pixelRatio: number;
   breakpoint: keyof typeof BREAKPOINTS;
   visible: boolean;
+  aspectRatio: number;
 
   constructor() {
     super();
     this.width = 0;
     this.height = 0;
+    this.aspectRatio = 0;
     this.pixelRatio = 1;
     this.breakpoint = "md";
     this.visible = true;
@@ -50,6 +52,10 @@ class Sizes extends EventEmitter<{
     return this.width >= BREAKPOINTS[breakpoint];
   }
 
+  isLandscape() {
+    return this.aspectRatio >= 1.2;
+  }
+
   setViewportUnits() {
     document.documentElement.style.setProperty("--vh", 0.01 * window.innerHeight + "px");
     document.documentElement.style.setProperty("--dvh", 0.01 * window.innerHeight + "px");
@@ -60,6 +66,7 @@ class Sizes extends EventEmitter<{
   resize() {
     this.width = window.innerWidth;
     this.height = window.innerHeight;
+    this.aspectRatio = this.width / this.height;
     this.pixelRatio = Math.min(window.devicePixelRatio, 2);
 
     this.setViewportUnits();

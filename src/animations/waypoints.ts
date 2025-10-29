@@ -37,12 +37,12 @@ function weightedAverage<T extends { x: number; y: number; z: number }>(points: 
 let positions: { x: number; y: number; z: number }[] = [];
 let focuses: { x: number; y: number; z: number }[] = [];
 let weights: number[] = [];
-let resolvedPoints: typeof points.md | typeof points.sm = points.md;
+let resolvedPoints: typeof points.landscape | typeof points.portrait = points.landscape;
 
 // called when viewport or scene set changes
 function updateReferences() {
-  const isMd = sizes.atLeastBreakpoint("md");
-  resolvedPoints = isMd ? points.md : points.sm;
+  const isLandscape = sizes.isLandscape();
+  resolvedPoints = isLandscape ? points.landscape : points.portrait;
 
   const active = Object.entries(sceneWeights).filter(([key, weight]) => weight > 0 && key in resolvedPoints) as [
     SceneKey,

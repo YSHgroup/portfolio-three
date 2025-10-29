@@ -30,13 +30,16 @@ import { t } from "../../i18n/utils/translate";
     justify-content: center;
     height: 50%;
 
-    @include mixins.mq("md") {
-      padding-bottom: 30%;
+    @include mixins.landscape {
       height: 100%;
-    }
 
-    @include mixins.mq("lg") {
-      padding-bottom: 5%;
+      @include mixins.mq("md") {
+        padding-bottom: 30%;
+      }
+
+      @include mixins.mq("lg") {
+        padding-bottom: 5%;
+      }
     }
 
     &-inner {
@@ -52,7 +55,7 @@ import { t } from "../../i18n/utils/translate";
       left: 50%;
       transform: translateX(-50%);
 
-      @include mixins.mq("md") {
+      @include mixins.landscape {
         left: 0;
         transform: translateX(0);
         grid-column: 2 / 13;

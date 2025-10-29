@@ -1,7 +1,7 @@
 import type { SceneKey } from "./types";
 
 export const points = {
-  md: {
+  landscape: {
     hero: {
       position: { x: 0, y: 6, z: 10 },
       focus: { x: 0, y: 3, z: 0 },
@@ -11,7 +11,7 @@ export const points = {
       focus: { x: 0, y: 2.5, z: 6 },
     },
   },
-  sm: {
+  portrait: {
     hero: {
       position: { x: 0, y: 8.4, z: 16 },
       focus: { x: 0, y: 5.4, z: 0 },
@@ -22,7 +22,7 @@ export const points = {
     },
   },
 } as const satisfies Record<
-  "md" | "sm",
+  "landscape" | "portrait",
   Partial<
     Record<
       SceneKey,

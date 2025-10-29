@@ -21,12 +21,12 @@ const setup = (about: HTMLElement) => {
 };
 
 const setupInAnimation = (about: HTMLElement) => {
-  inMM = createMatchMedia((_context, { mobile, desktop }) => {
+  inMM = createMatchMedia((_context, { isMobile, isLandscape }) => {
     const tl = gsap.timeline({
       duration: 1,
       scrollTrigger: {
         trigger: about,
-        start: mobile ? "top bottom" : "-=200px bottom",
+        start: isMobile ? "top bottom" : "-=200px bottom",
         end: "top top",
         scrub: true,
       },
@@ -45,10 +45,10 @@ const setupInAnimation = (about: HTMLElement) => {
     if (gridFloorMesh) tl.fromTo(gridFloorMesh.rotation, { z: 0.1 }, { z: 0, duration: 1, ease: "none" }, 0);
 
     tl.fromTo(room.group.scale, { x: 1, y: 1, z: 1 }, { x: 0.85, y: 0.85, z: 0.85, duration: 1, ease: "none" }, 0);
-    if (mobile) {
+    if (!isLandscape) {
       tl.fromTo(room.group.position, { x: 0, y: 0, z: 0 }, { x: 0, y: 6.8, z: 0, duration: 1, ease: "none" }, 0);
       tl.fromTo(room.group.rotation, { x: 0, y: -2.1, z: 0 }, { x: 0, y: -2.1, z: 0, duration: 1, ease: "none" }, 0);
-    } else if (desktop) {
+    } else {
       tl.fromTo(room.group.position, { x: 2, y: 0, z: 0 }, { x: 3, y: 6, z: 0, duration: 1, ease: "none" }, 0);
       tl.fromTo(
         room.group.rotation,
@@ -60,7 +60,7 @@ const setupInAnimation = (about: HTMLElement) => {
 
     const { waypointsPosition, waypointsRotation } = avatar;
 
-    if (desktop) {
+    if (isLandscape) {
       tl.fromTo(waypointsPosition, { x: 2, y: 0, z: 0 }, { x: 0, y: 0, z: 6, duration: 1, ease: "power1.out" }, 0);
       tl.fromTo(
         waypointsRotation,
@@ -70,7 +70,7 @@ const setupInAnimation = (about: HTMLElement) => {
       );
 
       tl.to("#hero-content-inner", { x: "27vw", rotate: 4, duration: 1, ease: "none" }, 0);
-    } else if (mobile) {
+    } else {
       //tl.to("#hero-content-inner", { y: "40vh", scale: 0.7, duration: 1, ease: "none" }, 0);
 
       tl.fromTo(waypointsPosition, { x: 0, y: 0, z: 0 }, { x: 0, y: 0, z: 6, duration: 1, ease: "power1.out" }, 0);
