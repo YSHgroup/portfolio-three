@@ -17,7 +17,7 @@ const stickyObserver = ref<IntersectionObserver | null>(null);
 const isStickyVisible = ref(false);
 const projectsLoaded = ref(false);
 const contactRef = ref<HTMLElement | null>(null);
-const contactTop = ref<number>(0);
+const contactBottom = ref<number>(0);
 
 const handleIntersection = (entries: IntersectionObserverEntry[]) => {
   isStickyVisible.value = entries[0]?.isIntersecting ?? false;
@@ -25,14 +25,16 @@ const handleIntersection = (entries: IntersectionObserverEntry[]) => {
 
 watchEffect((onInvalidate) => {
   if (!contactRef.value) return;
-  const updateContactAbsoluteTop = () => {
-    if (contactRef.value) {
-      const bounding = contactRef.value.getBoundingClientRect();
-      contactTop.value = bounding.top + window.scrollY;
-    }
+  const updateContactBottomOffset = () => {
+    if (!contactRef.value) return;
+    const bounding = contactRef.value.getBoundingClientRect();
+    const documentBottom = document.documentElement.scrollHeight;
+    const elementBottom = bounding.bottom + window.scrollY;
+    // distance from bottom of document to bottom of contact section
+    contactBottom.value = documentBottom - elementBottom;
   };
 
-  const observer = new ResizeObserver(updateContactAbsoluteTop);
+  const observer = new ResizeObserver(updateContactBottomOffset);
   observer.observe(contactRef.value as HTMLElement);
 
   onInvalidate(() => {
@@ -75,7 +77,7 @@ const handleProjectsLoaded = () => {
       <div
         class="intro-sticky"
         :class="{ 'intro-sticky-visible': isStickyVisible }"
-        :style="{ '--contact-top': `${contactTop}px` }"
+        :style="{ '--contact-bottom': `${contactBottom}px` }"
       >
         <div
           ref="stickyContentRef"
@@ -144,7 +146,7 @@ const handleProjectsLoaded = () => {
 
   &-fixed {
     position: absolute;
-    top: var(--contact-top);
+    bottom: var(--contact-bottom);
     left: 0;
     width: 100%;
     height: calc(var(--lvh) * 100);
