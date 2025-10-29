@@ -1,11 +1,11 @@
 import gsap from "gsap";
 import { sceneWeightsInOut } from "../scenes";
 import { animations as avatarAnimations } from "../../three/objects/avatar/animations";
-import ScrollTrigger from "gsap/ScrollTrigger";
+import { createMatchMedia } from "../utils/matchMedia";
 
 let inTl: gsap.core.Timeline | null = null;
 let outTl: gsap.core.Timeline | null = null;
-let wakeUpTrigger: ScrollTrigger | null = null;
+let wakeUpMm: gsap.MatchMedia | null = null;
 
 const setup = (contact: HTMLElement) => {
   inTl = gsap.timeline({
@@ -29,7 +29,7 @@ const setup = (contact: HTMLElement) => {
   });
   outTl.fromTo(sceneWeightsInOut.contact, { out: 0 }, { out: 1, duration: 1, ease: "none" }, 0);
 
-  wakeUpTrigger = ScrollTrigger.create({
+  /**  wakeUpTrigger = ScrollTrigger.create({
     trigger: contact,
     start: "center 75%",
     onEnter: () => {
@@ -37,6 +37,15 @@ const setup = (contact: HTMLElement) => {
         avatarAnimations.wakeUp();
       });
     },
+  }); */
+  wakeUpMm = createMatchMedia((_context, { isMobile }) => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: contact,
+        start: isMobile ? "center 60%" : "center 75%",
+      },
+    });
+    tl.call(avatarAnimations.wakeUp, [0.25]);
   });
 };
 
@@ -49,9 +58,9 @@ const destroy = () => {
     outTl.kill();
     outTl = null;
   }
-  if (wakeUpTrigger) {
-    wakeUpTrigger.kill();
-    wakeUpTrigger = null;
+  if (wakeUpMm) {
+    wakeUpMm.kill();
+    wakeUpMm = null;
   }
 };
 

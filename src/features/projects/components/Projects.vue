@@ -80,7 +80,7 @@ onMounted(loadPreviews);
     }
 
     @include mixins.mq("lg") {
-      grid-column: 2 / 8;
+      grid-column: 3 / 8;
     }
 
     &-copy {

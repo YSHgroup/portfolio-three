@@ -43,13 +43,14 @@ onUnmounted(() => {
     grid-column: 1 / 13;
     display: flex;
     flex-direction: column;
-    gap: var(--space-xl);
+    gap: var(--space-md);
 
     @include mixins.mq("sm") {
       grid-column: 1 / 8;
     }
 
     @include mixins.mq("md") {
+      gap: var(--space-xl);
       grid-column: 1 / 6;
       padding-top: var(--space-lg);
     }

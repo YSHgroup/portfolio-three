@@ -5,11 +5,18 @@ import gsap from "gsap";
 import { scene } from "./scene";
 import { waypoints } from "../../animations/waypoints";
 import { sceneWeights, sceneWeightsInOut } from "../../animations/scenes";
+import { sizes } from "../../utils/sizes";
 
 const PARALLAX_INTENSITY = 1;
 const PARALLAX_SPEED = 0.6;
-const contactPosition = new Vector3(0, -8.5, 9);
-const contactFocus = new Vector3(0, -10.5, 0);
+const contactPosition = {
+  sm: new Vector3(0, -6.5, 13),
+  md: new Vector3(0, -8.5, 9),
+};
+const contactFocus = {
+  sm: new Vector3(0, -9, 0),
+  md: new Vector3(0, -10.5, 0),
+};
 const currentContactFocus = new Vector3(0, -10.5, 0);
 
 const instance = new PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.01, 100);
@@ -48,16 +55,19 @@ const updateParallax = (object: Object3D) => {
 };
 
 const calculateContactTransform = () => {
+  const isMd = sizes.atLeastBreakpoint("md");
+  const breakpoint = isMd ? "md" : "sm";
+
   const inProgress = 1 - sceneWeightsInOut.contact.in;
   const outProgress = sceneWeightsInOut.contact.out;
 
-  instance.position.copy(contactPosition);
-  instance.position.y += inProgress * 7;
-  instance.position.y -= outProgress * 5;
+  instance.position.copy(contactPosition[breakpoint]);
+  instance.position.y += inProgress * (isMd ? 6 : 12);
+  instance.position.y -= outProgress * (isMd ? 5 : 5);
 
-  currentContactFocus.copy(contactFocus);
-  currentContactFocus.y += inProgress * 7;
-  currentContactFocus.y -= outProgress * 5;
+  currentContactFocus.copy(contactFocus[breakpoint]);
+  currentContactFocus.y += inProgress * (isMd ? 6 : 10);
+  currentContactFocus.y -= outProgress * (isMd ? 5 : 9);
 
   instance.lookAt(currentContactFocus);
 };
