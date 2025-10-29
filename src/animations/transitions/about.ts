@@ -130,7 +130,7 @@ const setupSectionsAnimation = (about: HTMLElement) => {
       },
     });
 
-    tl.to(aboutProgress, { value: 1, duration: 0.8, ease: "none" }, 0);
+    tl.to(aboutProgress, { value: 1, duration: 0.9, ease: "none" }, 0);
 
     const completed = { value: false };
     tl.to(completed, { value: true, duration: 0 }, 1);
