@@ -124,17 +124,19 @@ onUnmounted(() => {
 
   &-image {
     width: 100%;
+    height: 100%;
     object-fit: cover;
-    aspect-ratio: 16/9;
 
     &-container {
       transition: transform 0.125s ease-in-out;
       transform: scale(calc(1 + var(--hover) * 0.02));
+      aspect-ratio: 16/9;
     }
 
     &-wrapper {
       border-radius: var(--radius-lg);
       overflow: hidden;
+      background-color: var(--color-beige-500);
     }
   }
 

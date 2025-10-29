@@ -71,6 +71,7 @@ const handleProjectsLoaded = () => {
 </script>
 
 <template>
+  <HeaderHome v-if="projectsLoaded" />
   <Layout>
     <div class="intro-wrapper" ref="introRef">
       <Hero class="intro-hero" id="hero" />
@@ -94,7 +95,6 @@ const handleProjectsLoaded = () => {
     </div>
     <Footer :withSocial="false"></Footer>
   </Layout>
-  <HeaderHome v-if="projectsLoaded" />
 </template>
 
 <style scoped lang="scss">
