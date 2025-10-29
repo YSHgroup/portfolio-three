@@ -61,8 +61,12 @@ const calculateContactTransform = () => {
   const outProgress = sceneWeightsInOut.contact.out;
 
   instance.position.copy(contactPosition[breakpoint]);
-  instance.position.y += inProgress * (isMd ? 4 : 6);
-  instance.position.y -= outProgress * (isMd ? 4 : 6);
+  //instance.position.y += inProgress * (isMd ? 4 : 6);
+  //instance.position.y -= outProgress * (isMd ? 4 : 6);
+  if (isMd) {
+    instance.position.y += inProgress * 4;
+    instance.position.y -= outProgress * 4;
+  }
 
   instance.lookAt(contactFocus[breakpoint]);
 };
