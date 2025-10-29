@@ -97,6 +97,8 @@ const { withSocial = true } = defineProps<Props>();
       @include mixins.mq("md") {
         gap: var(--space-lg);
         flex-direction: row;
+        position: relative;
+        margin-left: auto;
       }
     }
   }
