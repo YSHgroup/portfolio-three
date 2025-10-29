@@ -6,33 +6,52 @@ import AboutSections from "../features/about/Sections.vue";
 import Projects from "../features/projects/components/Projects.vue";
 import Contact from "../features/contact/Contact.vue";
 import Footer from "../components/Footer.vue";
-import { ref, onMounted, onUnmounted, computed } from "vue";
+import { ref, onMounted, onUnmounted, watchEffect } from "vue";
 import { three } from "../three";
 import { animations } from "../animations";
 import HeaderHome from "../components/HeaderHome.vue";
 
-const stickyRef = ref<HTMLElement | null>(null);
+const introRef = ref<HTMLElement | null>(null);
 const stickyContentRef = ref<HTMLElement | null>(null);
-const observer = ref<IntersectionObserver | null>(null);
+const stickyObserver = ref<IntersectionObserver | null>(null);
 const isStickyVisible = ref(false);
 const projectsLoaded = ref(false);
+const contactRef = ref<HTMLElement | null>(null);
+const contactTop = ref<number>(0);
 
 const handleIntersection = (entries: IntersectionObserverEntry[]) => {
   isStickyVisible.value = entries[0]?.isIntersecting ?? false;
 };
 
+watchEffect((onInvalidate) => {
+  if (!contactRef.value) return;
+  const updateContactAbsoluteTop = () => {
+    if (contactRef.value) {
+      const bounding = contactRef.value.getBoundingClientRect();
+      contactTop.value = bounding.top + window.scrollY;
+    }
+  };
+
+  const observer = new ResizeObserver(updateContactAbsoluteTop);
+  observer.observe(contactRef.value as HTMLElement);
+
+  onInvalidate(() => {
+    observer.disconnect();
+  });
+});
+
 onMounted(() => {
   three.setActive(true);
 
-  observer.value = new IntersectionObserver(handleIntersection);
-  observer.value.observe(stickyRef.value as HTMLElement);
+  stickyObserver.value = new IntersectionObserver(handleIntersection);
+  stickyObserver.value.observe(introRef.value as HTMLElement);
 });
 
 onUnmounted(() => {
   three.setActive(false);
 
-  observer.value?.disconnect();
-  observer.value = null;
+  stickyObserver.value?.disconnect();
+  stickyObserver.value = null;
 });
 
 onMounted(() => {
@@ -47,36 +66,43 @@ onUnmounted(() => {
 const handleProjectsLoaded = () => {
   projectsLoaded.value = true;
 };
-
-const stickyContentClassNames = computed(() => {
-  return {
-    "intro-sticky-content": true,
-    "intro-sticky-content-fixed": !isStickyVisible.value,
-  };
-});
 </script>
 
 <template>
   <Layout>
-    <div class="intro-wrapper">
+    <div class="intro-wrapper" ref="introRef">
       <Hero class="intro-hero" id="hero" />
-      <div class="intro-sticky" ref="stickyRef">
-        <div ref="stickyContentRef" :class="stickyContentClassNames"></div>
+      <div
+        class="intro-sticky"
+        :class="{ 'intro-sticky-visible': isStickyVisible }"
+        :style="{ '--contact-top': `${contactTop}px` }"
+      >
+        <div
+          ref="stickyContentRef"
+          :class="['intro-sticky-content', { 'intro-sticky-content-fixed': !isStickyVisible }]"
+        ></div>
       </div>
       <div class="intro-wrapper-spacer"></div>
       <About id="about" />
       <AboutSections />
     </div>
     <Projects id="projects" @loaded="handleProjectsLoaded" />
-    <Contact id="contact" v-if="projectsLoaded" />
-    <Footer :withSocial="false" />
+    <div ref="contactRef" class="home-contact">
+      <Contact id="contact" v-if="projectsLoaded" />
+    </div>
+    <Footer :withSocial="false"></Footer>
   </Layout>
   <HeaderHome v-if="projectsLoaded" />
 </template>
 
 <style scoped lang="scss">
+.home {
+  &-contact {
+    width: 100%;
+  }
+}
+
 .intro-wrapper {
-  position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -99,7 +125,6 @@ const stickyContentClassNames = computed(() => {
 }
 
 .intro-sticky {
-  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
@@ -107,6 +132,10 @@ const stickyContentClassNames = computed(() => {
   z-index: -1;
   display: flex;
   align-items: flex-end;
+
+  &-visible {
+    position: sticky;
+  }
 }
 
 .intro-sticky-content {
@@ -114,8 +143,8 @@ const stickyContentClassNames = computed(() => {
   height: 100%;
 
   &-fixed {
-    position: fixed;
-    top: 0;
+    position: absolute;
+    top: var(--contact-top);
     left: 0;
     width: 100%;
     height: calc(var(--lvh) * 100);

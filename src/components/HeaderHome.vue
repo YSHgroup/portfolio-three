@@ -56,7 +56,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <header :class="['header-home', { 'header-home-mounted': isMounted }]">
+  <div :class="['header-home', { 'header-home-mounted': isMounted }]">
     <div :class="['header-home-links', { 'header-home-links-dark': isDarkTheme }]">
       <div
         :class="[
@@ -74,7 +74,7 @@ onMounted(() => {
         {{ t(section) }}
       </HeaderLink>
     </div>
-  </header>
+  </div>
 </template>
 
 <style scoped lang="scss">

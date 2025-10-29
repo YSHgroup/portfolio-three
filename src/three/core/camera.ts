@@ -17,7 +17,6 @@ const contactFocus = {
   sm: new Vector3(0, -9, 0),
   md: new Vector3(0, -10.5, 0),
 };
-const currentContactFocus = new Vector3(0, -10.5, 0);
 
 const instance = new PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.01, 100);
 
@@ -62,14 +61,10 @@ const calculateContactTransform = () => {
   const outProgress = sceneWeightsInOut.contact.out;
 
   instance.position.copy(contactPosition[breakpoint]);
-  instance.position.y += inProgress * (isMd ? 6 : 12);
-  instance.position.y -= outProgress * (isMd ? 5 : 5);
+  instance.position.y += inProgress * (isMd ? 4 : 6);
+  instance.position.y -= outProgress * (isMd ? 4 : 6);
 
-  currentContactFocus.copy(contactFocus[breakpoint]);
-  currentContactFocus.y += inProgress * (isMd ? 6 : 10);
-  currentContactFocus.y -= outProgress * (isMd ? 5 : 9);
-
-  instance.lookAt(currentContactFocus);
+  instance.lookAt(contactFocus[breakpoint]);
 };
 
 const tick = () => {
