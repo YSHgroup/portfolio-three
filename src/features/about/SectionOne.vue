@@ -1,21 +1,5 @@
-<script setup lang="ts">
-import HologramBox from "../../components/HologramBox.vue";
-</script>
-
 <template>
-  <div class="section-one">
-    <div class="section-one-content grid">
-      <div class="section-one-content-inner" id="section-one-content">
-        <HologramBox class="section-one-hologram-box" title="About">
-          <p class="section-one-hologram-box-copy">
-            David focuses on modern web technologies that bridge visuals and performance.
-            <br />With expertise in WebGL, TypeScript, and Node.js, he builds scalable systems and real-time 3D
-            interfaces for the web.
-          </p>
-        </HologramBox>
-      </div>
-    </div>
-  </div>
+  <div class="section-one"></div>
 </template>
 
 <style scoped lang="scss">
@@ -49,7 +33,8 @@ import HologramBox from "../../components/HologramBox.vue";
 
   &-hologram-box {
     &-copy {
-      font-size: var(--font-size-md);
+      font-size: var(--font-size-lg);
+      line-height: var(--line-height-copy);
       font-weight: 400;
     }
   }

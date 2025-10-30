@@ -2,7 +2,7 @@
 import Layout from "../components/Layout.vue";
 import Hero from "../features/hero/Hero.vue";
 import About from "../features/about/About.vue";
-import AboutSections from "../features/about/Sections.vue";
+//import AboutSections from "../features/about/Sections.vue";
 import Projects from "../features/projects/components/Projects.vue";
 import Contact from "../features/contact/Contact.vue";
 import Footer from "../components/Footer.vue";
@@ -86,8 +86,8 @@ const handleProjectsLoaded = () => {
         ></div>
       </div>
       <div class="intro-wrapper-spacer"></div>
-      <About id="about" />
-      <AboutSections />
+      <About />
+      <!--      <AboutSections />-->
     </div>
     <Projects id="projects" @loaded="handleProjectsLoaded" />
     <div ref="contactRef" class="home-contact">

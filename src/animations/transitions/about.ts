@@ -109,7 +109,7 @@ const setupSectionsContent = (about: HTMLElement) => {
       },
     });
 
-    tl.fromTo("#section-one-content", { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none" }, 0);
+    //tl.fromTo("#section-one-content", { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none" }, 0);
     //tl.to("#section-one-content", { opacity: 0, duration: 0.1, ease: "none" }, 0.4);
     //tl.fromTo("#section-two-content", { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none" }, 0.5);
 
