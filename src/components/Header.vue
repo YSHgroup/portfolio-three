@@ -67,7 +67,6 @@ const getInTouchClassNames = computed(() => {
     </div>
     <div :class="{ 'header-logo': true, 'header-logo-isProjectPage': isProjectPage }" @click="handleLogoClick">
       <Logo class="header-logo-image" />
-      <p class="header-logo-text">David</p>
     </div>
     <div class="header-right">
       <Button
@@ -173,12 +172,10 @@ const getInTouchClassNames = computed(() => {
     }
 
     &-image {
-      width: 28px;
-      transform: translateY(-3px);
+      width: 36px;
 
       @include mixins.mq("md") {
-        width: 34px;
-        transform: translateY(-4px);
+        width: 40px;
       }
     }
 

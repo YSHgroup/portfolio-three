@@ -46,8 +46,6 @@ const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!pr
 
 <style scoped lang="scss">
 .hologram-box {
-  color: var(--color-text-cyan-400);
-  font-family: "NB-Architekt-Std";
   position: relative;
 
   &-content {
@@ -59,10 +57,11 @@ const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!pr
     border-radius: 0 0 var(--radius-md) var(--radius-md);
     border-top-width: 0;
     background: linear-gradient(to bottom, var(--color-hologram-top) 0%, var(--color-hologram-bottom) 95%);
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-md);
     line-height: var(--line-height-copy);
 
     @include mixins.mq("md") {
+      font-size: var(--font-size-lg);
       padding: var(--space-md);
       padding-top: calc(var(--space-md) - var(--radius-md));
     }
@@ -109,6 +108,9 @@ const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!pr
     flex-direction: row;
     align-items: flex-start;
     height: calc(var(--radius-md) + 34px - var(--stroke-md));
+    position: relative;
+    top: 1px;
+    z-index: -1;
 
     &-title {
       font-size: var(--font-size-title-xs);
