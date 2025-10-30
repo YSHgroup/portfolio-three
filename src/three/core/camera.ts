@@ -76,6 +76,10 @@ const tick = () => {
 
   if (isContact === false) {
     instance.position.copy(waypoints.position);
+
+    if (sizes.atLeastBreakpoint("md")) {
+      instance.position.y -= sceneWeightsInOut.about.out * 2.5;
+    }
   }
 
   updateParallax(parallaxGroup);

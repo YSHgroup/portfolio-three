@@ -45,10 +45,10 @@ const setupInAnimation = (about: HTMLElement) => {
 
     tl.fromTo(room.group.scale, { x: 1, y: 1, z: 1 }, { x: 0.85, y: 0.85, z: 0.85, duration: 1, ease: "none" }, 0);
     if (!isLandscape) {
-      tl.fromTo(room.group.position, { x: 0, y: 0, z: 0 }, { x: 0, y: 6.8, z: 0, duration: 1, ease: "none" }, 0);
+      tl.fromTo(room.group.position, { x: 0, y: 0, z: 0 }, { x: 0, y: 5.4, z: 0, duration: 1, ease: "none" }, 0);
       tl.fromTo(room.group.rotation, { x: 0, y: -2.1, z: 0 }, { x: 0, y: -2.1, z: 0, duration: 1, ease: "none" }, 0);
     } else {
-      tl.fromTo(room.group.position, { x: 2, y: 0, z: 0 }, { x: 3, y: 6, z: 0, duration: 1, ease: "none" }, 0);
+      tl.fromTo(room.group.position, { x: 2, y: 0, z: 0 }, { x: 3, y: 5.7, z: 0, duration: 1, ease: "none" }, 0);
       tl.fromTo(
         room.group.rotation,
         { x: 0, y: -2.3, z: 0 },
@@ -125,7 +125,7 @@ const setupSectionsAnimation = (about: HTMLElement) => {
     const { waypointsRotation } = avatar;
     if (isLandscape) {
       //tl.to(waypointsPosition, { x: 2, y: 0, z: 6, duration: duration, ease: "power1.inOut" }, delay);
-      tl.to(waypointsRotation, { x: 0, y: -Math.PI * 1.1, z: 0, duration: duration, ease: "power1.inOut" }, delay);
+      tl.to(waypointsRotation, { x: 0, y: -Math.PI, z: 0, duration: duration, ease: "power1.inOut" }, delay);
     } else {
       //tl.to(waypointsPosition, { x: 0, y: 0, z: 6, duration: duration, ease: "power1.inOut" }, delay);
       tl.to(waypointsRotation, { x: 0, y: -Math.PI, z: 0, duration: duration, ease: "power1.inOut" }, delay);
