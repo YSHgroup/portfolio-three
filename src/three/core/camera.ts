@@ -10,11 +10,11 @@ import { sizes } from "../../utils/sizes";
 const PARALLAX_INTENSITY = 1;
 const PARALLAX_SPEED = 0.6;
 const contactPosition = {
-  sm: new Vector3(0, -6.5, 13),
+  sm: new Vector3(0, -8, 12),
   md: new Vector3(0, -8.5, 9),
 };
 const contactFocus = {
-  sm: new Vector3(0, -9, 0),
+  sm: new Vector3(0, -9.25, 0),
   md: new Vector3(0, -10.5, 0),
 };
 

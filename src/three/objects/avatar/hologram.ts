@@ -5,7 +5,7 @@ import { clone as cloneSkeleton } from "three/examples/jsm/utils/SkeletonUtils.j
 import { getMaterial as getHologramMaterial, uniforms as hologramUniforms } from "./hologram-material";
 import gsap from "gsap";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
-import { aboutProgress } from "../../../animations/transitions/about";
+import { sceneWeightsInOut } from "../../../animations/scenes";
 
 import type { Material, BufferGeometry, Object3D, Skeleton } from "three";
 
@@ -16,6 +16,7 @@ let material: Material | null = null;
 let geometry: BufferGeometry | null = null;
 let skeleton: Skeleton | null = null;
 
+const currentProgress = { value: 0 };
 const transform = new Group();
 
 const init = () => {
@@ -82,7 +83,8 @@ const setupMesh = () => {
 
 const tick = () => {
   hologramUniforms.uTime.value = gsap.ticker.time;
-  hologramUniforms.uProgress.value = aboutProgress.value;
+
+  hologramUniforms.uProgress.value = sceneWeightsInOut.about.in * 1.1 - 0.1;
 };
 
 const destroy = () => {
@@ -94,4 +96,11 @@ const destroy = () => {
   //skeleton = null;
 };
 
-export const avatarHologram = { init, destroy, getMesh: () => mesh, getMaterial: () => material, transform };
+export const avatarHologram = {
+  init,
+  destroy,
+  getMesh: () => mesh,
+  getMaterial: () => material,
+  currentProgress,
+  transform,
+};

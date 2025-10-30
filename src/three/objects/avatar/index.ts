@@ -10,7 +10,7 @@ import matcapVertexShader from "../../shaders/avatar-matcap/vertex.glsl";
 import matcapFragmentShader from "../../shaders/avatar-matcap/fragment.glsl";
 import headVertexShader from "../../shaders/avatar-head/vertex.glsl";
 import headFragmentShader from "../../shaders/avatar-head/fragment.glsl";
-import { aboutProgress } from "../../../animations/transitions/about";
+//import { aboutProgress } from "../../../animations/transitions/about";
 import { avatarHologram } from "./hologram";
 
 import type { Material, Bone, Texture } from "three";
@@ -148,7 +148,7 @@ const update = () => {
   avatarHologram.transform.position.copy(waypointsPosition);
   avatarHologram.transform.rotation.copy(waypointsRotation);
 
-  uniforms.uProgress.value = aboutProgress.value;
+  uniforms.uProgress.value = sceneWeightsInOut.about.in * 1.1 - 0.1;
   uniforms.uAmbientStrength.value = sceneWeightsInOut.about.in;
 };
 

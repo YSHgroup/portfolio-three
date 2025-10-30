@@ -44,7 +44,7 @@ onUnmounted(() => {
 
 <style scoped lang="scss">
 .about {
-  height: calc(var(--lvh) * 300);
+  height: calc(var(--lvh) * 250);
 
   &-sticky {
     position: sticky;
@@ -75,8 +75,10 @@ onUnmounted(() => {
     left: var(--space-outer);
     font-size: var(--font-size-xl);
 
-    @include mixins.mq("xxl") {
-      left: calc(var(--space-outer) + 8%);
+    @include mixins.landscape {
+      @include mixins.mq("xxl") {
+        left: calc(var(--space-outer) + 8%);
+      }
     }
   }
 
@@ -86,7 +88,7 @@ onUnmounted(() => {
     left: var(--space-outer);
     width: calc(100% - var(--space-outer) * 2);
 
-    @include mixins.mq("lg") {
+    @include mixins.landscape {
       width: 260px;
       left: calc(var(--space-outer) + 8%);
       max-width: 30%;
@@ -99,17 +101,17 @@ onUnmounted(() => {
     left: var(--space-outer);
     width: calc(100% - var(--space-outer) * 2);
 
-    @include mixins.mq("lg") {
+    @include mixins.landscape {
       width: 460px;
       max-width: 30%;
       bottom: 50%;
       transform: translateY(50%);
       left: unset;
       right: calc(var(--space-outer));
-    }
 
-    @include mixins.mq("xxl") {
-      right: calc(var(--space-outer) + 8%);
+      @include mixins.mq("xxl") {
+        right: calc(var(--space-outer) + 8%);
+      }
     }
   }
 }

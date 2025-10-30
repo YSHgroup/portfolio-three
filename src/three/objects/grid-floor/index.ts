@@ -5,6 +5,7 @@ import fragmentShader from "../../shaders/grid-floor/fragment.glsl";
 import gsap from "gsap";
 import { sceneWeightsInOut } from "../../../animations/scenes";
 import { aboutProgress } from "../../../animations/transitions/about";
+import { sizes } from "../../../utils/sizes";
 
 let mesh: Mesh | null = null;
 let geometry: PlaneGeometry | null = null;
@@ -51,6 +52,9 @@ const tick = () => {
   mesh.material.uniforms.uOpacity!.value = 0.2 + 0.8 * sceneWeightsInOut.about.in;
   mesh.material.uniforms.uTime!.value = gsap.ticker.time;
   mesh.material.uniforms.uProgress!.value = aboutProgress.value;
+
+  const isLandscape = sizes.isLandscape();
+  mesh.position.x = isLandscape ? -1 : -0.5;
 };
 
 const destroy = () => {

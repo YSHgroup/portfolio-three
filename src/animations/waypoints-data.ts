@@ -6,9 +6,17 @@ export const points = {
       position: { x: 0, y: 6, z: 10 },
       focus: { x: 0, y: 3, z: 0 },
     },
-    about: {
-      position: { x: 0, y: 4.7, z: 14.5 },
-      focus: { x: 0, y: 2.5, z: 6 },
+    "about-1": {
+      //position: { x: 0, y: 4.7, z: 14.5 },
+      position: { x: 0, y: 4.3, z: 11 },
+      //focus: { x: 0, y: 2.5, z: 6 },
+      focus: { x: 0, y: 3.25, z: 6 },
+    },
+    "about-2": {
+      //position: { x: 0, y: 4.7, z: 14.5 },
+      position: { x: -2.5, y: 4.3, z: 15 },
+      //focus: { x: 0, y: 2.5, z: 6 },
+      focus: { x: -2.5, y: 2.5, z: 6 },
     },
   },
   portrait: {
@@ -16,9 +24,15 @@ export const points = {
       position: { x: 0, y: 8.4, z: 16 },
       focus: { x: 0, y: 5.4, z: 0 },
     },
-    about: {
-      position: { x: 0, y: 5, z: 20 },
-      focus: { x: 0, y: 0.45, z: 0 },
+    "about-1": {
+      position: { x: 0, y: 4.5, z: 12.5 },
+      focus: { x: 0, y: 1.4, z: 0 },
+    },
+    "about-2": {
+      //position: { x: 0, y: 4.7, z: 14.5 },
+      position: { x: -0.5, y: 5, z: 18 },
+      //focus: { x: 0, y: 2.5, z: 6 },
+      focus: { x: -0.5, y: 1.5, z: 6 },
     },
   },
 } as const satisfies Record<
