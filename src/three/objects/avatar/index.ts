@@ -10,6 +10,7 @@ import matcapVertexShader from "../../shaders/avatar-matcap/vertex.glsl";
 import matcapFragmentShader from "../../shaders/avatar-matcap/fragment.glsl";
 import headVertexShader from "../../shaders/avatar-head/vertex.glsl";
 import headFragmentShader from "../../shaders/avatar-head/fragment.glsl";
+import gsap from "gsap";
 //import { aboutProgress } from "../../../animations/transitions/about";
 import { avatarHologram } from "./hologram";
 
@@ -32,6 +33,7 @@ const init = () => {
   animations.init();
   face.init();
   avatarLeftDesktop.init();
+  gsap.ticker.add(tick);
 };
 
 const getMaterial = (name: string): Material | null => {
@@ -118,11 +120,6 @@ const setupMesh = () => {
     mesh.remove(brain);
   }
 
-  const face = mesh.getObjectByName("face") as Mesh;
-  face.onBeforeRender = () => {
-    update();
-  };
-
   mesh.rotation.z = 0;
 
   transform.add(mesh);
@@ -132,8 +129,7 @@ const setupMesh = () => {
   scene.instance.add(transform);
 };
 
-const update = () => {
-  //TBD: hide when intro or contact is not visible
+const tick = () => {
   animations.update();
 
   const isContact = sceneWeights.contact > 0.001;
@@ -155,12 +151,19 @@ const update = () => {
 
   uniforms.uProgress.value = sceneWeightsInOut.about.in * 1.1 - 0.1;
   uniforms.uAmbientStrength.value = sceneWeightsInOut.about.in;
+
+  if (uniforms.uProgress.value > 0.999) {
+    transform.visible = false;
+  } else {
+    transform.visible = true;
+  }
 };
 
 const destroy = () => {
   //mesh = null;
   //transform.clear();
   face.destroy();
+  gsap.ticker.remove(tick);
 };
 
 export const avatar = {

@@ -50,7 +50,7 @@ const SERVICES = [
           </div>
           <HologramBoxLine />
           <p class="about-first-copy">
-            Fullstack developer specializing in interactive 3D web experiences and real-time systems.
+            Web developer specializing in interactive 3D web experiences and real-time systems.
             <br />Builds scalable, high-performance applications that combine engaging visuals with seamless
             functionality using WebGL, TypeScript, and Node.js.
           </p>
