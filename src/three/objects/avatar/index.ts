@@ -113,6 +113,11 @@ const setupMesh = () => {
     }
   });
 
+  const brain = mesh.getObjectByName("brain") as Mesh;
+  if (brain) {
+    mesh.remove(brain);
+  }
+
   const face = mesh.getObjectByName("face") as Mesh;
   face.onBeforeRender = () => {
     update();

@@ -24,7 +24,7 @@ void main() {
     vec3 viewDir = normalize(cameraPosition - vWorldPos);
 
     float fresnel = pow(1.0 - dot(viewDir, normal), 2.);
-    float falloff = smoothstep(0.8, 0.2, fresnel);
+    float falloff = smoothstep(.8, 0.4, fresnel);
 
     float holographic = stripes * fresnel;
     holographic += fresnel;

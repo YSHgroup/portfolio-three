@@ -9,7 +9,7 @@ import { sceneWeightsInOut } from "../../../animations/scenes";
 
 import type { Material, BufferGeometry, Object3D, Skeleton } from "three";
 
-const GEOMETRY_NAMES: string[] = ["black", "gray", "skin", "white", "head"];
+const GEOMETRY_NAMES: string[] = ["black", "gray", "skin", "white", "head", "brain"];
 
 let mesh: SkinnedMesh | null = null;
 let material: Material | null = null;
