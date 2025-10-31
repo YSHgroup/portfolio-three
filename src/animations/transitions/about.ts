@@ -16,14 +16,24 @@ const setup = ({
   about,
   firstHologramBoxTl,
   firstHologramBoxWrapper,
+  secondHologramBoxTl,
+  secondHologramBoxWrapper,
 }: {
   about: HTMLElement;
   firstHologramBoxTl: gsap.core.Timeline;
   firstHologramBoxWrapper: HTMLDivElement;
+  secondHologramBoxTl: gsap.core.Timeline;
+  secondHologramBoxWrapper: HTMLDivElement;
 }) => {
   setupInAnimation(about);
   setupProgressAnimation(about);
-  setupSectionsAnimation({ about, firstHologramBoxTl, firstHologramBoxWrapper });
+  setupSectionsAnimation({
+    about,
+    firstHologramBoxTl,
+    firstHologramBoxWrapper,
+    secondHologramBoxTl,
+    secondHologramBoxWrapper,
+  });
   setupOutAnimation(about);
 };
 
@@ -82,11 +92,11 @@ const setupInAnimation = (about: HTMLElement) => {
     } else {
       //tl.to("#hero-content-inner", { y: "40vh", scale: 0.7, duration: 1, ease: "none" }, 0);
 
-      tl.fromTo(waypointsPosition, { x: 0, y: 0, z: 0 }, { x: 0.3, y: 0, z: 6, duration: 1, ease: "power1.out" }, 0);
+      tl.fromTo(waypointsPosition, { x: 0, y: 0, z: 0 }, { x: 0, y: 0, z: 6, duration: 1, ease: "power1.out" }, 0);
       tl.fromTo(
         waypointsRotation,
         { x: 0, y: -2.1 + Math.PI / 2, z: 0 },
-        { x: 0, y: -Math.PI * 1.1, z: 0, duration: 1, ease: "power1.out" },
+        { x: 0, y: -Math.PI, z: 0, duration: 1, ease: "power1.out" },
         0,
       );
     }
@@ -127,7 +137,7 @@ const setupProgressAnimation = (about: HTMLElement) => {
     //tl.fromTo("#section-two-content", { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none" }, 0.5);
 
     const delay = 0;
-    const multiplier = 1;
+    const multiplier = 0.98;
     const duration = (1 - delay * 2) * multiplier;
 
     const { waypointsRotation } = avatar;
@@ -144,29 +154,62 @@ const setupSectionsAnimation = ({
   about,
   //firstHologramBoxTl,
   firstHologramBoxWrapper,
+  //secondHologramBoxTl,
+  secondHologramBoxWrapper,
 }: {
   about: HTMLElement;
   firstHologramBoxTl: gsap.core.Timeline;
   firstHologramBoxWrapper: HTMLDivElement;
+  secondHologramBoxWrapper: HTMLDivElement;
+  secondHologramBoxTl: gsap.core.Timeline;
 }) => {
   sectionsMm = createMatchMedia((_context, { isLandscape, isMobile }) => {
     const tl = gsap.timeline({
       duration: 1,
       scrollTrigger: {
         trigger: about,
-        start: isLandscape ? "top 50%" : "top 30%",
+        start: isLandscape ? "top 75%" : "top 30%",
         end: "bottom bottom",
         scrub: true,
       },
     });
 
-    tl.fromTo(
-      firstHologramBoxWrapper,
-      { opacity: 0, y: isMobile ? 60 : 100 },
-      { opacity: 1, y: 0, duration: 0.15, ease: "power1.out" },
-      0,
-    );
-    tl.to(firstHologramBoxWrapper, { opacity: 0, y: isMobile ? -60 : -100, duration: 0.15, ease: "power1.in" }, 0.45);
+    //first box
+    if (isLandscape) {
+      tl.fromTo(firstHologramBoxWrapper, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, 0);
+      tl.to(firstHologramBoxWrapper, { opacity: 0, duration: 0.15, ease: "power1.in" }, 0.55);
+
+      tl.fromTo(firstHologramBoxWrapper, { y: "20vh" }, { y: "-20vh", duration: 0.7, ease: "none" }, 0);
+    } else {
+      tl.fromTo(
+        firstHologramBoxWrapper,
+        { opacity: 0, y: isMobile ? 60 : 100 },
+        { opacity: 1, y: 0, duration: 0.15, ease: "power1.out" },
+        0,
+      );
+      tl.to(firstHologramBoxWrapper, { opacity: 0, y: "-10vh", duration: 0.15, ease: "power1.in" }, 0.45);
+    }
+
+    //second box
+    if (isLandscape) {
+      const SECOND_BOX_DELAY = 0.6;
+      tl.fromTo(
+        secondHologramBoxWrapper,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.15, ease: "power1.out" },
+        SECOND_BOX_DELAY,
+      );
+
+      tl.fromTo(secondHologramBoxWrapper, { y: "20vh" }, { y: 0, duration: 0.35, ease: "none" }, SECOND_BOX_DELAY);
+    } else {
+      const SECOND_BOX_DELAY = 0.55;
+      tl.fromTo(
+        secondHologramBoxWrapper,
+        { opacity: 0, y: "10vh" },
+        { opacity: 1, y: 0, duration: 0.15, ease: "power1.out" },
+        SECOND_BOX_DELAY,
+      );
+    }
 
     //tl.add(firstHologramBoxTl, 0);
 

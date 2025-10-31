@@ -134,8 +134,8 @@ const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!pr
     z-index: -1;
 
     &-title {
-      font-size: var(--font-size-title-xs);
-      font-weight: 700;
+      font-size: 26px;
+      font-weight: 400;
       text-transform: uppercase;
       letter-spacing: 0.02em;
       white-space: nowrap;

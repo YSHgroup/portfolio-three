@@ -6,13 +6,22 @@ import HologramBoxLine from "../../components/HologramBoxLine.vue";
 
 const aboutRef = ref<HTMLElement | null>(null);
 const firstHologramBoxRef = ref<{ tl: gsap.core.Timeline | null; wrapperRef: HTMLDivElement | null } | null>(null);
+const secondHologramBoxRef = ref<{ tl: gsap.core.Timeline | null; wrapperRef: HTMLDivElement | null } | null>(null);
 
 watchEffect((onInvalidate) => {
-  if (aboutRef.value && firstHologramBoxRef.value?.tl && firstHologramBoxRef.value.wrapperRef) {
+  if (
+    aboutRef.value &&
+    firstHologramBoxRef.value?.tl &&
+    firstHologramBoxRef.value.wrapperRef &&
+    secondHologramBoxRef.value?.tl &&
+    secondHologramBoxRef.value.wrapperRef
+  ) {
     transitions.about.setup({
       about: aboutRef.value,
       firstHologramBoxTl: firstHologramBoxRef.value.tl,
       firstHologramBoxWrapper: firstHologramBoxRef.value.wrapperRef,
+      secondHologramBoxTl: secondHologramBoxRef.value.tl,
+      secondHologramBoxWrapper: secondHologramBoxRef.value.wrapperRef,
     });
   }
 
@@ -20,6 +29,13 @@ watchEffect((onInvalidate) => {
     transitions.about.destroy();
   });
 });
+
+const SERVICES = [
+  { name: "Frontend Development", sub: "React, Vue" },
+  { name: "Backend Development", sub: "Node.js, Redis, PostgreSQL" },
+  { name: "WebGL & Creative Coding", sub: "Three.js, GLSL, GSAP, SVG" },
+  { name: "Real-Time Systems", sub: "WebSockets, multiplayer logic" },
+] as const satisfies { name: string; sub: string }[];
 </script>
 
 <template>
@@ -34,30 +50,22 @@ watchEffect((onInvalidate) => {
           </div>
           <HologramBoxLine />
           <p class="about-first-copy">
-            Focuses on modern web technologies that bridge visuals and performance.
-            <br />With expertise in WebGL, TypeScript, and Node.js, he builds scalable systems and real-time 3D
-            interfaces for the web.
+            Fullstack developer specializing in interactive 3D web experiences and real-time systems.
+            <br />Builds scalable, high-performance applications that combine engaging visuals with seamless
+            functionality using WebGL, TypeScript, and Node.js.
           </p>
         </HologramBox>
       </div>
-      <!--      <div class="about-details">
-        <p class="about-details-copy">Name: David</p>
-        <p class="about-details-copy">Location: Germany</p>
+      <div class="about-services">
+        <HologramBox title="Services" ref="secondHologramBoxRef">
+          <div class="about-services-list">
+            <div class="about-services-list-item" v-for="service in SERVICES" :key="service.name">
+              <p class="about-services-list-item-name">{{ service.name }}</p>
+              <p class="about-services-list-item-sub">{{ service.sub }}</p>
+            </div>
+          </div>
+        </HologramBox>
       </div>
-      <HologramBox class="about-focus" title="Focus">
-        <p class="section-one-hologram-box-copy">
-          David focuses on modern web technologies that bridge visuals and performance.
-          <br />With expertise in WebGL, TypeScript, and Node.js, he builds scalable systems and real-time 3D interfaces
-          for the web.
-        </p>
-      </HologramBox>
-      <HologramBox class="about-services" title="Services">
-        <p>- Frontend Development</p>
-        <p>- Backend Development</p>
-        <p>- Creative Coding</p>
-        <p>- 3D Design</p>
-        <p>- WebGL</p>
-      </HologramBox>-->
     </div>
   </div>
 </template>
@@ -92,13 +100,48 @@ watchEffect((onInvalidate) => {
   &-services {
     position: absolute;
     bottom: var(--space-outer);
-    left: var(--space-outer);
+    right: var(--space-outer);
     width: calc(100% - var(--space-outer) * 2);
 
     @include mixins.landscape {
-      width: 260px;
-      left: calc(var(--space-outer) + 8%);
-      max-width: 30%;
+      width: 500px;
+      max-width: calc(36% - var(--space-outer));
+      bottom: 50%;
+      transform: translateY(50%);
+      right: 64%;
+
+      @include mixins.mq("xxl") {
+        width: 420px;
+      }
+    }
+
+    &-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      padding-bottom: var(--space-sm);
+      padding-top: var(--space-xs);
+
+      &-item {
+        display: flex;
+        flex-direction: column;
+        padding-left: 28px;
+        position: relative;
+
+        &::before {
+          content: "";
+          position: absolute;
+          left: 12px;
+          top: 6px;
+          width: 6px;
+          height: 6px;
+          background-color: var(--color-text-cyan-400);
+        }
+
+        &-sub {
+          font-size: var(--font-size-xs);
+        }
+      }
     }
   }
 
@@ -107,16 +150,24 @@ watchEffect((onInvalidate) => {
     bottom: var(--space-outer);
     left: var(--space-outer);
     width: calc(100% - var(--space-outer) * 2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: var(--space-md);
+
+    @include mixins.landscape {
+      width: 500px;
+      max-width: calc(42% - var(--space-outer));
+      bottom: 50%;
+      transform: translateY(50%);
+      left: 58%;
+      //right: calc(var(--space-outer));
+
+      @include mixins.mq("xxl") {
+        width: 460px;
+        //right: calc(var(--space-outer) + 8%);
+      }
+    }
 
     &-content {
       display: flex;
       justify-content: space-between;
-      width: 100%;
     }
 
     &-details {
@@ -127,7 +178,7 @@ watchEffect((onInvalidate) => {
 
       @include mixins.mq("md") {
         padding: var(--space-sm) var(--space-md);
-        padding-top: var(--space-xxs);
+        padding-top: 0;
         font-size: var(--font-size-md);
       }
 
@@ -141,20 +192,6 @@ watchEffect((onInvalidate) => {
 
       @include mixins.mq("md") {
         padding: var(--space-md);
-      }
-    }
-
-    @include mixins.landscape {
-      width: 500px;
-      max-width: calc(42% - var(--space-outer));
-      bottom: 50%;
-      transform: translateY(50%);
-      left: 58%;
-      //right: calc(var(--space-outer));
-
-      @include mixins.mq("xxl") {
-        width: 460px;
-        //right: calc(var(--space-outer) + 8%);
       }
     }
   }
