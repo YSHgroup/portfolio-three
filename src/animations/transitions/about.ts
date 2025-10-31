@@ -3,18 +3,27 @@ import { sceneWeightsInOut } from "../scenes";
 //import { gridFloor } from "../../three/objects/grid-floor";
 import { createMatchMedia } from "../utils/matchMedia";
 import { room } from "../../three/objects/room";
-
 import gsap from "gsap";
 
 let inMM: gsap.MatchMedia | null = null;
 let outTl: gsap.core.Timeline | null = null;
+let progressMm: gsap.MatchMedia | null = null;
 let sectionsMm: gsap.MatchMedia | null = null;
 
 export const aboutProgress = { value: 0 };
 
-const setup = (about: HTMLElement) => {
+const setup = ({
+  about,
+  firstHologramBoxTl,
+  firstHologramBoxWrapper,
+}: {
+  about: HTMLElement;
+  firstHologramBoxTl: gsap.core.Timeline;
+  firstHologramBoxWrapper: HTMLDivElement;
+}) => {
   setupInAnimation(about);
-  setupSectionsAnimation(about);
+  setupProgressAnimation(about);
+  setupSectionsAnimation({ about, firstHologramBoxTl, firstHologramBoxWrapper });
   setupOutAnimation(about);
 };
 
@@ -73,11 +82,11 @@ const setupInAnimation = (about: HTMLElement) => {
     } else {
       //tl.to("#hero-content-inner", { y: "40vh", scale: 0.7, duration: 1, ease: "none" }, 0);
 
-      tl.fromTo(waypointsPosition, { x: 0, y: 0, z: 0 }, { x: -0.5, y: 0, z: 6, duration: 1, ease: "power1.out" }, 0);
+      tl.fromTo(waypointsPosition, { x: 0, y: 0, z: 0 }, { x: 0.3, y: 0, z: 6, duration: 1, ease: "power1.out" }, 0);
       tl.fromTo(
         waypointsRotation,
         { x: 0, y: -2.1 + Math.PI / 2, z: 0 },
-        { x: 0, y: -Math.PI * 0.8, z: 0, duration: 1, ease: "power1.out" },
+        { x: 0, y: -Math.PI * 1.1, z: 0, duration: 1, ease: "power1.out" },
         0,
       );
     }
@@ -98,8 +107,8 @@ const setupOutAnimation = (about: HTMLElement) => {
   outTl.fromTo(sceneWeightsInOut["about-2"], { out: 0 }, { out: 1, ease: "none", duration: 1 }, 0);
 };
 
-const setupSectionsAnimation = (about: HTMLElement) => {
-  sectionsMm = createMatchMedia((_context, { isLandscape }) => {
+const setupProgressAnimation = (about: HTMLElement) => {
+  progressMm = createMatchMedia((_context) => {
     const tl = gsap.timeline({
       duration: 1,
       scrollTrigger: {
@@ -117,19 +126,12 @@ const setupSectionsAnimation = (about: HTMLElement) => {
     //tl.to("#section-one-content", { opacity: 0, duration: 0.1, ease: "none" }, 0.4);
     //tl.fromTo("#section-two-content", { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none" }, 0.5);
 
-    const delay = 0.05;
+    const delay = 0;
     const multiplier = 1;
     const duration = (1 - delay * 2) * multiplier;
 
-    //const { waypointsPosition, waypointsRotation } = avatar;
     const { waypointsRotation } = avatar;
-    if (isLandscape) {
-      //tl.to(waypointsPosition, { x: 2, y: 0, z: 6, duration: duration, ease: "power1.inOut" }, delay);
-      tl.to(waypointsRotation, { x: 0, y: -Math.PI, z: 0, duration: duration, ease: "power1.inOut" }, delay);
-    } else {
-      //tl.to(waypointsPosition, { x: 0, y: 0, z: 6, duration: duration, ease: "power1.inOut" }, delay);
-      tl.to(waypointsRotation, { x: 0, y: -Math.PI, z: 0, duration: duration, ease: "power1.inOut" }, delay);
-    }
+    tl.to(waypointsRotation, { x: 0, y: -Math.PI, z: 0, duration: duration, ease: "power1.inOut" }, delay);
 
     tl.to(sceneWeightsInOut["about-2"], { in: 1, duration: duration, ease: "power1.inOut" }, delay);
     tl.to(sceneWeightsInOut["about-1"], { out: 1, duration: duration, ease: "power1.inOut" }, delay);
@@ -138,10 +140,46 @@ const setupSectionsAnimation = (about: HTMLElement) => {
   });
 };
 
+const setupSectionsAnimation = ({
+  about,
+  //firstHologramBoxTl,
+  firstHologramBoxWrapper,
+}: {
+  about: HTMLElement;
+  firstHologramBoxTl: gsap.core.Timeline;
+  firstHologramBoxWrapper: HTMLDivElement;
+}) => {
+  sectionsMm = createMatchMedia((_context, { isLandscape, isMobile }) => {
+    const tl = gsap.timeline({
+      duration: 1,
+      scrollTrigger: {
+        trigger: about,
+        start: isLandscape ? "top 50%" : "top 30%",
+        end: "bottom bottom",
+        scrub: true,
+      },
+    });
+
+    tl.fromTo(
+      firstHologramBoxWrapper,
+      { opacity: 0, y: isMobile ? 60 : 100 },
+      { opacity: 1, y: 0, duration: 0.15, ease: "power1.out" },
+      0,
+    );
+    tl.to(firstHologramBoxWrapper, { opacity: 0, y: isMobile ? -60 : -100, duration: 0.15, ease: "power1.in" }, 0.45);
+
+    //tl.add(firstHologramBoxTl, 0);
+
+    const completed = { value: false };
+    tl.to(completed, { value: true, duration: 1 }, 0);
+  });
+};
+
 const destroy = () => {
   if (inMM) inMM.revert();
-  if (sectionsMm) sectionsMm.revert();
+  if (progressMm) progressMm.revert();
   if (outTl) outTl.revert();
+  if (sectionsMm) sectionsMm.revert();
 };
 
 export const about = { setup, destroy };

@@ -1,18 +1,40 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, onMounted, onUnmounted, ref } from "vue";
+import gsap from "gsap";
 
-//TBD: without title, dont add top element
+const wrapperRef = ref<HTMLDivElement | null>(null);
 
 const props = defineProps<{
   title?: string;
   footer?: boolean;
 }>();
 
+let tl: gsap.core.Timeline | null = null;
+
+onMounted(() => {
+  tl = gsap.timeline();
+  //tl.fromTo(wrapperRef.value, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power1.out" }, 0);
+});
+
+onUnmounted(() => {
+  if (tl) {
+    tl.kill();
+    tl = null;
+  }
+});
+
+defineExpose({
+  get tl() {
+    return tl;
+  },
+  wrapperRef,
+});
+
 const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!props.title }]);
 </script>
 
 <template>
-  <div :class="classes">
+  <div :class="classes" ref="wrapperRef">
     <div class="hologram-box-header" v-if="props.title">
       <div class="hologram-box-header-content">
         <h3 class="hologram-box-header-title">{{ props.title }}</h3>
@@ -47,9 +69,9 @@ const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!pr
 <style scoped lang="scss">
 .hologram-box {
   position: relative;
+  //filter: drop-shadow(0 -10px rgb(52, 191, 255, 0.2)) drop-shadow(0 10px rgb(52, 191, 255, 0.2));
 
   &-content {
-    padding: var(--space-sm) var(--space-md);
     padding-top: calc(var(--space-sm) - var(--radius-md));
     width: 100%;
     border: var(--stroke-md) solid var(--color-cyan-400);
@@ -62,7 +84,6 @@ const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!pr
 
     @include mixins.mq("md") {
       font-size: var(--font-size-lg);
-      padding: var(--space-md);
       padding-top: calc(var(--space-md) - var(--radius-md));
     }
   }
@@ -117,6 +138,7 @@ const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!pr
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.02em;
+      white-space: nowrap;
     }
 
     &-content {
@@ -127,8 +149,12 @@ const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!pr
       border-right-width: 0;
       width: fit-content;
       height: 100%;
-      padding: var(--space-xxs) var(--space-md);
+      padding: var(--space-xxs) var(--space-sm);
       background-color: var(--color-hologram-top);
+
+      @include mixins.mq("md") {
+        padding: var(--space-xxs) var(--space-md);
+      }
     }
 
     &-notch-right {

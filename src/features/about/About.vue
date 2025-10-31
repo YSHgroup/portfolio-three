@@ -1,18 +1,24 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, watchEffect } from "vue";
 import { transitions } from "../../animations";
-//import HologramBox from "../../components/HologramBox.vue";
+import HologramBox from "../../components/HologramBox.vue";
+import HologramBoxLine from "../../components/HologramBoxLine.vue";
 
 const aboutRef = ref<HTMLElement | null>(null);
+const firstHologramBoxRef = ref<{ tl: gsap.core.Timeline | null; wrapperRef: HTMLDivElement | null } | null>(null);
 
-onMounted(() => {
-  if (aboutRef.value) {
-    transitions.about.setup(aboutRef.value);
+watchEffect((onInvalidate) => {
+  if (aboutRef.value && firstHologramBoxRef.value?.tl && firstHologramBoxRef.value.wrapperRef) {
+    transitions.about.setup({
+      about: aboutRef.value,
+      firstHologramBoxTl: firstHologramBoxRef.value.tl,
+      firstHologramBoxWrapper: firstHologramBoxRef.value.wrapperRef,
+    });
   }
-});
 
-onUnmounted(() => {
-  transitions.about.destroy();
+  onInvalidate(() => {
+    transitions.about.destroy();
+  });
 });
 </script>
 
@@ -20,6 +26,20 @@ onUnmounted(() => {
   <div class="about" ref="aboutRef" id="about"></div>
   <div class="about-sticky">
     <div class="about-content">
+      <div class="about-first">
+        <HologramBox title="David" ref="firstHologramBoxRef">
+          <div class="about-first-details">
+            <p class="about-first-details-copy">Location: Germany</p>
+            <p class="about-first-details-copy">Version: 2.7</p>
+          </div>
+          <HologramBoxLine />
+          <p class="about-first-copy">
+            Focuses on modern web technologies that bridge visuals and performance.
+            <br />With expertise in WebGL, TypeScript, and Node.js, he builds scalable systems and real-time 3D
+            interfaces for the web.
+          </p>
+        </HologramBox>
+      </div>
       <!--      <div class="about-details">
         <p class="about-details-copy">Name: David</p>
         <p class="about-details-copy">Location: Germany</p>
@@ -69,19 +89,6 @@ onUnmounted(() => {
     height: calc(var(--lvh) * 100 - var(--height-header));
   }
 
-  &-details {
-    position: absolute;
-    top: var(--space-outer);
-    left: var(--space-outer);
-    font-size: var(--font-size-xl);
-
-    @include mixins.landscape {
-      @include mixins.mq("xxl") {
-        left: calc(var(--space-outer) + 8%);
-      }
-    }
-  }
-
   &-services {
     position: absolute;
     bottom: var(--space-outer);
@@ -95,22 +102,59 @@ onUnmounted(() => {
     }
   }
 
-  &-focus {
+  &-first {
     position: absolute;
     bottom: var(--space-outer);
     left: var(--space-outer);
     width: calc(100% - var(--space-outer) * 2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: var(--space-md);
+
+    &-content {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    &-details {
+      padding: var(--space-xs) var(--space-sm);
+      padding-top: 0;
+      display: flex;
+      font-size: var(--font-size-sm);
+
+      @include mixins.mq("md") {
+        padding: var(--space-sm) var(--space-md);
+        padding-top: var(--space-xxs);
+        font-size: var(--font-size-md);
+      }
+
+      &-copy {
+        flex: 0.5;
+      }
+    }
+
+    &-copy {
+      padding: var(--space-sm);
+
+      @include mixins.mq("md") {
+        padding: var(--space-md);
+      }
+    }
 
     @include mixins.landscape {
-      width: 460px;
-      max-width: 30%;
+      width: 500px;
+      max-width: calc(42% - var(--space-outer));
       bottom: 50%;
       transform: translateY(50%);
-      left: unset;
-      right: calc(var(--space-outer));
+      left: 58%;
+      //right: calc(var(--space-outer));
 
       @include mixins.mq("xxl") {
-        right: calc(var(--space-outer) + 8%);
+        width: 460px;
+        //right: calc(var(--space-outer) + 8%);
       }
     }
   }

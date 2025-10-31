@@ -30,9 +30,9 @@ export const points = {
     },
     "about-2": {
       //position: { x: 0, y: 4.7, z: 14.5 },
-      position: { x: -0.5, y: 5, z: 18 },
+      position: { x: 0.3, y: 5, z: 18 },
       //focus: { x: 0, y: 2.5, z: 6 },
-      focus: { x: -0.5, y: 1.5, z: 6 },
+      focus: { x: 0.3, y: 1.5, z: 6 },
     },
   },
 } as const satisfies Record<

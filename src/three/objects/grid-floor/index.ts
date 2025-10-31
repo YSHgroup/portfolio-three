@@ -54,7 +54,7 @@ const tick = () => {
   mesh.material.uniforms.uProgress!.value = aboutProgress.value;
 
   const isLandscape = sizes.isLandscape();
-  mesh.position.x = isLandscape ? -1 : -0.5;
+  mesh.position.x = isLandscape ? -1 : 0.25;
 };
 
 const destroy = () => {
