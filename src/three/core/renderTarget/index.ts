@@ -8,6 +8,7 @@ const instance = new WebGLRenderTarget(window.innerWidth, window.innerHeight, {
   depthBuffer: false,
   stencilBuffer: false,
 });
+
 const scene = new Scene();
 scene.add(mainCamera.parallaxGroup);
 

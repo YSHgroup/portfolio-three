@@ -6,6 +6,7 @@ import { gridFloor } from "./grid-floor";
 import { lab } from "./lab";
 import { room } from "./room";
 import { sleepingSprite } from "./contact/sleeping-sprite";
+import { renderer } from "../core/renderer";
 
 const init = () => {
   avatarHologram.init();
@@ -16,6 +17,8 @@ const init = () => {
   lab.init();
   room.init();
   sleepingSprite.init();
+
+  renderer.compile();
 };
 
 const destroy = () => {

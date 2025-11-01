@@ -50,13 +50,15 @@ onUnmounted(() => {
           <img :src="props.preview.thumbnail" :alt="props.preview.title" class="preview-card-image" ref="imageRef" />
         </div>
       </div>
-      <div class="preview-card-edge">
-        <ButtonRound class="preview-card-button" variant="accent">
-          <ArrowRightLong class="preview-card-button-arrow" />
-        </ButtonRound>
+      <div class="preview-card-overlay">
+        <div class="preview-card-edge">
+          <ButtonRound class="preview-card-button" variant="accent">
+            <ArrowRightLong class="preview-card-button-arrow" />
+          </ButtonRound>
+        </div>
+        <Notch class="preview-card-notch preview-card-notch-left" />
+        <Notch class="preview-card-notch preview-card-notch-right" />
       </div>
-      <Notch class="preview-card-notch preview-card-notch-left" />
-      <Notch class="preview-card-notch preview-card-notch-right" />
     </div>
     <div class="preview-card-content">
       <div class="preview-card-copys">
@@ -83,6 +85,12 @@ onUnmounted(() => {
     flex-direction: column;
     gap: var(--space-md);
     padding-top: var(--space-xs);
+  }
+
+  &-overlay {
+    @include mixins.hover {
+      display: none;
+    }
   }
 
   &-notch {
