@@ -10,6 +10,7 @@ import { ref, onMounted, onUnmounted, watchEffect } from "vue";
 import { three } from "../three";
 import { animations } from "../animations";
 import HeaderHome from "../components/HeaderHome.vue";
+import { preloaderVisible } from "../composables/usePreloader";
 
 const introRef = ref<HTMLElement | null>(null);
 const stickyContentRef = ref<HTMLElement | null>(null);
@@ -24,7 +25,7 @@ const handleIntersection = (entries: IntersectionObserverEntry[]) => {
 };
 
 watchEffect((onInvalidate) => {
-  if (!contactRef.value) return;
+  if (!contactRef.value || preloaderVisible.value) return;
   const updateContactBottomOffset = () => {
     if (!contactRef.value) return;
     const bounding = contactRef.value.getBoundingClientRect();
