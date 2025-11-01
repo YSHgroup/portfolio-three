@@ -30,7 +30,7 @@ onMounted(loadPreviews);
     <NotchSection class="projects-notch" />
     <div class="grid">
       <div class="projects-title">
-        <Banner class="projects-title-banner" :copy="t('selected')" size="sm" />
+        <Banner class="projects-title-banner" :copy="t('selected')" size="sm" animated />
         <h2 class="projects-title-copy">{{ t("projects") }}</h2>
       </div>
     </div>
