@@ -101,6 +101,8 @@ const compileScene = async (camera: Camera, sceneToCompile: Scene) => {
       child.frustumCulled = originalState;
     });
 
+    renderTarget.render();
+
     resolve();
   });
 };
