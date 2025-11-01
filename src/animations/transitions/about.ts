@@ -87,7 +87,11 @@ const setupInAnimation = (about: HTMLElement) => {
         0,
       );
 
-      tl.to("#hero-content-inner", { x: "27vw", rotate: 4, y: 150, duration: 1, ease: "none" }, 0);
+      tl.to(
+        "#hero-content-inner",
+        { x: "27vw", rotate: 4, y: isMobile ? "-5vh" : "10vh", duration: 1, ease: "none" },
+        0,
+      );
     } else {
       //tl.to("#hero-content-inner", { y: "40vh", scale: 0.7, duration: 1, ease: "none" }, 0);
 

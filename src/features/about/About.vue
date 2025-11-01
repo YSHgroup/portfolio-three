@@ -38,7 +38,9 @@ watchEffect((onInvalidate) => {
         </div>
       </div>
       <div class="about-services" ref="contentTwoRef">
-        <BoxTwo @timeline:created="(tl: gsap.core.Timeline) => (tlTwoRef = tl)" />
+        <div class="about-services-content">
+          <BoxTwo @timeline:created="(tl: gsap.core.Timeline) => (tlTwoRef = tl)" />
+        </div>
       </div>
     </div>
   </div>
@@ -77,15 +79,22 @@ watchEffect((onInvalidate) => {
     right: var(--space-outer);
     width: calc(100% - var(--space-outer) * 2);
 
+    &-content {
+      @include mixins.landscape {
+        transform: translateY(50%);
+      }
+    }
+
     @include mixins.landscape {
       width: 500px;
       max-width: calc(36% - var(--space-outer));
       bottom: 50%;
-      transform: translateY(50%);
-      right: 64%;
+      left: var(--space-outer);
+      min-width: 260px;
 
       @include mixins.mq("xxl") {
         width: 420px;
+        left: calc(var(--space-outer) + 8%);
       }
     }
   }
@@ -93,8 +102,12 @@ watchEffect((onInvalidate) => {
   &-first {
     position: absolute;
     bottom: var(--space-outer);
-    left: var(--space-outer);
+    right: var(--space-outer);
     width: calc(100% - var(--space-outer) * 2);
+
+    @include mixins.landscape {
+      min-width: 300px;
+    }
 
     &-content {
       @include mixins.landscape {
@@ -106,10 +119,11 @@ watchEffect((onInvalidate) => {
       width: 500px;
       max-width: calc(42% - var(--space-outer));
       bottom: 50%;
-      left: 58%;
+      right: var(--space-outer);
 
       @include mixins.mq("xxl") {
         width: 460px;
+        right: calc(var(--space-outer) + 8%);
       }
     }
   }

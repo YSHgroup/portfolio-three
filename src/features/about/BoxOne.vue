@@ -35,7 +35,7 @@ watchEffect((onInvalidate) => {
 </script>
 
 <template>
-  <HologramBox ref="wrapperRef" title="David">
+  <HologramBox ref="wrapperRef" title="David" class="box-one">
     <div class="box-one-details">
       <p class="box-one-details-copy">{{ t("location") }}: {{ t("germany") }}</p>
       <p class="box-one-details-copy">Version: 2.7</p>
@@ -47,24 +47,7 @@ watchEffect((onInvalidate) => {
 
 <style scoped lang="scss">
 .box-one {
-  position: absolute;
-  bottom: var(--space-outer);
-  left: var(--space-outer);
-  width: calc(100% - var(--space-outer) * 2);
-
-  @include mixins.landscape {
-    width: 500px;
-    max-width: calc(42% - var(--space-outer));
-    bottom: 50%;
-    transform: translateY(50%);
-    left: 58%;
-    //right: calc(var(--space-outer));
-
-    @include mixins.mq("xxl") {
-      width: 460px;
-      //right: calc(var(--space-outer) + 8%);
-    }
-  }
+  width: 100%;
 
   &-content {
     display: flex;
