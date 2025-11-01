@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { ref, watchEffect } from "vue";
+import { computed, ref, watchEffect } from "vue";
 import { transitions } from "../../animations";
 import HologramBox from "../../components/HologramBox.vue";
 import HologramBoxLine from "../../components/HologramBoxLine.vue";
+import { t } from "../../i18n/utils/translate";
+import { locale } from "../../i18n/store";
 
 const aboutRef = ref<HTMLElement | null>(null);
 const firstHologramBoxRef = ref<{ tl: gsap.core.Timeline | null; wrapperRef: HTMLDivElement | null } | null>(null);
@@ -30,12 +32,23 @@ watchEffect((onInvalidate) => {
   });
 });
 
-const SERVICES = [
+const SERVICES_EN = [
   { name: "Frontend Development", sub: "React, Vue" },
   { name: "Backend Development", sub: "Node.js, Redis, PostgreSQL" },
   { name: "WebGL & Creative Coding", sub: "Three.js, GLSL, GSAP, SVG" },
   { name: "Real-Time Systems", sub: "WebSockets, multiplayer logic" },
 ] as const satisfies { name: string; sub: string }[];
+
+const SERVICES_DE = [
+  { name: "Frontend-Entwicklung", sub: "React, Vue" },
+  { name: "Backend-Entwicklung", sub: "Node.js, Redis, PostgreSQL" },
+  { name: "WebGL & Creative Coding", sub: "Three.js, GLSL, GSAP, SVG" },
+  { name: "Echtzeit-Systeme", sub: "WebSockets, Multiplayer-Logik" },
+] as const satisfies { name: string; sub: string }[];
+
+const services = computed(() => {
+  return locale.value === "en" ? SERVICES_EN : SERVICES_DE;
+});
 </script>
 
 <template>
@@ -45,21 +58,17 @@ const SERVICES = [
       <div class="about-first">
         <HologramBox title="David" ref="firstHologramBoxRef">
           <div class="about-first-details">
-            <p class="about-first-details-copy">Location: Germany</p>
+            <p class="about-first-details-copy">{{ t("location") }}: {{ t("germany") }}</p>
             <p class="about-first-details-copy">Version: 2.7</p>
           </div>
           <HologramBoxLine />
-          <p class="about-first-copy">
-            Web developer specializing in interactive 3D web experiences and real-time systems.
-            <br />Builds scalable, high-performance applications that combine engaging visuals with seamless
-            functionality using WebGL, TypeScript, and Node.js.
-          </p>
+          <p class="about-first-copy" v-html="t('about-intro')"></p>
         </HologramBox>
       </div>
       <div class="about-services">
         <HologramBox title="Services" ref="secondHologramBoxRef">
           <div class="about-services-list">
-            <div class="about-services-list-item" v-for="service in SERVICES" :key="service.name">
+            <div class="about-services-list-item" v-for="service in services" :key="service.name">
               <p class="about-services-list-item-name">{{ service.name }}</p>
               <p class="about-services-list-item-sub">{{ service.sub }}</p>
             </div>

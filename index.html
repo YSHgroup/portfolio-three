@@ -13,7 +13,7 @@
     <link rel="shortcut icon" href="/meta/favicon.ico" />
     <title>David Heckhoff - Web Developer (WebGL & Node.js)</title>
   </head>
-  <body>
+  <body class="is-loading">
     <svg style="display: none" viewBox="0 0 56 61" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <path
@@ -23,7 +23,24 @@
       </defs>
     </svg>
     <div id="app"></div>
-    <div id="preloader"></div>
+    <div class="preloader">
+      <svg class="preloader-svg" viewBox="0 0 56 61" xmlns="http://www.w3.org/2000/svg" style="transform: scale(1, 1)">
+        <mask class="preloader-mask">
+          <rect fill="black" height="61" width="61"></rect>
+          <rect
+            fill="white"
+            height="61"
+            width="61"
+            class="preloader-rect"
+            data-svg-origin="0 0"
+            transform="matrix(1,0,0,1,0,0)"
+            style="translate: none; rotate: none; scale: none; transform-origin: 0px 0px"
+          ></rect>
+        </mask>
+        <use href="#logo-path" fill="#091434" opacity=".1"></use>
+        <use href="#logo-path" fill="#091434" mask="url(.preloader-mask)"></use>
+      </svg>
+    </div>
     <script type="module" src="./src/main.ts"></script>
   </body>
 </html>
