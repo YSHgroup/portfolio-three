@@ -134,11 +134,15 @@ const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!pr
     z-index: -1;
 
     &-title {
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 400;
       text-transform: uppercase;
       letter-spacing: 0.02em;
       white-space: nowrap;
+
+      @include mixins.mq("md") {
+        font-size: 26px;
+      }
     }
 
     &-content {

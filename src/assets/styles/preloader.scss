@@ -9,10 +9,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 1;
 
   &-svg {
-    border: 2px solid red;
     width: 120px;
     height: 120px;
+  }
+
+  &-rect {
+    transform-origin: bottom center;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &-path {
+    fill: var(--color-text-400);
+  }
+
+  &-hidden {
+    opacity: 0;
+    visibility: hidden;
   }
 }

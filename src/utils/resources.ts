@@ -15,6 +15,7 @@ type ResourceType = Texture | GLTF;
 
 class Resources extends EventEmitter<{
   ready: void;
+  progress: number;
 }> {
   toLoad = sources.length;
   isReady = false;
@@ -72,6 +73,8 @@ class Resources extends EventEmitter<{
     this.items[source.name] = file;
 
     this.loaded++;
+    
+    this.emit("progress", this.loaded / this.toLoad);
 
     if (this.loaded === this.toLoad) {
       this.isReady = true;

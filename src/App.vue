@@ -9,8 +9,10 @@ import ProjectBackground from "./features/projects/components/ProjectBackground.
 import { useTranslations } from "./i18n/composables/useTranslations";
 import { scroll } from "./utils/scroll";
 import { useRoute } from "vue-router";
+import { usePreloader } from "./composables/usePreloader";
 
 useTranslations();
+usePreloader();
 const route = useRoute();
 
 onMounted(() => {
