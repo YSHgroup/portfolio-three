@@ -177,6 +177,9 @@ const setupSectionsAnimation = ({
       },
     });
 
+    const completed = { value: false };
+    tl.to(completed, { value: true, duration: 0 }, 1);
+
     tl.add(() => {
       tlOne?.play();
     }, 0);
@@ -198,7 +201,7 @@ const setupSectionsAnimation = ({
 
     //second box
     if (isLandscape) {
-      const SECOND_BOX_DELAY = 0.6;
+      const SECOND_BOX_DELAY = 0.55;
       tl.fromTo(contentTwo, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, SECOND_BOX_DELAY);
 
       tl.fromTo(contentTwo, { y: "20vh" }, { y: 0, duration: 0.35, ease: "none" }, SECOND_BOX_DELAY);
@@ -219,9 +222,6 @@ const setupSectionsAnimation = ({
         tlTwo?.play();
       }, SECOND_BOX_DELAY);
     }
-
-    const completed = { value: false };
-    tl.to(completed, { value: true, duration: 1 }, 0);
   });
 };
 

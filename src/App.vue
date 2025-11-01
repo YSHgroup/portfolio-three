@@ -10,6 +10,7 @@ import { useTranslations } from "./i18n/composables/useTranslations";
 import { scroll } from "./utils/scroll";
 import { useRoute } from "vue-router";
 import { usePreloader } from "./composables/usePreloader";
+import ScrollIcon from "./components/ScrollIcon.vue";
 
 useTranslations();
 usePreloader();
@@ -32,7 +33,8 @@ watch(
 </script>
 
 <template>
-  <Header></Header>
+  <Header />
   <ProjectBackground />
   <RouterView />
+  <ScrollIcon />
 </template>

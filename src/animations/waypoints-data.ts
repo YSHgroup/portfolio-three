@@ -21,8 +21,8 @@ export const points = {
   },
   portrait: {
     hero: {
-      position: { x: 0, y: 8.4, z: 16 },
-      focus: { x: 0, y: 5.4, z: 0 },
+      position: { x: 0, y: 8.2, z: 16 },
+      focus: { x: 0, y: 5.2, z: 0 },
     },
     "about-1": {
       position: { x: 0, y: 4.5, z: 12.5 },
