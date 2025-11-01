@@ -1,34 +1,13 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from "vue";
-import gsap from "gsap";
+import { computed, ref } from "vue";
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
+defineExpose({ wrapperRef });
 
 const props = defineProps<{
   title?: string;
   footer?: boolean;
 }>();
-
-let tl: gsap.core.Timeline | null = null;
-
-onMounted(() => {
-  tl = gsap.timeline();
-  //tl.fromTo(wrapperRef.value, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power1.out" }, 0);
-});
-
-onUnmounted(() => {
-  if (tl) {
-    tl.kill();
-    tl = null;
-  }
-});
-
-defineExpose({
-  get tl() {
-    return tl;
-  },
-  wrapperRef,
-});
 
 const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!props.title }]);
 </script>

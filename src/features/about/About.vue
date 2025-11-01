@@ -1,29 +1,24 @@
 <script setup lang="ts">
-import { computed, ref, watchEffect } from "vue";
+import { ref, watchEffect } from "vue";
 import { transitions } from "../../animations";
-import HologramBox from "../../components/HologramBox.vue";
-import HologramBoxLine from "../../components/HologramBoxLine.vue";
-import { t } from "../../i18n/utils/translate";
-import { locale } from "../../i18n/store";
+import BoxOne from "./BoxOne.vue";
+import BoxTwo from "./BoxTwo.vue";
+import gsap from "gsap";
 
 const aboutRef = ref<HTMLElement | null>(null);
-const firstHologramBoxRef = ref<{ tl: gsap.core.Timeline | null; wrapperRef: HTMLDivElement | null } | null>(null);
-const secondHologramBoxRef = ref<{ tl: gsap.core.Timeline | null; wrapperRef: HTMLDivElement | null } | null>(null);
+const contentOneRef = ref<HTMLDivElement | null>(null);
+const contentTwoRef = ref<HTMLDivElement | null>(null);
+const tlOneRef = ref<gsap.core.Timeline | null>(null);
+const tlTwoRef = ref<gsap.core.Timeline | null>(gsap.timeline({ paused: true }));
 
 watchEffect((onInvalidate) => {
-  if (
-    aboutRef.value &&
-    firstHologramBoxRef.value?.tl &&
-    firstHologramBoxRef.value.wrapperRef &&
-    secondHologramBoxRef.value?.tl &&
-    secondHologramBoxRef.value.wrapperRef
-  ) {
+  if (aboutRef.value && tlOneRef.value && contentOneRef.value && tlTwoRef.value && contentTwoRef.value) {
     transitions.about.setup({
       about: aboutRef.value,
-      firstHologramBoxTl: firstHologramBoxRef.value.tl,
-      firstHologramBoxWrapper: firstHologramBoxRef.value.wrapperRef,
-      secondHologramBoxTl: secondHologramBoxRef.value.tl,
-      secondHologramBoxWrapper: secondHologramBoxRef.value.wrapperRef,
+      contentOne: contentOneRef.value,
+      tlOne: tlOneRef.value,
+      contentTwo: contentTwoRef.value,
+      tlTwo: tlTwoRef.value,
     });
   }
 
@@ -31,49 +26,19 @@ watchEffect((onInvalidate) => {
     transitions.about.destroy();
   });
 });
-
-const SERVICES_EN = [
-  { name: "Frontend Development", sub: "React, Vue" },
-  { name: "Backend Development", sub: "Node.js, Redis, PostgreSQL" },
-  { name: "WebGL & Creative Coding", sub: "Three.js, GLSL, GSAP, SVG" },
-  { name: "Real-Time Systems", sub: "WebSockets, multiplayer logic" },
-] as const satisfies { name: string; sub: string }[];
-
-const SERVICES_DE = [
-  { name: "Frontend-Entwicklung", sub: "React, Vue" },
-  { name: "Backend-Entwicklung", sub: "Node.js, Redis, PostgreSQL" },
-  { name: "WebGL & Creative Coding", sub: "Three.js, GLSL, GSAP, SVG" },
-  { name: "Echtzeit-Systeme", sub: "WebSockets, Multiplayer-Logik" },
-] as const satisfies { name: string; sub: string }[];
-
-const services = computed(() => {
-  return locale.value === "en" ? SERVICES_EN : SERVICES_DE;
-});
 </script>
 
 <template>
   <div class="about" ref="aboutRef" id="about"></div>
   <div class="about-sticky">
     <div class="about-content">
-      <div class="about-first">
-        <HologramBox title="David" ref="firstHologramBoxRef">
-          <div class="about-first-details">
-            <p class="about-first-details-copy">{{ t("location") }}: {{ t("germany") }}</p>
-            <p class="about-first-details-copy">Version: 2.7</p>
-          </div>
-          <HologramBoxLine />
-          <p class="about-first-copy" v-html="t('about-intro')"></p>
-        </HologramBox>
+      <div class="about-first" ref="contentOneRef">
+        <div class="about-first-content">
+          <BoxOne @timeline:created="(tl: gsap.core.Timeline) => (tlOneRef = tl)" />
+        </div>
       </div>
-      <div class="about-services">
-        <HologramBox title="Services" ref="secondHologramBoxRef">
-          <div class="about-services-list">
-            <div class="about-services-list-item" v-for="service in services" :key="service.name">
-              <p class="about-services-list-item-name">{{ service.name }}</p>
-              <p class="about-services-list-item-sub">{{ service.sub }}</p>
-            </div>
-          </div>
-        </HologramBox>
+      <div class="about-services" ref="contentTwoRef">
+        <BoxTwo @timeline:created="(tl: gsap.core.Timeline) => (tlTwoRef = tl)" />
       </div>
     </div>
   </div>
@@ -123,35 +88,6 @@ const services = computed(() => {
         width: 420px;
       }
     }
-
-    &-list {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-xs);
-      padding-bottom: var(--space-sm);
-      padding-top: var(--space-xs);
-
-      &-item {
-        display: flex;
-        flex-direction: column;
-        padding-left: 28px;
-        position: relative;
-
-        &::before {
-          content: "";
-          position: absolute;
-          left: 12px;
-          top: 6px;
-          width: 6px;
-          height: 6px;
-          background-color: var(--color-text-cyan-400);
-        }
-
-        &-sub {
-          font-size: var(--font-size-xs);
-        }
-      }
-    }
   }
 
   &-first {
@@ -160,47 +96,20 @@ const services = computed(() => {
     left: var(--space-outer);
     width: calc(100% - var(--space-outer) * 2);
 
+    &-content {
+      @include mixins.landscape {
+        transform: translateY(50%);
+      }
+    }
+
     @include mixins.landscape {
       width: 500px;
       max-width: calc(42% - var(--space-outer));
       bottom: 50%;
-      transform: translateY(50%);
       left: 58%;
-      //right: calc(var(--space-outer));
 
       @include mixins.mq("xxl") {
         width: 460px;
-        //right: calc(var(--space-outer) + 8%);
-      }
-    }
-
-    &-content {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    &-details {
-      padding: var(--space-xs) var(--space-sm);
-      padding-top: 0;
-      display: flex;
-      font-size: var(--font-size-sm);
-
-      @include mixins.mq("md") {
-        padding: var(--space-sm) var(--space-md);
-        padding-top: 0;
-        font-size: var(--font-size-md);
-      }
-
-      &-copy {
-        flex: 0.5;
-      }
-    }
-
-    &-copy {
-      padding: var(--space-sm);
-
-      @include mixins.mq("md") {
-        padding: var(--space-md);
       }
     }
   }

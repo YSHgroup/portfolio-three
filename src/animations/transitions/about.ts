@@ -1,6 +1,5 @@
 import { avatar } from "../../three/objects/avatar";
 import { sceneWeightsInOut } from "../scenes";
-//import { gridFloor } from "../../three/objects/grid-floor";
 import { createMatchMedia } from "../utils/matchMedia";
 import { room } from "../../three/objects/room";
 import gsap from "gsap";
@@ -14,25 +13,25 @@ export const aboutProgress = { value: 0 };
 
 const setup = ({
   about,
-  firstHologramBoxTl,
-  firstHologramBoxWrapper,
-  secondHologramBoxTl,
-  secondHologramBoxWrapper,
+  tlOne,
+  contentOne,
+  tlTwo,
+  contentTwo,
 }: {
   about: HTMLElement;
-  firstHologramBoxTl: gsap.core.Timeline;
-  firstHologramBoxWrapper: HTMLDivElement;
-  secondHologramBoxTl: gsap.core.Timeline;
-  secondHologramBoxWrapper: HTMLDivElement;
+  tlOne: gsap.core.Timeline;
+  contentOne: HTMLDivElement;
+  tlTwo: gsap.core.Timeline;
+  contentTwo: HTMLDivElement;
 }) => {
   setupInAnimation(about);
   setupProgressAnimation(about);
   setupSectionsAnimation({
     about,
-    firstHologramBoxTl,
-    firstHologramBoxWrapper,
-    secondHologramBoxTl,
-    secondHologramBoxWrapper,
+    tlOne,
+    contentOne,
+    tlTwo,
+    contentTwo,
   });
   setupOutAnimation(about);
 };
@@ -152,18 +151,18 @@ const setupProgressAnimation = (about: HTMLElement) => {
 
 const setupSectionsAnimation = ({
   about,
-  //firstHologramBoxTl,
-  firstHologramBoxWrapper,
-  //secondHologramBoxTl,
-  secondHologramBoxWrapper,
+  tlOne,
+  contentOne,
+  tlTwo,
+  contentTwo,
 }: {
   about: HTMLElement;
-  firstHologramBoxTl: gsap.core.Timeline;
-  firstHologramBoxWrapper: HTMLDivElement;
-  secondHologramBoxWrapper: HTMLDivElement;
-  secondHologramBoxTl: gsap.core.Timeline;
+  contentOne: HTMLDivElement;
+  contentTwo: HTMLDivElement;
+  tlOne: gsap.core.Timeline;
+  tlTwo: gsap.core.Timeline;
 }) => {
-  sectionsMm = createMatchMedia((_context, { isLandscape, isMobile }) => {
+  sectionsMm = createMatchMedia((_context, { isLandscape }) => {
     const tl = gsap.timeline({
       duration: 1,
       scrollTrigger: {
@@ -174,44 +173,48 @@ const setupSectionsAnimation = ({
       },
     });
 
+    tl.add(() => {
+      tlOne?.play();
+    }, 0);
+
     //first box
     if (isLandscape) {
-      tl.fromTo(firstHologramBoxWrapper, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, 0);
-      tl.to(firstHologramBoxWrapper, { opacity: 0, duration: 0.15, ease: "power1.in" }, 0.55);
+      tl.fromTo(contentOne, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, 0);
+      tl.to(contentOne, { opacity: 0, duration: 0.15, ease: "power1.in" }, 0.55);
 
-      tl.fromTo(firstHologramBoxWrapper, { y: "20vh" }, { y: "-20vh", duration: 0.7, ease: "none" }, 0);
+      tl.fromTo(contentOne, { y: "20vh" }, { y: "-20vh", duration: 0.7, ease: "none" }, 0);
+
+      tl.add(() => {
+        tlOne?.play();
+      }, 0);
     } else {
-      tl.fromTo(
-        firstHologramBoxWrapper,
-        { opacity: 0, y: isMobile ? 60 : 100 },
-        { opacity: 1, y: 0, duration: 0.15, ease: "power1.out" },
-        0,
-      );
-      tl.to(firstHologramBoxWrapper, { opacity: 0, y: "-10vh", duration: 0.15, ease: "power1.in" }, 0.45);
+      tl.fromTo(contentOne, { opacity: 0, y: "20vh" }, { opacity: 1, y: "0vh", duration: 0.15, ease: "power1.out" }, 0);
+      tl.to(contentOne, { opacity: 0, y: "-20vh", duration: 0.15, ease: "power1.in" }, 0.45);
     }
 
     //second box
     if (isLandscape) {
       const SECOND_BOX_DELAY = 0.6;
-      tl.fromTo(
-        secondHologramBoxWrapper,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.15, ease: "power1.out" },
-        SECOND_BOX_DELAY,
-      );
+      tl.fromTo(contentTwo, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, SECOND_BOX_DELAY);
 
-      tl.fromTo(secondHologramBoxWrapper, { y: "20vh" }, { y: 0, duration: 0.35, ease: "none" }, SECOND_BOX_DELAY);
+      tl.fromTo(contentTwo, { y: "20vh" }, { y: 0, duration: 0.35, ease: "none" }, SECOND_BOX_DELAY);
+
+      tl.add(() => {
+        tlTwo?.play();
+      }, SECOND_BOX_DELAY);
     } else {
       const SECOND_BOX_DELAY = 0.55;
       tl.fromTo(
-        secondHologramBoxWrapper,
-        { opacity: 0, y: "10vh" },
-        { opacity: 1, y: 0, duration: 0.15, ease: "power1.out" },
+        contentTwo,
+        { opacity: 0, y: "20vh" },
+        { opacity: 1, y: "0vh", duration: 0.15, ease: "power1.out" },
         SECOND_BOX_DELAY,
       );
-    }
 
-    //tl.add(firstHologramBoxTl, 0);
+      tl.add(() => {
+        tlTwo?.play();
+      }, SECOND_BOX_DELAY);
+    }
 
     const completed = { value: false };
     tl.to(completed, { value: true, duration: 1 }, 0);
