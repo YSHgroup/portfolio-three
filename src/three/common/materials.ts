@@ -13,6 +13,7 @@ let shadowMaterial: ShaderMaterial | null = null;
 export const getRoomMaterial = (): Material => {
   if (roomMaterial) return roomMaterial;
   const texture = resources.items["room-texture"];
+  texture.flipY = false;
 
   roomMaterial = new MeshBasicMaterial({ map: texture });
 
