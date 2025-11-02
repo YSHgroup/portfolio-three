@@ -34,9 +34,9 @@ const classes = computed(() => [
   text-transform: uppercase;
   background-color: transparent;
   transition:
-    background-color 0.125s ease-in-out,
-    color 0.125s ease-in-out,
-    border-color 0.125s ease-in-out;
+    background-color 0.1s ease-in-out,
+    color 0.1s ease-in-out,
+    border-color 0.1s ease-in-out;
 
   &-rounded {
     border-radius: 50%;

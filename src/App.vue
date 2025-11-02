@@ -11,10 +11,13 @@ import { scroll } from "./utils/scroll";
 import { useRoute } from "vue-router";
 import { usePreloader } from "./composables/usePreloader";
 import ScrollIcon from "./components/ScrollIcon.vue";
+import Cursor from "./components/Cursor.vue";
+import { useAgent } from "./composables/useAgent";
 
 useTranslations();
 usePreloader();
 const route = useRoute();
+const { isTouch } = useAgent();
 
 onMounted(() => {
   sizes.init();
@@ -37,4 +40,5 @@ watch(
   <ProjectBackground />
   <RouterView />
   <ScrollIcon />
+  <Cursor v-if="!isTouch" />
 </template>

@@ -68,8 +68,10 @@ onMounted(() => {
       <HeaderLink
         v-for="section in sections"
         :key="section"
+        :is-active="activeLink === section"
         :class="['header-home-link', { 'header-home-link-active': activeLink === section && hasScrolledIntoView }]"
         @click="handleLinkClick('.' + section)"
+        :is-dark-theme="isDarkTheme"
       >
         {{ t(section) }}
       </HeaderLink>
@@ -108,8 +110,8 @@ onMounted(() => {
     border-radius: 100px;
     color: var(--color-text-400);
     transition:
-      color 0.125s ease-in-out,
-      background-color 0.125s ease-in-out;
+      color 0.1s ease-in-out,
+      background-color 0.1s ease-in-out;
 
     &-dark {
       background-color: var(--color-dark-blue-500);
@@ -127,8 +129,8 @@ onMounted(() => {
     border-radius: 100px;
     transition:
       transform 0.3s var(--ease-smooth),
-      opacity 0.125s ease-in-out,
-      background-color 0.125s ease-in-out;
+      opacity 0.1s ease-in-out,
+      background-color 0.1s ease-in-out;
     z-index: 1;
     opacity: 0;
 

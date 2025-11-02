@@ -35,6 +35,7 @@ const getAriaLabel = (name: string) => `${t("go-to")} ${name.charAt(0).toUpperCa
       :href="item.url"
       :aria-label="getAriaLabel(item.name)"
       class="social-link"
+      data-cursor="circle-black"
     >
       <ButtonRound renderAs="div" :variant="props.variant ?? 'theme'">
         <component :is="icons[item.name]" :aria-label="getAriaLabel(item.name)" external />

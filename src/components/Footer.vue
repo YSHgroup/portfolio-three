@@ -23,14 +23,22 @@ const { withSocial = true } = defineProps<Props>();
         <div class="footer-top-links">
           <div class="footer-top-links-legal">
             <Clickable renderAs="div">
-              <Link :href="locale === 'de' ? '/de/privacy' : '/privacy'" class="footer-link" :external="true">{{
-                t("privacy")
-              }}</Link>
+              <Link
+                :href="locale === 'de' ? '/de/privacy' : '/privacy'"
+                class="footer-link"
+                :external="true"
+                data-cursor="circle-black"
+                >{{ t("privacy") }}</Link
+              >
             </Clickable>
             <Clickable renderAs="div">
-              <Link :href="locale === 'de' ? '/de/legal' : '/legal'" class="footer-link" :external="true">{{
-                t("legal")
-              }}</Link>
+              <Link
+                :href="locale === 'de' ? '/de/legal' : '/legal'"
+                class="footer-link"
+                :external="true"
+                data-cursor="circle-black"
+                >{{ t("legal") }}</Link
+              >
             </Clickable>
           </div>
           <LangSwitch />
@@ -42,7 +50,9 @@ const { withSocial = true } = defineProps<Props>();
             {{ t("music-produced-by") }}
           </p>
           <Clickable renderAs="div">
-            <Link href="https://soundcloud.com/hmsurf" class="footer-link" external>HM Surf</Link>
+            <Link href="https://soundcloud.com/hmsurf" class="footer-link" external data-cursor="circle-black"
+              >HM Surf</Link
+            >
           </Clickable>
         </div>
         <p>© {{ new Date().getFullYear() }} David Heckhoff</p>

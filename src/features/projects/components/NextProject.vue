@@ -27,7 +27,7 @@ const { project } = defineProps<{
   padding-right: var(--space-sm);
   border-radius: var(--radius-md);
   color: var(--color-text-400);
-  transition: background-color 0.125s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
   display: flex;
   flex-direction: row;
   align-items: center;

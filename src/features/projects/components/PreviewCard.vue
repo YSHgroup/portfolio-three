@@ -43,7 +43,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <Link class="preview-card" :to="`/project/${props.preview.slug}`">
+  <Link class="preview-card" :to="`/project/${props.preview.slug}`" data-cursor="arrow">
     <div class="preview-card-top" ref="wrapperRef">
       <div class="preview-card-image-wrapper">
         <div class="preview-card-image-container">
@@ -124,7 +124,7 @@ onUnmounted(() => {
 
   &-button {
     &-arrow {
-      transition: transform 0.125s ease-in-out;
+      transition: transform 0.1s ease-in-out;
       width: 100%;
       transform: rotate(calc(var(--hover) * -45deg));
     }
@@ -136,7 +136,7 @@ onUnmounted(() => {
     object-fit: cover;
 
     &-container {
-      transition: transform 0.125s ease-in-out;
+      transition: transform 0.1s ease-in-out;
       transform: scale(calc(1 + var(--hover) * 0.02));
       aspect-ratio: 16/9;
     }
