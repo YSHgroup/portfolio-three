@@ -3,18 +3,18 @@ import labModel from "./assets/models/lab.glb";
 import roomModel from "./assets/models/room.glb";
 import contactModel from "./assets/models/contact.glb";
 
-import contactTexture from "./assets/textures/contact.jpg";
-import contactShadowTexture from "./assets/textures/contact-shadow.jpg";
+import contactTexture from "./assets/textures/contact.ktx2";
+import contactShadowTexture from "./assets/textures/contact-shadow.ktx2";
 import desktopsTexture from "./assets/textures/desktops.png";
 import faceTexture from "./assets/textures/face-spritesheet.png";
-import headTexture from "./assets/textures/head.png";
+import headTexture from "./assets/textures/head.ktx2";
 import iconSpritesheet from "./assets/textures/icon-spritesheet.png";
-import matcapBlack from "./assets/textures/matcap-black.jpg";
-import matcapGray from "./assets/textures/matcap-gray.jpg";
-import matcapSkin from "./assets/textures/matcap-skin.jpg";
-import matcapWhite from "./assets/textures/matcap-white.jpg";
+import matcapBlack from "./assets/textures/matcap-black.ktx2";
+import matcapGray from "./assets/textures/matcap-gray.ktx2";
+import matcapSkin from "./assets/textures/matcap-skin.ktx2";
+import matcapWhite from "./assets/textures/matcap-white.ktx2";
 import roomTexture from "./assets/textures/room.ktx2";
-import roomShadowTexture from "./assets/textures/room-shadow.png";
+import roomShadowTexture from "./assets/textures/room-shadow.ktx2";
 
 type Source = {
   name: string;
