@@ -3,16 +3,16 @@ import labModel from "./assets/models/lab.glb";
 import roomModel from "./assets/models/room.glb";
 import contactModel from "./assets/models/contact.glb";
 
-import contactTexture from "./assets/textures/contact.ktx2";
-import contactShadowTexture from "./assets/textures/contact-shadow.ktx2";
+import contactTexture from "./assets/textures/contact.webp";
+import contactShadowTexture from "./assets/textures/contact-shadow.webp";
 import desktopsTexture from "./assets/textures/desktops.webp";
 import faceTexture from "./assets/textures/face-spritesheet.png";
-import headTexture from "./assets/textures/head.ktx2";
+import headTexture from "./assets/textures/head.webp";
 import iconSpritesheet from "./assets/textures/icon-spritesheet.png";
-import matcapBlack from "./assets/textures/matcap-black.ktx2";
-import matcapGray from "./assets/textures/matcap-gray.ktx2";
-import matcapSkin from "./assets/textures/matcap-skin.ktx2";
-import matcapWhite from "./assets/textures/matcap-white.ktx2";
+import matcapBlack from "./assets/textures/matcap-black.webp";
+import matcapGray from "./assets/textures/matcap-gray.webp";
+import matcapSkin from "./assets/textures/matcap-skin.webp";
+import matcapWhite from "./assets/textures/matcap-white.webp";
 import roomTexture from "./assets/textures/room.webp";
 import roomShadowTexture from "./assets/textures/room-shadow.webp";
 

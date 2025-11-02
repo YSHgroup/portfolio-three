@@ -1,10 +1,8 @@
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import { SRGBColorSpace, TextureLoader } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { KTX2Loader } from "three/examples/jsm/loaders/KTX2Loader.js";
 import EventEmitter from "./EventEmitter";
 import { sources } from "../sources";
-import { renderer } from "../three/core/renderer";
 
 import type { Texture } from "three";
 import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
@@ -26,7 +24,6 @@ class Resources extends EventEmitter<{
     gltfLoader: GLTFLoader;
     textureLoader: TextureLoader;
     fontLoader: FontLoader;
-    ktx2Loader: KTX2Loader;
   };
 
   constructor() {
@@ -36,14 +33,11 @@ class Resources extends EventEmitter<{
       gltfLoader: new GLTFLoader(),
       textureLoader: new TextureLoader(),
       fontLoader: new FontLoader(),
-      ktx2Loader: new KTX2Loader().setTranscoderPath("/transcoder/"), // path to Basis transcoder
     };
   }
 
   startLoading() {
     if (this.isReady) return;
-
-    this.loaders.ktx2Loader.detectSupport(renderer.getInstance());
 
     for (const source of sources) {
       if (source.type === "gltfModel") {
@@ -51,20 +45,10 @@ class Resources extends EventEmitter<{
           this.sourceLoaded(source, file);
         });
       } else if (source.type === "texture") {
-        // Strip query string before checking extension
-        const pathWithoutQuery = source.path.split("?")[0];
-
-        if (pathWithoutQuery!.endsWith(".ktx2")) {
-          this.loaders.ktx2Loader.load(source.path, (file: Texture) => {
-            file.colorSpace = SRGBColorSpace;
-            this.sourceLoaded(source, file);
-          });
-        } else {
-          this.loaders.textureLoader.load(source.path, (file: Texture) => {
-            file.colorSpace = SRGBColorSpace;
-            this.sourceLoaded(source, file);
-          });
-        }
+        this.loaders.textureLoader.load(source.path, (file: Texture) => {
+          file.colorSpace = SRGBColorSpace;
+          this.sourceLoaded(source, file);
+        });
       }
     }
   }
@@ -73,7 +57,7 @@ class Resources extends EventEmitter<{
     this.items[source.name] = file;
 
     this.loaded++;
-    
+
     this.emit("progress", this.loaded / this.toLoad);
 
     if (this.loaded === this.toLoad) {
