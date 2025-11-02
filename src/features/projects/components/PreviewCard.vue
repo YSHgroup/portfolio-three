@@ -73,10 +73,31 @@ onUnmounted(() => {
 .preview-card {
   --hover: 0;
   position: relative;
+  border-radius: var(--radius-xl);
+  z-index: var(--z-index-layout);
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    width: calc(100% + 16px);
+    height: calc(100% + 16px);
+    background-color: var(--color-grayscale-400);
+    border-radius: var(--radius-xl);
+    z-index: -1;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.1s ease-in-out;
+  }
 
   @include mixins.hover {
     &:hover {
       --hover: 1;
+
+      &::after {
+        opacity: 1;
+      }
     }
   }
 

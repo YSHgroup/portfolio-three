@@ -137,7 +137,6 @@ onMounted(loadPreviews);
 
     @include mixins.mq("xl") {
       grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-      gap: var(--space-lg);
     }
   }
 }

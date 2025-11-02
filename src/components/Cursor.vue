@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from "vue";
+import { onMounted, onUnmounted, ref, watch } from "vue";
 import { lerp } from "../utils/math";
 import gsap from "gsap";
+import ArrowRightLong from "./icons/ArrowRightLong.vue";
+import { useRoute } from "vue-router";
 
 const cursorWrapperRef = ref<HTMLElement | null>(null);
 const cursorScaleRef = ref<HTMLElement | null>(null);
@@ -9,9 +11,10 @@ const mouseX = ref(0);
 const mouseY = ref(0);
 const currentX = ref(0);
 const currentY = ref(0);
-const isHovering = ref(false);
 const isVisible = ref(false);
 const cursorType = ref<"circle-black" | "arrow" | "circle-white" | null>(null);
+
+const route = useRoute();
 
 const lerpSpeed = 0.1;
 
@@ -25,10 +28,8 @@ const tick = () => {
   }
 
   if (cursorScaleRef.value) {
-    const visibilityScale = isVisible.value ? 1 : 0;
-    const hoverScale = isHovering.value ? 1.5 : 1;
-    const finalScale = visibilityScale * hoverScale;
-    cursorScaleRef.value.style.transform = `scale(${finalScale})`;
+    const scale = isVisible.value ? 1 : 0;
+    cursorScaleRef.value.style.transform = `scale(${scale})`;
   }
 };
 
@@ -59,10 +60,8 @@ const handleMouseMove = (e: MouseEvent) => {
       currentY.value = mouseY.value;
     }
     cursorType.value = detectedType;
-    isHovering.value = true;
   } else {
     isVisible.value = false;
-    isHovering.value = false;
     cursorType.value = null;
   }
 };
@@ -78,6 +77,15 @@ onMounted(() => {
   gsap.ticker.add(tick);
 });
 
+// Watch for route changes and reset cursor
+watch(
+  () => route.path,
+  () => {
+    isVisible.value = false;
+    cursorType.value = null;
+  },
+);
+
 onUnmounted(() => {
   window.removeEventListener("mousemove", handleMouseMove);
   gsap.ticker.remove(tick);
@@ -89,7 +97,9 @@ onUnmounted(() => {
     <div ref="cursorScaleRef" class="cursor-scale">
       <div class="cursor cursor-circle-black" :class="{ 'cursor-active': cursorType === 'circle-black' }" />
       <div class="cursor cursor-circle-white" :class="{ 'cursor-active': cursorType === 'circle-white' }" />
-      <div class="cursor cursor-arrow" :class="{ 'cursor-active': cursorType === 'arrow' }" />
+      <div class="cursor cursor-arrow" :class="{ 'cursor-active': cursorType === 'arrow' }">
+        <ArrowRightLong class="cursor-arrow-icon" />
+      </div>
     </div>
   </div>
 </template>
@@ -123,33 +133,40 @@ onUnmounted(() => {
   left: 0;
   transform: translate(-50%, -50%);
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease-in-out;
 
   &-active {
     opacity: 1;
   }
 
   &-circle-black {
-    width: 20px;
-    height: 20px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
-    border: 3px solid var(--color-text-400);
+    border: 4px solid var(--color-text-400);
   }
 
   &-circle-white {
-    width: 20px;
-    height: 20px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
-    border: 3px solid var(--color-white-400);
+    border: 4px solid var(--color-white-400);
   }
 
   &-arrow {
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 16px solid green;
-    transform: translate(-8px, -8px) rotate(0deg);
+    width: 54px;
+    height: 54px;
+    background-color: var(--color-orange-400);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: var(--stroke-lg) solid var(--color-beige-400);
+
+    &-icon {
+      color: var(--color-white-400);
+      width: 24px;
+    }
   }
 }
 </style>

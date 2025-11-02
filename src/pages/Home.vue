@@ -11,6 +11,7 @@ import { three } from "../three";
 import { animations } from "../animations";
 import HeaderHome from "../components/HeaderHome.vue";
 import { preloaderVisible } from "../composables/usePreloader";
+import ScrollIcon from "../components/ScrollIcon.vue";
 
 const introRef = ref<HTMLElement | null>(null);
 const stickyContentRef = ref<HTMLElement | null>(null);
@@ -72,6 +73,7 @@ const handleProjectsLoaded = () => {
 </script>
 
 <template>
+  <ScrollIcon />
   <HeaderHome v-if="projectsLoaded" />
   <Layout>
     <div class="intro-wrapper" ref="introRef">

@@ -46,6 +46,13 @@ const classes = computed(() => [
   &-accent {
     background-color: var(--color-accent-400, var(--color-orange-400));
     color: var(--color-accent-text-400, var(--color-white-400));
+
+    @include mixins.hover {
+      &:hover {
+        background-color: var(--color-black-400);
+        color: var(--color-white-400);
+      }
+    }
   }
 
   &-theme {
@@ -56,6 +63,13 @@ const classes = computed(() => [
   &-background {
     background-color: var(--color-background-400);
     color: var(--color-text-400);
+
+    @include mixins.hover {
+      &:hover {
+        background-color: var(--color-text-400);
+        color: var(--color-background-400);
+      }
+    }
   }
 
   &-border {

@@ -75,6 +75,7 @@ const getInTouchClassNames = computed(() => {
         :href="social.find((item) => item.name === 'mail')?.url ?? ''"
         external
         :class="getInTouchClassNames"
+        data-cursor="circle-white"
         >{{ t("get-in-touch") }}</Button
       >
     </div>

@@ -10,7 +10,6 @@ import { useTranslations } from "./i18n/composables/useTranslations";
 import { scroll } from "./utils/scroll";
 import { useRoute } from "vue-router";
 import { usePreloader } from "./composables/usePreloader";
-import ScrollIcon from "./components/ScrollIcon.vue";
 import Cursor from "./components/Cursor.vue";
 import { useAgent } from "./composables/useAgent";
 
@@ -39,6 +38,5 @@ watch(
   <Header />
   <ProjectBackground />
   <RouterView />
-  <ScrollIcon />
   <Cursor v-if="!isTouch" />
 </template>

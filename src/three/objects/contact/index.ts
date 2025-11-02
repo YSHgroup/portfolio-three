@@ -19,6 +19,7 @@ let objects: {
 const init = () => {
   initObjects();
   shadow.init();
+  gsap.ticker.add(tick);
 };
 
 const initObjects = () => {
