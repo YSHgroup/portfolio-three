@@ -18,5 +18,6 @@
   "selected": "Ausgewählte",
   "services": "Leistungen",
   "source-code": "Quellcode",
+  "switch-to-project": "Zum Projekt {project} wechseln",
   "view-project": "Projekt ansehen"
 }

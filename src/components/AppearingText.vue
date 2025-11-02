@@ -90,7 +90,7 @@ watchEffect((onInvalidate) => {
 
 <template>
   <div class="appearing-text">
-    <p class="appearing-text-value" :aria-label="props.text">
+    <p class="appearing-text-value">
       {{ displayText }}
     </p>
     <p class="appearing-text-clone" aria-hidden="true">{{ props.text }}</p>

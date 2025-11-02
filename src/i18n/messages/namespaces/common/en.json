@@ -18,5 +18,6 @@
   "selected": "Selected",
   "services": "Services",
   "source-code": "Source Code",
+  "switch-to-project": "Switch to project {project}",
   "view-project": "View project"
 }

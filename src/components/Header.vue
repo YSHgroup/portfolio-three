@@ -60,6 +60,7 @@ const getInTouchClassNames = computed(() => {
         v-if="isProjectPage"
         variant="accent"
         @click="router.back()"
+        :aria-label="t('back-to-home')"
         :class="{ 'header-back': true, 'header-back-isProjectPage': isProjectPage }"
       >
         <ArrowRight class="header-back-icon" />
@@ -72,6 +73,7 @@ const getInTouchClassNames = computed(() => {
       <Button
         renderAs="a"
         variant="accent"
+        :aria-label="t('get-in-touch')"
         :href="social.find((item) => item.name === 'mail')?.url ?? ''"
         external
         :class="getInTouchClassNames"

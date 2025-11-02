@@ -14,6 +14,11 @@ const handleLinkClick = (link: string) => {
 type ActiveLink = "about" | "projects" | "contact";
 const activeLink = ref<ActiveLink | null>(null);
 const sections: ActiveLink[] = ["about", "projects", "contact"];
+const ariaLabels = {
+  about: t("about"),
+  projects: t("projects"),
+  contact: t("contact"),
+};
 
 const isMounted = ref(false);
 
@@ -72,6 +77,7 @@ onMounted(() => {
         :class="['header-home-link', { 'header-home-link-active': activeLink === section && hasScrolledIntoView }]"
         @click="handleLinkClick('.' + section)"
         :is-dark-theme="isDarkTheme"
+        :aria-label="ariaLabels[section]"
       >
         {{ t(section) }}
       </HeaderLink>

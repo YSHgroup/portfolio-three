@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { onMounted, onUnmounted, ref } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ButtonRound from "../../../components/ButtonRound.vue";
+import { t } from "../../../i18n/utils/translate";
 
 import type { ProjectPreview } from "../../../content/types";
 
@@ -43,7 +44,12 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <Link class="preview-card" :to="`/project/${props.preview.slug}`" data-cursor="arrow">
+  <Link
+    class="preview-card"
+    :to="`/project/${props.preview.slug}`"
+    :aria-label="t('switch-to-project', { project: props.preview.title })"
+    data-cursor="arrow"
+  >
     <div class="preview-card-top" ref="wrapperRef">
       <div class="preview-card-image-wrapper">
         <div class="preview-card-image-container">

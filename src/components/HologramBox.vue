@@ -16,7 +16,7 @@ const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!pr
   <div :class="classes" ref="wrapperRef">
     <div class="hologram-box-header" v-if="props.title">
       <div class="hologram-box-header-content">
-        <h3 class="hologram-box-header-title">{{ props.title }}</h3>
+        <h2 class="hologram-box-header-title">{{ props.title }}</h2>
       </div>
       <div class="hologram-box-curve">
         <svg viewBox="0 0 51 34" fill="none" xmlns="http://www.w3.org/2000/svg" class="hologram-box-curve-svg">
