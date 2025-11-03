@@ -33,6 +33,9 @@ watchEffect((onInvalidate) => {
 
   timelines.value.forEach(({ timeline, delay }) => {
     tl.add(() => {
+      if (timeline.isActive() || timeline.progress() >= 0.99) {
+        return;
+      }
       timeline.play();
     }, delay);
   });
