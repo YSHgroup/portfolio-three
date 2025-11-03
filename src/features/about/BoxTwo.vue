@@ -9,25 +9,12 @@ import AppearingText from "../../components/AppearingText.vue";
 const wrapperRef = ref<InstanceType<typeof HologramBox> | null>(null);
 const timelines = ref<{ timeline: gsap.core.Timeline; delay: number }[]>([]);
 const subRefs = ref<HTMLParagraphElement[]>([]);
-let previousMainTimeline: gsap.core.Timeline | null = null;
-const previousTimelines = ref<gsap.core.Timeline[]>([]);
 
 const emit = defineEmits<{
   "timeline:created": [timeline: gsap.core.Timeline];
 }>();
 
 watchEffect((onInvalidate) => {
-  // Stop all previous playing timelines
-  if (previousMainTimeline && previousMainTimeline.isActive()) {
-    previousMainTimeline.pause();
-  }
-  previousTimelines.value.forEach((timeline) => {
-    if (timeline && timeline.isActive()) {
-      timeline.kill();
-    }
-  });
-  previousTimelines.value = [];
-
   const wrapperEl = wrapperRef.value?.wrapperRef;
   if (!wrapperEl) return;
 
@@ -43,8 +30,10 @@ watchEffect((onInvalidate) => {
   );
 
   timelines.value.forEach(({ timeline, delay }) => {
-    previousTimelines.value.push(timeline);
     tl.add(() => {
+      if (timeline.isActive()) {
+        return;
+      }
       timeline.play();
     }, delay);
   });
@@ -56,12 +45,10 @@ watchEffect((onInvalidate) => {
     }
   }
 
-  previousMainTimeline = tl;
   emit("timeline:created", tl);
 
   onInvalidate(() => {
     tl.kill();
-    previousMainTimeline = null;
   });
 });
 
