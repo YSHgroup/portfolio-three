@@ -1,13 +1,14 @@
 import videoParticles from "../../../assets/videos/particles.mp4";
 
-import particles0 from "../../../assets/images/projects/particles/particles-0.png";
-import particles1 from "../../../assets/images/projects/particles/particles-1.png";
-import particles2 from "../../../assets/images/projects/particles/particles-2.png";
+import particles0 from "../../../assets/images/projects/particles/particles-0.webp";
+import particles1 from "../../../assets/images/projects/particles/particles-1.webp";
+import particles2 from "../../../assets/images/projects/particles/particles-2.webp";
 
 import type { ProjectContent } from "../../types";
 
 export default {
   title: "WebGL Particles",
+  theme: "dark",
   tags: ["ogl", "javascript", "glsl"],
   live: "https://particles.david-hckh.com/",
   video: videoParticles,

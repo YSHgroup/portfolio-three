@@ -62,6 +62,7 @@ const getInTouchClassNames = computed(() => {
         @click="router.back()"
         :aria-label="t('back-to-home')"
         :class="{ 'header-back': true, 'header-back-isProjectPage': isProjectPage }"
+        data-cursor="circle-white"
       >
         <ArrowRight class="header-back-icon" />
       </ButtonRound>

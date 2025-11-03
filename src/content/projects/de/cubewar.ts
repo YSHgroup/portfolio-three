@@ -1,16 +1,17 @@
 import videoCubeWar from "../../../assets/videos/cubewar.mp4";
 
-import cubewar0 from "../../../assets/images/projects/cubewar/cubewar-0.png";
-import cubewar1 from "../../../assets/images/projects/cubewar/cubewar-1.png";
-import cubewar2 from "../../../assets/images/projects/cubewar/cubewar-2.png";
-import cubewar3 from "../../../assets/images/projects/cubewar/cubewar-3.png";
-import cubewar4 from "../../../assets/images/projects/cubewar/cubewar-4.png";
-import cubewar5 from "../../../assets/images/projects/cubewar/cubewar-5.png";
+import cubewar0 from "../../../assets/images/projects/cubewar/cubewar-0.webp";
+import cubewar1 from "../../../assets/images/projects/cubewar/cubewar-1.webp";
+import cubewar2 from "../../../assets/images/projects/cubewar/cubewar-2.webp";
+import cubewar3 from "../../../assets/images/projects/cubewar/cubewar-3.webp";
+import cubewar4 from "../../../assets/images/projects/cubewar/cubewar-4.webp";
+import cubewar5 from "../../../assets/images/projects/cubewar/cubewar-5.webp";
 
 import type { ProjectContent } from "../../types";
 
 export default {
   title: "CubeWar",
+  theme: "dark",
   tags: ["three", "node", "websockets", "kubernetes", "redis"],
   video: videoCubeWar,
   videoBorder: false,

@@ -58,6 +58,13 @@ const classes = computed(() => [
   &-theme {
     background-color: var(--color-grayscale-400);
     color: var(--color-text-400);
+
+    @include mixins.hover {
+      &:hover {
+        background-color: var(--color-text-400);
+        color: var(--color-background-400);
+      }
+    }
   }
 
   &-background {

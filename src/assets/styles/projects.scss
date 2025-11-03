@@ -5,6 +5,8 @@
   --color-accent-400: #008dff;
   --color-accent-text-400: white;
 
+  --color-black-400: #060f1f;
+
   --color-grayscale-400: #2b4169;
 
   --color-background-400: #364e7c;
@@ -18,9 +20,11 @@
   --color-accent-400: rgb(31, 129, 249);
   --color-accent-text-400: white;
 
-  --color-grayscale-400: #b8bdc7;
+  --color-black-400: rgb(20, 29, 37);
 
-  --color-background-400: #dadfe7;
+  --color-grayscale-400: rgb(226, 233, 238);
+
+  --color-background-400: rgb(226, 233, 238);
   --color-background-300: white;
 }
 
@@ -31,6 +35,8 @@
   --color-accent-400: #22904b;
   --color-accent-text-400: white;
 
+  --color-black-400: #000000;
+
   --color-grayscale-400: #2c2f2c;
 
   --color-background-400: #191c19;
@@ -40,6 +46,8 @@
 .project-pokedex {
   --color-text-400: #011030;
   --color-text-300: rgb(105, 111, 116);
+
+  --color-black-400: #011030;
 
   --color-accent-400: #ff5350;
   --color-accent-text-400: white;

@@ -93,7 +93,11 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div ref="cursorWrapperRef" class="cursor-wrapper">
+  <div
+    ref="cursorWrapperRef"
+    class="cursor-wrapper"
+    :class="{ [`project-${route.meta.project}`]: typeof route.meta.project === 'string' }"
+  >
     <div ref="cursorScaleRef" class="cursor-scale">
       <div class="cursor cursor-circle-black" :class="{ 'cursor-active': cursorType === 'circle-black' }" />
       <div class="cursor cursor-circle-white" :class="{ 'cursor-active': cursorType === 'circle-white' }" />
@@ -156,12 +160,13 @@ onUnmounted(() => {
   &-arrow {
     width: 54px;
     height: 54px;
-    background-color: var(--color-orange-400);
+    transition: background-color 0.2s ease-in-out;
+    background-color: var(--color-accent-400, var(--color-orange-400));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: var(--stroke-md) solid var(--color-beige-400);
+    border: var(--stroke-md) solid var(--color-white-400);
 
     &-icon {
       color: var(--color-white-400);

@@ -7,6 +7,7 @@ export type ProjectId = (typeof projectIds)[number];
 
 export interface ProjectContent {
   title: string;
+  theme: "light" | "dark";
   tags: TagVariant[];
   description?: string;
   video: string;

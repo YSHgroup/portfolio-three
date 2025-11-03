@@ -52,7 +52,13 @@ onMounted(loadPreviews);
       </div>
     </div>
     <div class="grid project-content-next-project-grid">
-      <Link v-if="nextProject" :to="`/project/${nextProject.slug}`" replace class="project-content-next-project">
+      <Link
+        v-if="nextProject"
+        :to="`/project/${nextProject.slug}`"
+        replace
+        class="project-content-next-project"
+        data-cursor="arrow"
+      >
         <NextProject :project="nextProject" />
       </Link>
     </div>
