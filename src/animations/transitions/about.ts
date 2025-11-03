@@ -189,7 +189,7 @@ const setupSectionsAnimation = ({
       tl.fromTo(contentOne, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, 0);
       tl.to(contentOne, { opacity: 0, duration: 0.15, ease: "power1.in" }, 0.55);
 
-      tl.fromTo(contentOne, { y: "20vh" }, { y: "-20vh", duration: 0.7, ease: "none" }, 0);
+      tl.fromTo(contentOne, { y: "15vh" }, { y: "-15vh", duration: 0.7, ease: "none" }, 0);
 
       tl.add(() => {
         tlOne?.play();
@@ -204,7 +204,7 @@ const setupSectionsAnimation = ({
       const SECOND_BOX_DELAY = 0.55;
       tl.fromTo(contentTwo, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, SECOND_BOX_DELAY);
 
-      tl.fromTo(contentTwo, { y: "20vh" }, { y: 0, duration: 0.35, ease: "none" }, SECOND_BOX_DELAY);
+      tl.fromTo(contentTwo, { y: "15vh" }, { y: 0, duration: 0.35, ease: "none" }, SECOND_BOX_DELAY);
 
       tl.add(() => {
         tlTwo?.play();

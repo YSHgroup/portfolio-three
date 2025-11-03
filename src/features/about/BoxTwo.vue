@@ -23,7 +23,7 @@ watchEffect((onInvalidate) => {
   }
   previousTimelines.value.forEach((timeline) => {
     if (timeline && timeline.isActive()) {
-      timeline.pause();
+      timeline.kill();
     }
   });
   previousTimelines.value = [];
