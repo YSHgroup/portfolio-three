@@ -50,7 +50,6 @@ watchEffect((onInvalidate) => {
 
   for (let step = 0; step < totalSteps; step++) {
     const startIndex = step * props.steps;
-    const endIndex = Math.min(startIndex + props.steps, totalLetters);
 
     const progress = { value: 0 };
 
@@ -69,7 +68,7 @@ watchEffect((onInvalidate) => {
         displayText.value = revealed + flicker;
       },
       onComplete: () => {
-        displayText.value = props.text.slice(0, endIndex);
+        displayText.value = props.text;
       },
     });
   }
