@@ -35,10 +35,7 @@ watchEffect((onInvalidate) => {
     const item = timelines.value[i];
     if (!item) continue;
     tl.add(() => {
-      if (item.timeline.isActive() || item.timeline.progress() >= 0.99) {
-        return;
-      }
-      item.timeline.play();
+      item.timeline.restart(true);
     }, item.delay);
   }
 
@@ -67,6 +64,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
     </template>
     <div class="box-one-details">
       <AppearingText
+        v-if="t('location') && t('germany')"
         class="box-one-details-copy"
         :text="`${t('location')}: ${t('germany')}`"
         :steps="3"
@@ -74,8 +72,9 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
         @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.1)"
       />
       <AppearingText
+        v-if="t('version')"
         class="box-one-details-copy"
-        :text="`Version: 2.7`"
+        :text="`${t('version')}: 2.7`"
         :steps="3"
         :duration="0.35"
         @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.2)"

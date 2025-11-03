@@ -19,5 +19,6 @@
   "services": "Skills",
   "source-code": "Source Code",
   "switch-to-project": "Switch to project {project}",
+  "version": "Version",
   "view-project": "View project"
 }

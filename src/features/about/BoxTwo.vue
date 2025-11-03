@@ -33,10 +33,7 @@ watchEffect((onInvalidate) => {
     const item = timelines.value[i];
     if (!item) continue;
     tl.add(() => {
-      if (item.timeline.isActive() || item.timeline.progress() >= 0.99) {
-        return;
-      }
-      item.timeline.play();
+      item.timeline.restart(true);
     }, item.delay);
   }
 

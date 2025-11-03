@@ -61,7 +61,6 @@ watch(
       timeline.to(progress, {
         value: 1,
         duration: DURATION_PER_STEP,
-        overwrite: true,
         onUpdate: () => {
           const revealed = props.text.slice(0, startIndex);
           const remaining = totalLetters - startIndex;
