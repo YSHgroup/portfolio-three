@@ -90,10 +90,8 @@ watchEffect((onInvalidate) => {
 
 <template>
   <div class="appearing-text">
-    <p class="appearing-text-value">
-      {{ displayText }}
-    </p>
-    <p class="appearing-text-clone" aria-hidden="true">{{ props.text }}</p>
+    <p class="appearing-text-value" v-html="displayText"></p>
+    <p class="appearing-text-clone" aria-hidden="true" v-html="props.text"></p>
   </div>
 </template>
 
@@ -106,11 +104,9 @@ watchEffect((onInvalidate) => {
 .appearing-text-value {
   position: absolute;
   inset: 0;
-  white-space: pre;
 }
 
 .appearing-text-clone {
   visibility: hidden;
-  white-space: pre;
 }
 </style>

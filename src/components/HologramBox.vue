@@ -1,22 +1,24 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, useSlots } from "vue";
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
 defineExpose({ wrapperRef });
 
 const props = defineProps<{
-  title?: string;
   footer?: boolean;
 }>();
 
-const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!props.title }]);
+const slots = useSlots();
+const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!slots.title }]);
 </script>
 
 <template>
   <div :class="classes" ref="wrapperRef">
-    <div class="hologram-box-header" v-if="props.title">
+    <div class="hologram-box-header" v-if="slots.title">
       <div class="hologram-box-header-content">
-        <h2 class="hologram-box-header-title">{{ props.title }}</h2>
+        <h2 class="hologram-box-header-title">
+          <slot name="title"></slot>
+        </h2>
       </div>
       <div class="hologram-box-curve">
         <svg viewBox="0 0 51 34" fill="none" xmlns="http://www.w3.org/2000/svg" class="hologram-box-curve-svg">

@@ -4,8 +4,11 @@ import HologramBoxLine from "../../components/HologramBoxLine.vue";
 import { t } from "../../i18n/utils/translate";
 import { ref, watchEffect } from "vue";
 import gsap from "gsap";
+import AppearingText from "../../components/AppearingText.vue";
 
 const wrapperRef = ref<InstanceType<typeof HologramBox> | null>(null);
+const timelines = ref<{ timeline: gsap.core.Timeline; delay: number }[]>([]);
+const copyRef = ref<HTMLParagraphElement | null>(null);
 
 const emit = defineEmits<{
   "timeline:created": [timeline: gsap.core.Timeline];
@@ -22,9 +25,17 @@ watchEffect((onInvalidate) => {
   tl.fromTo(
     wrapperEl,
     { clipPath: "inset(0% 0% 100% 0%)" },
-    { clipPath: "inset(0% 0% 0% 0%)", duration: 0.5, ease: "power1.out" },
+    { clipPath: "inset(0% 0% 0% 0%)", duration: 0.4, ease: "none" },
     0,
   );
+
+  tl.fromTo(copyRef.value, { opacity: 0 }, { opacity: 1, duration: 0.2 }, 0.35);
+
+  timelines.value.forEach(({ timeline, delay }) => {
+    tl.add(() => {
+      timeline.play();
+    }, delay);
+  });
 
   emit("timeline:created", tl);
 
@@ -32,16 +43,40 @@ watchEffect((onInvalidate) => {
     tl.kill();
   });
 });
+
+const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
+  timelines.value.push({ timeline, delay });
+};
 </script>
 
 <template>
-  <HologramBox ref="wrapperRef" title="David" class="box-one">
+  <HologramBox ref="wrapperRef" class="box-one">
+    <template #title>
+      <AppearingText
+        :text="`David`"
+        :steps="1"
+        :duration="0.35"
+        @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
+      />
+    </template>
     <div class="box-one-details">
-      <p class="box-one-details-copy">{{ t("location") }}: {{ t("germany") }}</p>
-      <p class="box-one-details-copy">Version: 2.7</p>
+      <AppearingText
+        class="box-one-details-copy"
+        :text="`${t('location')}: ${t('germany')}`"
+        :steps="2"
+        :duration="0.35"
+        @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.1)"
+      />
+      <AppearingText
+        class="box-one-details-copy"
+        :text="`Version: 2.7`"
+        :steps="2"
+        :duration="0.35"
+        @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.2)"
+      />
     </div>
     <HologramBoxLine />
-    <p class="box-one-copy" v-html="t('about-intro')"></p>
+    <p class="box-one-copy" v-html="t('about-intro')" ref="copyRef"></p>
   </HologramBox>
 </template>
 
