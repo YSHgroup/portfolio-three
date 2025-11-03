@@ -31,14 +31,16 @@ watchEffect((onInvalidate) => {
 
   tl.fromTo(copyRef.value, { opacity: 0 }, { opacity: 1, duration: 0.2 }, 0.35);
 
-  timelines.value.forEach(({ timeline, delay }) => {
+  for (let i = 0; i < timelines.value.length; i++) {
+    const item = timelines.value[i];
+    if (!item) continue;
     tl.add(() => {
-      if (timeline.isActive() || timeline.progress() >= 0.99) {
+      if (item.timeline.isActive() || item.timeline.progress() >= 0.99) {
         return;
       }
-      timeline.play();
-    }, delay);
-  });
+      item.timeline.play();
+    }, item.delay);
+  }
 
   emit("timeline:created", tl);
 
@@ -48,7 +50,8 @@ watchEffect((onInvalidate) => {
 });
 
 const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
-  timelines.value.push({ timeline, delay });
+  const updatedTimelines = [...timelines.value, { timeline, delay }];
+  timelines.value = updatedTimelines;
 };
 </script>
 

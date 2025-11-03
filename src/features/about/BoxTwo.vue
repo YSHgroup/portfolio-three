@@ -29,14 +29,16 @@ watchEffect((onInvalidate) => {
     0,
   );
 
-  timelines.value.forEach(({ timeline, delay }) => {
+  for (let i = 0; i < timelines.value.length; i++) {
+    const item = timelines.value[i];
+    if (!item) continue;
     tl.add(() => {
-      if (timeline.isActive() || timeline.progress() >= 0.99) {
+      if (item.timeline.isActive() || item.timeline.progress() >= 0.99) {
         return;
       }
-      timeline.play();
-    }, delay);
-  });
+      item.timeline.play();
+    }, item.delay);
+  }
 
   if (subRefs.value.length > 0) {
     const subItems = subRefs.value.filter((ref) => ref !== null && ref !== undefined);

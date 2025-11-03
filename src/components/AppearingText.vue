@@ -21,12 +21,7 @@ let currentTimeline: gsap.core.Timeline | null = null;
 const randomChar = () => FLICKER_CHARACTER_POOL[Math.floor(Math.random() * FLICKER_CHARACTER_POOL.length)];
 
 watchEffect((onInvalidate) => {
-  // If we have an active timeline that's been started, don't create a new one
-  if (currentTimeline && (currentTimeline.isActive() || currentTimeline.progress() > 0)) {
-    return;
-  }
-
-  // Kill previous timeline if it exists and hasn't started
+  // Kill previous timeline if it exists
   if (currentTimeline) {
     currentTimeline.kill();
     currentTimeline = null;
@@ -62,6 +57,7 @@ watchEffect((onInvalidate) => {
     timeline.to(progress, {
       value: 1,
       duration: DURATION_PER_STEP,
+      overwrite: true,
       onUpdate: () => {
         const revealed = props.text.slice(0, startIndex);
         const remaining = totalLetters - startIndex;
@@ -85,11 +81,8 @@ watchEffect((onInvalidate) => {
 
   onInvalidate(() => {
     if (currentTimeline) {
-      // Only kill if not active or hasn't progressed
-      if (!currentTimeline.isActive() && currentTimeline.progress() === 0) {
-        currentTimeline.kill();
-        currentTimeline = null;
-      }
+      currentTimeline.kill();
+      currentTimeline = null;
     }
   });
 });
