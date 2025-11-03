@@ -160,7 +160,9 @@ onUnmounted(() => {
   &-arrow {
     width: 54px;
     height: 54px;
-    transition: background-color 0.2s ease-in-out;
+    transition:
+      background-color 0.2s ease-in-out,
+      opacity 0.2s ease-in-out;
     background-color: var(--color-accent-400, var(--color-orange-400));
     border-radius: 50%;
     display: flex;
