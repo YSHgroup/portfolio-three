@@ -69,14 +69,14 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
       <AppearingText
         class="box-one-details-copy"
         :text="`${t('location')}: ${t('germany')}`"
-        :steps="2"
+        :steps="3"
         :duration="0.35"
         @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.1)"
       />
       <AppearingText
         class="box-one-details-copy"
         :text="`Version: 2.7`"
-        :steps="2"
+        :steps="3"
         :duration="0.35"
         @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.2)"
       />
