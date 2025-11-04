@@ -1,5 +1,3 @@
-uniform float uOpacity;
-
 varying vec3 vColor;
 varying float vAlpha;
 
@@ -13,7 +11,7 @@ void main() {
   }
   
   // Soft edge
-  float alpha = (1.0 - smoothstep(0.0, 0.5, dist)) * vAlpha * uOpacity;
+  float alpha = (1.0 - smoothstep(0.0, 0.5, dist)) * vAlpha;
   
   gl_FragColor = vec4(vColor, alpha);
 }

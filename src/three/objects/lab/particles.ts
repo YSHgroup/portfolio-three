@@ -11,11 +11,10 @@ let material: ShaderMaterial | null = null;
 
 const uniforms = {
   uTime: { value: 0 },
-  uOpacity: { value: 0.3 },
   uScaleMultiplier: { value: 1.0 },
 };
 
-const PARTICLE_COUNT = 50;
+const PARTICLE_COUNT = 30;
 
 const init = () => {
   if (points) return;

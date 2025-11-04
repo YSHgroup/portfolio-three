@@ -70,6 +70,6 @@ void main() {
   float alpha = fadeIn * fadeOut;
   
   vColor = color;
-  vAlpha = alpha;
+  vAlpha = alpha * 0.3;
 }
 
