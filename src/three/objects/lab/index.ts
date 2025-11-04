@@ -3,6 +3,7 @@ import { Group, Mesh } from "three";
 import { scene } from "../../core/scene";
 import { labShine } from "./shine";
 import { labBase } from "./base";
+import { labParticles } from "./particles";
 
 import type { Object3D } from "three";
 
@@ -31,10 +32,13 @@ const init = () => {
 
   if (objects?.shine) labShine.init(objects.shine);
   if (objects?.base) labBase.init(objects.base);
+
+  labParticles.init();
 };
 
 const destroy = () => {
   labShine.destroy();
+  labParticles.destroy();
   group.clear();
   //objects = null;
 };
