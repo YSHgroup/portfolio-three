@@ -12,7 +12,7 @@ import headVertexShader from "../../shaders/avatar-head/vertex.glsl";
 import headFragmentShader from "../../shaders/avatar-head/fragment.glsl";
 import gsap from "gsap";
 //import { aboutProgress } from "../../../animations/transitions/about";
-import { avatarHologram } from "./hologram";
+//import { avatarHologram } from "./hologram";
 
 import type { Material, Bone, Texture } from "three";
 
@@ -104,7 +104,7 @@ const setupMesh = () => {
       if (!mat) return;
       child.material = mat;
       child.frustumCulled = false;
-      child.renderOrder = child.name === "face" ? 21 : 20;
+      child.renderOrder = child.name === "face" ? 22 : 21;
 
       const hasMatcap = assignMatcap(child);
       if (hasMatcap) {
@@ -146,16 +146,14 @@ const tick = () => {
   transform.position.copy(waypointsPosition);
   transform.rotation.copy(waypointsRotation);
 
-  avatarHologram.transform.position.copy(waypointsPosition);
-  avatarHologram.transform.rotation.copy(waypointsRotation);
-
   uniforms.uProgress.value = sceneWeightsInOut.about.in * 1.1 - 0.1;
   uniforms.uAmbientStrength.value = sceneWeightsInOut.about.in;
 
-  if (uniforms.uProgress.value > 0.999) {
-    transform.visible = false;
+  if (!mesh) return;
+  if (uniforms.uProgress.value > 0.999 && sceneWeights.contact > 0.99) {
+    mesh.visible = false;
   } else {
-    transform.visible = true;
+    mesh.visible = true;
   }
 };
 
@@ -175,4 +173,5 @@ export const avatar = {
   waypointsPosition,
   waypointsRotation,
   uniforms,
+  transform,
 };

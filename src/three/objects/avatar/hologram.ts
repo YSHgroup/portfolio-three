@@ -1,11 +1,12 @@
 import { resources } from "../../../utils/resources";
 import { Mesh, Matrix4, Vector3, BufferAttribute, Group, SkinnedMesh } from "three";
-import { renderTarget } from "../../core/renderTarget";
+//import { renderTarget } from "../../core/renderTarget";
 import { clone as cloneSkeleton } from "three/examples/jsm/utils/SkeletonUtils.js";
 import { getMaterial as getHologramMaterial, uniforms as hologramUniforms } from "./hologram-material";
 import gsap from "gsap";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
-import { sceneWeightsInOut } from "../../../animations/scenes";
+import { sceneWeights, sceneWeightsInOut } from "../../../animations/scenes";
+import { avatar } from ".";
 
 import type { Material, BufferGeometry, Object3D, Skeleton } from "three";
 
@@ -76,15 +77,18 @@ const setupMesh = () => {
   mesh.rotation.z = 0;
 
   mesh.frustumCulled = false;
+  mesh.renderOrder = 20;
 
-  renderTarget.scene.add(transform);
+  avatar.transform.add(transform);
   transform.add(mesh);
 };
 
 const tick = () => {
   hologramUniforms.uTime.value = gsap.ticker.time;
-
   hologramUniforms.uProgress.value = sceneWeightsInOut.about.in * 1.1 - 0.1;
+
+  if (!mesh) return;
+  mesh.visible = sceneWeights.about > 0.001;
 };
 
 const destroy = () => {
