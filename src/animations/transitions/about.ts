@@ -180,10 +180,6 @@ const setupSectionsAnimation = ({
     const completed = { value: false };
     tl.to(completed, { value: true, duration: 0 }, 1);
 
-    tl.add(() => {
-      tlOne?.play();
-    }, 0);
-
     //first box
     if (isLandscape) {
       tl.fromTo(contentOne, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, 0);
@@ -197,6 +193,10 @@ const setupSectionsAnimation = ({
     } else {
       tl.fromTo(contentOne, { opacity: 0, y: "20vh" }, { opacity: 1, y: "0vh", duration: 0.15, ease: "power1.out" }, 0);
       tl.to(contentOne, { opacity: 0, y: "-20vh", duration: 0.15, ease: "power1.in" }, 0.45);
+
+      tl.add(() => {
+        tlOne?.play();
+      }, 0);
     }
 
     //second box
