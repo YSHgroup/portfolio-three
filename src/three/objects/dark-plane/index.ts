@@ -78,7 +78,7 @@ const handleResize = () => {
   uniforms.uAspectRatio.value = aspectRatio;
 
   const isMd = sizes.atLeastBreakpoint("md");
-  uniforms.uRadius.value = (isMd ? 48 : 32) / sizes.height;
+  uniforms.uRadius.value = (isMd ? 48 : 24) / sizes.height;
 };
 
 const tick = () => {

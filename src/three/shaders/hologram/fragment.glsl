@@ -18,7 +18,7 @@ void main() {
 
     float progress = 1. - getProgress();
 
-    float stripes = mod((vWorldPos.y - uTime * 0.1) * 30.0, 1.0);
+    float stripes = mod((vWorldPos.y - uTime * 0.1) * 25.0, 1.0);
     stripes = pow(stripes, 3.0);
 
     vec3 viewDir = normalize(cameraPosition - vWorldPos);
@@ -28,7 +28,7 @@ void main() {
 
     float holographic = stripes * fresnel;
     holographic += fresnel;
-    holographic += stripes * 0.02;
+    holographic += stripes * 0.05;
     holographic *= falloff;
     
     float dist = abs(vModelProgress - uProgress);

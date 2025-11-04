@@ -4,15 +4,18 @@ import fragmentShader from "../../shaders/lab-particles/fragment.glsl";
 import gsap from "gsap";
 import { renderTarget } from "../../core/renderTarget";
 import { lab } from ".";
+import { aboutProgress } from "../../../animations/transitions/about";
 
 let points: Points | null = null;
 let material: ShaderMaterial | null = null;
 
 const uniforms = {
   uTime: { value: 0 },
+  uOpacity: { value: 0.3 },
+  uScaleMultiplier: { value: 1.0 },
 };
 
-const PARTICLE_COUNT = 200;
+const PARTICLE_COUNT = 50;
 
 const init = () => {
   if (points) return;
@@ -32,7 +35,6 @@ const init = () => {
   const sizes = new Float32Array(PARTICLE_COUNT); // Individual size multiplier
 
   const blueColor = new Color(0.1, 0.808, 1.0); // Blue (similar to lab-shine color)
-  const orangeColor = new Color(1.0, 0.5, 0.2); // Orange
 
   const BOTTOM_RADIUS = 1.0;
 
@@ -71,18 +73,9 @@ const init = () => {
     // Individual size multiplier (0.6 to 1.4 for organic variation)
     sizes[i] = 0.6 + Math.random() * 0.8;
 
-    // Blue or orange with varying intensities
-    const isBlue = Math.random() < 0.5;
+    // Blue with varying intensities
     const intensity = 0.5 + Math.random() * 0.5; // 0.5 to 1.0 for intensity variation
-
-    let color: Color;
-    if (isBlue) {
-      // Vary blue intensity
-      color = blueColor.clone().multiplyScalar(intensity);
-    } else {
-      // Vary orange intensity
-      color = orangeColor.clone().multiplyScalar(intensity);
-    }
+    const color = blueColor.clone().multiplyScalar(intensity);
 
     // Add slight hue variation for more organic feel
     const hueVariation = 0.05;
@@ -133,6 +126,7 @@ const init = () => {
 const tick = () => {
   if (!material) return;
   material.uniforms.uTime!.value = gsap.ticker.time;
+  material.uniforms.uScaleMultiplier!.value = 0.5 + 0.75 * aboutProgress.value;
 
   points?.position.copy(lab.group.position);
 };

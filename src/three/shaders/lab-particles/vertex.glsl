@@ -10,11 +10,12 @@ varying vec3 vColor;
 varying float vAlpha;
 
 uniform float uTime;
+uniform float uScaleMultiplier;
 
-#define BOTTOM_RADIUS .8
-#define TOP_RADIUS 7.0
+#define BOTTOM_RADIUS .4
+#define TOP_RADIUS 2.0
 #define CONE_HEIGHT 5.0
-#define SPEED 0.2
+#define SPEED 0.1
 
 // Simple noise function for organic movement
 float noise(float x) {
@@ -57,7 +58,7 @@ void main() {
   float particleSize = baseSize * size;
   
   vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-  gl_PointSize = particleSize * (300.0 / -mvPosition.z);
+  gl_PointSize = particleSize * uScaleMultiplier * (300.0 / -mvPosition.z);
   gl_Position = projectionMatrix * mvPosition;
   
   // Calculate alpha based on progress for fade in/out using smoothstep
@@ -69,6 +70,6 @@ void main() {
   float alpha = fadeIn * fadeOut;
   
   vColor = color;
-  vAlpha = alpha * 0.8;
+  vAlpha = alpha;
 }
 
