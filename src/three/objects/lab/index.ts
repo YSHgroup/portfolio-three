@@ -1,8 +1,8 @@
 import { resources } from "../../../utils/resources";
 import { Group, Mesh } from "three";
-import { getLabMaterial } from "../../common/materials";
 import { scene } from "../../core/scene";
 import { labShine } from "./shine";
+import { labBase } from "./base";
 
 import type { Object3D } from "three";
 
@@ -23,15 +23,14 @@ const init = () => {
   };
 
   Object.values(objects).forEach((object) => {
-    const mat = getLabMaterial();
-    object.material = mat;
-    object.renderOrder = 20;
+    object.renderOrder = object.name === "shine" ? 21 : 20;
     group.add(object);
   });
 
   scene.instance.add(group);
 
   if (objects?.shine) labShine.init(objects.shine);
+  if (objects?.base) labBase.init(objects.base);
 };
 
 const destroy = () => {
