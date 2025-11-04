@@ -2,6 +2,7 @@ import { avatar } from "../../three/objects/avatar";
 import { sceneWeightsInOut } from "../scenes";
 import { createMatchMedia } from "../utils/matchMedia";
 import { room } from "../../three/objects/room";
+import { lab } from "../../three/objects/lab";
 import gsap from "gsap";
 
 let inMM: gsap.MatchMedia | null = null;
@@ -58,9 +59,6 @@ const setupInAnimation = (about: HTMLElement) => {
     tl.fromTo(sceneWeightsInOut.about, { in: 0 }, { in: 1, ease: "none", duration: 1 }, 0);
     tl.fromTo(sceneWeightsInOut["about-1"], { in: 0 }, { in: 1, ease: "none", duration: 1 }, 0);
 
-    //const gridFloorMesh = gridFloor.getMesh();
-    //if (gridFloorMesh) tl.fromTo(gridFloorMesh.rotation, { z: 0.1 }, { z: 0, duration: 1, ease: "none" }, 0);
-
     tl.fromTo(room.group.scale, { x: 1, y: 1, z: 1 }, { x: 0.85, y: 0.85, z: 0.85, duration: 1, ease: "none" }, 0);
     if (!isLandscape) {
       tl.fromTo(room.group.position, { x: 0, y: 0, z: 0 }, { x: 0, y: 5.4, z: 0, duration: 1, ease: "none" }, 0);
@@ -78,6 +76,9 @@ const setupInAnimation = (about: HTMLElement) => {
     const { waypointsPosition, waypointsRotation } = avatar;
 
     if (isLandscape) {
+      //lab
+      tl.fromTo(lab.group.position, { x: -1, y: -2, z: 6 }, { x: -1, y: 0, z: 6, duration: 1, ease: "none" }, 0);
+
       tl.fromTo(waypointsPosition, { x: 2, y: 0, z: 0 }, { x: -1, y: 0, z: 6, duration: 1, ease: "power1.out" }, 0);
       tl.fromTo(
         waypointsRotation,
@@ -94,6 +95,9 @@ const setupInAnimation = (about: HTMLElement) => {
       );
     } else {
       //tl.to("#hero-content-inner", { y: "40vh", scale: 0.7, duration: 1, ease: "none" }, 0);
+
+      //lab
+      tl.fromTo(lab.group.position, { x: 0, y: -2, z: 6 }, { x: 0, y: 0, z: 6, duration: 1, ease: "none" }, 0);
 
       tl.fromTo(waypointsPosition, { x: 0, y: 0, z: 0 }, { x: 0, y: 0, z: 6, duration: 1, ease: "power1.out" }, 0);
       tl.fromTo(

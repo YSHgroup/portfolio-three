@@ -15,14 +15,14 @@ void main() {
   vec3 pos = position;
 
   // weighted distance: X is weaker than Z
-  float dist = sqrt(pos.x * pos.x * X_WEIGHT + pos.z * pos.z * Z_WEIGHT);
-  float curve = pow(dist, 2.0);
+  //float dist = sqrt(pos.x * pos.x * X_WEIGHT + pos.z * pos.z * Z_WEIGHT);
+  //float curve = pow(dist, 2.0);
 
   // only apply when z > 0 (smooth fade near z = 0)
-  float zMask = smoothstep(1., 0.0, pos.z);
+  //float zMask = smoothstep(1., 0.0, pos.z);
 
   // apply curve
-  pos.y += (curve * CURVE_MIN) + (curve * CURVE * uProgress) * zMask;
+  //pos.y += (curve * CURVE_MIN) + (curve * CURVE * uProgress) * zMask;
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
 

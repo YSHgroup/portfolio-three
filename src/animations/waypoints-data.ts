@@ -14,9 +14,9 @@ export const points = {
     },
     "about-2": {
       //position: { x: 0, y: 4.7, z: 14.5 },
-      position: { x: -1, y: 4.3, z: 15 },
+      position: { x: -1, y: 4, z: 15.5 },
       //focus: { x: 0, y: 2.5, z: 6 },
-      focus: { x: -1, y: 2.3, z: 6 },
+      focus: { x: -1, y: 2.2, z: 6 },
     },
   },
   portrait: {
@@ -30,9 +30,9 @@ export const points = {
     },
     "about-2": {
       //position: { x: 0, y: 4.7, z: 14.5 },
-      position: { x: 0, y: 4, z: 19.5 },
+      position: { x: 0, y: 4, z: 20 },
       //focus: { x: 0, y: 2.5, z: 6 },
-      focus: { x: 0, y: 1, z: 6 },
+      focus: { x: 0, y: 0.6, z: 6 },
     },
   },
 } as const satisfies Record<

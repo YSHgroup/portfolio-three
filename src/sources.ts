@@ -9,6 +9,7 @@ import desktopsTexture from "./assets/textures/desktops.webp";
 import faceTexture from "./assets/textures/face-spritesheet.png";
 import headTexture from "./assets/textures/head.webp";
 import iconSpritesheet from "./assets/textures/icon-spritesheet.png";
+import labTexture from "./assets/textures/lab.png";
 import matcapBlack from "./assets/textures/matcap-black.webp";
 import matcapGray from "./assets/textures/matcap-gray.webp";
 import matcapSkin from "./assets/textures/matcap-skin.webp";
@@ -36,6 +37,7 @@ export const sources = [
   { name: "face-texture", type: "texture", path: faceTexture },
   { name: "head-texture", type: "texture", path: headTexture },
   { name: "icon-spritesheet", type: "texture", path: iconSpritesheet },
+  { name: "lab-texture", type: "texture", path: labTexture },
   { name: "matcap-black", type: "texture", path: matcapBlack },
   { name: "matcap-gray", type: "texture", path: matcapGray },
   { name: "matcap-skin", type: "texture", path: matcapSkin },

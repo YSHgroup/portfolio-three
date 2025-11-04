@@ -6,9 +6,10 @@ uniform vec3 uLineColor;
 uniform float uOpacity;
 uniform float uTime;
 
-#define CELLS 15.0
+#define CELLS 18.0
 #define LINE_WIDTH 0.01
 #define FOG_START 0.25
+#define SHADOW_COLOR vec3(0.0, 0.0, 0.2)
 
 void main() {
     vec2 coord = vUv * CELLS;
@@ -37,12 +38,11 @@ void main() {
     // center circle
     vec2 center = vec2(0.5);
     float centerDist = distance(vUv, center);
-    float centerAlpha = smoothstep(0.1, 0.0, centerDist);
-    centerAlpha *= 0.7;
-
-    pattern = max(pattern, centerAlpha);
+    float centerAlpha = smoothstep(0.09, 0.072, centerDist);
+    centerAlpha *= 0.4;
 
     vec3 finalColor = mix(uColor, uLineColor, pattern);
+    finalColor = mix(finalColor, SHADOW_COLOR, centerAlpha);
 
     gl_FragColor = vec4(finalColor, alpha * uOpacity);
 }

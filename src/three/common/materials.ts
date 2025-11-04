@@ -32,8 +32,10 @@ export const getContactMaterial = (): Material => {
 
 export const getLabMaterial = (): Material => {
   if (labMaterial) return labMaterial;
+  const texture = resources.items["lab-texture"];
+  texture.flipY = false;
 
-  labMaterial = new MeshBasicMaterial({ color: 0xff0000 });
+  labMaterial = new MeshBasicMaterial({ map: texture, transparent: true });
 
   return labMaterial;
 };
