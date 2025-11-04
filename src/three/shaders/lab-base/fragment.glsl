@@ -26,6 +26,10 @@ void main() {
     float ringBloom = smoothstep(INNER_RADIUS, INNER_RADIUS + RIGHT_BLOOM_WIDTH, dist) *
                 smoothstep(OUTER_RADIUS + RIGHT_BLOOM_WIDTH, OUTER_RADIUS, dist);
     ring += ringBloom * 0.5;
+
+    float centerCircle = smoothstep(0.4, 0.1, dist);
+    ring += centerCircle * 0.5;
+
     ring = min(1., ring);
 
     //mix side colors between pos.y -0.01 and -0.2

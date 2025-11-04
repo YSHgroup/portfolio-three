@@ -34,6 +34,7 @@ const init = () => {
 };
 
 const destroy = () => {
+  labShine.destroy();
   group.clear();
   //objects = null;
 };
