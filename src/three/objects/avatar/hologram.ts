@@ -5,8 +5,9 @@ import { clone as cloneSkeleton } from "three/examples/jsm/utils/SkeletonUtils.j
 import { getMaterial as getHologramMaterial, uniforms as hologramUniforms } from "./hologram-material";
 import gsap from "gsap";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
-import { sceneWeights, sceneWeightsInOut } from "../../../animations/scenes";
+import { sceneWeights } from "../../../animations/scenes";
 import { avatar } from ".";
+import { aboutProgress } from "../../../animations/transitions/about";
 
 import type { Material, BufferGeometry, Object3D, Skeleton } from "three";
 
@@ -85,7 +86,8 @@ const setupMesh = () => {
 
 const tick = () => {
   hologramUniforms.uTime.value = gsap.ticker.time;
-  hologramUniforms.uProgress.value = sceneWeightsInOut.about.in * 1.1 - 0.1;
+  //hologramUniforms.uProgress.value = sceneWeightsInOut.about.in * 1.1 - 0.1;
+  hologramUniforms.uProgress.value = aboutProgress.value * 1.1 - 0.1;
 
   if (!mesh) return;
   mesh.visible = sceneWeights.about > 0.001;

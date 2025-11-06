@@ -11,7 +11,7 @@ import matcapFragmentShader from "../../shaders/avatar-matcap/fragment.glsl";
 import headVertexShader from "../../shaders/avatar-head/vertex.glsl";
 import headFragmentShader from "../../shaders/avatar-head/fragment.glsl";
 import gsap from "gsap";
-//import { aboutProgress } from "../../../animations/transitions/about";
+import { aboutProgress } from "../../../animations/transitions/about";
 //import { avatarHologram } from "./hologram";
 
 import type { Material, Bone, Texture } from "three";
@@ -146,7 +146,8 @@ const tick = () => {
   transform.position.copy(waypointsPosition);
   transform.rotation.copy(waypointsRotation);
 
-  uniforms.uProgress.value = sceneWeightsInOut.about.in * 1.1 - 0.1;
+  //uniforms.uProgress.value = sceneWeightsInOut.about.in * 1.1 - 0.1;
+  uniforms.uProgress.value = aboutProgress.value * 1.1 - 0.1;
   uniforms.uAmbientStrength.value = sceneWeightsInOut.about.in;
 
   if (!mesh) return;

@@ -7,16 +7,21 @@ export const points = {
       focus: { x: 0, y: 3, z: 0 },
     },
     "about-1": {
-      //position: { x: 0, y: 4.7, z: 14.5 },
+      /**      position: { x: 0, y: 4.7, z: 14.5 },
       position: { x: 0, y: 4.3, z: 11 },
-      //focus: { x: 0, y: 2.5, z: 6 },
-      focus: { x: 0, y: 3.25, z: 6 },
+      focus: { x: 0, y: 2.5, z: 6 },
+      focus: { x: 0, y: 3.25, z: 6 }, */
+      position: { x: 0, y: 4.5, z: 15.5 },
+      focus: { x: 0, y: 2.2, z: 6 },
     },
     "about-2": {
       //position: { x: 0, y: 4.7, z: 14.5 },
-      position: { x: -1, y: 4, z: 15.5 },
+      //position: { x: 0, y: 3, z: 15.5 },
       //focus: { x: 0, y: 2.5, z: 6 },
-      focus: { x: -1, y: 2.2, z: 6 },
+      //focus: { x: 0, y: 1.2, z: 6 },
+
+      position: { x: 0, y: 4.5, z: 15.5 },
+      focus: { x: 0, y: 2.2, z: 6 },
     },
   },
   portrait: {
@@ -25,7 +30,7 @@ export const points = {
       focus: { x: 0, y: 5.2, z: 0 },
     },
     "about-1": {
-      position: { x: 0, y: 4.5, z: 12.5 },
+      position: { x: 0, y: 4, z: 12.5 },
       focus: { x: 0, y: 1.4, z: 0 },
     },
     "about-2": {

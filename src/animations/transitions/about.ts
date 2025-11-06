@@ -77,14 +77,15 @@ const setupInAnimation = (about: HTMLElement) => {
 
     if (isLandscape) {
       //lab
-      tl.fromTo(lab.group.position, { x: -1, y: -2, z: 6 }, { x: -1, y: 0, z: 6, duration: 1, ease: "none" }, 0);
+      //tl.fromTo(lab.group.position, { x: -1, y: -2, z: 6 }, { x: -1, y: 0, z: 6, duration: 1, ease: "power.1out" }, 0);
+      tl.fromTo(lab.group.position, { x: 0, y: -2, z: 6 }, { x: 0, y: 0, z: 6, duration: 1, ease: "power.1out" }, 0);
 
-      tl.fromTo(waypointsPosition, { x: 2, y: 0, z: 0 }, { x: -1, y: 0, z: 6, duration: 1, ease: "power1.out" }, 0);
+      tl.fromTo(waypointsPosition, { x: 2, y: 0, z: 0 }, { x: 0, y: 0, z: 6, duration: 1, ease: "power1.out" }, 0);
       tl.fromTo(
         waypointsRotation,
         { x: 0, y: -2.3 + Math.PI / 2, z: 0 },
         //{ x: 0, y: -Math.PI, z: 0, duration: 1, ease: "power1.out" },
-        { x: 0, y: -Math.PI * 0.8, z: 0, duration: 1, ease: "power1.out" },
+        { x: 0, y: -Math.PI, z: 0, duration: 1, ease: "power1.out" },
         0,
       );
 
