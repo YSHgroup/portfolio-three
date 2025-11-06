@@ -88,7 +88,7 @@ export class DigitalNumbers {
   public updateFrames(number: number) {
     if (!this.frameAttribute || number === this.currentNumber) return;
     this.currentNumber = number;
-    
+
     // Convert number to string and get digits
     const numStr = number.toString();
     const digits = numStr.split("").map(Number);

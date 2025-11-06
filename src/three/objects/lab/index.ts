@@ -44,7 +44,7 @@ const init = () => {
     count: 3,
     scene: group,
     position: new Vector3(0, -0.23, 1.07),
-    scale: 0.18,
+    scale: 0.17,
     color: new Color("#bae9ff"),
   });
   aboutNumbers.updateFrames(0);
