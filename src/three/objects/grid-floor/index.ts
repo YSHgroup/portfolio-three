@@ -52,7 +52,7 @@ const tick = () => {
   mesh.material.uniforms.uProgress!.value = aboutProgress.value;
 
   mesh.position.copy(lab.group.position);
-  mesh.position.y = -0.2;
+  mesh.position.y = -0.4;
 };
 
 const destroy = () => {

@@ -99,6 +99,7 @@ const getInTouchClassNames = computed(() => {
   max-width: 100%;
   z-index: var(--z-index-header);
   height: var(--height-header);
+  pointer-events: none;
 
   --scrolled: 0;
 
@@ -109,6 +110,7 @@ const getInTouchClassNames = computed(() => {
   &-back {
     pointer-events: none;
     visibility: hidden;
+    pointer-events: auto;
 
     &-icon {
       width: 100%;
@@ -142,6 +144,7 @@ const getInTouchClassNames = computed(() => {
     right: var(--space-outer);
     top: 50%;
     transform: translateY(-50%);
+    pointer-events: auto;
   }
 
   &-dark {
@@ -166,6 +169,7 @@ const getInTouchClassNames = computed(() => {
     gap: var(--space-xs);
     transition: color 0.2s ease-in-out;
     opacity: var(--scrolled);
+    pointer-events: auto;
 
     @include mixins.mq("md") {
       gap: var(--space-sm);

@@ -6,6 +6,7 @@ import contactModel from "./assets/models/contact.glb";
 import contactTexture from "./assets/textures/contact.webp";
 import contactShadowTexture from "./assets/textures/contact-shadow.webp";
 import desktopsTexture from "./assets/textures/desktops.webp";
+import diffuseMap from "./assets/textures/diffuse-map.png";
 import faceTexture from "./assets/textures/face-spritesheet.png";
 import headTexture from "./assets/textures/head.webp";
 import iconSpritesheet from "./assets/textures/icon-spritesheet.png";
@@ -33,6 +34,7 @@ export const sources = [
   { name: "contact-texture", type: "texture", path: contactTexture },
   { name: "contact-shadow-texture", type: "texture", path: contactShadowTexture },
   { name: "desktops-texture", type: "texture", path: desktopsTexture },
+  { name: "diffuse-map", type: "texture", path: diffuseMap },
   { name: "face-texture", type: "texture", path: faceTexture },
   { name: "head-texture", type: "texture", path: headTexture },
   { name: "icon-spritesheet", type: "texture", path: iconSpritesheet },

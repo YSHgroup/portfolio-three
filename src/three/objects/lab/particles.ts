@@ -14,7 +14,7 @@ const uniforms = {
   uScaleMultiplier: { value: 1.0 },
 };
 
-const PARTICLE_COUNT = 30;
+const PARTICLE_COUNT = 50;
 
 const init = () => {
   if (points) return;
@@ -125,7 +125,7 @@ const init = () => {
 const tick = () => {
   if (!material) return;
   material.uniforms.uTime!.value = gsap.ticker.time;
-  material.uniforms.uScaleMultiplier!.value = 0.5 + 0.75 * aboutProgress.value;
+  material.uniforms.uScaleMultiplier!.value = 0.75 + 0.5 * aboutProgress.value;
 
   points?.position.copy(lab.group.position);
 };

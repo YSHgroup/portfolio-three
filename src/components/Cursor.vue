@@ -168,7 +168,7 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: var(--stroke-md) solid var(--color-white-400);
+    //border: var(--stroke-md) solid var(--color-white-400);
 
     &-icon {
       color: var(--color-white-400);

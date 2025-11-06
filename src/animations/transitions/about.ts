@@ -7,8 +7,9 @@ import gsap from "gsap";
 
 let inMM: gsap.MatchMedia | null = null;
 let outTl: gsap.core.Timeline | null = null;
-let progressMm: gsap.MatchMedia | null = null;
+let progressTl: gsap.core.Timeline | null = null;
 let sectionsMm: gsap.MatchMedia | null = null;
+let scenesMm: gsap.MatchMedia | null = null;
 
 export const aboutProgress = { value: 0 };
 
@@ -35,6 +36,25 @@ const setup = ({
     contentTwo,
   });
   setupOutAnimation(about);
+  setupScenesAnimation(about);
+  setupProgressAnimation(about);
+};
+
+const setupProgressAnimation = (about: HTMLElement) => {
+  progressTl = gsap.timeline({
+    duration: 1,
+    scrollTrigger: {
+      trigger: about,
+      start: "top bottom",
+      end: "bottom bottom",
+      scrub: true,
+    },
+  });
+
+  const completed = { value: false };
+  progressTl.to(completed, { value: true, duration: 0 }, 1);
+
+  progressTl.fromTo(aboutProgress, { value: 0 }, { value: 1, duration: 0.95, ease: "none" }, 0);
 };
 
 const setupInAnimation = (about: HTMLElement) => {
@@ -78,7 +98,7 @@ const setupInAnimation = (about: HTMLElement) => {
     if (isLandscape) {
       //lab
       //tl.fromTo(lab.group.position, { x: -1, y: -2, z: 6 }, { x: -1, y: 0, z: 6, duration: 1, ease: "power.1out" }, 0);
-      tl.fromTo(lab.group.position, { x: 0, y: -2, z: 6 }, { x: 0, y: 0, z: 6, duration: 1, ease: "power.1out" }, 0);
+      tl.fromTo(lab.group.position, { x: 0, y: 0, z: 6 }, { x: 0, y: 0, z: 6, duration: 1, ease: "power.1out" }, 0);
 
       tl.fromTo(waypointsPosition, { x: 2, y: 0, z: 0 }, { x: 0, y: 0, z: 6, duration: 1, ease: "power1.out" }, 0);
       tl.fromTo(
@@ -98,7 +118,7 @@ const setupInAnimation = (about: HTMLElement) => {
       //tl.to("#hero-content-inner", { y: "40vh", scale: 0.7, duration: 1, ease: "none" }, 0);
 
       //lab
-      tl.fromTo(lab.group.position, { x: 0, y: -2, z: 6 }, { x: 0, y: 0, z: 6, duration: 1, ease: "none" }, 0);
+      tl.fromTo(lab.group.position, { x: 0, y: 0, z: 6 }, { x: 0, y: 0, z: 6, duration: 1, ease: "none" }, 0);
 
       tl.fromTo(waypointsPosition, { x: 0, y: 0, z: 0 }, { x: 0, y: 0, z: 6, duration: 1, ease: "power1.out" }, 0);
       tl.fromTo(
@@ -125,8 +145,8 @@ const setupOutAnimation = (about: HTMLElement) => {
   outTl.fromTo(sceneWeightsInOut["about-2"], { out: 0 }, { out: 1, ease: "none", duration: 1 }, 0);
 };
 
-const setupProgressAnimation = (about: HTMLElement) => {
-  progressMm = createMatchMedia((_context) => {
+const setupScenesAnimation = (about: HTMLElement) => {
+  scenesMm = createMatchMedia((_context) => {
     const tl = gsap.timeline({
       duration: 1,
       scrollTrigger: {
@@ -140,12 +160,8 @@ const setupProgressAnimation = (about: HTMLElement) => {
     const completed = { value: false };
     tl.to(completed, { value: true, duration: 1 }, 0);
 
-    //tl.fromTo("#section-one-content", { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none" }, 0);
-    //tl.to("#section-one-content", { opacity: 0, duration: 0.1, ease: "none" }, 0.4);
-    //tl.fromTo("#section-two-content", { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none" }, 0.5);
-
     const delay = 0;
-    const multiplier = 0.98;
+    const multiplier = 0.95;
     const duration = (1 - delay * 2) * multiplier;
 
     const { waypointsRotation } = avatar;
@@ -153,8 +169,6 @@ const setupProgressAnimation = (about: HTMLElement) => {
 
     tl.to(sceneWeightsInOut["about-2"], { in: 1, duration: duration, ease: "power1.inOut" }, delay);
     tl.to(sceneWeightsInOut["about-1"], { out: 1, duration: duration, ease: "power1.inOut" }, delay);
-
-    tl.to(aboutProgress, { value: 1, duration: (1 - delay) * multiplier, ease: "none" }, 0);
   });
 };
 
@@ -188,16 +202,17 @@ const setupSectionsAnimation = ({
     //first box
     if (isLandscape) {
       tl.fromTo(contentOne, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, 0);
-      tl.to(contentOne, { opacity: 0, duration: 0.15, ease: "power1.in" }, 0.55);
+      //tl.to(contentOne, { opacity: 0, duration: 0.15, ease: "power1.in" }, 0.55);
 
-      tl.fromTo(contentOne, { y: "12.5vh" }, { y: "-12.5vh", duration: 0.7, ease: "none" }, 0);
+      //tl.fromTo(contentOne, { y: "12.5vh" }, { y: "-12.5vh", duration: 0.7, ease: "none" }, 0);
+      tl.fromTo(contentOne, { y: "12.5vh" }, { y: "0vh", duration: 0.35, ease: "none" }, 0);
 
       tl.add(() => {
         tlOne?.play();
       }, 0);
     } else {
-      tl.fromTo(contentOne, { opacity: 0, y: "20vh" }, { opacity: 1, y: "0vh", duration: 0.15, ease: "power1.out" }, 0);
-      tl.to(contentOne, { opacity: 0, y: "-20vh", duration: 0.15, ease: "power1.in" }, 0.45);
+      tl.fromTo(contentOne, { opacity: 0, y: "15vh" }, { opacity: 1, y: "0vh", duration: 0.15, ease: "power1.out" }, 0);
+      tl.to(contentOne, { opacity: 0, y: "-15vh", duration: 0.15, ease: "power1.in" }, 0.45);
 
       tl.add(() => {
         tlOne?.play();
@@ -232,9 +247,10 @@ const setupSectionsAnimation = ({
 
 const destroy = () => {
   if (inMM) inMM.revert();
-  if (progressMm) progressMm.revert();
+  if (progressTl) progressTl.revert();
   if (outTl) outTl.revert();
   if (sectionsMm) sectionsMm.revert();
+  if (scenesMm) scenesMm.revert();
 };
 
 export const about = { setup, destroy };
