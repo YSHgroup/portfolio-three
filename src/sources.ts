@@ -14,6 +14,7 @@ import matcapBlack from "./assets/textures/matcap-black.webp";
 import matcapGray from "./assets/textures/matcap-gray.webp";
 import matcapSkin from "./assets/textures/matcap-skin.webp";
 import matcapWhite from "./assets/textures/matcap-white.webp";
+import numbersBitmap from "./assets/textures/numbers-bitmap.webp";
 import roomTexture from "./assets/textures/room.webp";
 import roomShadowTexture from "./assets/textures/room-shadow.webp";
 
@@ -42,6 +43,7 @@ export const sources = [
   { name: "matcap-gray", type: "texture", path: matcapGray },
   { name: "matcap-skin", type: "texture", path: matcapSkin },
   { name: "matcap-white", type: "texture", path: matcapWhite },
+  { name: "numbers-bitmap", type: "texture", path: numbersBitmap },
   { name: "room-texture", type: "texture", path: roomTexture },
   { name: "room-shadow-texture", type: "texture", path: roomShadowTexture },
 ] as const satisfies Source[];

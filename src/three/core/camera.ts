@@ -78,7 +78,7 @@ const tick = () => {
     instance.position.copy(waypoints.position);
 
     if (sizes.atLeastBreakpoint("md")) {
-      instance.position.y -= sceneWeightsInOut.about.out * 2.5;
+      instance.position.y -= sceneWeightsInOut.about.out * 2.75;
     }
   }
 

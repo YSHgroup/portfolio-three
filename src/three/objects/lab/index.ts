@@ -1,9 +1,12 @@
 import { resources } from "../../../utils/resources";
-import { Group, Mesh } from "three";
+import { Group, Mesh, Vector3, Color } from "three";
 import { scene } from "../../core/scene";
 import { labShine } from "./shine";
 import { labBase } from "./base";
 import { labParticles } from "./particles";
+import { DigitalNumbers } from "../digital-numbers";
+import { aboutProgress } from "../../../animations/transitions/about";
+import gsap from "gsap";
 
 import type { Object3D } from "three";
 
@@ -13,6 +16,8 @@ let objects: {
   base: Mesh;
   shine: Mesh;
 } | null = null;
+
+let aboutNumbers: DigitalNumbers | null = null;
 
 const init = () => {
   if (objects) return;
@@ -34,11 +39,30 @@ const init = () => {
   if (objects?.base) labBase.init(objects.base);
 
   labParticles.init();
+
+  aboutNumbers = new DigitalNumbers({
+    count: 3,
+    scene: group,
+    position: new Vector3(0, -0.23, 1.07),
+    scale: 0.18,
+    color: new Color("#bae9ff"),
+  });
+  aboutNumbers.updateFrames(0);
+
+  gsap.ticker.add(tick);
+};
+
+const tick = () => {
+  if (!aboutNumbers) return;
+  const value = Math.floor(aboutProgress.value * 100);
+  aboutNumbers.updateFrames(value);
 };
 
 const destroy = () => {
+  gsap.ticker.remove(tick);
   labShine.destroy();
   labParticles.destroy();
+  aboutNumbers = null;
   group.clear();
   //objects = null;
 };
