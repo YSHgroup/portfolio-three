@@ -165,10 +165,14 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 
   &-title-description {
     display: none;
-    font-size: var(--font-size-title-xs);
+    font-size: var(--font-size-title-xxs);
 
     @include mixins.landscape {
       display: block;
+    }
+
+    @include mixins.landscape-large {
+      font-size: var(--font-size-title-xs);
     }
   }
 

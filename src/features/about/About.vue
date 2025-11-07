@@ -3,13 +3,15 @@ import { ref, watchEffect } from "vue";
 import { transitions } from "../../animations";
 import BoxDescription from "./BoxDescription.vue";
 import BoxServices from "./BoxServices.vue";
-import gsap from "gsap";
+import BoxDetails from "./BoxDetails.vue";
 
 const aboutRef = ref<HTMLElement | null>(null);
 const contentDescriptionRef = ref<HTMLDivElement | null>(null);
 const contentServicesRef = ref<HTMLDivElement | null>(null);
+const contentDetailsRef = ref<HTMLDivElement | null>(null);
 const tlDescriptionRef = ref<gsap.core.Timeline | null>(null);
-const tlServicesRef = ref<gsap.core.Timeline | null>(gsap.timeline({ paused: true }));
+const tlServicesRef = ref<gsap.core.Timeline | null>(null);
+const tlDetailsRef = ref<gsap.core.Timeline | null>(null);
 
 watchEffect((onInvalidate) => {
   if (
@@ -17,7 +19,9 @@ watchEffect((onInvalidate) => {
     tlDescriptionRef.value &&
     contentDescriptionRef.value &&
     tlServicesRef.value &&
-    contentServicesRef.value
+    contentServicesRef.value &&
+    contentDetailsRef.value &&
+    tlDetailsRef.value
   ) {
     transitions.about.setup({
       about: aboutRef.value,
@@ -25,6 +29,8 @@ watchEffect((onInvalidate) => {
       tlDescription: tlDescriptionRef.value,
       contentServices: contentServicesRef.value,
       tlServices: tlServicesRef.value,
+      contentDetails: contentDetailsRef.value,
+      tlDetails: tlDetailsRef.value,
     });
   }
 
@@ -45,6 +51,9 @@ watchEffect((onInvalidate) => {
       </div>
       <div class="about-left">
         <div class="about-left-content">
+          <div ref="contentDetailsRef" class="about-left-content-details">
+            <BoxDetails @timeline:created="(tl: gsap.core.Timeline) => (tlDetailsRef = tl)" />
+          </div>
           <div ref="contentServicesRef">
             <BoxServices @timeline:created="(tl: gsap.core.Timeline) => (tlServicesRef = tl)" />
           </div>
@@ -89,16 +98,33 @@ watchEffect((onInvalidate) => {
 
     @include mixins.landscape {
       width: 500px;
-      max-width: calc(36% - var(--space-outer));
+      max-width: calc(38% - var(--space-outer));
       height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
       left: var(--space-outer);
 
       @include mixins.mq("xxl") {
         width: 420px;
         left: calc(var(--space-outer) + 8%);
+      }
+    }
+
+    &-content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      gap: var(--space-sm);
+
+      @include mixins.landscape-large {
+        gap: var(--space-xl);
+      }
+
+      &-details {
+        display: none;
+
+        @include mixins.landscape {
+          display: block;
+        }
       }
     }
   }
@@ -117,7 +143,7 @@ watchEffect((onInvalidate) => {
 
     @include mixins.landscape {
       width: 500px;
-      max-width: calc(36% - var(--space-outer));
+      max-width: calc(38% - var(--space-outer));
       bottom: 50%;
       right: var(--space-outer);
 

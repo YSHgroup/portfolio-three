@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import HologramBox from "../../components/HologramBox.vue";
-import HologramBoxLine from "../../components/HologramBoxLine.vue";
 import { t } from "../../i18n/utils/translate";
 import { ref, watchEffect, onBeforeUnmount } from "vue";
 import gsap from "gsap";
@@ -102,10 +101,10 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
         class="box-details-title-name"
       />
     </template>
-    <div class="box-details-details">
+    <div class="box-details-content">
       <AppearingText
         v-if="t('location') && t('germany')"
-        class="box-details-details-copy"
+        class="box-details-content-copy"
         :text="`${t('location')}: ${t('germany')}`"
         :steps="3"
         :duration="0.35"
@@ -113,14 +112,13 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
       />
       <AppearingText
         v-if="t('version')"
-        class="box-details-details-copy"
+        class="box-details-content-copy"
         :text="`${t('version')}: 2.7`"
         :steps="3"
         :duration="0.35"
         @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.2)"
       />
     </div>
-    <HologramBoxLine class="box-details-line" />
   </HologramBox>
 </template>
 
@@ -128,23 +126,13 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 .box-details {
   width: 100%;
 
-  &-line {
-    @include mixins.landscape {
-      display: none;
-    }
-  }
-
   &-title {
     &-name {
-      display: block;
-
-      @include mixins.landscape {
-        display: block;
-      }
+      font-size: var(--font-size-title-sm);
     }
   }
 
-  &-details {
+  &-content {
     padding: var(--space-xs) var(--space-sm);
     padding-top: 0;
     display: flex;
@@ -154,10 +142,6 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
       padding: var(--space-sm) var(--space-md);
       padding-top: 0;
       font-size: var(--font-size-md);
-    }
-
-    @include mixins.landscape {
-      display: none;
     }
 
     &-copy {

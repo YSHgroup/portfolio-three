@@ -19,12 +19,16 @@ const setup = ({
   contentDescription,
   tlServices,
   contentServices,
+  tlDetails,
+  contentDetails,
 }: {
   about: HTMLElement;
   tlDescription: gsap.core.Timeline;
   contentDescription: HTMLDivElement;
   tlServices: gsap.core.Timeline;
   contentServices: HTMLDivElement;
+  tlDetails: gsap.core.Timeline;
+  contentDetails: HTMLDivElement;
 }) => {
   setupInAnimation(about);
   setupProgressAnimation(about);
@@ -34,6 +38,8 @@ const setup = ({
     contentDescription,
     tlServices,
     contentServices,
+    tlDetails,
+    contentDetails,
   });
   setupOutAnimation(about);
   setupScenesAnimation(about);
@@ -178,19 +184,23 @@ const setupSectionsAnimation = ({
   contentDescription,
   tlServices,
   contentServices,
+  tlDetails,
+  contentDetails,
 }: {
   about: HTMLElement;
   contentDescription: HTMLDivElement;
   contentServices: HTMLDivElement;
+  contentDetails: HTMLDivElement;
   tlDescription: gsap.core.Timeline;
   tlServices: gsap.core.Timeline;
+  tlDetails: gsap.core.Timeline;
 }) => {
   sectionsMm = createMatchMedia((_context, { isLandscape }) => {
     const tl = gsap.timeline({
       duration: 1,
       scrollTrigger: {
         trigger: about,
-        start: isLandscape ? "top 50%" : "top 25%",
+        start: isLandscape ? "top 35%" : "top 25%",
         end: "bottom bottom",
         scrub: true,
       },
@@ -199,48 +209,64 @@ const setupSectionsAnimation = ({
     const completed = { value: false };
     tl.to(completed, { value: true, duration: 0 }, 1);
 
-    //first box
     if (isLandscape) {
-      tl.fromTo(contentDescription, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, 0);
-      //tl.to(contentDescription, { opacity: 0, duration: 0.15, ease: "power1.in" }, 0.55);
+      // Equal spacing between three animations: 0, 0.275, 0.55
+      const DETAILS_DELAY = 0;
+      const DESCRIPTION_DELAY = 0.275;
+      const SERVICES_DELAY = 0.55;
 
-      //tl.fromTo(contentDescription, { y: "12.5vh" }, { y: "-12.5vh", duration: 0.7, ease: "none" }, 0);
-      tl.fromTo(contentDescription, { y: "12.5vh" }, { y: "0vh", duration: 0.35, ease: "none" }, 0);
+      // Details animation (first, only on landscape)
+      tl.fromTo(contentDetails, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, DETAILS_DELAY);
+      tl.fromTo(contentDetails, { y: "12.5vh" }, { y: "0vh", duration: 0.35, ease: "none" }, DETAILS_DELAY);
+      tl.add(() => {
+        tlDetails?.play();
+      }, DETAILS_DELAY);
 
+      // Description animation
+      tl.fromTo(
+        contentDescription,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.15, ease: "power1.out" },
+        DESCRIPTION_DELAY,
+      );
+      tl.fromTo(contentDescription, { y: "12.5vh" }, { y: "0vh", duration: 0.35, ease: "none" }, DESCRIPTION_DELAY);
       tl.add(() => {
         tlDescription?.play();
-      }, 0);
-    } else {
-      tl.fromTo(contentDescription, { opacity: 0, y: "10vh" }, { opacity: 1, y: "0vh", duration: 0.15, ease: "power1.out" }, 0);
-      tl.to(contentDescription, { opacity: 0, y: "-10vh", duration: 0.15, ease: "power1.in" }, 0.45);
+      }, DESCRIPTION_DELAY);
 
-      tl.add(() => {
-        tlDescription?.play();
-      }, 0);
-    }
-
-    //second box
-    if (isLandscape) {
-      const SECOND_BOX_DELAY = 0.55;
-      tl.fromTo(contentServices, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, SECOND_BOX_DELAY);
-
-      tl.fromTo(contentServices, { y: "12.5vh" }, { y: 0, duration: 0.35, ease: "none" }, SECOND_BOX_DELAY);
-
+      // Services animation
+      tl.fromTo(contentServices, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, SERVICES_DELAY);
+      tl.fromTo(contentServices, { y: "12.5vh" }, { y: 0, duration: 0.35, ease: "none" }, SERVICES_DELAY);
       tl.add(() => {
         tlServices?.play();
-      }, SECOND_BOX_DELAY);
+      }, SERVICES_DELAY);
     } else {
-      const SECOND_BOX_DELAY = 0.55;
+      // Mobile: only description and services (no details)
+      const DESCRIPTION_DELAY = 0;
+      const SERVICES_DELAY = 0.55;
+
+      // Description animation
+      tl.fromTo(
+        contentDescription,
+        { opacity: 0, y: "10vh" },
+        { opacity: 1, y: "0vh", duration: 0.15, ease: "power1.out" },
+        DESCRIPTION_DELAY,
+      );
+      tl.to(contentDescription, { opacity: 0, y: "-10vh", duration: 0.15, ease: "power1.in" }, 0.45);
+      tl.add(() => {
+        tlDescription?.play();
+      }, DESCRIPTION_DELAY);
+
+      // Services animation
       tl.fromTo(
         contentServices,
         { opacity: 0, y: "10vh" },
         { opacity: 1, y: "0vh", duration: 0.15, ease: "power1.out" },
-        SECOND_BOX_DELAY,
+        SERVICES_DELAY,
       );
-
       tl.add(() => {
         tlServices?.play();
-      }, SECOND_BOX_DELAY);
+      }, SERVICES_DELAY);
     }
   });
 };

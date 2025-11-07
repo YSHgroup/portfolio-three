@@ -167,8 +167,19 @@ const services = computed(() => {
     display: flex;
     flex-direction: column;
     gap: var(--space-xs);
-    padding-bottom: var(--space-sm);
-    padding-top: var(--space-xs);
+    padding-bottom: var(--space-md);
+    padding-top: var(--space-xxs);
+    padding-right: var(--space-xxs);
+
+    @include mixins.landscape {
+      padding-bottom: var(--space-sm);
+      padding-top: 0;
+    }
+
+    @include mixins.landscape-large {
+      padding-bottom: var(--space-md);
+      padding-top: var(--space-xs);
+    }
 
     &-item {
       display: flex;
@@ -186,15 +197,39 @@ const services = computed(() => {
         background-color: var(--color-text-cyan-400);
       }
 
+      &-name {
+        font-size: var(--font-size-md);
+
+        @include mixins.landscape {
+          font-size: var(--font-size-sm);
+        }
+
+        @include mixins.landscape-large {
+          font-size: var(--font-size-lg);
+        }
+      }
+
       &-sub {
         font-size: var(--font-size-xs);
         opacity: 0;
+
+        @include mixins.landscape-large {
+          font-size: var(--font-size-sm);
+        }
       }
     }
   }
 
   &-title {
     font-size: var(--font-size-title-xs);
+
+    @include mixins.landscape {
+      font-size: var(--font-size-title-xxs);
+    }
+
+    @include mixins.landscape-large {
+      font-size: var(--font-size-title-xs);
+    }
   }
 }
 </style>
