@@ -2,6 +2,7 @@ varying vec2 vUv;
 varying vec3 vPosition;
 
 uniform sampler2D uDiffuseMap;
+uniform float uProgress;
 
 #define COLOR_TOP vec3(0.,0.38,0.69)
 #define COLOR_CYAN vec3(0.27, 1.0, 1.0)
@@ -39,7 +40,7 @@ void main() {
     float shadow = smoothstep(SHADOW_END, SHADOW_START, vPosition.y);
 
     // Mix base color with cyan color based on ring mask
-    vec3 color = mix(diffuse.rgb, COLOR_CYAN, ring);
+    vec3 color = mix(diffuse.rgb, COLOR_CYAN, ring * (0.1 + 0.9 * uProgress));
     color = mix(color, SHADOW_COLOR, shadow * SHADOW_OPACITY);
 
     gl_FragColor = vec4(color, 1.0);

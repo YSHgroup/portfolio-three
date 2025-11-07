@@ -61,6 +61,7 @@ const tick = () => {
 const destroy = () => {
   gsap.ticker.remove(tick);
   labShine.destroy();
+  labBase.destroy();
   labParticles.destroy();
   aboutNumbers = null;
   group.clear();

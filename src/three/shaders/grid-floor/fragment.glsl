@@ -5,8 +5,9 @@ uniform vec3 uColor;
 uniform vec3 uLineColor;
 uniform float uOpacity;
 uniform float uTime;
+uniform float uProgress;
 
-#define CELLS 18.0
+#define CELLS 22.0
 #define LINE_WIDTH 0.01
 #define FOG_START 0.25
 #define SHADOW_COLOR vec3(0.0, 0.0, 0.075)
@@ -33,12 +34,13 @@ void main() {
     
     // fade to edges
     float distToCenter = distance(vUv, vec2(0.5));
-    float alpha = 1.0 - smoothstep(FOG_START * 0.5, 0.5, distToCenter);
+    float fadeProgress = mix(0.25, 0.5, uProgress);
+    float alpha = 1.0 - smoothstep(FOG_START * 0.5, fadeProgress, distToCenter);
 
     // center circle
     vec2 center = vec2(0.5);
     float centerDist = distance(vUv, center);
-    float centerAlpha = smoothstep(0.075, 0.059, centerDist);
+    float centerAlpha = smoothstep(0.06, 0.048, centerDist);
     centerAlpha *= 0.4;
 
     vec3 finalColor = mix(uColor, uLineColor, pattern);

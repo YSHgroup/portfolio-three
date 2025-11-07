@@ -23,7 +23,7 @@ const uniforms = {
 
 const init = () => {
   if (geometry) return;
-  geometry = new PlaneGeometry(18, 18, 18, 18);
+  geometry = new PlaneGeometry(22, 22, 22, 22);
   geometry.rotateX(-Math.PI / 2);
 
   material = new ShaderMaterial({
