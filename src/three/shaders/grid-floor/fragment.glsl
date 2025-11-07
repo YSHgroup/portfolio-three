@@ -7,7 +7,7 @@ uniform float uOpacity;
 uniform float uTime;
 uniform float uProgress;
 
-#define CELLS 22.0
+#define CELLS 18.0
 #define LINE_WIDTH 0.01
 #define FOG_START 0.25
 #define SHADOW_COLOR vec3(0.0, 0.0, 0.075)

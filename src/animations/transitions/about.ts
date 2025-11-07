@@ -15,25 +15,25 @@ export const aboutProgress = { value: 0 };
 
 const setup = ({
   about,
-  tlOne,
-  contentOne,
-  tlTwo,
-  contentTwo,
+  tlDescription,
+  contentDescription,
+  tlServices,
+  contentServices,
 }: {
   about: HTMLElement;
-  tlOne: gsap.core.Timeline;
-  contentOne: HTMLDivElement;
-  tlTwo: gsap.core.Timeline;
-  contentTwo: HTMLDivElement;
+  tlDescription: gsap.core.Timeline;
+  contentDescription: HTMLDivElement;
+  tlServices: gsap.core.Timeline;
+  contentServices: HTMLDivElement;
 }) => {
   setupInAnimation(about);
   setupProgressAnimation(about);
   setupSectionsAnimation({
     about,
-    tlOne,
-    contentOne,
-    tlTwo,
-    contentTwo,
+    tlDescription,
+    contentDescription,
+    tlServices,
+    contentServices,
   });
   setupOutAnimation(about);
   setupScenesAnimation(about);
@@ -174,16 +174,16 @@ const setupScenesAnimation = (about: HTMLElement) => {
 
 const setupSectionsAnimation = ({
   about,
-  tlOne,
-  contentOne,
-  tlTwo,
-  contentTwo,
+  tlDescription,
+  contentDescription,
+  tlServices,
+  contentServices,
 }: {
   about: HTMLElement;
-  contentOne: HTMLDivElement;
-  contentTwo: HTMLDivElement;
-  tlOne: gsap.core.Timeline;
-  tlTwo: gsap.core.Timeline;
+  contentDescription: HTMLDivElement;
+  contentServices: HTMLDivElement;
+  tlDescription: gsap.core.Timeline;
+  tlServices: gsap.core.Timeline;
 }) => {
   sectionsMm = createMatchMedia((_context, { isLandscape }) => {
     const tl = gsap.timeline({
@@ -201,45 +201,45 @@ const setupSectionsAnimation = ({
 
     //first box
     if (isLandscape) {
-      tl.fromTo(contentOne, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, 0);
-      //tl.to(contentOne, { opacity: 0, duration: 0.15, ease: "power1.in" }, 0.55);
+      tl.fromTo(contentDescription, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, 0);
+      //tl.to(contentDescription, { opacity: 0, duration: 0.15, ease: "power1.in" }, 0.55);
 
-      //tl.fromTo(contentOne, { y: "12.5vh" }, { y: "-12.5vh", duration: 0.7, ease: "none" }, 0);
-      tl.fromTo(contentOne, { y: "12.5vh" }, { y: "0vh", duration: 0.35, ease: "none" }, 0);
+      //tl.fromTo(contentDescription, { y: "12.5vh" }, { y: "-12.5vh", duration: 0.7, ease: "none" }, 0);
+      tl.fromTo(contentDescription, { y: "12.5vh" }, { y: "0vh", duration: 0.35, ease: "none" }, 0);
 
       tl.add(() => {
-        tlOne?.play();
+        tlDescription?.play();
       }, 0);
     } else {
-      tl.fromTo(contentOne, { opacity: 0, y: "10vh" }, { opacity: 1, y: "0vh", duration: 0.15, ease: "power1.out" }, 0);
-      tl.to(contentOne, { opacity: 0, y: "-10vh", duration: 0.15, ease: "power1.in" }, 0.45);
+      tl.fromTo(contentDescription, { opacity: 0, y: "10vh" }, { opacity: 1, y: "0vh", duration: 0.15, ease: "power1.out" }, 0);
+      tl.to(contentDescription, { opacity: 0, y: "-10vh", duration: 0.15, ease: "power1.in" }, 0.45);
 
       tl.add(() => {
-        tlOne?.play();
+        tlDescription?.play();
       }, 0);
     }
 
     //second box
     if (isLandscape) {
       const SECOND_BOX_DELAY = 0.55;
-      tl.fromTo(contentTwo, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, SECOND_BOX_DELAY);
+      tl.fromTo(contentServices, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, SECOND_BOX_DELAY);
 
-      tl.fromTo(contentTwo, { y: "12.5vh" }, { y: 0, duration: 0.35, ease: "none" }, SECOND_BOX_DELAY);
+      tl.fromTo(contentServices, { y: "12.5vh" }, { y: 0, duration: 0.35, ease: "none" }, SECOND_BOX_DELAY);
 
       tl.add(() => {
-        tlTwo?.play();
+        tlServices?.play();
       }, SECOND_BOX_DELAY);
     } else {
       const SECOND_BOX_DELAY = 0.55;
       tl.fromTo(
-        contentTwo,
+        contentServices,
         { opacity: 0, y: "10vh" },
         { opacity: 1, y: "0vh", duration: 0.15, ease: "power1.out" },
         SECOND_BOX_DELAY,
       );
 
       tl.add(() => {
-        tlTwo?.play();
+        tlServices?.play();
       }, SECOND_BOX_DELAY);
     }
   });

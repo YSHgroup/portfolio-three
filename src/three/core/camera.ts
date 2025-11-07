@@ -10,12 +10,12 @@ import { sizes } from "../../utils/sizes";
 const PARALLAX_INTENSITY = 1;
 const PARALLAX_SPEED = 0.6;
 const contactPosition = {
-  sm: new Vector3(0, -8, 12),
-  md: new Vector3(0, -8.5, 9),
+  portrait: new Vector3(0, -8, 12),
+  landscape: new Vector3(0, -8.5, 9),
 };
 const contactFocus = {
-  sm: new Vector3(0, -9.4, 0),
-  md: new Vector3(0, -10.5, 0),
+  portrait: new Vector3(0, -9.4, 0),
+  landscape: new Vector3(0, -10.5, 0),
 };
 
 const instance = new PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.01, 100);
@@ -54,8 +54,8 @@ const updateParallax = (object: Object3D) => {
 };
 
 const calculateContactTransform = () => {
-  const isMd = sizes.atLeastBreakpoint("md");
-  const breakpoint = isMd ? "md" : "sm";
+  const isLandscape = sizes.isLandscape();
+  const breakpoint = isLandscape ? "landscape" : "portrait";
 
   const inProgress = 1 - sceneWeightsInOut.contact.in;
   const outProgress = sceneWeightsInOut.contact.out;
@@ -63,7 +63,7 @@ const calculateContactTransform = () => {
   instance.position.copy(contactPosition[breakpoint]);
   //instance.position.y += inProgress * (isMd ? 4 : 6);
   //instance.position.y -= outProgress * (isMd ? 4 : 6);
-  if (isMd) {
+  if (isLandscape) {
     instance.position.y += inProgress * 4;
     instance.position.y -= outProgress * 4;
   }
