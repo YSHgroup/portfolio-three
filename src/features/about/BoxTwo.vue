@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import HologramBox from "../../components/HologramBox.vue";
-import { computed, ref, watchEffect } from "vue";
+import { computed, ref, watchEffect, onBeforeUnmount } from "vue";
 import gsap from "gsap";
 import { locale } from "../../i18n/store";
 import { t } from "../../i18n/utils/translate";
 import AppearingText from "../../components/AppearingText.vue";
+import { BREAKPOINTS } from "../../utils/sizes";
 
 const wrapperRef = ref<InstanceType<typeof HologramBox> | null>(null);
 const timelines = ref<{ timeline: gsap.core.Timeline; delay: number }[]>([]);
 const subRefs = ref<HTMLParagraphElement[]>([]);
+let matchMedia: gsap.MatchMedia | null = null;
 
 const emit = defineEmits<{
   "timeline:created": [timeline: gsap.core.Timeline];
@@ -18,37 +20,84 @@ watchEffect((onInvalidate) => {
   const wrapperEl = wrapperRef.value?.wrapperRef;
   if (!wrapperEl) return;
 
-  const tl = gsap.timeline({
-    paused: true,
-  });
+  // Clean up previous matchMedia
+  if (matchMedia) {
+    matchMedia.revert();
+    matchMedia = null;
+  }
 
-  tl.fromTo(
-    wrapperEl,
-    { clipPath: "inset(0% 0% 100% 0%)" },
-    { clipPath: "inset(0% 0% 0% 0%)", duration: 0.4, ease: "none" },
-    0,
+  // Initialize GSAP matchMedia
+  matchMedia = gsap.matchMedia();
+
+  matchMedia.add(
+    {
+      isMobile: `(max-width: ${BREAKPOINTS.md - 1}px)`,
+      isDesktop: `(min-width: ${BREAKPOINTS.md}px)`,
+    },
+    (context) => {
+      const { conditions } = context;
+      const { isMobile } = conditions as { isMobile: boolean; isDesktop: boolean };
+
+      const tl = gsap.timeline({
+        paused: true,
+      });
+
+      // Only animate clipPath on desktop
+      if (!isMobile) {
+        tl.fromTo(
+          wrapperEl,
+          { clipPath: "inset(0% 0% 100% 0%)" },
+          { clipPath: "inset(0% 0% 0% 0%)", duration: 0.4, ease: "none" },
+          0,
+        );
+      } else {
+        // On mobile, ensure clipPath is set to visible immediately
+        gsap.set(wrapperEl, { clipPath: "inset(0% 0% 0% 0%)" });
+      }
+
+      for (let i = 0; i < timelines.value.length; i++) {
+        const item = timelines.value[i];
+        if (!item) continue;
+        tl.add(() => {
+          item.timeline.restart(true);
+        }, item.delay);
+      }
+
+      // Only fade in on desktop
+      if (!isMobile && subRefs.value.length > 0) {
+        const subItems = subRefs.value.filter((ref) => ref !== null && ref !== undefined);
+        if (subItems.length > 0) {
+          tl.fromTo(subItems, { opacity: 0 }, { opacity: 1, duration: 0.2, stagger: 0.1 }, 0.3);
+        }
+      } else if (isMobile && subRefs.value.length > 0) {
+        // On mobile, ensure opacity is 1 immediately
+        const subItems = subRefs.value.filter((ref) => ref !== null && ref !== undefined);
+        if (subItems.length > 0) {
+          gsap.set(subItems, { opacity: 1 });
+        }
+      }
+
+      emit("timeline:created", tl);
+
+      // Return cleanup function
+      return () => {
+        tl.kill();
+      };
+    },
   );
 
-  for (let i = 0; i < timelines.value.length; i++) {
-    const item = timelines.value[i];
-    if (!item) continue;
-    tl.add(() => {
-      item.timeline.restart(true);
-    }, item.delay);
-  }
-
-  if (subRefs.value.length > 0) {
-    const subItems = subRefs.value.filter((ref) => ref !== null && ref !== undefined);
-    if (subItems.length > 0) {
-      tl.fromTo(subItems, { opacity: 0 }, { opacity: 1, duration: 0.2, stagger: 0.1 }, 0.3);
-    }
-  }
-
-  emit("timeline:created", tl);
-
   onInvalidate(() => {
-    tl.kill();
+    if (matchMedia) {
+      matchMedia.revert();
+      matchMedia = null;
+    }
   });
+});
+
+onBeforeUnmount(() => {
+  if (matchMedia) {
+    matchMedia.revert();
+  }
 });
 
 const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {

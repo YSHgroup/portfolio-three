@@ -190,7 +190,7 @@ const setupSectionsAnimation = ({
       duration: 1,
       scrollTrigger: {
         trigger: about,
-        start: isLandscape ? "top 75%" : "top 30%",
+        start: isLandscape ? "top 50%" : "top 25%",
         end: "bottom bottom",
         scrub: true,
       },
