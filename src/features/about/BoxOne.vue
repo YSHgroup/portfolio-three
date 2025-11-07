@@ -110,6 +110,14 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
         :steps="1"
         :duration="0.35"
         @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
+        class="box-one-title-name"
+      />
+      <AppearingText
+        :text="t('description')"
+        :steps="1"
+        :duration="0.35"
+        @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
+        class="box-one-title-description"
       />
     </template>
     <div class="box-one-details">
@@ -130,7 +138,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
         @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.2)"
       />
     </div>
-    <HologramBoxLine />
+    <HologramBoxLine class="box-one-line" />
     <p class="box-one-copy" v-html="t('about-intro')" ref="copyRef"></p>
   </HologramBox>
 </template>
@@ -138,6 +146,31 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 <style scoped lang="scss">
 .box-one {
   width: 100%;
+
+  &-line {
+    @include mixins.landscape {
+      display: none;
+    }
+  }
+
+  &-title {
+    &-name {
+      display: block;
+
+      @include mixins.landscape {
+        display: none;
+      }
+    }
+  }
+
+  &-title-description {
+    display: none;
+    font-size: var(--font-size-title-xs);
+
+    @include mixins.landscape {
+      display: block;
+    }
+  }
 
   &-content {
     display: flex;
@@ -156,6 +189,10 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
       font-size: var(--font-size-md);
     }
 
+    @include mixins.landscape {
+      display: none;
+    }
+
     &-copy {
       flex: 0.5;
     }
@@ -166,6 +203,15 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 
     @include mixins.mq("md") {
       padding: var(--space-md);
+    }
+
+    @include mixins.landscape {
+      padding-top: 0;
+      font-size: var(--font-size-sm);
+    }
+
+    @include mixins.landscape-large {
+      font-size: var(--font-size-lg);
     }
   }
 }

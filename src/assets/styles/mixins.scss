@@ -52,3 +52,9 @@ $media-direction: min;
     @content;
   }
 }
+
+@mixin landscape-large {
+  @media (orientation: landscape) and (min-height: 480px) {
+    @content;
+  }
+}

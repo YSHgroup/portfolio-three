@@ -100,7 +100,8 @@ watchEffect((onInvalidate) => {
     width: calc(100% - var(--space-outer) * 2);
 
     @include mixins.landscape {
-      min-width: 300px;
+      width: 300px;
+      max-width: calc(36% - var(--space-outer));
     }
 
     &-content {

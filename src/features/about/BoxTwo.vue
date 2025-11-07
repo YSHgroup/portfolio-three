@@ -131,6 +131,7 @@ const services = computed(() => {
         :steps="1"
         :duration="0.35"
         @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
+        class="box-two-title"
       />
     </template>
     <div class="box-two-list">
@@ -190,6 +191,10 @@ const services = computed(() => {
         opacity: 0;
       }
     }
+  }
+
+  &-title {
+    font-size: var(--font-size-title-xs);
   }
 }
 </style>
