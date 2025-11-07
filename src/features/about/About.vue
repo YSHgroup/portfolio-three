@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, watchEffect } from "vue";
 import { transitions } from "../../animations";
-import BoxOne from "./BoxOne.vue";
-import BoxTwo from "./BoxTwo.vue";
+import BoxDescription from "./BoxDescription.vue";
+import BoxServices from "./BoxServices.vue";
 import gsap from "gsap";
 
 const aboutRef = ref<HTMLElement | null>(null);
@@ -34,12 +34,12 @@ watchEffect((onInvalidate) => {
     <div class="about-content">
       <div class="about-right" ref="contentOneRef">
         <div class="about-right-content">
-          <BoxOne @timeline:created="(tl: gsap.core.Timeline) => (tlOneRef = tl)" />
+          <BoxDescription @timeline:created="(tl: gsap.core.Timeline) => (tlOneRef = tl)" />
         </div>
       </div>
       <div class="about-services" ref="contentTwoRef">
         <div class="about-services-content">
-          <BoxTwo @timeline:created="(tl: gsap.core.Timeline) => (tlTwoRef = tl)" />
+          <BoxServices @timeline:created="(tl: gsap.core.Timeline) => (tlTwoRef = tl)" />
         </div>
       </div>
     </div>

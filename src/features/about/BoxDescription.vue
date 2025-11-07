@@ -103,27 +103,27 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 </script>
 
 <template>
-  <HologramBox ref="wrapperRef" class="box-one">
+  <HologramBox ref="wrapperRef" class="box-description">
     <template #title>
       <AppearingText
         :text="`David`"
         :steps="1"
         :duration="0.35"
         @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
-        class="box-one-title-name"
+        class="box-description-title-name"
       />
       <AppearingText
         :text="t('description')"
         :steps="1"
         :duration="0.35"
         @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
-        class="box-one-title-description"
+        class="box-description-title-description"
       />
     </template>
-    <div class="box-one-details">
+    <div class="box-description-details">
       <AppearingText
         v-if="t('location') && t('germany')"
-        class="box-one-details-copy"
+        class="box-description-details-copy"
         :text="`${t('location')}: ${t('germany')}`"
         :steps="3"
         :duration="0.35"
@@ -131,20 +131,20 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
       />
       <AppearingText
         v-if="t('version')"
-        class="box-one-details-copy"
+        class="box-description-details-copy"
         :text="`${t('version')}: 2.7`"
         :steps="3"
         :duration="0.35"
         @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.2)"
       />
     </div>
-    <HologramBoxLine class="box-one-line" />
-    <p class="box-one-copy" v-html="t('about-intro')" ref="copyRef"></p>
+    <HologramBoxLine class="box-description-line" />
+    <p class="box-description-copy" v-html="t('about-intro')" ref="copyRef"></p>
   </HologramBox>
 </template>
 
 <style scoped lang="scss">
-.box-one {
+.box-description {
   width: 100%;
 
   &-line {

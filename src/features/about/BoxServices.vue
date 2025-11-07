@@ -131,12 +131,12 @@ const services = computed(() => {
         :steps="1"
         :duration="0.35"
         @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
-        class="box-two-title"
+        class="box-services-title"
       />
     </template>
-    <div class="box-two-list">
-      <div class="box-two-list-item" v-for="(service, index) in services" :key="service.name">
-        <p class="box-two-list-item-name">
+    <div class="box-services-list">
+      <div class="box-services-list-item" v-for="(service, index) in services" :key="service.name">
+        <p class="box-services-list-item-name">
           <AppearingText
             :text="service.name"
             :steps="1"
@@ -145,7 +145,7 @@ const services = computed(() => {
           />
         </p>
         <p
-          class="box-two-list-item-sub"
+          class="box-services-list-item-sub"
           :ref="
             (el) => {
               if (el) {
@@ -162,7 +162,7 @@ const services = computed(() => {
 </template>
 
 <style scoped lang="scss">
-.box-two {
+.box-services {
   &-list {
     display: flex;
     flex-direction: column;
