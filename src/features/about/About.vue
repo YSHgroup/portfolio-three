@@ -32,8 +32,8 @@ watchEffect((onInvalidate) => {
   <div class="about" ref="aboutRef" id="about"></div>
   <div class="about-sticky">
     <div class="about-content">
-      <div class="about-first" ref="contentOneRef">
-        <div class="about-first-content">
+      <div class="about-right" ref="contentOneRef">
+        <div class="about-right-content">
           <BoxOne @timeline:created="(tl: gsap.core.Timeline) => (tlOneRef = tl)" />
         </div>
       </div>
@@ -79,16 +79,10 @@ watchEffect((onInvalidate) => {
     right: var(--space-outer);
     width: calc(100% - var(--space-outer) * 2);
 
-    &-content {
-      @include mixins.landscape {
-        transform: translateY(50%);
-      }
-    }
-
     @include mixins.landscape {
       width: 500px;
       max-width: calc(36% - var(--space-outer));
-      bottom: 50%;
+      bottom: calc(var(--space-outer) + 10%);
       left: var(--space-outer);
       min-width: 260px;
 
@@ -99,7 +93,7 @@ watchEffect((onInvalidate) => {
     }
   }
 
-  &-first {
+  &-right {
     position: absolute;
     bottom: var(--space-outer);
     right: var(--space-outer);

@@ -84,7 +84,7 @@ const setupInAnimation = (about: HTMLElement) => {
       tl.fromTo(room.group.position, { x: 0, y: 0, z: 0 }, { x: 0, y: 5.4, z: 0, duration: 1, ease: "none" }, 0);
       tl.fromTo(room.group.rotation, { x: 0, y: -2.1, z: 0 }, { x: 0, y: -2.1, z: 0, duration: 1, ease: "none" }, 0);
     } else {
-      tl.fromTo(room.group.position, { x: 2, y: 0, z: 0 }, { x: 3, y: 5.7, z: 0, duration: 1, ease: "none" }, 0);
+      tl.fromTo(room.group.position, { x: 2, y: 0, z: 0 }, { x: 4.5, y: 5.7, z: 0, duration: 1, ease: "none" }, 0);
       tl.fromTo(
         room.group.rotation,
         { x: 0, y: -2.3, z: 0 },
