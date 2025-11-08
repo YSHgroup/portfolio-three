@@ -119,7 +119,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 <style scoped lang="scss">
 .box-description {
   width: 100%;
-  //display: none;
+  display: none;
 
   &-line {
     @include mixins.landscape {

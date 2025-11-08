@@ -163,6 +163,8 @@ const services = computed(() => {
 
 <style scoped lang="scss">
 .box-services {
+  display: none;
+
   &-list {
     display: flex;
     flex-direction: column;

@@ -8,8 +8,8 @@ import { Vector3 } from "three";
 import PinIcon from "../../components/icons/Pin.vue";
 import ProjectedElement from "../../components/ProjectedElement.vue";
 
-const landscapePoint = new Vector3(-0.75, 3.6, 6.5);
-const portraitPoint = new Vector3(-0.58, 3.2, 6.5);
+const landscapePoint = new Vector3(-0.875, 3.6, 6.5);
+const portraitPoint = new Vector3(-0.6, 4.2, 6.5);
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
 const timelines = ref<{ timeline: gsap.core.Timeline; delay: number }[]>([]);
@@ -126,7 +126,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 <style scoped lang="scss">
 .box-details-content {
   width: 160px;
-  max-width: 35svw;
+  max-width: 34svw;
   position: relative;
   gap: var(--space-xxs);
   display: flex;
