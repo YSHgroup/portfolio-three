@@ -40,7 +40,7 @@ void main() {
     // center circle
     vec2 center = vec2(0.5);
     float centerDist = distance(vUv, center);
-    float centerAlpha = smoothstep(0.06, 0.048, centerDist);
+    float centerAlpha = smoothstep(0.075, 0.059, centerDist);
     centerAlpha *= 0.4;
 
     vec3 finalColor = mix(uColor, uLineColor, pattern);
