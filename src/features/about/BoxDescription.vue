@@ -7,8 +7,8 @@ import ProjectedElement from "../../components/ProjectedElement.vue";
 import { t } from "../../i18n/utils/translate";
 import AppearingText from "../../components/AppearingText.vue";
 
-const landscapePoint = new Vector3(0.7, 3, 6.5);
-const portraitPoint = new Vector3(0.75, 2.5, 6.5);
+const landscapePoint = new Vector3(-1, 2, 6);
+const portraitPoint = new Vector3(-0.6, 2.5, 6);
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
 const timelines = ref<{ timeline: gsap.core.Timeline; delay: number }[]>([]);
@@ -48,7 +48,7 @@ watchEffect((onInvalidate) => {
       if (!isMobile) {
         tl.fromTo(
           wrapperEl,
-          { clipPath: "inset(0% 0% 100% 0%)" },
+          { clipPath: "inset(0% 0% 0% 100%)" },
           { clipPath: "inset(0% 0% 0% 0%)", duration: 0.3, ease: "none" },
           0,
         );
@@ -95,7 +95,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 </script>
 
 <template>
-  <ProjectedElement :landscape="landscapePoint" :portrait="portraitPoint" origin="top-left">
+  <ProjectedElement :landscape="landscapePoint" :portrait="portraitPoint">
     <div ref="wrapperRef" class="box-description-content">
       <AppearingText
         :text="t('about-tagline')"
@@ -117,24 +117,26 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
     gap: var(--space-xxs);
     display: flex;
     flex-direction: column;
-    transform: translate(0, 0);
-    padding-top: var(--space-sm);
-    padding-bottom: var(--space-xxs);
-    padding-left: calc(48px + var(--space-md));
+    transform: translate(-100%, 0);
+    padding-top: calc(var(--space-sm) + 3px);
+    padding-bottom: calc(var(--space-xxs) + 3px);
+    padding-left: var(--space-sm);
+    padding-right: 48px;
 
     @include mixins.mq("md") {
-      padding-top: var(--space-md);
+      padding-top: calc(var(--space-md) + 3px);
+      padding-left: var(--space-md);
     }
 
     @include mixins.landscape-large {
-      width: 440px;
+      width: 360px;
     }
 
     &::after {
       content: "";
       position: absolute;
       top: 0;
-      left: 0;
+      right: 0;
       width: 10px;
       height: 10px;
       background-color: var(--color-cyan-400);
@@ -146,12 +148,12 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
       position: absolute;
       top: 3px;
       left: 0;
-      width: 48px;
+      width: 100%;
       height: calc(100% - 4px);
       border: var(--stroke-md) solid var(--color-cyan-400);
       border-bottom-width: 0;
-      border-left-width: 0;
-      border-top-right-radius: var(--radius-md);
+      border-right-width: 0;
+      border-top-left-radius: var(--radius-md);
     }
   }
 

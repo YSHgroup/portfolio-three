@@ -8,8 +8,8 @@ import { BREAKPOINTS } from "../../utils/sizes";
 import { Vector3 } from "three";
 import ProjectedElement from "../../components/ProjectedElement.vue";
 
-const landscapePoint = new Vector3(-1, 2, 6.5);
-const portraitPoint = new Vector3(-0.6, 4.2, 6.5);
+const landscapePoint = new Vector3(0.75, 2.9, 6);
+const portraitPoint = new Vector3(-0.6, 4.2, 6);
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
 const timelines = ref<{ timeline: gsap.core.Timeline; delay: number }[]>([]);
@@ -48,7 +48,7 @@ watchEffect((onInvalidate) => {
       if (!isMobile) {
         tl.fromTo(
           wrapperEl,
-          { clipPath: "inset(0% 0% 100% 0%)" },
+          { clipPath: "inset(0% 0% 0% 100%)" },
           { clipPath: "inset(0% 0% 0% 0%)", duration: 0.4, ease: "none" },
           0,
         );
@@ -129,7 +129,7 @@ const services = computed(() => {
 </script>
 
 <template>
-  <ProjectedElement :landscape="landscapePoint" :portrait="portraitPoint" origin="top-right">
+  <ProjectedElement :landscape="landscapePoint" :portrait="portraitPoint">
     <div ref="wrapperRef" class="box-services-content">
       <div class="box-services-title">
         <AppearingText
@@ -159,27 +159,28 @@ const services = computed(() => {
 .box-services {
   &-content {
     position: relative;
-    transform: translate(-100%, 0);
     padding-top: var(--space-sm);
-    padding-left: var(--space-sm);
+    padding-bottom: var(--space-xxs);
+    padding-right: var(--space-sm);
+    padding-left: calc(96px + var(--space-md));
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
 
     @include mixins.mq("md") {
       padding-top: var(--space-md);
-      padding-left: var(--space-md);
+      padding-right: var(--space-md);
     }
 
     @include mixins.landscape-large {
-      width: 320px;
+      width: 480px;
     }
 
     &::after {
       content: "";
       position: absolute;
       top: 0;
-      right: 0;
+      left: 0;
       width: 10px;
       height: 10px;
       background-color: var(--color-cyan-400);
@@ -190,13 +191,13 @@ const services = computed(() => {
       content: "";
       position: absolute;
       top: 3px;
-      right: 0;
-      width: 100%;
-      height: calc(100% - 4px);
+      left: 0;
+      width: 96px;
+      height: calc(100% - 3px);
       border: var(--stroke-md) solid var(--color-cyan-400);
       border-bottom-width: 0;
-      border-right-width: 0;
-      border-top-left-radius: var(--radius-md);
+      border-left-width: 0;
+      border-top-right-radius: var(--radius-md);
     }
   }
 
