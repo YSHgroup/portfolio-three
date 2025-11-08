@@ -26,7 +26,7 @@ export const useHeaderTheme = ({
     }
 
     if (!aboutElement) {
-      aboutElement = typeof window !== "undefined" ? document.querySelector(".about") : null;
+      aboutElement = typeof window !== "undefined" ? document.querySelector("#about") : null;
     }
 
     if (aboutElement) {

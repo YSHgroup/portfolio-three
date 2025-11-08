@@ -5,7 +5,6 @@ import BoxDescription from "./BoxDescription.vue";
 import BoxServices from "./BoxServices.vue";
 import BoxDetails from "./BoxDetails.vue";
 
-const aboutRef = ref<HTMLElement | null>(null);
 const contentDescriptionRef = ref<HTMLDivElement | null>(null);
 const contentServicesRef = ref<HTMLDivElement | null>(null);
 const contentDetailsRef = ref<HTMLDivElement | null>(null);
@@ -13,9 +12,13 @@ const tlDescriptionRef = ref<gsap.core.Timeline | null>(null);
 const tlServicesRef = ref<gsap.core.Timeline | null>(null);
 const tlDetailsRef = ref<gsap.core.Timeline | null>(null);
 
+const props = defineProps<{
+  spacerRef: HTMLElement | null;
+}>();
+
 watchEffect((onInvalidate) => {
   if (
-    aboutRef.value &&
+    props.spacerRef &&
     tlDescriptionRef.value &&
     contentDescriptionRef.value &&
     tlServicesRef.value &&
@@ -24,7 +27,7 @@ watchEffect((onInvalidate) => {
     tlDetailsRef.value
   ) {
     transitions.about.setup({
-      about: aboutRef.value,
+      about: props.spacerRef,
       contentDescription: contentDescriptionRef.value,
       tlDescription: tlDescriptionRef.value,
       contentServices: contentServicesRef.value,
@@ -41,7 +44,6 @@ watchEffect((onInvalidate) => {
 </script>
 
 <template>
-  <div class="about" ref="aboutRef" id="about"></div>
   <div class="about-sticky">
     <div class="about-content">
       <div ref="contentDetailsRef" class="about-details">
@@ -65,8 +67,6 @@ watchEffect((onInvalidate) => {
 
 <style scoped lang="scss">
 .about {
-  height: calc(var(--lvh) * 250);
-
   &-sticky {
     position: sticky;
     bottom: 0;

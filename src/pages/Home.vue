@@ -20,6 +20,7 @@ const isStickyVisible = ref(false);
 const projectsLoaded = ref(false);
 const contactRef = ref<HTMLElement | null>(null);
 const contactBottom = ref<number>(0);
+const aboutSpacerRef = ref<HTMLElement | null>(null);
 
 const handleIntersection = (entries: IntersectionObserverEntry[]) => {
   isStickyVisible.value = entries[0]?.isIntersecting ?? false;
@@ -89,7 +90,8 @@ const handleProjectsLoaded = () => {
         ></div>
       </div>
       <div class="intro-wrapper-spacer"></div>
-      <About />
+      <div class="about-spacer" ref="aboutSpacerRef" id="about"></div>
+      <About :spacer-ref="aboutSpacerRef" />
       <!--      <AboutSections />-->
     </div>
     <Projects id="projects" @loaded="handleProjectsLoaded" />
@@ -105,6 +107,10 @@ const handleProjectsLoaded = () => {
   &-contact {
     width: 100%;
   }
+}
+
+.about-spacer {
+  height: calc(var(--lvh) * 250);
 }
 
 .intro-wrapper {
