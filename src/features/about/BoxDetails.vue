@@ -124,90 +124,92 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 </template>
 
 <style scoped lang="scss">
-.box-details-content {
-  width: 160px;
-  max-width: 34svw;
-  position: relative;
-  gap: var(--space-xxs);
-  display: flex;
-  flex-direction: column;
-  transform: translate(-100%, -100%);
-  padding-bottom: var(--space-sm);
-  padding-top: var(--space-xxs);
-  padding-left: var(--space-sm);
+.box-details {
+  &-content {
+    width: 160px;
+    max-width: 34svw;
+    position: relative;
+    gap: var(--space-xxs);
+    display: flex;
+    flex-direction: column;
+    transform: translate(-100%, -100%);
+    padding-bottom: var(--space-sm);
+    padding-top: var(--space-xxs);
+    padding-left: var(--space-sm);
 
-  @include mixins.mq("md") {
-    padding-bottom: var(--space-md);
-    padding-left: var(--space-md);
+    @include mixins.mq("md") {
+      padding-bottom: var(--space-md);
+      padding-left: var(--space-md);
+    }
+
+    @include mixins.landscape-large {
+      width: 240px;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 10px;
+      height: 10px;
+      background-color: var(--color-cyan-400);
+      border-radius: 50%;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: calc(100% - 4px);
+      border: var(--stroke-md) solid var(--color-cyan-400);
+      border-top-width: 0;
+      border-right-width: 0;
+      border-bottom-left-radius: var(--radius-md);
+      opacity: 0.5;
+    }
   }
 
-  @include mixins.landscape-large {
-    width: 240px;
+  &-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    flex-direction: row;
+    white-space: nowrap;
+    height: var(--icon-size-sm);
   }
 
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 10px;
-    height: 10px;
-    background-color: var(--color-cyan-400);
-    border-radius: 50%;
+  &-icon {
+    width: var(--icon-size-xxs);
+    transform: translateY(-1px);
+
+    @include mixins.mq("md") {
+      width: var(--icon-size-xs);
+    }
   }
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: calc(100% - 4px);
-    border: var(--stroke-md) solid var(--color-cyan-400);
-    border-top-width: 0;
-    border-right-width: 0;
-    border-bottom-left-radius: var(--radius-md);
-    opacity: 0.5;
-  }
-}
+  &-title {
+    font-size: var(--font-size-title-xxs);
 
-.box-details-item {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-  flex-direction: row;
-  white-space: nowrap;
-  height: var(--icon-size-sm);
-}
-
-.box-details-icon {
-  width: var(--icon-size-xxs);
-  transform: translateY(-1px);
-
-  @include mixins.mq("md") {
-    width: var(--icon-size-xs);
-  }
-}
-
-.box-details-title {
-  font-size: var(--font-size-title-xxs);
-
-  @include mixins.mq("md") {
-    font-size: var(--font-size-title-sm);
-  }
-}
-
-.box-details-items {
-  display: flex;
-  font-size: var(--font-size-sm);
-  flex-direction: column;
-
-  @include mixins.mq("md") {
-    font-size: var(--font-size-md);
+    @include mixins.mq("md") {
+      font-size: var(--font-size-title-sm);
+    }
   }
 
-  &-copy {
-    flex: 0.5;
+  &-items {
+    display: flex;
+    font-size: var(--font-size-sm);
+    flex-direction: column;
+
+    @include mixins.mq("md") {
+      font-size: var(--font-size-md);
+    }
+
+    &-copy {
+      flex: 0.5;
+    }
   }
 }
 </style>
