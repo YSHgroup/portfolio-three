@@ -50,6 +50,7 @@ const classes = computed(() => ["hologram-box", { "hologram-box-has-title": !!sl
 <style scoped lang="scss">
 .hologram-box {
   position: relative;
+  will-change: clip-path;
   //filter: drop-shadow(0 -10px rgb(52, 191, 255, 0.2)) drop-shadow(0 10px rgb(52, 191, 255, 0.2));
 
   &-content {

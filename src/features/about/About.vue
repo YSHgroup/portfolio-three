@@ -54,7 +54,7 @@ watchEffect((onInvalidate) => {
           <div ref="contentDetailsRef" class="about-left-content-details">
             <BoxDetails @timeline:created="(tl: gsap.core.Timeline) => (tlDetailsRef = tl)" />
           </div>
-          <div ref="contentServicesRef">
+          <div ref="contentServicesRef" class="about-left-content-services">
             <BoxServices @timeline:created="(tl: gsap.core.Timeline) => (tlServicesRef = tl)" />
           </div>
         </div>
@@ -121,10 +121,15 @@ watchEffect((onInvalidate) => {
 
       &-details {
         display: none;
+        will-change: transform, opacity;
 
         @include mixins.landscape {
           display: block;
         }
+      }
+
+      &-services {
+        will-change: transform, opacity;
       }
     }
   }
@@ -134,6 +139,7 @@ watchEffect((onInvalidate) => {
     bottom: var(--space-outer);
     right: var(--space-outer);
     width: calc(100% - var(--space-outer) * 2);
+    will-change: transform, opacity;
 
     &-content {
       @include mixins.landscape {

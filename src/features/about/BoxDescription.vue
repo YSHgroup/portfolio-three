@@ -204,6 +204,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 
   &-copy {
     padding: var(--space-sm);
+    will-change: opacity;
 
     @include mixins.mq("md") {
       padding: var(--space-md);

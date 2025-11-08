@@ -212,6 +212,7 @@ const services = computed(() => {
       &-sub {
         font-size: var(--font-size-xs);
         opacity: 0;
+        will-change: opacity;
 
         @include mixins.landscape-large {
           font-size: var(--font-size-sm);
