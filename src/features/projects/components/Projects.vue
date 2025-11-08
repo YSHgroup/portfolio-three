@@ -25,6 +25,7 @@ watch(locale, loadPreviews);
 
 onMounted(loadPreviews);
 </script>
+
 <template>
   <div class="projects">
     <NotchSection class="projects-notch" />

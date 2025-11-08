@@ -87,12 +87,13 @@ const handleProjectsLoaded = () => {
         <div
           ref="stickyContentRef"
           :class="['intro-sticky-content', { 'intro-sticky-content-fixed': !isStickyVisible }]"
-        ></div>
+        >
+          <About :spacer-ref="aboutSpacerRef" />
+        </div>
       </div>
       <div class="intro-wrapper-spacer"></div>
       <div class="about-spacer" ref="aboutSpacerRef" id="about"></div>
-      <About :spacer-ref="aboutSpacerRef" />
-      <!--      <AboutSections />-->
+      <!--      <About :spacer-ref="aboutSpacerRef" />-->
     </div>
     <Projects id="projects" @loaded="handleProjectsLoaded" />
     <div ref="contactRef" class="home-contact">
@@ -143,6 +144,7 @@ const handleProjectsLoaded = () => {
   z-index: -1;
   display: flex;
   align-items: flex-end;
+  overflow: hidden;
 
   &-visible {
     position: sticky;
@@ -152,6 +154,7 @@ const handleProjectsLoaded = () => {
 .intro-sticky-content {
   width: 100%;
   height: 100%;
+  overflow: hidden;
 
   &-fixed {
     position: absolute;

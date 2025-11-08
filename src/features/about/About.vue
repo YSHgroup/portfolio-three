@@ -44,21 +44,19 @@ watchEffect((onInvalidate) => {
 </script>
 
 <template>
-  <div class="about-sticky">
-    <div class="about-content">
-      <div ref="contentDetailsRef" class="about-details">
-        <BoxDetails @timeline:created="(tl: gsap.core.Timeline) => (tlDetailsRef = tl)" />
+  <div class="about-content">
+    <div ref="contentDetailsRef" class="about-details">
+      <BoxDetails @timeline:created="(tl: gsap.core.Timeline) => (tlDetailsRef = tl)" />
+    </div>
+    <div class="about-right" ref="contentDescriptionRef">
+      <div class="about-right-content">
+        <BoxDescription @timeline:created="(tl: gsap.core.Timeline) => (tlDescriptionRef = tl)" />
       </div>
-      <div class="about-right" ref="contentDescriptionRef">
-        <div class="about-right-content">
-          <BoxDescription @timeline:created="(tl: gsap.core.Timeline) => (tlDescriptionRef = tl)" />
-        </div>
-      </div>
-      <div class="about-left">
-        <div class="about-left-content">
-          <div ref="contentServicesRef" class="about-left-content-services">
-            <BoxServices @timeline:created="(tl: gsap.core.Timeline) => (tlServicesRef = tl)" />
-          </div>
+    </div>
+    <div class="about-left">
+      <div class="about-left-content">
+        <div ref="contentServicesRef" class="about-left-content-services">
+          <BoxServices @timeline:created="(tl: gsap.core.Timeline) => (tlServicesRef = tl)" />
         </div>
       </div>
     </div>
@@ -67,21 +65,10 @@ watchEffect((onInvalidate) => {
 
 <style scoped lang="scss">
 .about {
-  &-sticky {
-    position: sticky;
-    bottom: 0;
-    width: 100%;
-    height: 0;
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-text-cyan-400);
-    font-family: "NB-Architekt-Std";
-  }
-
   &-content {
     position: absolute;
+    color: var(--color-text-cyan-400);
+    font-family: "NB-Architekt-Std";
     bottom: 0;
     width: 100%;
     padding: var(--space-outer);
