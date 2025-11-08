@@ -133,6 +133,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
   flex-direction: column;
   transform: translate(-100%, -100%);
   padding-bottom: var(--space-sm);
+  padding-top: var(--space-xxs);
   padding-left: var(--space-sm);
 
   @include mixins.mq("md") {
