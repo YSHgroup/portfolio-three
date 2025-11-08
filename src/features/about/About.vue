@@ -70,7 +70,7 @@ watchEffect((onInvalidate) => {
     transform: translateX(-50%);
     height: calc(var(--lvh) * 100 - var(--height-header));
 
-    --about-shadow: 0 2px 8px rgba(14, 19, 51, 0.5);
+    --about-shadow: 0 2px 8px rgba(0, 18, 63, 0.75);
   }
 
   &-details,
