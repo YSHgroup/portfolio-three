@@ -1,14 +1,19 @@
 <script setup lang="ts">
 import { t } from "../../i18n/utils/translate";
-import { ref, watchEffect, onBeforeUnmount } from "vue";
+import { ref, watchEffect, onBeforeUnmount, onMounted } from "vue";
 import gsap from "gsap";
 import AppearingText from "../../components/AppearingText.vue";
 import { BREAKPOINTS } from "../../utils/sizes";
-import PinIcon from "../../components/icons/Pin.vue";
+import { Vector3 } from "three";
+import { camera } from "../../three/core/camera";
+
+const point = new Vector3(-0.45, 2.9, 6.5);
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
+const wrapperWrapperRef = ref<HTMLDivElement | null>(null);
 const timelines = ref<{ timeline: gsap.core.Timeline; delay: number }[]>([]);
 let matchMedia: gsap.MatchMedia | null = null;
+let tickCallback: (() => void) | null = null;
 
 const emit = defineEmits<{
   "timeline:created": [timeline: gsap.core.Timeline];
@@ -44,8 +49,8 @@ watchEffect((onInvalidate) => {
       if (!isMobile) {
         tl.fromTo(
           wrapperEl,
-          { clipPath: "inset(0% 0% 100% 0%)" },
-          { clipPath: "inset(0% 0% 0% 0%)", duration: 0.4, ease: "none" },
+          { clipPath: "inset(0% 0% 0% 100%)" },
+          { clipPath: "inset(0% 0% 0% 0%)", duration: 0.3, ease: "none" },
           0,
         );
       } else {
@@ -58,7 +63,7 @@ watchEffect((onInvalidate) => {
         if (!item) continue;
         tl.add(() => {
           item.timeline.restart(true);
-        }, item.delay);
+        }, item.delay + 0.25);
       }
 
       emit("timeline:created", tl);
@@ -78,9 +83,25 @@ watchEffect((onInvalidate) => {
   });
 });
 
+const updatePosition = () => {
+  if (!wrapperWrapperRef.value) return;
+
+  const screenPos = camera.project(point);
+
+  wrapperWrapperRef.value.style.transform = `translate(calc(${screenPos.x}px - 100%), calc(${screenPos.y}px - 100%))`;
+};
+
+onMounted(() => {
+  tickCallback = updatePosition;
+  gsap.ticker.add(tickCallback);
+});
+
 onBeforeUnmount(() => {
   if (matchMedia) {
     matchMedia.revert();
+  }
+  if (tickCallback) {
+    gsap.ticker.remove(tickCallback);
   }
 });
 
@@ -91,9 +112,8 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 </script>
 
 <template>
-  <div class="box-details-wrapper">
-    <div ref="wrapperRef" class="box-details">
-      <div class="box-details-line"></div>
+  <div ref="wrapperWrapperRef" class="box-details">
+    <div ref="wrapperRef" class="box-details-content">
       <div class="box-details-title">
         <AppearingText
           text="David"
@@ -102,26 +122,15 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
           @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
         />
       </div>
-      <div class="box-details-content">
+      <div class="box-details-items">
         <div class="box-details-item">
-          <PinIcon class="box-details-icon" />
           <AppearingText
-            v-if="t('germany')"
+            v-if="t('location') && t('germany')"
             class="box-details-content-copy"
-            :text="t('germany')"
+            :text="`${t('location')}: ${t('germany')}`"
             :steps="3"
             :duration="0.35"
             @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.1)"
-          />
-        </div>
-        <div class="box-details-item">
-          <AppearingText
-            v-if="t('version')"
-            class="box-details-content-copy"
-            :text="`${t('version')}: 2.7`"
-            :steps="3"
-            :duration="0.35"
-            @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.2)"
           />
         </div>
       </div>
@@ -131,41 +140,50 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 
 <style scoped lang="scss">
 .box-details {
-  width: 240px;
+  width: 0;
+  height: 0;
   position: relative;
-  padding-bottom: calc(var(--space-sm) + 32px);
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
 
-  &-wrapper {
-    width: 240px;
+  &-content {
+    min-width: 280px;
     position: relative;
-    transform: translate(-100%, -100%);
+    padding-bottom: var(--space-md);
+    padding-left: var(--space-md);
+    gap: var(--space-xxs);
+    display: flex;
+    flex-direction: column;
 
     &::after {
       content: "";
       position: absolute;
       bottom: 0;
-      right: calc(-5px + var(--stroke-md));
+      right: 0;
       width: 10px;
       height: 10px;
       background-color: var(--color-cyan-400);
       border-radius: 50%;
     }
-  }
 
-  &-line {
-    border-top-right-radius: var(--radius-md);
-    border: var(--stroke-md) solid var(--color-cyan-400);
-    border-left-width: 0;
-    border-bottom-width: 0;
-    height: 32px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: calc(100% - 4px);
+      border: var(--stroke-md) solid var(--color-cyan-400);
+      border-top-width: 0;
+      border-right-width: 0;
+      border-bottom-left-radius: var(--radius-md);
+    }
   }
 
   &-icon {
-    width: var(--icon-size-sm);
+    width: var(--icon-size-xs);
+    transform: translateY(-1px);
   }
 
   &-item {
@@ -181,9 +199,10 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
     font-size: var(--font-size-title-sm);
   }
 
-  &-content {
+  &-items {
     display: flex;
     font-size: var(--font-size-sm);
+    flex-direction: column;
 
     @include mixins.mq("md") {
       font-size: var(--font-size-md);

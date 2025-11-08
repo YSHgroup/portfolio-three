@@ -96,6 +96,16 @@ const resize = () => {
   instance.updateProjectionMatrix();
 };
 
+const project = (point: Vector3): { x: number; y: number } => {
+  const projected = point.clone();
+  projected.project(instance);
+
+  const x = projected.x * threeSizes.width * 0.5;
+  const y = -projected.y * threeSizes.height * 0.5;
+
+  return { x, y };
+};
+
 const destroy = () => {
   threeSizes.off("resize", resize);
   gsap.ticker.remove(tick);
@@ -104,4 +114,4 @@ const destroy = () => {
   cursor.y = 0;
 };
 
-export const camera = { init, destroy, instance, parallaxGroup, updateParallax };
+export const camera = { init, destroy, instance, parallaxGroup, updateParallax, project };

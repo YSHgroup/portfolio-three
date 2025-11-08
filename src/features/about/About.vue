@@ -95,7 +95,7 @@ watchEffect((onInvalidate) => {
     will-change: transform, opacity;
     width: fit-content;
     position: absolute;
-    top: calc(-1 * var(--height-header) + 50%);
+    top: calc(50% - var(--height-header) / 2);
     left: 50%;
 
     @include mixins.landscape {
@@ -125,11 +125,16 @@ watchEffect((onInvalidate) => {
       height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: space-evenly;
+      justify-content: flex-end;
       gap: var(--space-sm);
+
+      @include mixins.landscape {
+        padding-bottom: 8%;
+      }
 
       @include mixins.landscape-large {
         gap: var(--space-xl);
+        padding-bottom: 25%;
       }
 
       &-services {

@@ -217,7 +217,7 @@ const setupSectionsAnimation = ({
 
       // Details animation (first, only on landscape)
       tl.fromTo(contentDetails, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, DETAILS_DELAY);
-      tl.fromTo(contentDetails, { y: "12.5vh" }, { y: "0vh", duration: 0.35, ease: "none" }, DETAILS_DELAY);
+      //tl.fromTo(contentDetails, { y: "12.5vh" }, { y: "0vh", duration: 0.35, ease: "none" }, DETAILS_DELAY);
       tl.add(() => {
         tlDetails?.play();
       }, DETAILS_DELAY);
