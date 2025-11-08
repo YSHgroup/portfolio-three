@@ -153,7 +153,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 
   &-content {
     width: 160px;
-    max-width: 35vw;
+    max-width: 35svw;
     position: relative;
     gap: var(--space-xxs);
     display: flex;
