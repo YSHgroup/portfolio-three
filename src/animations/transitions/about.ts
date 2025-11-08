@@ -200,7 +200,7 @@ const setupSectionsAnimation = ({
       duration: 1,
       scrollTrigger: {
         trigger: about,
-        start: isLandscape ? "top 35%" : "top 40%",
+        start: isLandscape ? "top 35%" : "top 25%",
         end: "bottom bottom",
         scrub: true,
       },
@@ -229,14 +229,14 @@ const setupSectionsAnimation = ({
         { opacity: 1, duration: 0.15, ease: "power1.out" },
         DESCRIPTION_DELAY,
       );
-      tl.fromTo(contentDescription, { y: "12.5vh" }, { y: "0vh", duration: 0.35, ease: "none" }, DESCRIPTION_DELAY);
+      //tl.fromTo(contentDescription, { y: "12.5vh" }, { y: "0vh", duration: 0.35, ease: "none" }, DESCRIPTION_DELAY);
       tl.add(() => {
         tlDescription?.play();
       }, DESCRIPTION_DELAY);
 
       // Services animation
       tl.fromTo(contentServices, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, SERVICES_DELAY);
-      tl.fromTo(contentServices, { y: "12.5vh" }, { y: 0, duration: 0.35, ease: "none" }, SERVICES_DELAY);
+      //tl.fromTo(contentServices, { y: "12.5vh" }, { y: 0, duration: 0.35, ease: "none" }, SERVICES_DELAY);
       tl.add(() => {
         tlServices?.play();
       }, SERVICES_DELAY);
@@ -255,11 +255,10 @@ const setupSectionsAnimation = ({
       // Description animation
       tl.fromTo(
         contentDescription,
-        { opacity: 0, y: "10vh" },
-        { opacity: 1, y: "0vh", duration: 0.15, ease: "power1.out" },
+        { opacity: 0 },
+        { opacity: 1, duration: 0.15, ease: "power1.out" },
         DESCRIPTION_DELAY,
       );
-      tl.to(contentDescription, { opacity: 0, y: "-10vh", duration: 0.15, ease: "power1.in" }, 0.45);
       tl.add(() => {
         tlDescription?.play();
       }, DESCRIPTION_DELAY);

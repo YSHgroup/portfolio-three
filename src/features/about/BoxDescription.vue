@@ -1,14 +1,17 @@
 <script setup lang="ts">
-import HologramBox from "../../components/HologramBox.vue";
-import { t } from "../../i18n/utils/translate";
 import { ref, watchEffect, onBeforeUnmount } from "vue";
 import gsap from "gsap";
-import AppearingText from "../../components/AppearingText.vue";
 import { BREAKPOINTS } from "../../utils/sizes";
+import { Vector3 } from "three";
+import ProjectedElement from "../../components/ProjectedElement.vue";
+import { t } from "../../i18n/utils/translate";
+import AppearingText from "../../components/AppearingText.vue";
 
-const wrapperRef = ref<InstanceType<typeof HologramBox> | null>(null);
+const landscapePoint = new Vector3(0.7, 3, 6.5);
+const portraitPoint = new Vector3(0.75, 2.5, 6.5);
+
+const wrapperRef = ref<HTMLDivElement | null>(null);
 const timelines = ref<{ timeline: gsap.core.Timeline; delay: number }[]>([]);
-const copyRef = ref<HTMLParagraphElement | null>(null);
 let matchMedia: gsap.MatchMedia | null = null;
 
 const emit = defineEmits<{
@@ -16,7 +19,7 @@ const emit = defineEmits<{
 }>();
 
 watchEffect((onInvalidate) => {
-  const wrapperEl = wrapperRef.value?.wrapperRef;
+  const wrapperEl = wrapperRef.value;
   if (!wrapperEl) return;
 
   // Clean up previous matchMedia
@@ -46,7 +49,7 @@ watchEffect((onInvalidate) => {
         tl.fromTo(
           wrapperEl,
           { clipPath: "inset(0% 0% 100% 0%)" },
-          { clipPath: "inset(0% 0% 0% 0%)", duration: 0.4, ease: "none" },
+          { clipPath: "inset(0% 0% 0% 0%)", duration: 0.3, ease: "none" },
           0,
         );
       } else {
@@ -54,22 +57,12 @@ watchEffect((onInvalidate) => {
         gsap.set(wrapperEl, { clipPath: "inset(0% 0% 0% 0%)" });
       }
 
-      // Only fade in on desktop
-      if (!isMobile) {
-        tl.fromTo(copyRef.value, { opacity: 0 }, { opacity: 1, duration: 0.2 }, 0.35);
-      } else {
-        // On mobile, ensure opacity is 1 immediately
-        if (copyRef.value) {
-          gsap.set(copyRef.value, { opacity: 1 });
-        }
-      }
-
       for (let i = 0; i < timelines.value.length; i++) {
         const item = timelines.value[i];
         if (!item) continue;
         tl.add(() => {
           item.timeline.restart(true);
-        }, item.delay);
+        }, item.delay + 0.15);
       }
 
       emit("timeline:created", tl);
@@ -102,57 +95,71 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 </script>
 
 <template>
-  <HologramBox ref="wrapperRef" class="box-description">
-    <template #title>
+  <ProjectedElement :landscape="landscapePoint" :portrait="portraitPoint" origin="top-left">
+    <div ref="wrapperRef" class="box-description-content">
       <AppearingText
-        :text="t('description')"
-        :steps="1"
-        :duration="0.35"
+        :text="t('about-tagline')"
+        :steps="3"
+        :duration="0.7"
+        class="box-description-copy"
         @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
-        class="box-description-title"
       />
-    </template>
-    <p class="box-description-copy" v-html="t('about-intro')" ref="copyRef"></p>
-  </HologramBox>
+    </div>
+  </ProjectedElement>
 </template>
 
 <style scoped lang="scss">
 .box-description {
-  width: 100%;
-  display: none;
+  &-content {
+    width: 160px;
+    max-width: 34svw;
+    position: relative;
+    gap: var(--space-xxs);
+    display: flex;
+    flex-direction: column;
+    transform: translate(0, 0);
+    padding-top: var(--space-sm);
+    padding-bottom: var(--space-xxs);
+    padding-left: calc(48px + var(--space-md));
 
-  &-line {
-    @include mixins.landscape {
-      display: none;
+    @include mixins.mq("md") {
+      padding-top: var(--space-md);
     }
-  }
-
-  &-title {
-    font-size: var(--font-size-title-xs);
 
     @include mixins.landscape-large {
-      font-size: var(--font-size-title-xs);
+      width: 440px;
     }
-  }
 
-  &-content {
-    display: flex;
-    justify-content: space-between;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 10px;
+      height: 10px;
+      background-color: var(--color-cyan-400);
+      border-radius: 50%;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 0;
+      width: 48px;
+      height: calc(100% - 4px);
+      border: var(--stroke-md) solid var(--color-cyan-400);
+      border-bottom-width: 0;
+      border-left-width: 0;
+      border-top-right-radius: var(--radius-md);
+    }
   }
 
   &-copy {
-    padding: var(--space-sm);
-    padding-top: var(--space-xxs);
-
     will-change: opacity;
-
-    @include mixins.mq("md") {
-      padding: var(--space-md);
-      padding-top: 0;
-    }
+    text-shadow: var(--about-shadow);
 
     @include mixins.landscape {
-      padding-top: 0;
       font-size: var(--font-size-sm);
     }
 

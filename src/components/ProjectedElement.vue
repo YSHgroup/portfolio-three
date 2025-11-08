@@ -5,10 +5,16 @@ import { camera } from "../three/core/camera";
 import { sizes } from "../utils/sizes";
 import gsap from "gsap";
 
-const props = defineProps<{
-  landscape: Vector3;
-  portrait: Vector3;
-}>();
+const props = withDefaults(
+  defineProps<{
+    landscape: Vector3;
+    portrait: Vector3;
+    origin?: "center" | "top-left" | "top-right";
+  }>(),
+  {
+    origin: "center",
+  }
+);
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
 
@@ -18,7 +24,13 @@ const updatePosition = () => {
   const point = sizes.isLandscape() ? props.landscape : props.portrait;
   const screenPos = camera.project(point);
 
-  wrapperRef.value.style.transform = `translate(calc(${screenPos.x}px - 100%), calc(${screenPos.y}px - 100%))`;
+  if (props.origin === "top-left") {
+    wrapperRef.value.style.transform = `translate(${screenPos.x}px, ${screenPos.y}px)`;
+  } else if (props.origin === "top-right") {
+    wrapperRef.value.style.transform = `translate(calc(${screenPos.x}px - 100%), ${screenPos.y}px)`;
+  } else {
+    wrapperRef.value.style.transform = `translate(calc(${screenPos.x}px - 100%), calc(${screenPos.y}px - 100%))`;
+  }
 };
 
 onMounted(() => {

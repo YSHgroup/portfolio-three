@@ -168,7 +168,6 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
       border-top-width: 0;
       border-right-width: 0;
       border-bottom-left-radius: var(--radius-md);
-      opacity: 0.5;
     }
   }
 
@@ -184,6 +183,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
   &-icon {
     width: var(--icon-size-xxs);
     transform: translateY(-1px);
+    filter: drop-shadow(var(--about-shadow));
 
     @include mixins.mq("md") {
       width: var(--icon-size-xs);
@@ -192,6 +192,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 
   &-title {
     font-size: var(--font-size-title-xxs);
+    text-shadow: var(--about-shadow);
 
     @include mixins.mq("md") {
       font-size: var(--font-size-title-sm);
@@ -202,6 +203,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
     display: flex;
     font-size: var(--font-size-sm);
     flex-direction: column;
+    text-shadow: var(--about-shadow);
 
     @include mixins.mq("md") {
       font-size: var(--font-size-md);

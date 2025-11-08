@@ -1,6 +1,7 @@
 {
   "about": "About",
   "about-intro": "Web developer specializing in interactive 3D web experiences and real-time systems.<br />Builds scalable, high-performance applications that combine engaging visuals with seamless functionality using WebGL, TypeScript, and Node.js.",
+  "about-tagline": "Builds interactive 3D experiences and real-time systems that are fast, responsive, and fun to use.",
   "back-to-home": "Back to home",
   "contact": "Contact",
   "description": "Description",

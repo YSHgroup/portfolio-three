@@ -1,13 +1,17 @@
 <script setup lang="ts">
-import HologramBox from "../../components/HologramBox.vue";
 import { computed, ref, watchEffect, onBeforeUnmount } from "vue";
 import gsap from "gsap";
 import { locale } from "../../i18n/store";
 import { t } from "../../i18n/utils/translate";
 import AppearingText from "../../components/AppearingText.vue";
 import { BREAKPOINTS } from "../../utils/sizes";
+import { Vector3 } from "three";
+import ProjectedElement from "../../components/ProjectedElement.vue";
 
-const wrapperRef = ref<InstanceType<typeof HologramBox> | null>(null);
+const landscapePoint = new Vector3(-1, 2, 6.5);
+const portraitPoint = new Vector3(-0.6, 4.2, 6.5);
+
+const wrapperRef = ref<HTMLDivElement | null>(null);
 const timelines = ref<{ timeline: gsap.core.Timeline; delay: number }[]>([]);
 const subRefs = ref<HTMLParagraphElement[]>([]);
 let matchMedia: gsap.MatchMedia | null = null;
@@ -17,16 +21,14 @@ const emit = defineEmits<{
 }>();
 
 watchEffect((onInvalidate) => {
-  const wrapperEl = wrapperRef.value?.wrapperRef;
+  const wrapperEl = wrapperRef.value;
   if (!wrapperEl) return;
 
-  // Clean up previous matchMedia
   if (matchMedia) {
     matchMedia.revert();
     matchMedia = null;
   }
 
-  // Initialize GSAP matchMedia
   matchMedia = gsap.matchMedia();
 
   matchMedia.add(
@@ -60,7 +62,7 @@ watchEffect((onInvalidate) => {
         if (!item) continue;
         tl.add(() => {
           item.timeline.restart(true);
-        }, item.delay);
+        }, item.delay + 0.25);
       }
 
       // Only fade in on desktop
@@ -101,22 +103,25 @@ onBeforeUnmount(() => {
 });
 
 const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
-  timelines.value.push({ timeline, delay });
+  const updatedTimelines = [...timelines.value, { timeline, delay }];
+  timelines.value = updatedTimelines;
 };
 
 const SERVICES_EN = [
-  { name: "Frontend", sub: "React, Vue" },
-  { name: "Backend", sub: "Node.js, Redis, PostgreSQL" },
-  { name: "3D & Creative", sub: "Three.js, GLSL, GSAP" },
-  { name: "Real-Time", sub: "WebSockets, Multiplayer" },
-] as const satisfies { name: string; sub: string }[];
+  { name: "Three.js & WebGL" },
+  { name: "Node.js & WebSockets" },
+  { name: "React & Vue" },
+  { name: "Kubernetes & Redis" },
+  { name: "Real-Time Multiplayer" },
+] as const satisfies { name: string }[];
 
 const SERVICES_DE = [
-  { name: "Frontend", sub: "React, Vue" },
-  { name: "Backend", sub: "Node.js, Redis, PostgreSQL" },
-  { name: "3D & Kreativ", sub: "Three.js, GLSL, GSAP" },
-  { name: "Echtzeit", sub: "WebSockets, Multiplayer" },
-] as const satisfies { name: string; sub: string }[];
+  { name: "Three.js & WebGL" },
+  { name: "Node.js & WebSockets" },
+  { name: "React & Vue" },
+  { name: "Kubernetes & Redis" },
+  { name: "Real-Time Multiplayer" },
+] as const satisfies { name: string }[];
 
 const services = computed(() => {
   return locale.value === "en" ? SERVICES_EN : SERVICES_DE;
@@ -124,82 +129,103 @@ const services = computed(() => {
 </script>
 
 <template>
-  <HologramBox ref="wrapperRef" class="box-services">
-    <template #title>
-      <AppearingText
-        :text="t('services')"
-        :steps="1"
-        :duration="0.35"
-        @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
-        class="box-services-title"
-      />
-    </template>
-    <div class="box-services-list">
-      <div class="box-services-list-item" v-for="(service, index) in services" :key="service.name">
-        <p class="box-services-list-item-name">
-          <AppearingText
-            :text="service.name"
-            :steps="1"
-            :duration="0.35"
-            @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.15 + index * 0.1)"
-          />
-        </p>
-        <p
-          class="box-services-list-item-sub"
-          :ref="
-            (el) => {
-              if (el) {
-                subRefs[index] = el as HTMLParagraphElement;
-              }
-            }
-          "
-        >
-          {{ service.sub }}
-        </p>
+  <ProjectedElement :landscape="landscapePoint" :portrait="portraitPoint" origin="top-right">
+    <div ref="wrapperRef" class="box-services-content">
+      <div class="box-services-title">
+        <AppearingText
+          :text="t('services')"
+          :steps="1"
+          :duration="0.35"
+          @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
+        />
+      </div>
+      <div class="box-services-list">
+        <div class="box-services-list-item" v-for="(service, index) in services" :key="service.name">
+          <p class="box-services-list-item-name">
+            <AppearingText
+              :text="service.name"
+              :steps="1"
+              :duration="0.35"
+              @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.15 + index * 0.1)"
+            />
+          </p>
+        </div>
       </div>
     </div>
-  </HologramBox>
+  </ProjectedElement>
 </template>
 
 <style scoped lang="scss">
 .box-services {
-  display: none;
+  &-content {
+    position: relative;
+    transform: translate(-100%, 0);
+    padding-top: var(--space-sm);
+    padding-left: var(--space-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+
+    @include mixins.mq("md") {
+      padding-top: var(--space-md);
+      padding-left: var(--space-md);
+    }
+
+    @include mixins.landscape-large {
+      width: 320px;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 10px;
+      height: 10px;
+      background-color: var(--color-cyan-400);
+      border-radius: 50%;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 3px;
+      right: 0;
+      width: 100%;
+      height: calc(100% - 4px);
+      border: var(--stroke-md) solid var(--color-cyan-400);
+      border-bottom-width: 0;
+      border-right-width: 0;
+      border-top-left-radius: var(--radius-md);
+    }
+  }
 
   &-list {
     display: flex;
     flex-direction: column;
     gap: var(--space-xs);
-    padding-bottom: var(--space-md);
-    padding-top: var(--space-xxs);
-    padding-right: var(--space-xxs);
-
-    @include mixins.landscape {
-      padding-bottom: var(--space-sm);
-      padding-top: 0;
-    }
-
-    @include mixins.landscape-large {
-      padding-bottom: var(--space-md);
-    }
 
     &-item {
       display: flex;
       flex-direction: column;
-      padding-left: 28px;
+      padding-left: 18px;
       position: relative;
 
       &::before {
         content: "";
         position: absolute;
-        left: 12px;
+        left: 2px;
         top: 6px;
-        width: 6px;
-        height: 6px;
-        background-color: var(--color-text-cyan-300);
+        width: 4px;
+        height: 4px;
+        background-color: var(--color-text-cyan-400);
+        box-shadow: var(--about-shadow);
+        border-radius: 50%;
       }
 
       &-name {
         font-size: var(--font-size-md);
+        text-shadow: var(--about-shadow);
 
         @include mixins.landscape {
           font-size: var(--font-size-sm);
@@ -209,22 +235,12 @@ const services = computed(() => {
           font-size: var(--font-size-lg);
         }
       }
-
-      &-sub {
-        font-size: var(--font-size-xs);
-        opacity: 0;
-        will-change: opacity;
-        color: var(--color-text-cyan-300);
-
-        @include mixins.landscape-large {
-          font-size: var(--font-size-sm);
-        }
-      }
     }
   }
 
   &-title {
     font-size: var(--font-size-title-xs);
+    text-shadow: var(--about-shadow);
 
     @include mixins.landscape {
       font-size: var(--font-size-title-xxs);
