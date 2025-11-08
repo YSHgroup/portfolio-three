@@ -124,7 +124,7 @@ const services = computed(() => {
 </script>
 
 <template>
-  <HologramBox ref="wrapperRef">
+  <HologramBox ref="wrapperRef" class="box-services">
     <template #title>
       <AppearingText
         :text="t('services')"

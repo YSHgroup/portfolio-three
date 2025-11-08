@@ -1,24 +1,19 @@
 <script setup lang="ts">
 import { t } from "../../i18n/utils/translate";
-import { ref, watchEffect, onBeforeUnmount, onMounted } from "vue";
+import { ref, watchEffect, onBeforeUnmount } from "vue";
 import gsap from "gsap";
 import AppearingText from "../../components/AppearingText.vue";
 import { BREAKPOINTS } from "../../utils/sizes";
 import { Vector3 } from "three";
-import { camera } from "../../three/core/camera";
 import PinIcon from "../../components/icons/Pin.vue";
-import { sizes } from "../../utils/sizes";
+import ProjectedElement from "../../components/ProjectedElement.vue";
 
-const points = {
-  landscape: new Vector3(-0.75, 3.6, 6.5),
-  portrait: new Vector3(-0.58, 3.2, 6.5),
-};
+const landscapePoint = new Vector3(-0.75, 3.6, 6.5);
+const portraitPoint = new Vector3(-0.58, 3.2, 6.5);
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
-const wrapperWrapperRef = ref<HTMLDivElement | null>(null);
 const timelines = ref<{ timeline: gsap.core.Timeline; delay: number }[]>([]);
 let matchMedia: gsap.MatchMedia | null = null;
-let tickCallback: (() => void) | null = null;
 
 const emit = defineEmits<{
   "timeline:created": [timeline: gsap.core.Timeline];
@@ -88,26 +83,9 @@ watchEffect((onInvalidate) => {
   });
 });
 
-const updatePosition = () => {
-  if (!wrapperWrapperRef.value) return;
-
-  const point = sizes.isLandscape() ? points.landscape : points.portrait;
-  const screenPos = camera.project(point);
-
-  wrapperWrapperRef.value.style.transform = `translate(calc(${screenPos.x}px - 100%), calc(${screenPos.y}px - 100%))`;
-};
-
-onMounted(() => {
-  tickCallback = updatePosition;
-  gsap.ticker.add(tickCallback);
-});
-
 onBeforeUnmount(() => {
   if (matchMedia) {
     matchMedia.revert();
-  }
-  if (tickCallback) {
-    gsap.ticker.remove(tickCallback);
   }
 });
 
@@ -118,7 +96,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 </script>
 
 <template>
-  <div ref="wrapperWrapperRef" class="box-details">
+  <ProjectedElement :landscape="landscapePoint" :portrait="portraitPoint">
     <div ref="wrapperRef" class="box-details-content">
       <div class="box-details-title">
         <AppearingText
@@ -142,99 +120,93 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
         </div>
       </div>
     </div>
-  </div>
+  </ProjectedElement>
 </template>
 
 <style scoped lang="scss">
-.box-details {
-  width: 0;
-  height: 0;
+.box-details-content {
+  width: 160px;
+  max-width: 35svw;
   position: relative;
+  gap: var(--space-xxs);
+  display: flex;
+  flex-direction: column;
+  transform: translate(-100%, -100%);
+  padding-bottom: var(--space-sm);
+  padding-left: var(--space-sm);
 
-  &-content {
-    width: 160px;
-    max-width: 35svw;
-    position: relative;
-    gap: var(--space-xxs);
-    display: flex;
-    flex-direction: column;
-    transform: translate(-100%, -100%);
-    padding-bottom: var(--space-sm);
-    padding-left: var(--space-sm);
-
-    @include mixins.mq("md") {
-      padding-bottom: var(--space-md);
-      padding-left: var(--space-md);
-    }
-
-    @include mixins.landscape-large {
-      width: 240px;
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 10px;
-      height: 10px;
-      background-color: var(--color-cyan-400);
-      border-radius: 50%;
-    }
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: calc(100% - 4px);
-      border: var(--stroke-md) solid var(--color-cyan-400);
-      border-top-width: 0;
-      border-right-width: 0;
-      border-bottom-left-radius: var(--radius-md);
-      opacity: 0.5;
-    }
+  @include mixins.mq("md") {
+    padding-bottom: var(--space-md);
+    padding-left: var(--space-md);
   }
 
-  &-item {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    flex-direction: row;
-    white-space: nowrap;
-    height: var(--icon-size-sm);
+  @include mixins.landscape-large {
+    width: 240px;
   }
 
-  &-icon {
-    width: var(--icon-size-xxs);
-    transform: translateY(-1px);
-
-    @include mixins.mq("md") {
-      width: var(--icon-size-xs);
-    }
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-cyan-400);
+    border-radius: 50%;
   }
 
-  &-title {
-    font-size: var(--font-size-title-xxs);
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 4px);
+    border: var(--stroke-md) solid var(--color-cyan-400);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-left-radius: var(--radius-md);
+    opacity: 0.5;
+  }
+}
 
-    @include mixins.mq("md") {
-      font-size: var(--font-size-title-sm);
-    }
+.box-details-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  flex-direction: row;
+  white-space: nowrap;
+  height: var(--icon-size-sm);
+}
+
+.box-details-icon {
+  width: var(--icon-size-xxs);
+  transform: translateY(-1px);
+
+  @include mixins.mq("md") {
+    width: var(--icon-size-xs);
+  }
+}
+
+.box-details-title {
+  font-size: var(--font-size-title-xxs);
+
+  @include mixins.mq("md") {
+    font-size: var(--font-size-title-sm);
+  }
+}
+
+.box-details-items {
+  display: flex;
+  font-size: var(--font-size-sm);
+  flex-direction: column;
+
+  @include mixins.mq("md") {
+    font-size: var(--font-size-md);
   }
 
-  &-items {
-    display: flex;
-    font-size: var(--font-size-sm);
-    flex-direction: column;
-
-    @include mixins.mq("md") {
-      font-size: var(--font-size-md);
-    }
-
-    &-copy {
-      flex: 0.5;
-    }
+  &-copy {
+    flex: 0.5;
   }
 }
 </style>

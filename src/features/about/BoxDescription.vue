@@ -119,6 +119,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 <style scoped lang="scss">
 .box-description {
   width: 100%;
+  //display: none;
 
   &-line {
     @include mixins.landscape {
@@ -142,7 +143,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
   &-copy {
     padding: var(--space-sm);
     padding-top: var(--space-xxs);
-    
+
     will-change: opacity;
 
     @include mixins.mq("md") {
