@@ -44,6 +44,9 @@ watchEffect((onInvalidate) => {
   <div class="about" ref="aboutRef" id="about"></div>
   <div class="about-sticky">
     <div class="about-content">
+      <div ref="contentDetailsRef" class="about-details">
+        <BoxDetails @timeline:created="(tl: gsap.core.Timeline) => (tlDetailsRef = tl)" />
+      </div>
       <div class="about-right" ref="contentDescriptionRef">
         <div class="about-right-content">
           <BoxDescription @timeline:created="(tl: gsap.core.Timeline) => (tlDescriptionRef = tl)" />
@@ -51,9 +54,6 @@ watchEffect((onInvalidate) => {
       </div>
       <div class="about-left">
         <div class="about-left-content">
-          <div ref="contentDetailsRef" class="about-left-content-details">
-            <BoxDetails @timeline:created="(tl: gsap.core.Timeline) => (tlDetailsRef = tl)" />
-          </div>
           <div ref="contentServicesRef" class="about-left-content-services">
             <BoxServices @timeline:created="(tl: gsap.core.Timeline) => (tlServicesRef = tl)" />
           </div>
@@ -90,6 +90,19 @@ watchEffect((onInvalidate) => {
     height: calc(var(--lvh) * 100 - var(--height-header));
   }
 
+  &-details {
+    display: none;
+    will-change: transform, opacity;
+    width: fit-content;
+    position: absolute;
+    top: calc(-1 * var(--height-header) + 50%);
+    left: 50%;
+
+    @include mixins.landscape {
+      display: block;
+    }
+  }
+
   &-left {
     position: absolute;
     bottom: var(--space-outer);
@@ -117,15 +130,6 @@ watchEffect((onInvalidate) => {
 
       @include mixins.landscape-large {
         gap: var(--space-xl);
-      }
-
-      &-details {
-        display: none;
-        will-change: transform, opacity;
-
-        @include mixins.landscape {
-          display: block;
-        }
       }
 
       &-services {

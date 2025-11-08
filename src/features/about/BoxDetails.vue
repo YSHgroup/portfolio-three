@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import HologramBox from "../../components/HologramBox.vue";
 import { t } from "../../i18n/utils/translate";
 import { ref, watchEffect, onBeforeUnmount } from "vue";
 import gsap from "gsap";
 import AppearingText from "../../components/AppearingText.vue";
 import { BREAKPOINTS } from "../../utils/sizes";
+import PinIcon from "../../components/icons/Pin.vue";
 
-const wrapperRef = ref<InstanceType<typeof HologramBox> | null>(null);
+const wrapperRef = ref<HTMLDivElement | null>(null);
 const timelines = ref<{ timeline: gsap.core.Timeline; delay: number }[]>([]);
 let matchMedia: gsap.MatchMedia | null = null;
 
@@ -15,7 +15,7 @@ const emit = defineEmits<{
 }>();
 
 watchEffect((onInvalidate) => {
-  const wrapperEl = wrapperRef.value?.wrapperRef;
+  const wrapperEl = wrapperRef.value;
   if (!wrapperEl) return;
 
   // Clean up previous matchMedia
@@ -91,56 +91,101 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 </script>
 
 <template>
-  <HologramBox ref="wrapperRef" class="box-details">
-    <template #title>
-      <AppearingText
-        :text="`david`"
-        :steps="1"
-        :duration="0.35"
-        @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
-        class="box-details-title-name"
-      />
-    </template>
-    <div class="box-details-content">
-      <AppearingText
-        v-if="t('location') && t('germany')"
-        class="box-details-content-copy"
-        :text="`${t('location')}: ${t('germany')}`"
-        :steps="3"
-        :duration="0.35"
-        @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.1)"
-      />
-      <AppearingText
-        v-if="t('version')"
-        class="box-details-content-copy"
-        :text="`${t('version')}: 2.7`"
-        :steps="3"
-        :duration="0.35"
-        @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.2)"
-      />
+  <div class="box-details-wrapper">
+    <div ref="wrapperRef" class="box-details">
+      <div class="box-details-line"></div>
+      <div class="box-details-title">
+        <AppearingText
+          text="David"
+          :steps="1"
+          :duration="0.35"
+          @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
+        />
+      </div>
+      <div class="box-details-content">
+        <div class="box-details-item">
+          <PinIcon class="box-details-icon" />
+          <AppearingText
+            v-if="t('germany')"
+            class="box-details-content-copy"
+            :text="t('germany')"
+            :steps="3"
+            :duration="0.35"
+            @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.1)"
+          />
+        </div>
+        <div class="box-details-item">
+          <AppearingText
+            v-if="t('version')"
+            class="box-details-content-copy"
+            :text="`${t('version')}: 2.7`"
+            :steps="3"
+            :duration="0.35"
+            @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.2)"
+          />
+        </div>
+      </div>
     </div>
-  </HologramBox>
+  </div>
 </template>
 
 <style scoped lang="scss">
 .box-details {
-  width: 100%;
+  width: 240px;
+  position: relative;
+  padding-bottom: calc(var(--space-sm) + 32px);
 
-  &-title {
-    &-name {
-      font-size: var(--font-size-title-sm);
+  &-wrapper {
+    width: 240px;
+    position: relative;
+    transform: translate(-100%, -100%);
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: calc(-5px + var(--stroke-md));
+      width: 10px;
+      height: 10px;
+      background-color: var(--color-cyan-400);
+      border-radius: 50%;
     }
   }
 
+  &-line {
+    border-top-right-radius: var(--radius-md);
+    border: var(--stroke-md) solid var(--color-cyan-400);
+    border-left-width: 0;
+    border-bottom-width: 0;
+    height: 32px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  &-icon {
+    width: var(--icon-size-sm);
+  }
+
+  &-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    flex-direction: row;
+    white-space: nowrap;
+    height: var(--icon-size-sm);
+  }
+
+  &-title {
+    font-size: var(--font-size-title-sm);
+  }
+
   &-content {
-    padding: var(--space-xs) var(--space-sm);
-    padding-top: 0;
     display: flex;
     font-size: var(--font-size-sm);
 
     @include mixins.mq("md") {
-      padding: var(--space-sm) var(--space-md);
-      padding-top: 0;
       font-size: var(--font-size-md);
     }
 
