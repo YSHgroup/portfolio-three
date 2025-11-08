@@ -241,6 +241,7 @@ const services = computed(() => {
   &-title {
     font-size: var(--font-size-title-xs);
     text-shadow: var(--about-shadow);
+    font-weight: 700;
 
     @include mixins.landscape {
       font-size: var(--font-size-title-xxs);

@@ -62,7 +62,7 @@ watchEffect((onInvalidate) => {
   &-content {
     position: absolute;
     color: var(--color-text-cyan-400);
-    font-family: "NB-Architekt-Std";
+    font-family: "ProFontWindows";
     bottom: 0;
     width: 100%;
     padding: var(--space-outer);

@@ -117,16 +117,8 @@ watchEffect((onInvalidate) => {
   &-copy {
     font-weight: 700;
     color: var(--color-white-400);
-    font-family: "NB-Architekt-Std";
+    font-family: "ProFontWindows";
     text-transform: uppercase;
-
-    :deep(.appearing-text-value),
-    :deep(.appearing-text-clone) {
-      font-weight: inherit;
-      color: inherit;
-      font-family: inherit;
-      text-transform: inherit;
-    }
 
     &-size {
       &-sm {

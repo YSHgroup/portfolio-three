@@ -138,12 +138,10 @@ onBeforeUnmount(() => {
 <style scoped>
 .appearing-text {
   position: relative;
-  display: inline-block;
 }
 
 .appearing-text-value {
   position: absolute;
-  inset: 0;
 }
 
 .appearing-text-clone {

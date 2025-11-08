@@ -193,6 +193,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
   &-title {
     font-size: var(--font-size-title-xxs);
     text-shadow: var(--about-shadow);
+    font-weight: 700;
 
     @include mixins.mq("md") {
       font-size: var(--font-size-title-sm);
