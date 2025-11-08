@@ -91,16 +91,15 @@ watchEffect((onInvalidate) => {
   }
 
   &-details {
-    display: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     will-change: transform, opacity;
-    width: fit-content;
+    width: 100%;
+    height: 0;
     position: absolute;
     top: calc(50% - var(--height-header) / 2);
-    left: 50%;
-
-    @include mixins.landscape {
-      display: block;
-    }
+    left: 0;
   }
 
   &-left {
@@ -113,11 +112,11 @@ watchEffect((onInvalidate) => {
       width: 500px;
       max-width: calc(38% - var(--space-outer));
       height: 100%;
-      left: var(--space-outer);
+      right: var(--space-outer);
 
       @include mixins.mq("xxl") {
         width: 420px;
-        left: calc(var(--space-outer) + 8%);
+        right: calc(var(--space-outer) + 8%);
       }
     }
 
@@ -128,13 +127,13 @@ watchEffect((onInvalidate) => {
       justify-content: flex-end;
       gap: var(--space-sm);
 
-      @include mixins.landscape {
-        padding-bottom: 8%;
-      }
+      //@include mixins.landscape {
+      //  padding-bottom: 8%;
+      //}
 
       @include mixins.landscape-large {
         gap: var(--space-xl);
-        padding-bottom: 25%;
+        padding-bottom: 35%;
       }
 
       &-services {
@@ -150,21 +149,25 @@ watchEffect((onInvalidate) => {
     width: calc(100% - var(--space-outer) * 2);
     will-change: transform, opacity;
 
-    &-content {
-      @include mixins.landscape {
-        transform: translateY(50%);
-      }
-    }
-
     @include mixins.landscape {
       width: 500px;
       max-width: calc(38% - var(--space-outer));
-      bottom: 50%;
-      right: var(--space-outer);
+      bottom: var(--space-outer);
+      left: var(--space-outer);
 
       @include mixins.mq("xxl") {
         width: 460px;
-        right: calc(var(--space-outer) + 8%);
+        left: calc(var(--space-outer) + 8%);
+      }
+    }
+
+    &-content {
+      //@include mixins.landscape {
+      //  padding-bottom: 8%;
+      //}
+
+      @include mixins.landscape-large {
+        padding-bottom: 35%;
       }
     }
   }

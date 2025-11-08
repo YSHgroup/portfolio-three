@@ -105,17 +105,17 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 };
 
 const SERVICES_EN = [
-  { name: "Frontend Development", sub: "React, Vue" },
-  { name: "Backend Development", sub: "Node.js, Redis, PostgreSQL" },
-  { name: "WebGL & Creative Coding", sub: "Three.js, GLSL, GSAP, SVG" },
-  { name: "Real-Time Systems", sub: "WebSockets, multiplayer logic" },
+  { name: "Frontend", sub: "React, Vue" },
+  { name: "Backend", sub: "Node.js, Redis, PostgreSQL" },
+  { name: "3D & Creative", sub: "Three.js, GLSL, GSAP" },
+  { name: "Real-Time", sub: "WebSockets, Multiplayer" },
 ] as const satisfies { name: string; sub: string }[];
 
 const SERVICES_DE = [
-  { name: "Frontend-Entwicklung", sub: "React, Vue" },
-  { name: "Backend-Entwicklung", sub: "Node.js, Redis, PostgreSQL" },
-  { name: "WebGL & Creative Coding", sub: "Three.js, GLSL, GSAP, SVG" },
-  { name: "Echtzeit-Systeme", sub: "WebSockets, Multiplayer-Logik" },
+  { name: "Frontend", sub: "React, Vue" },
+  { name: "Backend", sub: "Node.js, Redis, PostgreSQL" },
+  { name: "3D & Kreativ", sub: "Three.js, GLSL, GSAP" },
+  { name: "Echtzeit", sub: "WebSockets, Multiplayer" },
 ] as const satisfies { name: string; sub: string }[];
 
 const services = computed(() => {
@@ -178,7 +178,6 @@ const services = computed(() => {
 
     @include mixins.landscape-large {
       padding-bottom: var(--space-md);
-      padding-top: var(--space-xs);
     }
 
     &-item {
@@ -194,7 +193,7 @@ const services = computed(() => {
         top: 6px;
         width: 6px;
         height: 6px;
-        background-color: var(--color-text-cyan-400);
+        background-color: var(--color-text-cyan-300);
       }
 
       &-name {
@@ -213,6 +212,7 @@ const services = computed(() => {
         font-size: var(--font-size-xs);
         opacity: 0;
         will-change: opacity;
+        color: var(--color-text-cyan-300);
 
         @include mixins.landscape-large {
           font-size: var(--font-size-sm);

@@ -200,7 +200,7 @@ const setupSectionsAnimation = ({
       duration: 1,
       scrollTrigger: {
         trigger: about,
-        start: isLandscape ? "top 35%" : "top 25%",
+        start: isLandscape ? "top 35%" : "top 40%",
         end: "bottom bottom",
         scrub: true,
       },
@@ -241,9 +241,16 @@ const setupSectionsAnimation = ({
         tlServices?.play();
       }, SERVICES_DELAY);
     } else {
-      // Mobile: only description and services (no details)
-      const DESCRIPTION_DELAY = 0;
-      const SERVICES_DELAY = 0.55;
+      // Mobile: only description and services and details
+      const DETAILS_DELAY = 0;
+      const DESCRIPTION_DELAY = 0.15;
+      const SERVICES_DELAY = 0.6;
+
+      // Details animation
+      tl.fromTo(contentDetails, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, DETAILS_DELAY);
+      tl.add(() => {
+        tlDetails?.play();
+      }, DETAILS_DELAY);
 
       // Description animation
       tl.fromTo(

@@ -6,8 +6,13 @@ import AppearingText from "../../components/AppearingText.vue";
 import { BREAKPOINTS } from "../../utils/sizes";
 import { Vector3 } from "three";
 import { camera } from "../../three/core/camera";
+import PinIcon from "../../components/icons/Pin.vue";
+import { sizes } from "../../utils/sizes";
 
-const point = new Vector3(-0.45, 2.9, 6.5);
+const points = {
+  landscape: new Vector3(-0.75, 3.6, 6.5),
+  portrait: new Vector3(-0.58, 3.2, 6.5),
+};
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
 const wrapperWrapperRef = ref<HTMLDivElement | null>(null);
@@ -86,6 +91,7 @@ watchEffect((onInvalidate) => {
 const updatePosition = () => {
   if (!wrapperWrapperRef.value) return;
 
+  const point = sizes.isLandscape() ? points.landscape : points.portrait;
   const screenPos = camera.project(point);
 
   wrapperWrapperRef.value.style.transform = `translate(calc(${screenPos.x}px - 100%), calc(${screenPos.y}px - 100%))`;
@@ -124,10 +130,11 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
       </div>
       <div class="box-details-items">
         <div class="box-details-item">
+          <PinIcon class="box-details-icon" />
           <AppearingText
-            v-if="t('location') && t('germany')"
+            v-if="t('germany')"
             class="box-details-content-copy"
-            :text="`${t('location')}: ${t('germany')}`"
+            :text="t('germany')"
             :steps="3"
             :duration="0.35"
             @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.1)"
@@ -143,18 +150,26 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
   width: 0;
   height: 0;
   position: relative;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
 
   &-content {
-    min-width: 280px;
+    width: 160px;
+    max-width: 35vw;
     position: relative;
-    padding-bottom: var(--space-md);
-    padding-left: var(--space-md);
     gap: var(--space-xxs);
     display: flex;
     flex-direction: column;
+    transform: translate(-100%, -100%);
+    padding-bottom: var(--space-sm);
+    padding-left: var(--space-sm);
+
+    @include mixins.mq("md") {
+      padding-bottom: var(--space-md);
+      padding-left: var(--space-md);
+    }
+
+    @include mixins.landscape-large {
+      width: 240px;
+    }
 
     &::after {
       content: "";
@@ -178,12 +193,8 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
       border-top-width: 0;
       border-right-width: 0;
       border-bottom-left-radius: var(--radius-md);
+      opacity: 0.5;
     }
-  }
-
-  &-icon {
-    width: var(--icon-size-xs);
-    transform: translateY(-1px);
   }
 
   &-item {
@@ -195,8 +206,21 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
     height: var(--icon-size-sm);
   }
 
+  &-icon {
+    width: var(--icon-size-xxs);
+    transform: translateY(-1px);
+
+    @include mixins.mq("md") {
+      width: var(--icon-size-xs);
+    }
+  }
+
   &-title {
-    font-size: var(--font-size-title-sm);
+    font-size: var(--font-size-title-xxs);
+
+    @include mixins.mq("md") {
+      font-size: var(--font-size-title-sm);
+    }
   }
 
   &-items {

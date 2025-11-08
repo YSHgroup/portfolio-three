@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import HologramBox from "../../components/HologramBox.vue";
-import HologramBoxLine from "../../components/HologramBoxLine.vue";
 import { t } from "../../i18n/utils/translate";
 import { ref, watchEffect, onBeforeUnmount } from "vue";
 import gsap from "gsap";
@@ -106,39 +105,13 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
   <HologramBox ref="wrapperRef" class="box-description">
     <template #title>
       <AppearingText
-        :text="`David`"
-        :steps="1"
-        :duration="0.35"
-        @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
-        class="box-description-title-name"
-      />
-      <AppearingText
         :text="t('description')"
         :steps="1"
         :duration="0.35"
         @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
-        class="box-description-title-description"
+        class="box-description-title"
       />
     </template>
-    <div class="box-description-details">
-      <AppearingText
-        v-if="t('location') && t('germany')"
-        class="box-description-details-copy"
-        :text="`${t('location')}: ${t('germany')}`"
-        :steps="3"
-        :duration="0.35"
-        @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.1)"
-      />
-      <AppearingText
-        v-if="t('version')"
-        class="box-description-details-copy"
-        :text="`${t('version')}: 2.7`"
-        :steps="3"
-        :duration="0.35"
-        @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.2)"
-      />
-    </div>
-    <HologramBoxLine class="box-description-line" />
     <p class="box-description-copy" v-html="t('about-intro')" ref="copyRef"></p>
   </HologramBox>
 </template>
@@ -154,22 +127,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
   }
 
   &-title {
-    &-name {
-      display: block;
-
-      @include mixins.landscape {
-        display: none;
-      }
-    }
-  }
-
-  &-title-description {
-    display: none;
-    font-size: var(--font-size-title-xxs);
-
-    @include mixins.landscape {
-      display: block;
-    }
+    font-size: var(--font-size-title-xs);
 
     @include mixins.landscape-large {
       font-size: var(--font-size-title-xs);
@@ -181,33 +139,15 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
     justify-content: space-between;
   }
 
-  &-details {
-    padding: var(--space-xs) var(--space-sm);
-    padding-top: 0;
-    display: flex;
-    font-size: var(--font-size-sm);
-
-    @include mixins.mq("md") {
-      padding: var(--space-sm) var(--space-md);
-      padding-top: 0;
-      font-size: var(--font-size-md);
-    }
-
-    @include mixins.landscape {
-      display: none;
-    }
-
-    &-copy {
-      flex: 0.5;
-    }
-  }
-
   &-copy {
     padding: var(--space-sm);
+    padding-top: var(--space-xxs);
+    
     will-change: opacity;
 
     @include mixins.mq("md") {
       padding: var(--space-md);
+      padding-top: 0;
     }
 
     @include mixins.landscape {
