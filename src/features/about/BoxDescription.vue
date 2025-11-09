@@ -96,70 +96,72 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 
 <template>
   <ProjectedElement :landscape="landscapePoint" :portrait="portraitPoint">
-    <div ref="wrapperRef" class="box-description-content">
-      <AppearingText
-        :text="t('about-tagline')"
-        :steps="3"
-        :duration="0.7"
-        class="box-description-copy"
-        @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
-      />
+    <div ref="wrapperRef" class="box-description">
+      <div class="box-description-content">
+        <AppearingText
+          :text="t('about-tagline')"
+          :steps="3"
+          :duration="0.7"
+          class="box-description-copy"
+          @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
+        />
+      </div>
     </div>
   </ProjectedElement>
 </template>
 
 <style scoped lang="scss">
 .box-description {
+  width: 160px;
+  max-width: 34svw;
+  position: relative;
+  gap: var(--space-xxs);
+  display: flex;
+  flex-direction: column;
+  transform: translate(-100%, -50%);
+  padding-top: 3px;
+  padding-right: 48px;
+
+  @include mixins.landscape-large {
+    width: 360px;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    width: 11px;
+    height: 11px;
+    background-color: var(--color-cyan-400);
+    border-radius: 50%;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    width: 48px;
+    height: 0;
+    border-top: var(--stroke-sm) solid var(--color-cyan-400);
+  }
+
   &-content {
-    width: 160px;
-    max-width: 34svw;
-    position: relative;
-    gap: var(--space-xxs);
-    display: flex;
-    flex-direction: column;
-    transform: translate(-100%, 0);
-    padding-top: calc(var(--space-sm) + 3px);
-    padding-bottom: calc(var(--space-xxs) + 3px);
-    padding-left: var(--space-sm);
-    padding-right: 48px;
+    border: var(--stroke-sm) solid var(--color-cyan-400);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    background: linear-gradient(to bottom, var(--color-hologram-top) 0%, var(--color-hologram-bottom) 100%);
 
     @include mixins.mq("md") {
-      padding-top: calc(var(--space-md) + 3px);
-      padding-left: var(--space-md);
-    }
-
-    @include mixins.landscape-large {
-      width: 360px;
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 10px;
-      height: 10px;
-      background-color: var(--color-cyan-400);
-      border-radius: 50%;
-    }
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 3px;
-      left: 0;
-      width: 100%;
-      height: calc(100% - 4px);
-      border: var(--stroke-md) solid var(--color-cyan-400);
-      border-bottom-width: 0;
-      border-right-width: 0;
-      border-top-left-radius: var(--radius-md);
+      padding: var(--space-sm) var(--space-md);
     }
   }
 
   &-copy {
     will-change: opacity;
-    text-shadow: var(--about-shadow);
 
     @include mixins.landscape {
       font-size: var(--font-size-sm);

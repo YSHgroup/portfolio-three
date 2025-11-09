@@ -69,8 +69,6 @@ watchEffect((onInvalidate) => {
     left: 50%;
     transform: translateX(-50%);
     height: calc(var(--lvh) * 100 - var(--height-header));
-
-    --about-shadow: 0 2px 8px rgba(0, 18, 63, 0.5);
   }
 
   &-details,

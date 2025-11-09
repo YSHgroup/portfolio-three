@@ -97,26 +97,28 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 
 <template>
   <ProjectedElement :landscape="landscapePoint" :portrait="portraitPoint">
-    <div ref="wrapperRef" class="box-details-content">
-      <div class="box-details-title">
-        <AppearingText
-          text="David"
-          :steps="1"
-          :duration="0.35"
-          @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
-        />
-      </div>
-      <div class="box-details-items">
-        <div class="box-details-item">
-          <PinIcon class="box-details-icon" />
+    <div ref="wrapperRef" class="box-details">
+      <div class="box-details-content">
+        <div class="box-details-title">
           <AppearingText
-            v-if="t('germany')"
-            class="box-details-content-copy"
-            :text="t('germany')"
-            :steps="3"
+            text="David"
+            :steps="1"
             :duration="0.35"
-            @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.1)"
+            @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
           />
+        </div>
+        <div class="box-details-items">
+          <div class="box-details-item">
+            <PinIcon class="box-details-icon" />
+            <AppearingText
+              v-if="t('germany')"
+              class="box-details-content-copy"
+              :text="t('germany')"
+              :steps="3"
+              :duration="0.35"
+              @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.1)"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -125,49 +127,51 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 
 <style scoped lang="scss">
 .box-details {
+  width: 160px;
+  max-width: 34svw;
+  position: relative;
+  transform: translate(-100%, -50%);
+  padding-bottom: 3px;
+  padding-right: 48px;
+
+  @include mixins.landscape-large {
+    width: 240px;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    width: 11px;
+    height: 11px;
+    background-color: var(--color-cyan-400);
+    border-radius: 50%;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    width: 48px;
+    height: 0;
+    border-bottom: var(--stroke-sm) solid var(--color-cyan-400);
+  }
+
   &-content {
-    width: 160px;
-    max-width: 34svw;
-    position: relative;
+    border: var(--stroke-sm) solid var(--color-cyan-400);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    background: linear-gradient(to bottom, var(--color-hologram-top) 0%, var(--color-hologram-bottom) 100%);
     gap: var(--space-xxs);
     display: flex;
     flex-direction: column;
-    transform: translate(-100%, -100%);
-    padding-bottom: var(--space-sm);
-    padding-top: var(--space-xxs);
-    padding-left: var(--space-sm);
 
     @include mixins.mq("md") {
-      padding-bottom: var(--space-md);
-      padding-left: var(--space-md);
-    }
-
-    @include mixins.landscape-large {
-      width: 240px;
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 10px;
-      height: 10px;
-      background-color: var(--color-cyan-400);
-      border-radius: 50%;
-    }
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: calc(100% - 4px);
-      border: var(--stroke-md) solid var(--color-cyan-400);
-      border-top-width: 0;
-      border-right-width: 0;
-      border-bottom-left-radius: var(--radius-md);
+      padding: var(--space-sm) var(--space-md);
     }
   }
 
@@ -183,7 +187,6 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
   &-icon {
     width: var(--icon-size-xxs);
     transform: translateY(-1px);
-    filter: drop-shadow(var(--about-shadow));
 
     @include mixins.mq("md") {
       width: var(--icon-size-xs);
@@ -192,7 +195,6 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 
   &-title {
     font-size: var(--font-size-title-xxs);
-    text-shadow: var(--about-shadow);
     font-weight: 700;
 
     @include mixins.mq("md") {
@@ -204,7 +206,6 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
     display: flex;
     font-size: var(--font-size-sm);
     flex-direction: column;
-    text-shadow: var(--about-shadow);
 
     @include mixins.mq("md") {
       font-size: var(--font-size-md);

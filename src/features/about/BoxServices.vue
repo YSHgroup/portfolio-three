@@ -8,7 +8,7 @@ import { BREAKPOINTS } from "../../utils/sizes";
 import { Vector3 } from "three";
 import ProjectedElement from "../../components/ProjectedElement.vue";
 
-const landscapePoint = new Vector3(0.75, 2.9, 6);
+const landscapePoint = new Vector3(0.9, 2.9, 6);
 const portraitPoint = new Vector3(-0.6, 4.2, 6);
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
@@ -48,7 +48,7 @@ watchEffect((onInvalidate) => {
       if (!isMobile) {
         tl.fromTo(
           wrapperEl,
-          { clipPath: "inset(0% 0% 0% 100%)" },
+          { clipPath: "inset(0% 100% 0% 0%)" },
           { clipPath: "inset(0% 0% 0% 0%)", duration: 0.4, ease: "none" },
           0,
         );
@@ -112,7 +112,7 @@ const SERVICES_EN = [
   { name: "Node.js & WebSockets" },
   { name: "React & Vue" },
   { name: "Kubernetes & Redis" },
-  { name: "Real-Time Multiplayer" },
+  { name: "Real-time Multiplayer" },
 ] as const satisfies { name: string }[];
 
 const SERVICES_DE = [
@@ -120,7 +120,7 @@ const SERVICES_DE = [
   { name: "Node.js & WebSockets" },
   { name: "React & Vue" },
   { name: "Kubernetes & Redis" },
-  { name: "Real-Time Multiplayer" },
+  { name: "Echtzeit-Mehrspieler" },
 ] as const satisfies { name: string }[];
 
 const services = computed(() => {
@@ -130,25 +130,27 @@ const services = computed(() => {
 
 <template>
   <ProjectedElement :landscape="landscapePoint" :portrait="portraitPoint">
-    <div ref="wrapperRef" class="box-services-content">
-      <div class="box-services-title">
-        <AppearingText
-          :text="t('services')"
-          :steps="1"
-          :duration="0.35"
-          @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
-        />
-      </div>
-      <div class="box-services-list">
-        <div class="box-services-list-item" v-for="(service, index) in services" :key="service.name">
-          <p class="box-services-list-item-name">
-            <AppearingText
-              :text="service.name"
-              :steps="1"
-              :duration="0.35"
-              @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.15 + index * 0.1)"
-            />
-          </p>
+    <div ref="wrapperRef" class="box-services">
+      <div class="box-services-content">
+        <div class="box-services-title">
+          <AppearingText
+            :text="t('services')"
+            :steps="1"
+            :duration="0.35"
+            @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
+          />
+        </div>
+        <div class="box-services-list">
+          <div class="box-services-list-item" v-for="(service, index) in services" :key="service.name">
+            <p class="box-services-list-item-name">
+              <AppearingText
+                :text="service.name"
+                :steps="1"
+                :duration="0.35"
+                @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.15 + index * 0.1)"
+              />
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -157,47 +159,48 @@ const services = computed(() => {
 
 <style scoped lang="scss">
 .box-services {
+  position: relative;
+  padding-left: 72px;
+  padding-top: 3px;
+
+  @include mixins.landscape-large {
+    width: 380px;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 11px;
+    height: 11px;
+    background-color: var(--color-cyan-400);
+    border-radius: 50%;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 72px;
+    height: 0;
+    border-top: var(--stroke-sm) solid var(--color-cyan-400);
+  }
+
   &-content {
-    position: relative;
-    padding-top: var(--space-sm);
-    padding-bottom: var(--space-xxs);
-    padding-right: var(--space-sm);
-    padding-left: calc(96px + var(--space-md));
+    border: var(--stroke-sm) solid var(--color-cyan-400);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    background: linear-gradient(to bottom, var(--color-hologram-top) 0%, var(--color-hologram-bottom) 100%);
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
 
     @include mixins.mq("md") {
-      padding-top: var(--space-md);
-      padding-right: var(--space-md);
-    }
-
-    @include mixins.landscape-large {
-      width: 480px;
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 10px;
-      height: 10px;
-      background-color: var(--color-cyan-400);
-      border-radius: 50%;
-    }
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 3px;
-      left: 0;
-      width: 96px;
-      height: calc(100% - 3px);
-      border: var(--stroke-md) solid var(--color-cyan-400);
-      border-bottom-width: 0;
-      border-left-width: 0;
-      border-top-right-radius: var(--radius-md);
+      padding: var(--space-sm) var(--space-md);
     }
   }
 
@@ -220,13 +223,11 @@ const services = computed(() => {
         width: 4px;
         height: 4px;
         background-color: var(--color-text-cyan-400);
-        box-shadow: var(--about-shadow);
         border-radius: 50%;
       }
 
       &-name {
         font-size: var(--font-size-md);
-        text-shadow: var(--about-shadow);
 
         @include mixins.landscape {
           font-size: var(--font-size-sm);
@@ -241,7 +242,6 @@ const services = computed(() => {
 
   &-title {
     font-size: var(--font-size-title-xs);
-    text-shadow: var(--about-shadow);
     font-weight: 700;
 
     @include mixins.landscape {
