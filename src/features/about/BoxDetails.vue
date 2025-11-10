@@ -35,7 +35,7 @@ watchEffect((onInvalidate) => {
     {
       isMobile: `(max-width: ${BREAKPOINTS.md - 1}px)`,
       isDesktop: `(min-width: ${BREAKPOINTS.md}px)`,
-      isLandscape: `(orientation: landscape)`,
+      isLandscape: `(min-aspect-ratio: 1)`,
     },
     (context) => {
       const { conditions } = context;

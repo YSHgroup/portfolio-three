@@ -53,7 +53,7 @@ class Sizes extends EventEmitter<{
   }
 
   isLandscape() {
-    return this.aspectRatio > 1;
+    return this.aspectRatio >= 1;
   }
 
   setViewportUnits() {
@@ -71,7 +71,7 @@ class Sizes extends EventEmitter<{
   resize() {
     this.width = window.innerWidth;
     this.height = window.innerHeight;
-    this.aspectRatio = this.width / this.height;
+    this.aspectRatio = document.documentElement.clientWidth / document.documentElement.clientHeight;
     this.pixelRatio = Math.min(window.devicePixelRatio, 2);
 
     this.setViewportUnits();
@@ -79,6 +79,8 @@ class Sizes extends EventEmitter<{
     this.breakpoint = getBreakpoint() as keyof typeof BREAKPOINTS;
 
     this.emit("resize", { width: this.width, height: this.height, pixelRatio: this.pixelRatio });
+
+    console.log(this.width, this.height);
   }
 
   destroy() {

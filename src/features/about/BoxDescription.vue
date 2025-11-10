@@ -225,10 +225,10 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 
     @include mixins.landscape {
       padding: var(--space-xs) var(--space-sm);
-    }
 
-    @include mixins.mq("md") {
-      padding: var(--space-sm) var(--space-md);
+      @include mixins.mq("md") {
+        padding: var(--space-sm) var(--space-md);
+      }
     }
   }
 
