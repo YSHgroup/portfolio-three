@@ -116,7 +116,8 @@ const handleProjectsLoaded = () => {
 }
 
 .intro-wrapper {
-  width: 100%;
+  width: calc(var(--svw) * 100);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 
@@ -135,6 +136,8 @@ const handleProjectsLoaded = () => {
   top: 0;
   left: 0;
   width: 100%;
+  height: calc(var(--lvh) * 100);
+  overflow: hidden;
 }
 
 .intro-about-hidden {
@@ -158,7 +161,7 @@ const handleProjectsLoaded = () => {
 }
 
 .intro-sticky-content {
-  width: 100%;
+  width: calc(var(--svw) * 100);
   height: calc(var(--lvh) * 100);
   overflow: hidden;
   position: relative;
