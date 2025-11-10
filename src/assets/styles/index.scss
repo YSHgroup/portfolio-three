@@ -38,7 +38,6 @@ body {
   text-shadow: none;
 }
 
-
 :root {
   /* Base fallback using standard vh/vw */
   --vh: 1vh;
@@ -49,6 +48,17 @@ body {
   --svw: 1vw;
   --lvw: 1vw;
   --dvw: 1vw;
+}
+
+.three-canvas {
+  user-select: none;
+  contain: strict;
+  overflow: clip;
+  inset: 0;
+  top: 0;
+  left: 0;
+  width: calc(var(--svw) * 100);
+  height: calc(var(--lvh) * 100);
 }
 
 /* Override if the browser supports dvh / dvw */

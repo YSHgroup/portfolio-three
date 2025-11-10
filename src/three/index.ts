@@ -10,6 +10,7 @@ let canvas: HTMLCanvasElement | null = null;
 const getCanvas = () => {
   if (canvas) return canvas;
   canvas = document.createElement("canvas");
+  canvas.classList.add("three-canvas");
 
   return canvas;
 };
