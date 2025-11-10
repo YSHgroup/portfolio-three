@@ -10,15 +10,7 @@ let canvas: HTMLCanvasElement | null = null;
 const getCanvas = () => {
   if (canvas) return canvas;
   canvas = document.createElement("canvas");
-  canvas.style.width = "100%";
-  canvas.style.height = "100%";
-  canvas.style.display = "block";
-  canvas.style.position = "absolute";
-  canvas.style.top = "0";
-  canvas.style.left = "0";
-  // Set explicit dimensions to prevent layout shift
-  canvas.width = 1;
-  canvas.height = 1;
+
   return canvas;
 };
 

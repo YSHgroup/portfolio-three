@@ -117,7 +117,6 @@ const handleProjectsLoaded = () => {
 
 .intro-wrapper {
   width: calc(var(--svw) * 100);
-  overflow: hidden;
   display: flex;
   flex-direction: column;
 
@@ -147,9 +146,8 @@ const handleProjectsLoaded = () => {
 .intro-sticky {
   top: 0;
   left: 0;
-  width: 100%;
+  width: calc(var(--svw) * 100);
   height: calc(var(--lvh) * 100);
-  overflow: hidden;
   z-index: -1;
   display: flex;
   align-items: flex-end;
