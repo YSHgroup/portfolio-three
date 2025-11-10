@@ -53,7 +53,7 @@ class Sizes extends EventEmitter<{
   }
 
   isLandscape() {
-    return this.aspectRatio >= 1.2;
+    return this.aspectRatio > 1;
   }
 
   setViewportUnits() {
@@ -61,6 +61,11 @@ class Sizes extends EventEmitter<{
     document.documentElement.style.setProperty("--dvh", 0.01 * window.innerHeight + "px");
     document.documentElement.style.setProperty("--svh", 0.01 * document.documentElement.clientHeight + "px");
     document.documentElement.style.setProperty("--lvh", "1vh");
+
+    document.documentElement.style.setProperty("--vw", 0.01 * window.innerWidth + "px");
+    document.documentElement.style.setProperty("--dvw", 0.01 * window.innerWidth + "px");
+    document.documentElement.style.setProperty("--svw", 0.01 * document.documentElement.clientWidth + "px");
+    document.documentElement.style.setProperty("--lvw", "1vw");
   }
 
   resize() {

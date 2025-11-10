@@ -13,7 +13,7 @@ export const createMatchMedia = (
     {
       isMobile: `(max-width: ${BREAKPOINTS.md - 1}px)`,
       isDesktop: `(min-width: ${BREAKPOINTS.md}px)`,
-      isLandscape: `(min-aspect-ratio: 12/10)`,
+      isLandscape: `(orientation: landscape)`,
     },
     (context) => {
       const { conditions } = context;

@@ -126,19 +126,30 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 
 <style scoped lang="scss">
 .box-details {
+  --line-length: min(48px, calc(var(--svw) * 5));
+
   position: relative;
   padding-bottom: 3px;
-  padding-right: 48px;
+  padding-right: var(--line-length);
   width: 100%;
 
   @include mixins.landscape {
     width: 240px;
-    max-width: 32svw;
+    max-width: calc(var(--svw) * 30);
     transform: translate(-100%, -50%);
   }
 
   @include mixins.landscape-large {
     width: 240px;
+  }
+
+  &::after,
+  &::before {
+    display: none;
+
+    @include mixins.landscape {
+      display: block;
+    }
   }
 
   &::after {
@@ -159,7 +170,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
     top: 50%;
     transform: translateY(-50%);
     right: 0;
-    width: 48px;
+    width: var(--line-length);
     height: 0;
     border-bottom: var(--stroke-sm) solid var(--color-cyan-400);
   }

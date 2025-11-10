@@ -48,7 +48,7 @@ $media-direction: min;
 }
 
 @mixin landscape {
-  @media (min-aspect-ratio: 12/10) {
+  @media (orientation: landscape) {
     @content;
   }
 }

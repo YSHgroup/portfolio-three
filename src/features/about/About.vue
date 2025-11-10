@@ -78,11 +78,17 @@ watchEffect((onInvalidate) => {
     justify-content: center;
     align-items: center;
     will-change: transform, opacity;
+    height: 100%;
     width: 100%;
-    height: 0;
     position: absolute;
-    top: calc(50% - var(--height-header) / 2);
+    top: 0;
     left: 0;
+
+    @include mixins.landscape {
+      width: 100%;
+      height: 0;
+      top: calc(50% - var(--height-header) / 2);
+    }
   }
 }
 </style>

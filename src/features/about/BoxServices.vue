@@ -8,7 +8,7 @@ import { BREAKPOINTS } from "../../utils/sizes";
 import { Vector3 } from "three";
 import ProjectedElement from "../../components/ProjectedElement.vue";
 
-const point = new Vector3(0.9, 2.9, 6.75);
+const point = new Vector3(0.6, 2.9, 6.75);
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
 const timelines = ref<{ timeline: gsap.core.Timeline; delay: number }[]>([]);
@@ -158,19 +158,33 @@ const services = computed(() => {
 
 <style scoped lang="scss">
 .box-services {
-  position: relative;
-  padding-top: 3px;
-  width: 100%;
+  --line-length: min(48px, calc(var(--svw) * 5));
+
+  position: absolute;
+  bottom: var(--space-outer);
+  width: calc(100% - var(--space-outer) * 2);
+  left: var(--space-outer);
 
   @include mixins.landscape {
     width: 480px;
-    max-width: 40svw;
-    padding-left: 48px;
+    max-width: calc(var(--svw) * 37);
+    padding-left: var(--line-length);
+    position: relative;
+    padding-top: 3px;
   }
 
   @include mixins.landscape-large {
     width: 380px;
-    padding-left: 72px;
+    max-width: calc(var(--svw) * 31);
+  }
+
+  &::after,
+  &::before {
+    display: none;
+
+    @include mixins.landscape {
+      display: block;
+    }
   }
 
   &::after {
@@ -195,11 +209,7 @@ const services = computed(() => {
     border-top: var(--stroke-sm) solid var(--color-cyan-400);
 
     @include mixins.landscape {
-      width: 48px;
-    }
-
-    @include mixins.landscape-large {
-      width: 72px;
+      width: var(--line-length);
     }
   }
 
@@ -210,6 +220,7 @@ const services = computed(() => {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
 
     @include mixins.landscape {
       padding: var(--space-xs) var(--space-sm);
