@@ -79,8 +79,6 @@ class Sizes extends EventEmitter<{
     this.breakpoint = getBreakpoint() as keyof typeof BREAKPOINTS;
 
     this.emit("resize", { width: this.width, height: this.height, pixelRatio: this.pixelRatio });
-
-    console.log(this.width, this.height);
   }
 
   destroy() {
