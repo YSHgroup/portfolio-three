@@ -78,7 +78,6 @@ const handleProjectsLoaded = () => {
   <HeaderHome v-if="projectsLoaded" />
   <Layout>
     <div class="intro-wrapper" ref="introRef">
-      <Hero class="intro-hero" id="hero" />
       <div
         class="intro-sticky"
         :class="{ 'intro-sticky-visible': isStickyVisible }"
@@ -86,11 +85,13 @@ const handleProjectsLoaded = () => {
       >
         <div
           ref="stickyContentRef"
-          :class="['intro-sticky-content', { 'intro-sticky-content-fixed': !isStickyVisible }]"
-        >
+          :class="['intro-sticky-content', { 'intro-sticky-content-contact': !isStickyVisible }]"
+        ></div>
+        <div :class="{ 'intro-about-hidden': !isStickyVisible }">
           <About :spacer-ref="aboutSpacerRef" />
         </div>
       </div>
+      <Hero class="intro-hero" id="hero" />
       <div class="intro-wrapper-spacer"></div>
       <div class="about-spacer" ref="aboutSpacerRef" id="about"></div>
       <!--      <About :spacer-ref="aboutSpacerRef" />-->
@@ -136,6 +137,10 @@ const handleProjectsLoaded = () => {
   width: 100%;
 }
 
+.intro-about-hidden {
+  visibility: hidden;
+}
+
 .intro-sticky {
   top: 0;
   left: 0;
@@ -156,7 +161,7 @@ const handleProjectsLoaded = () => {
   height: 100%;
   overflow: hidden;
 
-  &-fixed {
+  &-contact {
     position: absolute;
     bottom: var(--contact-bottom);
     left: 0;

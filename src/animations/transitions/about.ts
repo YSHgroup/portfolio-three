@@ -212,8 +212,8 @@ const setupSectionsAnimation = ({
     if (isLandscape) {
       // Equal spacing between three animations: 0, 0.275, 0.55
       const DETAILS_DELAY = 0;
-      const DESCRIPTION_DELAY = 0.275;
-      const SERVICES_DELAY = 0.55;
+      const DESCRIPTION_DELAY = 0.4;
+      const SERVICES_DELAY = 0.8;
 
       // Details animation (first, only on landscape)
       tl.fromTo(contentDetails, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, DETAILS_DELAY);
@@ -243,8 +243,8 @@ const setupSectionsAnimation = ({
     } else {
       // Mobile: only description and services and details
       const DETAILS_DELAY = 0;
-      const DESCRIPTION_DELAY = 0.15;
-      const SERVICES_DELAY = 0.6;
+      const DESCRIPTION_DELAY = 0.35;
+      const SERVICES_DELAY = 0.7;
 
       // Details animation
       tl.fromTo(contentDetails, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, DETAILS_DELAY);

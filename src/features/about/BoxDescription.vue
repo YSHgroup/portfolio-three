@@ -7,8 +7,7 @@ import ProjectedElement from "../../components/ProjectedElement.vue";
 import { t } from "../../i18n/utils/translate";
 import AppearingText from "../../components/AppearingText.vue";
 
-const landscapePoint = new Vector3(-1, 2, 6);
-const portraitPoint = new Vector3(-0.6, 2.5, 6);
+const point = new Vector3(-1, 2, 6.75);
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
 const timelines = ref<{ timeline: gsap.core.Timeline; delay: number }[]>([]);
@@ -95,7 +94,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 </script>
 
 <template>
-  <ProjectedElement :landscape="landscapePoint" :portrait="portraitPoint">
+  <ProjectedElement :point="point">
     <div ref="wrapperRef" class="box-description">
       <div class="box-description-content">
         <AppearingText
@@ -112,8 +111,6 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 
 <style scoped lang="scss">
 .box-description {
-  width: 160px;
-  max-width: 34svw;
   position: relative;
   gap: var(--space-xxs);
   display: flex;
@@ -122,8 +119,13 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
   padding-top: 3px;
   padding-right: 48px;
 
+  @include mixins.landscape {
+    width: 480px;
+    max-width: 39svw;
+  }
+
   @include mixins.landscape-large {
-    width: 360px;
+    width: 410px;
   }
 
   &::after {
@@ -151,9 +153,12 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 
   &-content {
     border: var(--stroke-sm) solid var(--color-cyan-400);
-    padding: var(--space-sm) var(--space-md);
     border-radius: var(--radius-md);
     background: linear-gradient(to bottom, var(--color-hologram-top) 0%, var(--color-hologram-bottom) 100%);
+
+    @include mixins.landscape {
+      padding: var(--space-xs) var(--space-sm);
+    }
 
     @include mixins.mq("md") {
       padding: var(--space-sm) var(--space-md);

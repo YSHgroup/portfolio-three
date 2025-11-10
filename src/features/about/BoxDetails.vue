@@ -8,8 +8,7 @@ import { Vector3 } from "three";
 import PinIcon from "../../components/icons/Pin.vue";
 import ProjectedElement from "../../components/ProjectedElement.vue";
 
-const landscapePoint = new Vector3(-0.875, 3.6, 6);
-const portraitPoint = new Vector3(-0.6, 4.2, 6);
+const point = new Vector3(-0.875, 3.6, 6.75);
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
 const timelines = ref<{ timeline: gsap.core.Timeline; delay: number }[]>([]);
@@ -96,7 +95,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 </script>
 
 <template>
-  <ProjectedElement :landscape="landscapePoint" :portrait="portraitPoint">
+  <ProjectedElement :point="point">
     <div ref="wrapperRef" class="box-details">
       <div class="box-details-content">
         <div class="box-details-title">
@@ -127,12 +126,16 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 
 <style scoped lang="scss">
 .box-details {
-  width: 160px;
-  max-width: 34svw;
   position: relative;
-  transform: translate(-100%, -50%);
   padding-bottom: 3px;
   padding-right: 48px;
+  width: 100%;
+
+  @include mixins.landscape {
+    width: 240px;
+    max-width: 32svw;
+    transform: translate(-100%, -50%);
+  }
 
   @include mixins.landscape-large {
     width: 240px;
@@ -163,12 +166,15 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 
   &-content {
     border: var(--stroke-sm) solid var(--color-cyan-400);
-    padding: var(--space-sm) var(--space-md);
     border-radius: var(--radius-md);
     background: linear-gradient(to bottom, var(--color-hologram-top) 0%, var(--color-hologram-bottom) 100%);
     gap: var(--space-xxs);
     display: flex;
     flex-direction: column;
+
+    @include mixins.landscape {
+      padding: var(--space-xs) var(--space-sm);
+    }
 
     @include mixins.mq("md") {
       padding: var(--space-sm) var(--space-md);

@@ -8,8 +8,7 @@ import { BREAKPOINTS } from "../../utils/sizes";
 import { Vector3 } from "three";
 import ProjectedElement from "../../components/ProjectedElement.vue";
 
-const landscapePoint = new Vector3(0.9, 2.9, 6);
-const portraitPoint = new Vector3(-0.6, 4.2, 6);
+const point = new Vector3(0.9, 2.9, 6.75);
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
 const timelines = ref<{ timeline: gsap.core.Timeline; delay: number }[]>([]);
@@ -129,7 +128,7 @@ const services = computed(() => {
 </script>
 
 <template>
-  <ProjectedElement :landscape="landscapePoint" :portrait="portraitPoint">
+  <ProjectedElement :point="point">
     <div ref="wrapperRef" class="box-services">
       <div class="box-services-content">
         <div class="box-services-title">
@@ -160,11 +159,18 @@ const services = computed(() => {
 <style scoped lang="scss">
 .box-services {
   position: relative;
-  padding-left: 72px;
   padding-top: 3px;
+  width: 100%;
+
+  @include mixins.landscape {
+    width: 480px;
+    max-width: 40svw;
+    padding-left: 48px;
+  }
 
   @include mixins.landscape-large {
     width: 380px;
+    padding-left: 72px;
   }
 
   &::after {
@@ -185,19 +191,29 @@ const services = computed(() => {
     top: 50%;
     transform: translateY(-50%);
     left: 0;
-    width: 72px;
     height: 0;
     border-top: var(--stroke-sm) solid var(--color-cyan-400);
+
+    @include mixins.landscape {
+      width: 48px;
+    }
+
+    @include mixins.landscape-large {
+      width: 72px;
+    }
   }
 
   &-content {
     border: var(--stroke-sm) solid var(--color-cyan-400);
-    padding: var(--space-sm) var(--space-md);
     border-radius: var(--radius-md);
     background: linear-gradient(to bottom, var(--color-hologram-top) 0%, var(--color-hologram-bottom) 100%);
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
+
+    @include mixins.landscape {
+      padding: var(--space-xs) var(--space-sm);
+    }
 
     @include mixins.mq("md") {
       padding: var(--space-sm) var(--space-md);
