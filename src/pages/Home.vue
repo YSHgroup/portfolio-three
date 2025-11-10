@@ -60,19 +60,7 @@ onUnmounted(() => {
 });
 
 onMounted(() => {
-  const parent = stickyContentRef.value as HTMLElement;
-  if (parent) {
-    // Ensure container has dimensions before appending canvas to prevent layout shift
-    const rect = parent.getBoundingClientRect();
-    if (rect.width === 0 || rect.height === 0) {
-      // Wait for next frame if dimensions aren't ready
-      requestAnimationFrame(() => {
-        three.updateParent(parent);
-      });
-    } else {
-      three.updateParent(parent);
-    }
-  }
+  three.updateParent(stickyContentRef.value as HTMLElement);
   animations.init();
 });
 
@@ -158,6 +146,7 @@ const handleProjectsLoaded = () => {
   left: 0;
   width: 100%;
   height: calc(var(--lvh) * 100);
+  overflow: hidden;
   z-index: -1;
   display: flex;
   align-items: flex-end;
@@ -170,12 +159,10 @@ const handleProjectsLoaded = () => {
 
 .intro-sticky-content {
   width: 100%;
-  height: 100%;
+  height: calc(var(--lvh) * 100);
   overflow: hidden;
   position: relative;
   contain: layout style paint;
-  min-width: 0;
-  min-height: 0;
 
   &-contact {
     position: absolute;
