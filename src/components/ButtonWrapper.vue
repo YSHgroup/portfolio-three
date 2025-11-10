@@ -3,7 +3,7 @@ import { computed } from "vue";
 
 export interface Props {
   renderAs?: "button" | "a" | "div";
-  variant?: "accent" | "border" | "theme" | "background";
+  variant?: "accent" | "border" | "theme" | "background" | "gray";
   rounded?: boolean;
 }
 
@@ -56,7 +56,7 @@ const classes = computed(() => [
   }
 
   &-theme {
-    background-color: var(--color-grayscale-400);
+    background-color: var(--color-grayscale-500);
     color: var(--color-text-400);
 
     @include mixins.hover {
@@ -75,6 +75,17 @@ const classes = computed(() => [
       &:hover {
         background-color: var(--color-text-400);
         color: var(--color-background-400);
+      }
+    }
+  }
+
+  &-gray {
+    background-color: var(--color-gray-400);
+    color: var(--color-white-400);
+
+    @include mixins.hover {
+      &:hover {
+        background-color: var(--color-gray-500);
       }
     }
   }

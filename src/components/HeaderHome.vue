@@ -75,7 +75,7 @@ onMounted(() => {
         :key="section"
         :is-active="activeLink === section"
         :class="['header-home-link', { 'header-home-link-active': activeLink === section && hasScrolledIntoView }]"
-        @click="handleLinkClick('.' + section)"
+        @click="handleLinkClick('#' + section)"
         :is-dark-theme="isDarkTheme"
         :aria-label="ariaLabels[section]"
       >

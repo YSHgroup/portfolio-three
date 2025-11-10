@@ -30,7 +30,7 @@ import AppearingText from "../../components/AppearingText.vue";
   &-content {
     align-items: center;
     justify-content: center;
-    height: 50%;
+    height: 46%;
 
     @include mixins.landscape {
       height: 100%;

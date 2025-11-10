@@ -9,6 +9,7 @@ import { useRoute, useRouter } from "vue-router";
 import { social } from "../content/social";
 import ButtonRound from "./ButtonRound.vue";
 import ArrowRight from "./icons/ArrowRight.vue";
+import MusicToggle from "./MusicToggle.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -81,6 +82,7 @@ const getInTouchClassNames = computed(() => {
         data-cursor="circle-white"
         >{{ t("get-in-touch") }}</Button
       >
+      <MusicToggle class="header-music-toggle" :isDarkTheme="isDarkTheme" />
     </div>
   </header>
 </template>
@@ -145,6 +147,13 @@ const getInTouchClassNames = computed(() => {
     top: 50%;
     transform: translateY(-50%);
     pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  &-music-toggle {
+    display: flex;
   }
 
   &-dark {

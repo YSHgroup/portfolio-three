@@ -75,7 +75,6 @@ const handleProjectsLoaded = () => {
 
 <template>
   <ScrollIcon />
-  <HeaderHome v-if="projectsLoaded" />
   <Layout>
     <div class="intro-wrapper" ref="introRef">
       <div
@@ -102,6 +101,7 @@ const handleProjectsLoaded = () => {
     </div>
     <Footer :withSocial="false"></Footer>
   </Layout>
+  <HeaderHome v-if="projectsLoaded" />
 </template>
 
 <style scoped lang="scss">
