@@ -31,6 +31,8 @@ class Sizes extends EventEmitter<{
     this.pixelRatio = 1;
     this.breakpoint = "md";
     this.visible = true;
+
+    this.resize();
   }
 
   init() {
