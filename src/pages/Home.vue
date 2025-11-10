@@ -6,7 +6,7 @@ import About from "../features/about/About.vue";
 import Projects from "../features/projects/components/Projects.vue";
 import Contact from "../features/contact/Contact.vue";
 import Footer from "../components/Footer.vue";
-import { ref, onMounted, onUnmounted, watchEffect } from "vue";
+import { ref, onMounted, onUnmounted, watchEffect, computed } from "vue";
 import { three } from "../three";
 import { animations } from "../animations";
 import HeaderHome from "../components/HeaderHome.vue";
@@ -16,15 +16,19 @@ import ScrollIcon from "../components/ScrollIcon.vue";
 const introRef = ref<HTMLElement | null>(null);
 const stickyContentRef = ref<HTMLElement | null>(null);
 const stickyObserver = ref<IntersectionObserver | null>(null);
-const isStickyVisible = ref(false);
+const scrolledPastIntro = ref(false);
 const projectsLoaded = ref(false);
 const contactRef = ref<HTMLElement | null>(null);
 const contactBottom = ref<number>(0);
 const aboutSpacerRef = ref<HTMLElement | null>(null);
 
 const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-  isStickyVisible.value = entries[0]?.isIntersecting ?? false;
+  scrolledPastIntro.value = entries[0]?.isIntersecting ?? false;
 };
+
+const isStickyVisible = computed(() => {
+  return scrolledPastIntro.value || !projectsLoaded.value;
+});
 
 watchEffect((onInvalidate) => {
   if (!contactRef.value || preloaderVisible.value) return;
