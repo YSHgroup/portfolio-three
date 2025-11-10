@@ -37,14 +37,26 @@ const init = () => {
 
 const updateParent = (parent: HTMLElement) => {
   const canvas = getCanvas();
-  // Ensure parent has dimensions before appending canvas
+
+  // Ensure parent has valid dimensions before appending canvas
   const rect = parent.getBoundingClientRect();
-  if (rect.width && rect.height) {
-    // Set initial canvas dimensions based on parent to prevent layout shift
-    canvas.width = Math.floor(rect.width);
-    canvas.height = Math.floor(rect.height);
+  if (!rect.width || !rect.height) {
+    // If parent doesn't have dimensions yet, wait and retry
+    requestAnimationFrame(() => {
+      updateParent(parent);
+    });
+    return;
   }
-  parent.appendChild(canvas);
+
+  // Set initial canvas dimensions based on parent to prevent layout shift
+  canvas.width = Math.floor(rect.width);
+  canvas.height = Math.floor(rect.height);
+
+  // Append canvas only if not already a child
+  if (!parent.contains(canvas)) {
+    parent.appendChild(canvas);
+  }
+
   // Trigger immediate resize after DOM insertion
   requestAnimationFrame(() => {
     threeSizes.resize();

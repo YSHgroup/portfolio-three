@@ -60,7 +60,19 @@ onUnmounted(() => {
 });
 
 onMounted(() => {
-  three.updateParent(stickyContentRef.value as HTMLElement);
+  const parent = stickyContentRef.value as HTMLElement;
+  if (parent) {
+    // Ensure container has dimensions before appending canvas to prevent layout shift
+    const rect = parent.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) {
+      // Wait for next frame if dimensions aren't ready
+      requestAnimationFrame(() => {
+        three.updateParent(parent);
+      });
+    } else {
+      three.updateParent(parent);
+    }
+  }
   animations.init();
 });
 
@@ -162,6 +174,8 @@ const handleProjectsLoaded = () => {
   overflow: hidden;
   position: relative;
   contain: layout style paint;
+  min-width: 0;
+  min-height: 0;
 
   &-contact {
     position: absolute;
