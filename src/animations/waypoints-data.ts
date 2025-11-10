@@ -32,14 +32,14 @@ export const points = {
     "about-1": {
       //position: { x: 0, y: 5.5, z: 20 },
       //focus: { x: 0, y: 1.8, z: 6 },
-      position: { x: 0, y: 5.5, z: 20 },
-      focus: { x: 0, y: 0.6, z: 6 },
+      position: { x: 0, y: 4.5, z: 18 },
+      focus: { x: 0, y: 0.8, z: 6 },
     },
     "about-2": {
       //position: { x: 0, y: 5.5, z: 20 },
       //focus: { x: 0, y: 1.8, z: 6 },
-      position: { x: 0, y: 5.5, z: 20 },
-      focus: { x: 0, y: 0.6, z: 6 },
+      position: { x: 0, y: 4.5, z: 18 },
+      focus: { x: 0, y: 0.8, z: 6 },
     },
   },
 } as const satisfies Record<

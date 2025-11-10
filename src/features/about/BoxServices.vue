@@ -8,7 +8,7 @@ import { BREAKPOINTS } from "../../utils/sizes";
 import { Vector3 } from "three";
 import ProjectedElement from "../../components/ProjectedElement.vue";
 
-const point = new Vector3(0.6, 2.9, 6.75);
+const point = new Vector3(0.8, 2.5, 6.75);
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
 const timelines = ref<{ timeline: gsap.core.Timeline; delay: number }[]>([]);
@@ -170,12 +170,15 @@ const services = computed(() => {
     max-width: calc(var(--svw) * 37);
     padding-left: var(--line-length);
     position: relative;
+    left: 0;
+    bottom: 0;
     padding-top: 3px;
+    transform: translate(0, -50%);
   }
 
   @include mixins.landscape-large {
     width: 380px;
-    max-width: calc(var(--svw) * 31);
+    max-width: calc(var(--svw) * 36);
   }
 
   &::after,

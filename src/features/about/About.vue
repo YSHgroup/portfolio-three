@@ -63,12 +63,12 @@ watchEffect((onInvalidate) => {
     position: absolute;
     color: var(--color-text-cyan-400);
     font-family: "ProFontWindows";
-    bottom: 0;
+    top: 0;
     width: 100%;
     padding: var(--space-outer);
     left: 50%;
     transform: translateX(-50%);
-    height: calc(var(--lvh) * 100 - var(--height-header));
+    height: calc(var(--svh) * 100);
   }
 
   &-details,
@@ -87,7 +87,7 @@ watchEffect((onInvalidate) => {
     @include mixins.landscape {
       width: 100%;
       height: 0;
-      top: calc(50% - var(--height-header) / 2);
+      top: 50%;
     }
   }
 }

@@ -241,24 +241,20 @@ const setupSectionsAnimation = ({
         tlServices?.play();
       }, SERVICES_DELAY);
     } else {
-      // Mobile: only description and services and details
-      const DETAILS_DELAY = 0;
-      const DESCRIPTION_DELAY = 0.35;
-      const SERVICES_DELAY = 0.7;
+      // Mobile: only description and services (details hidden on portrait)
+      const DESCRIPTION_DELAY = 0;
+      const SERVICES_DELAY = 0.6;
 
-      // Details animation
-      tl.fromTo(contentDetails, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, DETAILS_DELAY);
-      tl.add(() => {
-        tlDetails?.play();
-      }, DETAILS_DELAY);
+      // Details animation disabled - BoxDetails is hidden on portrait
 
       // Description animation
       tl.fromTo(
         contentDescription,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.15, ease: "power1.out" },
+        { opacity: 0, y: "10vh" },
+        { opacity: 1, y: "0vh", duration: 0.15, ease: "power1.out" },
         DESCRIPTION_DELAY,
       );
+      tl.to(contentDescription, { opacity: 0, y: "-10vh", duration: 0.15, ease: "power1.out" }, SERVICES_DELAY - 0.075);
       tl.add(() => {
         tlDescription?.play();
       }, DESCRIPTION_DELAY);

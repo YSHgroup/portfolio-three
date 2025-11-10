@@ -35,17 +35,18 @@ watchEffect((onInvalidate) => {
     {
       isMobile: `(max-width: ${BREAKPOINTS.md - 1}px)`,
       isDesktop: `(min-width: ${BREAKPOINTS.md}px)`,
+      isLandscape: `(orientation: landscape)`,
     },
     (context) => {
       const { conditions } = context;
-      const { isMobile } = conditions as { isMobile: boolean; isDesktop: boolean };
+      const { isLandscape } = conditions as { isMobile: boolean; isDesktop: boolean; isLandscape: boolean };
 
       const tl = gsap.timeline({
         paused: true,
       });
 
-      // Only animate clipPath on desktop
-      if (!isMobile) {
+      // Only animate clipPath on landscape (animations disabled on portrait)
+      if (isLandscape) {
         tl.fromTo(
           wrapperEl,
           { clipPath: "inset(0% 0% 0% 100%)" },
@@ -53,16 +54,19 @@ watchEffect((onInvalidate) => {
           0,
         );
       } else {
-        // On mobile, ensure clipPath is set to visible immediately
+        // On portrait, set clipPath immediately without animation
         gsap.set(wrapperEl, { clipPath: "inset(0% 0% 0% 0%)" });
       }
 
-      for (let i = 0; i < timelines.value.length; i++) {
-        const item = timelines.value[i];
-        if (!item) continue;
-        tl.add(() => {
-          item.timeline.restart(true);
-        }, item.delay + 0.25);
+      // Only add timeline animations on landscape
+      if (isLandscape) {
+        for (let i = 0; i < timelines.value.length; i++) {
+          const item = timelines.value[i];
+          if (!item) continue;
+          tl.add(() => {
+            item.timeline.restart(true);
+          }, item.delay + 0.25);
+        }
       }
 
       emit("timeline:created", tl);
@@ -128,12 +132,13 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 .box-details {
   --line-length: min(48px, calc(var(--svw) * 5));
 
-  position: relative;
-  padding-bottom: 3px;
-  padding-right: var(--line-length);
-  width: 100%;
+  display: none;
 
   @include mixins.landscape {
+    display: block;
+    position: absolute;
+    padding-bottom: 3px;
+    padding-right: var(--line-length);
     width: 240px;
     max-width: calc(var(--svw) * 30);
     transform: translate(-100%, -50%);
@@ -181,9 +186,13 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
     background: linear-gradient(to bottom, var(--color-hologram-top) 0%, var(--color-hologram-bottom) 100%);
     gap: var(--space-xxs);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: var(--space-sm) var(--space-md);
 
     @include mixins.landscape {
+      flex-direction: column;
+      justify-content: flex-start;
       padding: var(--space-xs) var(--space-sm);
     }
 

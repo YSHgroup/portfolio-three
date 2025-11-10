@@ -56,6 +56,7 @@ const updateParallax = (object: Object3D) => {
 const calculateContactTransform = () => {
   const isLandscape = sizes.isLandscape();
   const breakpoint = isLandscape ? "landscape" : "portrait";
+  const isMd = sizes.atLeastBreakpoint("md");
 
   const inProgress = 1 - sceneWeightsInOut.contact.in;
   const outProgress = sceneWeightsInOut.contact.out;
@@ -63,7 +64,7 @@ const calculateContactTransform = () => {
   instance.position.copy(contactPosition[breakpoint]);
   //instance.position.y += inProgress * (isMd ? 4 : 6);
   //instance.position.y -= outProgress * (isMd ? 4 : 6);
-  if (isLandscape) {
+  if (isLandscape && isMd) {
     instance.position.y += inProgress * 4;
     instance.position.y -= outProgress * 4;
   }
