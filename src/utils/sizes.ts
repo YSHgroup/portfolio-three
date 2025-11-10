@@ -85,6 +85,7 @@ class Sizes extends EventEmitter<{
 
   destroy() {
     window.removeEventListener("resize", this.resize.bind(this));
+    window.removeEventListener("visibilitychange", this.visibilityChange.bind(this));
   }
 }
 

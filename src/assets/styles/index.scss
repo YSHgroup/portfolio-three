@@ -37,3 +37,38 @@ body {
   color: rgb(255, 255, 255);
   text-shadow: none;
 }
+
+
+:root {
+  /* Base fallback using standard vh/vw */
+  --vh: 1vh;
+  --vw: 1vw;
+  --svh: 1vh;
+  --lvh: 1vh;
+  --dvh: 1vh;
+  --svw: 1vw;
+  --lvw: 1vw;
+  --dvw: 1vw;
+}
+
+/* Override if the browser supports dvh / dvw */
+@supports (height: 100dvh) {
+  :root {
+    --dvh: 1dvh;
+    --dvw: 1dvw;
+  }
+}
+
+@supports (height: 100svh) {
+  :root {
+    --svh: 1svh;
+    --svw: 1svw;
+  }
+}
+
+@supports (height: 100lvh) {
+  :root {
+    --lvh: 1lvh;
+    --lvw: 1lvw;
+  }
+}
