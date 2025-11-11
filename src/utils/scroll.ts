@@ -31,7 +31,9 @@ class Scroll {
       lenis.value = null;
     }
 
-    lenis.value = new Lenis();
+    lenis.value = new Lenis({
+      anchors: { lerp: 0.08 },
+    });
     lenis.value.on("scroll", this.handleScroll.bind(this));
   }
 }
