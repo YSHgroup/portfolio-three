@@ -2,14 +2,8 @@
 import HeaderLink from "./HeaderLink.vue";
 import { onMounted, ref } from "vue";
 import { t } from "../i18n/utils/translate";
-import { lenis } from "../utils/scroll";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useHeaderTheme } from "../composables/useHeaderTheme";
-
-const handleLinkClick = (link: string) => {
-  if (!lenis.value) return;
-  lenis.value.scrollTo(link);
-};
 
 type ActiveLink = "about" | "projects" | "contact";
 const activeLink = ref<ActiveLink | null>(null);
@@ -75,7 +69,7 @@ onMounted(() => {
         :key="section"
         :is-active="activeLink === section"
         :class="['header-home-link', { 'header-home-link-active': activeLink === section && hasScrolledIntoView }]"
-        @click="handleLinkClick('#' + section)"
+        :href="'#' + section"
         :is-dark-theme="isDarkTheme"
         :aria-label="ariaLabels[section]"
       >
@@ -161,6 +155,7 @@ onMounted(() => {
     width: 128px;
     white-space: nowrap;
     text-transform: uppercase;
+    text-align: center;
 
     &-active {
       color: var(--color-white-400);

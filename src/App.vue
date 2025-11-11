@@ -12,9 +12,11 @@ import { useRoute } from "vue-router";
 import { usePreloader } from "./composables/usePreloader";
 import Cursor from "./components/Cursor.vue";
 import { useAgent } from "./composables/useAgent";
+import { useMusic } from "./composables/useMusic";
 
 useTranslations();
 usePreloader();
+useMusic();
 const route = useRoute();
 const { isTouch } = useAgent();
 
