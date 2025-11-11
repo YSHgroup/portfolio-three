@@ -120,7 +120,7 @@ const handleProjectsLoaded = () => {
 }
 
 .intro-wrapper {
-  width: calc(var(--svw) * 100);
+  width: 100%;
   display: flex;
   flex-direction: column;
 
@@ -150,12 +150,11 @@ const handleProjectsLoaded = () => {
 .intro-sticky {
   top: 0;
   left: 0;
-  width: calc(var(--svw) * 100);
+  width: 100%;
   height: calc(var(--lvh) * 100);
   z-index: -1;
   display: flex;
   align-items: flex-end;
-  overflow: hidden;
 
   &-visible {
     position: sticky;
@@ -163,9 +162,8 @@ const handleProjectsLoaded = () => {
 }
 
 .intro-sticky-content {
-  width: calc(var(--svw) * 100);
+  width: 100%;
   height: calc(var(--lvh) * 100);
-  overflow: hidden;
   position: relative;
   contain: layout style paint;
 
