@@ -30,12 +30,6 @@ const toggleMusic = () => {
   &-dark {
     background-color: var(--color-dark-blue-500);
     color: var(--color-white-400);
-
-    @include mixins.hover {
-      &:hover {
-        background-color: var(--color-dark-blue-600);
-      }
-    }
   }
 }
 </style>
