@@ -151,6 +151,7 @@ const handleProjectsLoaded = () => {
   top: 0;
   left: 0;
   width: 100%;
+  overflow: hidden;
   height: calc(var(--lvh) * 100);
   z-index: -1;
   display: flex;
@@ -166,6 +167,7 @@ const handleProjectsLoaded = () => {
   height: calc(var(--lvh) * 100);
   position: relative;
   contain: layout style paint;
+  overflow: hidden;
 
   &-contact {
     position: absolute;
