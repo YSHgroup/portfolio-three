@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, watch } from "vue";
+import { onMounted, onUnmounted, watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import gsap from "gsap";
 import { BASE_VOLUMES, musicTracks } from "../definitions/music";
@@ -30,13 +30,14 @@ export const useMusic = () => {
     tickVolumes();
   };
 
-  const play = (track: MusicTrack) => {
-    musicTracks[track].load();
-    musicTracks[track].play();
+  const play = (trackId: MusicTrack) => {
+    musicTracks[trackId].load();
+    musicTracks[trackId].play();
   };
 
-  watch(howlerUnlocked, (newVal) => {
-    if (!newVal) return;
+  watchEffect(() => {
+    if (!howlerUnlocked.value || !soundsEnabled.value) return;
+
     play("luci");
     play("about");
   });

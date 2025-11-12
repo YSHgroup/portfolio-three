@@ -18,11 +18,7 @@ export const useHowler = () => {
   };
 
   watch(soundsEnabled, (newVal) => {
-    if (!newVal) {
-      Howler.mute(true);
-      return;
-    }
-    Howler.mute(false);
+    Howler.mute(!newVal);
     localStorage.setItem("portfolio-soundsEnabled", newVal.toString());
   });
 
