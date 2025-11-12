@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { musicEnabled } from "../composables/useMusic";
+import { musicEnabled } from "../features/music/composables/useMusic";
 import ButtonRound from "./ButtonRound.vue";
 import Volume from "./icons/Volume.vue";
 import { t } from "../i18n/utils/translate";

@@ -6,7 +6,7 @@ import About from "../features/about/About.vue";
 import Projects from "../features/projects/components/Projects.vue";
 import Contact from "../features/contact/Contact.vue";
 import Footer from "../components/Footer.vue";
-import { ref, onMounted, onUnmounted, watchEffect, computed } from "vue";
+import { ref, onMounted, onUnmounted, watchEffect, computed, watch } from "vue";
 import { three } from "../three";
 import { animations } from "../animations";
 import HeaderHome from "../components/HeaderHome.vue";
@@ -49,11 +49,19 @@ watchEffect((onInvalidate) => {
   });
 });
 
+watch(projectsLoaded, (loaded) => {
+  if (loaded) {
+    animations.init();
+  }
+});
+
 onMounted(() => {
   three.setActive(true);
 
   stickyObserver.value = new IntersectionObserver(handleIntersection);
   stickyObserver.value.observe(introRef.value as HTMLElement);
+
+  three.updateParent(stickyContentRef.value as HTMLElement);
 });
 
 onUnmounted(() => {
@@ -61,14 +69,7 @@ onUnmounted(() => {
 
   stickyObserver.value?.disconnect();
   stickyObserver.value = null;
-});
 
-onMounted(() => {
-  three.updateParent(stickyContentRef.value as HTMLElement);
-  animations.init();
-});
-
-onUnmounted(() => {
   animations.destroy();
 });
 

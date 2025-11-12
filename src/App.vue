@@ -12,7 +12,7 @@ import { useRoute } from "vue-router";
 import { usePreloader } from "./composables/usePreloader";
 import Cursor from "./components/Cursor.vue";
 import { useAgent } from "./composables/useAgent";
-import { useMusic } from "./composables/useMusic";
+import { useMusic } from "./features/music/composables/useMusic";
 
 useTranslations();
 usePreloader();

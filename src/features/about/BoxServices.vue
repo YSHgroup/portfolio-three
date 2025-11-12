@@ -8,7 +8,7 @@ import { BREAKPOINTS } from "../../utils/sizes";
 import { Vector3 } from "three";
 import ProjectedElement from "../../components/ProjectedElement.vue";
 
-const point = new Vector3(0.8, 2.5, 6.75);
+const point = new Vector3(0.85, 2.75, 6.75);
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
 const timelines = ref<{ timeline: gsap.core.Timeline; delay: number }[]>([]);
