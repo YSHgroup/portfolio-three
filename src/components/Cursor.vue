@@ -4,6 +4,7 @@ import { lerp } from "../utils/math";
 import gsap from "gsap";
 import ArrowRightLong from "./icons/ArrowRightLong.vue";
 import { useRoute } from "vue-router";
+import { raycast } from "../three/utils/raycast";
 
 const cursorWrapperRef = ref<HTMLElement | null>(null);
 const cursorScaleRef = ref<HTMLElement | null>(null);
@@ -13,6 +14,7 @@ const currentX = ref(0);
 const currentY = ref(0);
 const isVisible = ref(false);
 const cursorType = ref<"circle-black" | "arrow" | "circle-white" | null>(null);
+const detectedType = ref<"circle-black" | "arrow" | "circle-white" | null>(null);
 
 const route = useRoute();
 
@@ -22,6 +24,27 @@ const tick = () => {
   // Lerp the current position towards the mouse position
   currentX.value = lerp(currentX.value, mouseX.value, lerpSpeed);
   currentY.value = lerp(currentY.value, mouseY.value, lerpSpeed);
+
+  const hoveringBox = raycast.getHoveringBox();
+
+  if (hoveringBox) {
+    if (!isVisible.value) {
+      isVisible.value = true;
+      currentX.value = mouseX.value;
+      currentY.value = mouseY.value;
+    }
+    cursorType.value = "circle-black";
+  } else if (detectedType.value) {
+    if (!isVisible.value) {
+      isVisible.value = true;
+      currentX.value = mouseX.value;
+      currentY.value = mouseY.value;
+    }
+    cursorType.value = detectedType.value;
+  } else {
+    isVisible.value = false;
+    cursorType.value = null;
+  }
 
   if (cursorWrapperRef.value) {
     cursorWrapperRef.value.style.transform = `translate(${currentX.value}px, ${currentY.value}px)`;
@@ -45,25 +68,9 @@ const checkIfHasCursorAttribute = (element: Element | null): "circle-black" | "a
 };
 
 const handleMouseMove = (e: MouseEvent) => {
-  // Update mouse position
   mouseX.value = e.clientX;
   mouseY.value = e.clientY;
-
-  // Check for cursor attribute and update state
-  const detectedType = checkIfHasCursorAttribute(e.target as Element);
-
-  if (detectedType) {
-    if (!isVisible.value) {
-      isVisible.value = true;
-      // Initialize cursor position to current mouse position when first appearing
-      currentX.value = mouseX.value;
-      currentY.value = mouseY.value;
-    }
-    cursorType.value = detectedType;
-  } else {
-    isVisible.value = false;
-    cursorType.value = null;
-  }
+  detectedType.value = checkIfHasCursorAttribute(e.target as Element);
 };
 
 onMounted(() => {

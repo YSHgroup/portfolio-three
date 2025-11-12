@@ -8,6 +8,7 @@ import { shadow } from "./shadow";
 import { desktops } from "./desktops";
 import { mouse } from "./mouse";
 import { messagePopup } from "./message-popup";
+import { penguin } from "./penguin";
 
 import type { Object3D } from "three";
 
@@ -33,7 +34,9 @@ const init = () => {
   shadow.init();
   desktops.init();
   messagePopup.init();
+
   if (objects?.mouse) mouse.init(objects.mouse);
+  if (objects?.penguin) penguin.init(objects.penguin);
 };
 
 const initObjects = () => {
@@ -79,6 +82,8 @@ const tick = () => {
   if (objects?.chair) {
     objects.chair.rotation.copy(chairRotation);
   }
+
+  penguin.tick();
 };
 
 const destroy = () => {
@@ -88,6 +93,7 @@ const destroy = () => {
   //objects = null;
   desktops.destroy();
   mouse.destroy();
+  penguin.destroy();
 };
 
 export const room = { init, destroy, group, chairRotation };

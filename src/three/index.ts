@@ -4,6 +4,7 @@ import { objects } from "./objects";
 import { renderTarget } from "./core/renderTarget";
 import { threeSizes } from "./utils/sizes";
 import { resources } from "../utils/resources";
+import { raycast } from "./utils/raycast";
 
 let canvas: HTMLCanvasElement | null = null;
 
@@ -25,6 +26,7 @@ const init = () => {
 
   resources.once("ready", () => {
     objects.init();
+    raycast.init();
   });
 };
 
