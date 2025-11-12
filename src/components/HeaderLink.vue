@@ -8,7 +8,7 @@ const props = defineProps<{
 <template>
   <button
     class="header-link"
-    :data-cursor="isDarkTheme ? 'circle-white' : 'circle-black'"
+    data-cursor="circle-white"
     :class="{ 'header-link-active': props.isActive, 'header-link-dark': props.isDarkTheme }"
   >
     <slot></slot>
@@ -37,12 +37,13 @@ const props = defineProps<{
     left: 0;
     width: 100%;
     height: 100%;
-    transition: background-color 0.1s ease-in-out;
-    background-color: var(--color-beige-700);
+    transition:
+      background-color 0.1s ease-in-out,
+      opacity 0.1s ease-in-out;
+    background-color: var(--color-text-400);
     border-radius: 100px;
     z-index: -1;
     opacity: 0;
-    transition: opacity 0.1s ease-in-out;
   }
 
   &-dark {
@@ -59,6 +60,8 @@ const props = defineProps<{
 
   @include mixins.hover {
     &:hover {
+      color: var(--color-white-400);
+
       &::after {
         opacity: 1;
       }

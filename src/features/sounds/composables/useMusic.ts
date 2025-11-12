@@ -31,8 +31,10 @@ export const useMusic = () => {
   };
 
   const play = (trackId: MusicTrack) => {
-    musicTracks[trackId].load();
-    musicTracks[trackId].play();
+    const track = musicTracks[trackId];
+    if (!track || track.playing()) return;
+    track.load();
+    track.play();
   };
 
   watchEffect(() => {

@@ -45,6 +45,10 @@ const props = defineProps<{
   transform: translateX(-20px);
   opacity: 0;
 
+  * {
+    transition: fill 0.2s ease-in-out;
+  }
+
   &-active {
     transform: translateX(0px);
     opacity: 1;

@@ -1,16 +1,35 @@
 import { onMounted, onUnmounted, ref, watch } from "vue";
 import gsap from "gsap";
+import { lerp } from "../../../utils/math";
+import { Howler } from "howler";
 
 export const howlerUnlocked = ref(false);
 export const soundsEnabled = ref(false);
 
+Howler.volume(0);
+
 export const useHowler = () => {
-  const tick = () => {
-    if (howlerUnlocked.value) return;
-    if (Howler.ctx.state !== "running") return;
+  const enabledVolume = ref<number>(0);
+
+  const handleUnlocked = () => {
     howlerUnlocked.value = true;
     console.log("[Howler] Unlocked");
-    gsap.ticker.remove(tick);
+    soundsEnabled.value = localStorage.getItem("portfolio-soundsEnabled") === "true";
+  };
+
+  const tick = () => {
+    if (!howlerUnlocked.value) {
+      if (Howler.ctx.state !== "running") return;
+      handleUnlocked();
+    } else {
+      //lerp howler.volume to targetVolume
+      const currentVolume = Howler.volume();
+      if (currentVolume > 0.99 && enabledVolume.value === 1) {
+        return;
+      }
+      const speed = enabledVolume.value === 1 ? 0.01 : 0.05;
+      Howler.volume(lerp(currentVolume, enabledVolume.value, speed));
+    }
   };
 
   const handleVisibilityChange = () => {
@@ -18,12 +37,16 @@ export const useHowler = () => {
   };
 
   watch(soundsEnabled, (newVal) => {
-    Howler.mute(!newVal);
+    enabledVolume.value = newVal ? 1 : 0;
     localStorage.setItem("portfolio-soundsEnabled", newVal.toString());
   });
 
   onMounted(() => {
-    soundsEnabled.value = localStorage.getItem("portfolio-soundsEnabled") === "true";
+    Howler.volume(0);
+
+    if (howlerUnlocked.value) {
+      soundsEnabled.value = localStorage.getItem("portfolio-soundsEnabled") === "true";
+    }
 
     gsap.ticker.add(tick);
     window.addEventListener("visibilitychange", handleVisibilityChange);

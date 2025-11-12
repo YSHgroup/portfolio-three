@@ -128,7 +128,7 @@ onUnmounted(() => {
   position: relative;
   transform-origin: center;
   will-change: transform;
-  transition: transform 0.2s ease-out;
+  transition: transform 0.1s ease-in-out;
 }
 
 .cursor {
@@ -137,7 +137,7 @@ onUnmounted(() => {
   left: 0;
   transform: translate(-50%, -50%);
   opacity: 0;
-  transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.1s ease-in-out;
 
   &-active {
     opacity: 1;
@@ -161,8 +161,8 @@ onUnmounted(() => {
     width: 54px;
     height: 54px;
     transition:
-      background-color 0.2s ease-in-out,
-      opacity 0.2s ease-in-out;
+      background-color 0.1s ease-in-out,
+      opacity 0.1s ease-in-out;
     background-color: var(--color-accent-400, var(--color-orange-400));
     border-radius: 50%;
     display: flex;
