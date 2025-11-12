@@ -5,6 +5,7 @@ import { BASE_VOLUMES, musicTracks } from "../definitions/music";
 import { sceneWeights } from "../../../animations/scenes";
 import { sizes } from "../../../utils/sizes";
 import { howlerUnlocked, soundsEnabled } from "./useHowler";
+import { clamp } from "../../../utils/math";
 
 import type { MusicTrack } from "../types";
 
@@ -19,8 +20,8 @@ export const useMusic = () => {
       return;
     }
 
-    musicTracks.luci.volume((1 - sceneWeights.about) * BASE_VOLUMES.luci);
-    musicTracks.about.volume(Math.max(0, (sceneWeights.about * 1.5 - 0.5) * BASE_VOLUMES.about));
+    musicTracks.luci.volume(clamp(1 - sceneWeights.about, 0, 1) * BASE_VOLUMES.luci);
+    musicTracks.about.volume(clamp(sceneWeights.about * 1.5 - 0.5, 0, 1) * BASE_VOLUMES.about);
   };
 
   const tick = () => {
