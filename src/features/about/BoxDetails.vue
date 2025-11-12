@@ -8,7 +8,7 @@ import { Vector3 } from "three";
 import PinIcon from "../../components/icons/Pin.vue";
 import ProjectedElement from "../../components/ProjectedElement.vue";
 
-const point = new Vector3(-0.875, 3.6, 6.75);
+const point = new Vector3(-0.76, 3.6, 6.75);
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
 const timelines = ref<{ timeline: gsap.core.Timeline; delay: number }[]>([]);

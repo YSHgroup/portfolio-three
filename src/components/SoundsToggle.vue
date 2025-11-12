@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { musicEnabled } from "../features/music/composables/useMusic";
+import { soundsEnabled } from "../features/sounds/composables/useHowler";
 import ButtonRound from "./ButtonRound.vue";
 import Volume from "./icons/Volume.vue";
 import { t } from "../i18n/utils/translate";
@@ -8,8 +8,8 @@ const props = defineProps<{
   isDarkTheme: boolean;
 }>();
 
-const toggleMusic = () => {
-  musicEnabled.value = !musicEnabled.value;
+const toggleSounds = () => {
+  soundsEnabled.value = !soundsEnabled.value;
 };
 </script>
 
@@ -17,11 +17,11 @@ const toggleMusic = () => {
   <ButtonRound
     variant="theme"
     :class="{ 'music-toggle': true, 'music-toggle-dark': props.isDarkTheme }"
-    @click="toggleMusic"
-    :aria-label="musicEnabled ? t('disable-music') : t('enable-music')"
+    @click="toggleSounds"
+    :aria-label="soundsEnabled ? t('disable-sounds') : t('enable-sounds')"
     data-cursor="circle-white"
   >
-    <Volume :active="musicEnabled" />
+    <Volume :active="soundsEnabled" />
   </ButtonRound>
 </template>
 

@@ -8,7 +8,7 @@ import { t } from "../../i18n/utils/translate";
 import AppearingText from "../../components/AppearingText.vue";
 import PinIcon from "../../components/icons/Pin.vue";
 
-const point = new Vector3(-0.95, 2, 6.75);
+const point = new Vector3(-0.9, 2, 6.75);
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
 const timelines = ref<{ timeline: gsap.core.Timeline; delay: number }[]>([]);
