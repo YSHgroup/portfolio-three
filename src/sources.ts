@@ -9,7 +9,7 @@ import desktopsTexture from "./assets/textures/desktops.webp";
 import diffuseMap from "./assets/textures/diffuse-map.png";
 import faceTexture from "./assets/textures/face-spritesheet.png";
 import headTexture from "./assets/textures/head.webp";
-import iconSpritesheet from "./assets/textures/icon-spritesheet.png";
+import iconSpritesheet from "./assets/textures/icon-spritesheet.webp";
 import matcapBlack from "./assets/textures/matcap-black.webp";
 import matcapGray from "./assets/textures/matcap-gray.webp";
 import matcapSkin from "./assets/textures/matcap-skin.webp";
