@@ -1,7 +1,7 @@
 import { Howl } from "howler";
 
 import trackLuci from "../../../assets/music/luci.ogg";
-import trackAbout from "../../../assets/music/about.ogg";
+import trackAbout from "../../../assets/music/dichotomy.ogg";
 
 import type { MusicTrack } from "../types";
 
@@ -12,5 +12,5 @@ export const musicTracks = {
 
 export const BASE_VOLUMES = {
   luci: 0.2,
-  about: 0.3,
+  about: 0.2,
 } as const satisfies Record<MusicTrack, number>;
