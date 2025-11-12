@@ -19,8 +19,6 @@ const uniforms = {
   uProgress: { value: 0 },
 };
 
-//hologramUniforms.uProgress.value = aboutProgress.value;
-
 const init = () => {
   if (geometry) return;
   geometry = new PlaneGeometry(18, 18, 18, 18);

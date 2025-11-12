@@ -30,7 +30,6 @@ const setup = ({
   tlDetails: gsap.core.Timeline;
   contentDetails: HTMLDivElement;
 }) => {
-  aboutProgress.value = 0;
   setupInAnimation(about);
   setupProgressAnimation(about);
   setupSectionsAnimation({
@@ -44,7 +43,6 @@ const setup = ({
   });
   setupOutAnimation(about);
   setupScenesAnimation(about);
-  setupProgressAnimation(about);
 };
 
 const setupProgressAnimation = (about: HTMLElement) => {
@@ -280,8 +278,6 @@ const destroy = () => {
   if (outTl) outTl.revert();
   if (sectionsMm) sectionsMm.revert();
   if (scenesMm) scenesMm.revert();
-
-  aboutProgress.value = 0;
 };
 
 export const about = { setup, destroy };
