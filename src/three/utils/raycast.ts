@@ -1,17 +1,25 @@
 import gsap from "gsap";
-import { Ray, Vector2, Vector3, Box3 } from "three";
+import { Ray, Vector2, Vector3 } from "three";
 import { camera } from "../core/camera";
 
-let hoveringBox: Box3 | null = null;
-const boxesToCheck: Box3[] = [];
+import type { ClickableBox3 } from "../types";
+
+let hoveringBox: ClickableBox3 | null = null;
+const boxesToCheck: ClickableBox3[] = [];
 const pointer = new Vector2();
 const ndcPointer = new Vector3();
 const ray = new Ray();
 const target = new Vector3();
 
+const handleClick = () => {
+  if (!hoveringBox || !hoveringBox.onClick) return;
+  hoveringBox.onClick();
+};
+
 const init = () => {
   gsap.ticker.add(tick);
   window.addEventListener("mousemove", handleMouseMove);
+  window.addEventListener("click", handleClick);
 };
 
 const handleMouseMove = (event: MouseEvent) => {
@@ -35,7 +43,7 @@ const tick = () => {
 
   hoveringBox = null;
 
-  let closestBox: Box3 | null = null;
+  let closestBox: ClickableBox3 | null = null;
   let closestDistance = Infinity;
 
   for (const box of boxesToCheck) {
@@ -56,6 +64,7 @@ const tick = () => {
 const destroy = () => {
   gsap.ticker.remove(tick);
   window.removeEventListener("mousemove", handleMouseMove);
+  window.removeEventListener("click", handleClick);
 };
 
 export const raycast = {

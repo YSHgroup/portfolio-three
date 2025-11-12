@@ -12,6 +12,8 @@ import { animations } from "../animations";
 import HeaderHome from "../components/HeaderHome.vue";
 import { preloaderVisible } from "../composables/usePreloader";
 import ScrollIcon from "../components/ScrollIcon.vue";
+import { raycast } from "../three/utils/raycast";
+import gsap from "gsap";
 
 const introRef = ref<HTMLElement | null>(null);
 const stickyContentRef = ref<HTMLElement | null>(null);
@@ -21,6 +23,7 @@ const projectsLoaded = ref(false);
 const contactRef = ref<HTMLElement | null>(null);
 const contactBottom = ref<number>(0);
 const aboutSpacerRef = ref<HTMLElement | null>(null);
+const isHoveringObject3D = ref<boolean>(false);
 
 const handleIntersection = (entries: IntersectionObserverEntry[]) => {
   scrolledPastIntro.value = entries[0]?.isIntersecting ?? false;
@@ -55,6 +58,17 @@ watch(projectsLoaded, (loaded) => {
   }
 });
 
+const updateCursor = () => {
+  const hoveringBox = raycast.getHoveringBox();
+  const shouldBePointer = !!hoveringBox;
+
+  // Only update if state changed
+  if (shouldBePointer !== isHoveringObject3D.value) {
+    isHoveringObject3D.value = shouldBePointer;
+    document.documentElement.style.cursor = shouldBePointer ? "pointer" : "";
+  }
+};
+
 onMounted(() => {
   three.setActive(true);
 
@@ -62,6 +76,8 @@ onMounted(() => {
   stickyObserver.value.observe(introRef.value as HTMLElement);
 
   three.updateParent(stickyContentRef.value as HTMLElement);
+
+  gsap.ticker.add(updateCursor);
 });
 
 onUnmounted(() => {
@@ -70,6 +86,7 @@ onUnmounted(() => {
   stickyObserver.value?.disconnect();
   stickyObserver.value = null;
 
+  gsap.ticker.remove(updateCursor);
   animations.destroy();
 });
 

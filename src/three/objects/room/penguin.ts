@@ -1,40 +1,50 @@
-import { Box3, Box3Helper } from "three";
-import { scene } from "../../core/scene";
+import { Box3 } from "three";
 import { raycast } from "../../utils/raycast";
+import gsap from "gsap";
 
 import type { Mesh } from "three";
+import type { ClickableBox3 } from "../../types";
 
 let mesh: Mesh | null = null;
-let box3: Box3 | null = null;
-let helper: Box3Helper | null = null;
+let box3: ClickableBox3 | null = null;
+let isJumping = false;
 
 const init = (_mesh: Mesh) => {
   mesh = _mesh;
 
-  // Create Box3 from mesh geometry
   box3 = new Box3().setFromObject(mesh);
-
-  // Create Box3Helper to visualize the box
-  helper = new Box3Helper(box3, 0x00ff00);
-  scene.instance.add(helper);
+  box3.onClick = handleClick;
 
   raycast.boxesToCheck.push(box3);
 };
 
+const handleClick = () => {
+  if (isJumping || !mesh) return;
+  isJumping = true;
+  gsap.to(mesh.position, {
+    y: 2,
+    duration: 0.4,
+    ease: "power2.out",
+    yoyo: true,
+    repeat: 1,
+    onComplete: () => {
+      isJumping = false;
+    },
+  });
+};
+
 const tick = () => {
-  if (!mesh || !box3 || !helper) return;
+  if (!mesh || !box3) return;
 
   box3.setFromObject(mesh);
+  box3.expandByScalar(0.2);
 };
 
 const destroy = () => {
-  if (helper) {
-    scene.instance.remove(helper);
-    helper.dispose();
-    helper = null;
+  if (box3) {
+    raycast.boxesToCheck.splice(raycast.boxesToCheck.indexOf(box3), 1);
   }
   box3 = null;
-  if (box3) raycast.boxesToCheck.splice(raycast.boxesToCheck.indexOf(box3), 1);
 };
 
 export const penguin = { init, tick, destroy };
