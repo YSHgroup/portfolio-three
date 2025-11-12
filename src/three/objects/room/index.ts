@@ -9,6 +9,7 @@ import { desktops } from "./desktops";
 import { mouse } from "./mouse";
 import { messagePopup } from "./message-popup";
 import { penguin } from "./penguin";
+import { music } from "./music";
 
 import type { Object3D } from "three";
 
@@ -36,10 +37,11 @@ const init = () => {
   shadow.init();
   desktops.init();
   messagePopup.init();
-
   if (objects?.mouse) mouse.init(objects.mouse);
   if (objects?.penguin)
     penguin.init(objects.penguin, { left: objects["penguin-wing-left"], right: objects["penguin-wing-right"] });
+
+  if (objects?.music) music.init(objects.music);
 };
 
 const initObjects = () => {
@@ -91,6 +93,7 @@ const tick = () => {
   }
 
   penguin.tick();
+  music.tick();
 };
 
 const destroy = () => {
@@ -101,6 +104,7 @@ const destroy = () => {
   desktops.destroy();
   mouse.destroy();
   penguin.destroy();
+  music.destroy();
 };
 
 export const room = { init, destroy, group, chairRotation };
