@@ -17,24 +17,28 @@ const props = defineProps<{
   cursor: pointer;
   position: relative;
   z-index: 0;
+  transition: color 0.1s ease-in-out;
 
   &::after {
     content: "";
     position: absolute;
-    top: -5px;
-    left: -5px;
-    width: calc(100% + 10px);
-    height: calc(100% + 10px);
-    background-color: var(--color-grayscale-400);
+    top: -4px;
+    left: -8px;
+    width: calc(100% + 16px);
+    height: calc(100% + 8px);
+    background-color: var(--color-black-400);
     z-index: -1;
     border-radius: var(--radius-md);
-    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out;
   }
 
   @include mixins.hover {
     &:hover {
+      color: var(--color-white-400);
+
       &::after {
-        visibility: visible;
+        opacity: 1;
       }
     }
   }

@@ -6,10 +6,18 @@ import LangSwitch from "./LangSwitch.vue";
 import NotchSection from "./NotchSection.vue";
 import { t } from "../i18n/utils/translate";
 import { locale } from "../i18n/store";
+import ButtonRound from "./ButtonRound.vue";
+import { lenis } from "../utils/scroll";
+import ArrowRightLong from "./icons/ArrowRightLong.vue";
 
 interface Props {
   withSocial?: boolean;
 }
+
+const handleBackToTop = () => {
+  if (!lenis.value) return;
+  lenis.value.scrollTo(0);
+};
 
 const { withSocial = true } = defineProps<Props>();
 </script>
@@ -18,6 +26,15 @@ const { withSocial = true } = defineProps<Props>();
   <footer class="footer">
     <NotchSection class="footer-notch" />
     <div class="footer-content">
+      <div
+        class="footer-back-to-top"
+        tabindex="0"
+        @click="handleBackToTop"
+        @keydown.enter="handleBackToTop"
+        data-cursor="circle-white"
+      >
+        <ButtonRound renderAs="div" variant="border"><ArrowRightLong class="footer-back-to-top-icon" /></ButtonRound>
+      </div>
       <div class="footer-top">
         <Social v-if="withSocial" />
         <div class="footer-top-links">
@@ -27,7 +44,7 @@ const { withSocial = true } = defineProps<Props>();
                 :href="locale === 'de' ? '/de/privacy' : '/privacy'"
                 class="footer-link"
                 :external="true"
-                data-cursor="circle-black"
+                data-cursor="circle-white"
                 >{{ t("privacy") }}</Link
               >
             </Clickable>
@@ -36,7 +53,7 @@ const { withSocial = true } = defineProps<Props>();
                 :href="locale === 'de' ? '/de/legal' : '/legal'"
                 class="footer-link"
                 :external="true"
-                data-cursor="circle-black"
+                data-cursor="circle-white"
                 >{{ t("legal") }}</Link
               >
             </Clickable>
@@ -50,7 +67,7 @@ const { withSocial = true } = defineProps<Props>();
             {{ t("music-produced-by") }}
           </p>
           <Clickable renderAs="div">
-            <Link href="https://soundcloud.com/hmsurf" class="footer-link" external data-cursor="circle-black"
+            <Link href="https://soundcloud.com/hmsurf" class="footer-link" external data-cursor="circle-white"
               >HM Surf</Link
             >
           </Clickable>
@@ -77,6 +94,22 @@ const { withSocial = true } = defineProps<Props>();
     width: 100%;
     max-width: calc(var(--breakpoint-xxxl));
     padding: calc(var(--space-outer) + var(--space-sm)) var(--space-outer);
+    position: relative;
+  }
+
+  &-back-to-top {
+    cursor: pointer;
+
+    @include mixins.mq("md") {
+      position: absolute;
+      top: calc(var(--space-outer) + var(--space-sm));
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &-icon {
+      transform: rotate(-90deg);
+    }
   }
 
   &-top {
