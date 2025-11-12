@@ -10,28 +10,18 @@ const pointer = new Vector2();
 const ndcPointer = new Vector3();
 const ray = new Ray();
 const target = new Vector3();
+const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
-const handleClick = () => {
-  if (!hoveringBox || !hoveringBox.onClick) return;
-  hoveringBox.onClick();
-};
-
-const init = () => {
-  gsap.ticker.add(tick);
-  window.addEventListener("mousemove", handleMouseMove);
-  window.addEventListener("click", handleClick);
-};
-
-const handleMouseMove = (event: MouseEvent) => {
+const updatePointer = (clientX: number, clientY: number) => {
   // Convert to normalized device coordinates (-1 to 1)
-  pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-  pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  pointer.x = (clientX / window.innerWidth) * 2 - 1;
+  pointer.y = -(clientY / window.innerHeight) * 2 + 1;
 };
 
-const tick = () => {
+const performRaycast = () => {
   if (!boxesToCheck.length) return;
 
-  // Ensure camera’s world matrix is current
+  // Ensure camera's world matrix is current
   camera.instance.updateWorldMatrix(true, false);
 
   // Get camera world position
@@ -61,10 +51,59 @@ const tick = () => {
   }
 };
 
+const handleClick = () => {
+  if (!hoveringBox || !hoveringBox.onClick) return;
+  hoveringBox.onClick();
+};
+
+const handleMouseMove = (event: MouseEvent) => {
+  updatePointer(event.clientX, event.clientY);
+};
+
+const handleTouchStart = (event: TouchEvent) => {
+  const touch = event.touches[0];
+  if (touch) {
+    event.preventDefault();
+    updatePointer(touch.clientX, touch.clientY);
+    performRaycast();
+  }
+};
+
+const handleTouchEnd = (event: TouchEvent) => {
+  const touch = event.changedTouches[0];
+  if (touch) {
+    event.preventDefault();
+    updatePointer(touch.clientX, touch.clientY);
+    performRaycast();
+    handleClick();
+  }
+};
+
+const tick = () => {
+  // Only perform continuous raycast for non-touch devices
+  if (!isTouchDevice) {
+    performRaycast();
+  }
+};
+
+const init = () => {
+  if (!isTouchDevice) {
+    gsap.ticker.add(tick);
+  }
+  window.addEventListener("mousemove", handleMouseMove);
+  window.addEventListener("click", handleClick);
+  window.addEventListener("touchstart", handleTouchStart, { passive: false });
+  window.addEventListener("touchend", handleTouchEnd, { passive: false });
+};
+
 const destroy = () => {
-  gsap.ticker.remove(tick);
+  if (!isTouchDevice) {
+    gsap.ticker.remove(tick);
+  }
   window.removeEventListener("mousemove", handleMouseMove);
   window.removeEventListener("click", handleClick);
+  window.removeEventListener("touchstart", handleTouchStart);
+  window.removeEventListener("touchend", handleTouchEnd);
 };
 
 export const raycast = {

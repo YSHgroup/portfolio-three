@@ -14,6 +14,7 @@ import { preloaderVisible } from "../composables/usePreloader";
 import ScrollIcon from "../components/ScrollIcon.vue";
 import { raycast } from "../three/utils/raycast";
 import gsap from "gsap";
+import { useAgent } from "../composables/useAgent";
 
 const introRef = ref<HTMLElement | null>(null);
 const stickyContentRef = ref<HTMLElement | null>(null);
@@ -24,6 +25,7 @@ const contactRef = ref<HTMLElement | null>(null);
 const contactBottom = ref<number>(0);
 const aboutSpacerRef = ref<HTMLElement | null>(null);
 const isHoveringObject3D = ref<boolean>(false);
+const { isTouch } = useAgent();
 
 const handleIntersection = (entries: IntersectionObserverEntry[]) => {
   scrolledPastIntro.value = entries[0]?.isIntersecting ?? false;
@@ -59,10 +61,10 @@ watch(projectsLoaded, (loaded) => {
 });
 
 const updateCursor = () => {
+  if (isTouch.value) return;
   const hoveringBox = raycast.getHoveringBox();
   const shouldBePointer = !!hoveringBox;
 
-  // Only update if state changed
   if (shouldBePointer !== isHoveringObject3D.value) {
     isHoveringObject3D.value = shouldBePointer;
     document.documentElement.style.cursor = shouldBePointer ? "pointer" : "";
@@ -85,6 +87,8 @@ onUnmounted(() => {
 
   stickyObserver.value?.disconnect();
   stickyObserver.value = null;
+
+  document.documentElement.style.cursor = "";
 
   gsap.ticker.remove(updateCursor);
   animations.destroy();
