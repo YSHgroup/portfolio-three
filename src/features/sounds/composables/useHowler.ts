@@ -36,6 +36,12 @@ export const useHowler = () => {
     Howler.mute(document.visibilityState === "hidden");
   };
 
+  const handleKeyPress = (event: KeyboardEvent) => {
+    if (event.code === "KeyM") {
+      soundsEnabled.value = !soundsEnabled.value;
+    }
+  };
+
   watch(soundsEnabled, (newVal) => {
     enabledVolume.value = newVal ? 1 : 0;
     localStorage.setItem("portfolio-soundsEnabled", newVal.toString());
@@ -50,10 +56,12 @@ export const useHowler = () => {
 
     gsap.ticker.add(tick);
     window.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("keydown", handleKeyPress);
   });
 
   onUnmounted(() => {
     gsap.ticker.remove(tick);
     window.removeEventListener("visibilitychange", handleVisibilityChange);
+    window.removeEventListener("keydown", handleKeyPress);
   });
 };
