@@ -23,6 +23,8 @@ let objects: {
   mouse: Mesh;
   music: Mesh;
   penguin: Mesh;
+  "penguin-wing-left": Mesh;
+  "penguin-wing-right": Mesh;
   plant: Mesh;
   room: Mesh;
   shelf: Mesh;
@@ -36,13 +38,15 @@ const init = () => {
   messagePopup.init();
 
   if (objects?.mouse) mouse.init(objects.mouse);
-  if (objects?.penguin) penguin.init(objects.penguin);
+  if (objects?.penguin)
+    penguin.init(objects.penguin, { left: objects["penguin-wing-left"], right: objects["penguin-wing-right"] });
 };
 
 const initObjects = () => {
   if (objects) return;
   const resource = resources.items["room-model"];
 
+  const penguin = resource.scene.children.find((child: Object3D) => child.name === "penguin");
   objects = {
     blackboard: resource.scene.children.find((child: Object3D) => child.name === "blackboard"),
     carpet: resource.scene.children.find((child: Object3D) => child.name === "carpet"),
@@ -50,13 +54,16 @@ const initObjects = () => {
     frame: resource.scene.children.find((child: Object3D) => child.name === "frame"),
     mouse: resource.scene.children.find((child: Object3D) => child.name === "mouse"),
     music: resource.scene.children.find((child: Object3D) => child.name === "music"),
-    penguin: resource.scene.children.find((child: Object3D) => child.name === "penguin"),
     plant: resource.scene.children.find((child: Object3D) => child.name === "plant"),
     room: resource.scene.children.find((child: Object3D) => child.name === "room"),
     shelf: resource.scene.children.find((child: Object3D) => child.name === "shelf"),
+    penguin,
+    "penguin-wing-left": penguin.children.find((child: Object3D) => child.name === "penguin-wing-left"),
+    "penguin-wing-right": penguin.children.find((child: Object3D) => child.name === "penguin-wing-right"),
   };
 
   Object.values(objects).forEach((object) => {
+    if (!object) return;
     const mat = getRoomMaterial();
     object.material = mat;
     group.add(object);
