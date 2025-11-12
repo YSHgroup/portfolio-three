@@ -12,7 +12,6 @@ html {
   color: var(--color-text-400);
   font-family: "Urbanist";
   letter-spacing: 0.02em;
-  scroll-behavior: smooth;
 }
 
 body {
@@ -37,49 +36,4 @@ body {
   background: #2d2a24;
   color: rgb(255, 255, 255);
   text-shadow: none;
-}
-
-:root {
-  /* Base fallback using standard vh/vw */
-  --vh: 1vh;
-  --vw: 1vw;
-  --svh: 1vh;
-  --lvh: 1vh;
-  --dvh: 1vh;
-  --svw: 1vw;
-  --lvw: 1vw;
-  --dvw: 1vw;
-}
-
-.three-canvas {
-  user-select: none;
-  contain: strict;
-  overflow: clip;
-  inset: 0;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: calc(var(--lvh) * 100);
-}
-
-/* Override if the browser supports dvh / dvw */
-@supports (height: 100dvh) {
-  :root {
-    --dvh: 1dvh;
-    --dvw: 1dvw;
-  }
-}
-
-@supports (height: 100svh) {
-  :root {
-    --svh: 1svh;
-    --svw: 1svw;
-  }
-}
-
-@supports (height: 100lvh) {
-  :root {
-    --lvh: 1lvh;
-    --lvw: 1lvw;
-  }
 }

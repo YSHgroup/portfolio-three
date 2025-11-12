@@ -2,22 +2,17 @@
 const props = defineProps<{
   isActive?: boolean;
   isDarkTheme?: boolean;
-  href?: string;
 }>();
-
-const isAnchor = !!props.href;
 </script>
 
 <template>
-  <component
-    :is="isAnchor ? 'a' : 'button'"
-    :href="isAnchor ? href : undefined"
+  <button
     class="header-link"
     :data-cursor="isDarkTheme ? 'circle-white' : 'circle-black'"
     :class="{ 'header-link-active': props.isActive, 'header-link-dark': props.isDarkTheme }"
   >
     <slot></slot>
-  </component>
+  </button>
 </template>
 
 <style scoped lang="scss">
