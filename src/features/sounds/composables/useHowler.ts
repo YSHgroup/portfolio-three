@@ -14,7 +14,13 @@ export const useHowler = () => {
   const handleUnlocked = () => {
     howlerUnlocked.value = true;
     console.log("[Howler] Unlocked");
-    soundsEnabled.value = localStorage.getItem("portfolio-soundsEnabled") === "true";
+    const storeItem = localStorage.getItem("portfolio-soundsEnabled");
+    if (storeItem) {
+      soundsEnabled.value = storeItem === "true";
+    } else {
+      soundsEnabled.value = true;
+      localStorage.setItem("portfolio-soundsEnabled", "true");
+    }
   };
 
   const tick = () => {
