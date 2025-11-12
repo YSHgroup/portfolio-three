@@ -51,30 +51,15 @@ const performRaycast = () => {
   }
 };
 
-const handleClick = () => {
+const handleClick = (e: MouseEvent) => {
+  updatePointer(e.clientX, e.clientY);
+  performRaycast();
   if (!hoveringBox || !hoveringBox.onClick) return;
   hoveringBox.onClick();
 };
 
 const handleMouseMove = (event: MouseEvent) => {
   updatePointer(event.clientX, event.clientY);
-};
-
-const handleTouchStart = (event: TouchEvent) => {
-  const touch = event.touches[0];
-  if (touch) {
-    updatePointer(touch.clientX, touch.clientY);
-    performRaycast();
-  }
-};
-
-const handleTouchEnd = (event: TouchEvent) => {
-  const touch = event.changedTouches[0];
-  if (touch) {
-    updatePointer(touch.clientX, touch.clientY);
-    performRaycast();
-    handleClick();
-  }
 };
 
 const tick = () => {
@@ -90,8 +75,6 @@ const init = () => {
   }
   window.addEventListener("mousemove", handleMouseMove);
   window.addEventListener("click", handleClick);
-  window.addEventListener("touchstart", handleTouchStart, { passive: false });
-  window.addEventListener("touchend", handleTouchEnd, { passive: false });
 };
 
 const destroy = () => {
@@ -100,8 +83,6 @@ const destroy = () => {
   }
   window.removeEventListener("mousemove", handleMouseMove);
   window.removeEventListener("click", handleClick);
-  window.removeEventListener("touchstart", handleTouchStart);
-  window.removeEventListener("touchend", handleTouchEnd);
 };
 
 export const raycast = {
