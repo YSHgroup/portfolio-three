@@ -63,7 +63,6 @@ const handleMouseMove = (event: MouseEvent) => {
 const handleTouchStart = (event: TouchEvent) => {
   const touch = event.touches[0];
   if (touch) {
-    event.preventDefault();
     updatePointer(touch.clientX, touch.clientY);
     performRaycast();
   }
@@ -72,7 +71,6 @@ const handleTouchStart = (event: TouchEvent) => {
 const handleTouchEnd = (event: TouchEvent) => {
   const touch = event.changedTouches[0];
   if (touch) {
-    event.preventDefault();
     updatePointer(touch.clientX, touch.clientY);
     performRaycast();
     handleClick();
