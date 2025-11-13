@@ -21,7 +21,7 @@ export const useMusic = () => {
     }
 
     musicTracks.luci.volume(clamp(1 - sceneWeights.about, 0, 1) * BASE_VOLUMES.luci);
-    musicTracks.about.volume(clamp(sceneWeights.about * 1.5 - 0.5, 0, 1) * BASE_VOLUMES.about);
+    musicTracks.about.volume(clamp(sceneWeights.about * 1.25 - 0.25, 0, 1) * BASE_VOLUMES.about);
   };
 
   const tick = () => {

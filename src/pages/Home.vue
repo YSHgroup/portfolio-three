@@ -138,7 +138,8 @@ const handleProjectsLoaded = () => {
 }
 
 .about-spacer {
-  height: calc(var(--lvh) * 250);
+  max-height: calc(var(--lvh) * 250);
+  min-height: calc(var(--lvh) * 250);
 }
 
 .intro-wrapper {
@@ -161,8 +162,8 @@ const handleProjectsLoaded = () => {
   top: 0;
   left: 0;
   width: 100%;
-  height: calc(var(--lvh) * 100);
-  overflow: hidden;
+  max-height: calc(var(--lvh) * 100);
+  min-height: calc(var(--lvh) * 100);
 }
 
 .intro-about-hidden {
@@ -173,8 +174,8 @@ const handleProjectsLoaded = () => {
   top: 0;
   left: 0;
   width: 100%;
-  overflow: hidden;
-  height: calc(var(--lvh) * 100);
+  max-height: calc(var(--lvh) * 100);
+  min-height: calc(var(--lvh) * 100);
   z-index: -1;
   display: flex;
   align-items: flex-end;

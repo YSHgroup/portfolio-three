@@ -16,8 +16,8 @@ class ThreeSizes extends EventEmitter<{
   }
 
   resize() {
-    this.width = window.innerWidth;
-    this.height = window.innerHeight;
+    this.width = document.documentElement.clientWidth;
+    this.height = document.documentElement.clientHeight;
     this.pixelRatio = Math.min(window.devicePixelRatio, 2);
     this.emit("resize", { width: this.width, height: this.height, pixelRatio: this.pixelRatio });
   }
