@@ -11,19 +11,22 @@ class ThreeSizes extends EventEmitter<{
 
   init(_canvas: HTMLCanvasElement) {
     this.canvas = _canvas;
-    window.addEventListener("resize", this.resize.bind(this));
-    this.resize();
+    this.observer = new ResizeObserver(this.resize.bind(this));
+    this.observer.observe(this.canvas);
   }
 
   resize() {
-    this.width = document.documentElement.clientWidth;
-    this.height = document.documentElement.clientHeight;
+    const rect = this.canvas?.getBoundingClientRect();
+    if (!rect || !rect.width || !rect.height) return;
+    this.width = rect?.width ?? 0;
+    this.height = rect?.height ?? 0;
     this.pixelRatio = Math.min(window.devicePixelRatio, 2);
     this.emit("resize", { width: this.width, height: this.height, pixelRatio: this.pixelRatio });
   }
 
   destroy() {
-    window.removeEventListener("resize", this.resize.bind(this));
+    this.observer?.disconnect();
+    this.observer = null;
     this.canvas = null;
   }
 }
