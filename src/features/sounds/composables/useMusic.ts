@@ -6,6 +6,7 @@ import { sceneWeights } from "../../../animations/scenes";
 import { sizes } from "../../../utils/sizes";
 import { howlerUnlocked, soundsEnabled } from "./useHowler";
 import { clamp } from "../../../utils/math";
+import { isFeatureEnabled } from "../../../utils/features";
 
 import type { MusicTrack } from "../types";
 
@@ -31,6 +32,7 @@ export const useMusic = () => {
   };
 
   const play = (trackId: MusicTrack) => {
+    if (!isFeatureEnabled("sounds")) return;
     const track = musicTracks[trackId];
     if (!track || track.playing()) return;
     track.load();
@@ -38,6 +40,7 @@ export const useMusic = () => {
   };
 
   watchEffect(() => {
+    if (!isFeatureEnabled("sounds")) return;
     if (!howlerUnlocked.value || !soundsEnabled.value) return;
 
     play("luci");
@@ -45,10 +48,12 @@ export const useMusic = () => {
   });
 
   onMounted(() => {
+    if (!isFeatureEnabled("sounds")) return;
     gsap.ticker.add(tick);
   });
 
   onUnmounted(() => {
+    if (!isFeatureEnabled("sounds")) return;
     gsap.ticker.remove(tick);
     musicTracks.luci.stop();
     musicTracks.about.stop();

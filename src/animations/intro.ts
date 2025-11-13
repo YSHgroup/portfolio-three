@@ -1,7 +1,9 @@
-//import { animations as avatarAnimations } from "../three/objects/avatar/animations";
+import { animations as avatarAnimations } from "../three/objects/avatar/animations";
+import { isFeatureEnabled } from "../utils/features";
 
 const play = () => {
-  //avatarAnimations.wave();
+  if (!isFeatureEnabled("introWave")) return;
+  avatarAnimations.wave();
 };
 
 export const intro = { play };

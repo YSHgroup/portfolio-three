@@ -2,6 +2,7 @@ import { onMounted, onUnmounted, ref, watch } from "vue";
 import gsap from "gsap";
 import { lerp } from "../../../utils/math";
 import { Howler } from "howler";
+import { isFeatureEnabled } from "../../../utils/features";
 
 export const howlerUnlocked = ref(false);
 export const soundsEnabled = ref(false);
@@ -49,11 +50,13 @@ export const useHowler = () => {
   };
 
   watch(soundsEnabled, (newVal) => {
+    if (!isFeatureEnabled("sounds")) return;
     enabledVolume.value = newVal ? 1 : 0;
     localStorage.setItem("portfolio-soundsEnabled", newVal.toString());
   });
 
   onMounted(() => {
+    if (!isFeatureEnabled("sounds")) return;
     Howler.volume(0);
 
     if (howlerUnlocked.value) {
@@ -66,6 +69,7 @@ export const useHowler = () => {
   });
 
   onUnmounted(() => {
+    if (!isFeatureEnabled("sounds")) return;
     gsap.ticker.remove(tick);
     window.removeEventListener("visibilitychange", handleVisibilityChange);
     window.removeEventListener("keydown", handleKeyPress);

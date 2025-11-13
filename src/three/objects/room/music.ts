@@ -1,5 +1,6 @@
 import { Box3, Mesh } from "three";
 import { raycast } from "../../utils/raycast";
+import { isFeatureEnabled } from "../../../utils/features";
 import { room } from ".";
 import { soundsEnabled } from "../../../features/sounds/composables/useHowler";
 import { notes } from "./notes";
@@ -17,10 +18,11 @@ const init = (_mesh: Mesh) => {
   mesh = _mesh;
   room.group.add(mesh);
 
-  box3 = new Box3().setFromObject(mesh);
-  box3.onClick = handleClick;
-
-  //raycast.boxesToCheck.push(box3);
+  if (isFeatureEnabled("sounds")) {
+    box3 = new Box3().setFromObject(mesh);
+    box3.onClick = handleClick;
+    raycast.boxesToCheck.push(box3);
+  }
 
   // Initialize notes positioned relative to music box
   notes.init({
@@ -39,7 +41,7 @@ const tick = () => {
 
 const destroy = () => {
   if (box3) {
-    //raycast.boxesToCheck.splice(raycast.boxesToCheck.indexOf(box3), 1);
+    raycast.boxesToCheck.splice(raycast.boxesToCheck.indexOf(box3), 1);
   }
   box3 = null;
   notes.destroy();

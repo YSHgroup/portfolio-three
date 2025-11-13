@@ -9,7 +9,8 @@ import { useRoute, useRouter } from "vue-router";
 import { social } from "../content/social";
 import ButtonRound from "./ButtonRound.vue";
 import ArrowRight from "./icons/ArrowRight.vue";
-//import SoundsToggle from "./SoundsToggle.vue";
+import SoundsToggle from "./SoundsToggle.vue";
+import { isFeatureEnabled } from "../utils/features";
 
 const route = useRoute();
 const router = useRouter();
@@ -82,7 +83,7 @@ const getInTouchClassNames = computed(() => {
         data-cursor="circle-white"
         >{{ t("get-in-touch") }}</Button
       >
-      <!-- <SoundsToggle class="header-sounds-toggle" :isDarkTheme="isDarkTheme" /> -->
+      <SoundsToggle class="header-sounds-toggle" :isDarkTheme="isDarkTheme" v-if="isFeatureEnabled('sounds')" />
     </div>
   </header>
 </template>
