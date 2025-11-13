@@ -14,7 +14,7 @@ let mixer: AnimationMixer;
 let activeAction: string | null = null;
 const actions = new Map<string, AnimationAction>();
 let isAwake = false;
-const wavingStrength = { value: 1 };
+const wavingStrength = { value: 0 };
 let hologramMixer: AnimationMixer;
 const hologramActions = new Map<string, AnimationAction>();
 
