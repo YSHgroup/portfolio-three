@@ -4,6 +4,7 @@ import fragmentShader from "../../shaders/avatar-face/fragment.glsl";
 import vertexShader from "../../shaders/avatar-face/vertex.glsl";
 import { avatar } from "./index";
 import gsap from "gsap";
+import { lenis } from "../../../utils/scroll";
 
 import type { Material } from "three";
 import { sceneWeights } from "../../../animations/scenes";
@@ -93,6 +94,20 @@ const wakeUp = () => {
   tl.set(sceneFrames, { contact: "proud-0" }, 0.46);
 };
 
+const wave = () => {
+  const tl = gsap.timeline();
+
+  const PROUD_AFTER = 1;
+  const RESE_AFTER = 3;
+  tl.set(sceneFrames, { intro: "contact-transition-0" }, 0);
+  tl.set(sceneFrames, { intro: "contact-transition-1" }, PROUD_AFTER);
+  tl.set(sceneFrames, { intro: "contact-transition-2" }, PROUD_AFTER + 0.03);
+  tl.set(sceneFrames, { intro: "proud-0" }, PROUD_AFTER + 0.06);
+  tl.set(sceneFrames, { intro: "default-0" }, RESE_AFTER);
+
+  return tl;
+};
+
 const tick = () => {
   const isContact = sceneWeights.contact > 0.001;
   if (isContact) {
@@ -101,10 +116,15 @@ const tick = () => {
       : sceneFrames.contact;
     uniforms.uFrame.value = FRAME_INDEXES[name as keyof typeof FRAME_INDEXES];
   } else {
-    const name = sceneFrames.intro.startsWith("default")
-      ? `default-${Math.round(blinkFrame.value)}`
-      : sceneFrames.intro;
-    uniforms.uFrame.value = FRAME_INDEXES[name as keyof typeof FRAME_INDEXES];
+    const isAbout = sceneWeights.about > 0.1;
+    if (isAbout) {
+      uniforms.uFrame.value = FRAME_INDEXES["default-0"];
+    } else {
+      const name = sceneFrames.intro.startsWith("default")
+        ? `default-${Math.round(blinkFrame.value)}`
+        : sceneFrames.intro;
+      uniforms.uFrame.value = FRAME_INDEXES[name as keyof typeof FRAME_INDEXES];
+    }
   }
 };
 
@@ -112,4 +132,4 @@ const destroy = () => {
   gsap.ticker.remove(tick);
 };
 
-export const face = { init, destroy, getMaterial, FRAME_INDEXES, wakeUp };
+export const face = { init, destroy, getMaterial, FRAME_INDEXES, wakeUp, wave };

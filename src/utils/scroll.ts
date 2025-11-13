@@ -6,6 +6,8 @@ import { ref } from "vue";
 export const lenis = ref<Lenis | null>(null);
 
 class Scroll {
+  hasScrolled = false;
+
   constructor() {
     this.init();
   }
@@ -21,6 +23,7 @@ class Scroll {
   }
 
   handleScroll() {
+    this.hasScrolled = true;
     ScrollTrigger.update();
   }
 

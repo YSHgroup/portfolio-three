@@ -1,6 +1,6 @@
 import { avatar } from ".";
 import { avatarHologram } from "./hologram";
-import { AnimationAction, AnimationMixer, LoopPingPong } from "three";
+import { AnimationAction, AnimationMixer, LoopOnce, LoopPingPong } from "three";
 import gsap from "gsap";
 import { resources } from "../../../utils/resources";
 import { sceneWeights } from "../../../animations/scenes";
@@ -14,7 +14,7 @@ let mixer: AnimationMixer;
 let activeAction: string | null = null;
 const actions = new Map<string, AnimationAction>();
 let isAwake = false;
-
+const wavingStrength = { value: 1 };
 let hologramMixer: AnimationMixer;
 const hologramActions = new Map<string, AnimationAction>();
 
@@ -73,6 +73,12 @@ const setupActions = () => {
   const contactIdle = mixer.clipAction(getActionFromMesh("contact-idle"));
   contactIdle.loop = LoopPingPong;
   actions.set("contact-idle", contactIdle);
+
+  //wave
+  const wave = mixer.clipAction(getActionFromMesh("wave"));
+  wave.clampWhenFinished = true;
+  wave.loop = LoopOnce;
+  actions.set("wave", wave);
 };
 
 const setupHologramActions = () => {
@@ -96,6 +102,12 @@ const setupHologramActions = () => {
   leftDesktop.clampWhenFinished = true;
   hologramActions.set("left-desktop", leftDesktop);
   leftDesktop.weight = 0;
+
+  //wave
+  const wave = hologramMixer.clipAction(getActionFromMesh("wave"));
+  wave.clampWhenFinished = true;
+  wave.loop = LoopOnce;
+  hologramActions.set("wave", wave);
 };
 
 const play = (name: string, transition: number = 0.5) => {
@@ -126,12 +138,29 @@ const setWeight = (key: string, weight: number) => {
 };
 
 const updateIntro = () => {
-  setWeight("desktop-idle", 1 - avatar.tIdleIntensity.value);
-  setWeight("left-desktop", 1 - avatar.tIdleIntensity.value);
+  setWeight("desktop-idle", (1 - avatar.tIdleIntensity.value) * (1 - wavingStrength.value));
+  setWeight("left-desktop", (1 - avatar.tIdleIntensity.value) * (1 - wavingStrength.value));
   setWeight("t-idle", avatar.tIdleIntensity.value);
   setWeight("sleeping", 0);
   setWeight("contact-idle", 0);
   setWeight("wake-up", 0);
+  setWeight("wave", wavingStrength.value * (1 - avatar.tIdleIntensity.value));
+};
+
+const wave = () => {
+  const tl = gsap.timeline();
+  //get wave duration from action
+  const waveAction = actions.get("wave");
+  const hologramWaveAction = hologramActions.get("wave");
+  if (!waveAction) return;
+  const waveDuration = waveAction.getClip().duration;
+  waveAction.play();
+  hologramWaveAction?.play();
+
+  tl.add(face.wave());
+  tl.fromTo(wavingStrength, { value: 1 }, { value: 0 }, waveDuration - 0.2);
+
+  return tl;
 };
 
 const wakeUp = () => {
@@ -167,6 +196,7 @@ const updateContact = () => {
   setWeight("sleeping", 1);
   setWeight("contact-idle", 1);
   setWeight("wake-up", 1);
+  setWeight("wave", 0);
 };
 
 const update = () => {
@@ -182,4 +212,4 @@ const update = () => {
   hologramMixer.update(delta / 60);
 };
 
-export const animations = { init, play, actions, update, wakeUp, getIsAwake: () => isAwake };
+export const animations = { init, play, actions, update, wakeUp, getIsAwake: () => isAwake, wave };
