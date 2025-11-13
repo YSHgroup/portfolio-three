@@ -4,7 +4,6 @@ import fragmentShader from "../../shaders/avatar-face/fragment.glsl";
 import vertexShader from "../../shaders/avatar-face/vertex.glsl";
 import { avatar } from "./index";
 import gsap from "gsap";
-import { lenis } from "../../../utils/scroll";
 
 import type { Material } from "three";
 import { sceneWeights } from "../../../animations/scenes";
