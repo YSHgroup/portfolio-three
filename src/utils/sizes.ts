@@ -7,8 +7,10 @@ export const BREAKPOINTS = {
   xl: 1280,
 } as const satisfies Record<string, number>;
 
-const getBreakpoint = () => {
-  return Object.keys(BREAKPOINTS).find((key) => window.innerWidth <= BREAKPOINTS[key as keyof typeof BREAKPOINTS]);
+const BREAKPOINT_ORDER = ["xl", "lg", "md", "sm"];
+
+const getBreakpoint = (width: number) => {
+  return BREAKPOINT_ORDER.find((key) => width >= BREAKPOINTS[key as keyof typeof BREAKPOINTS]) || "sm";
 };
 
 class Sizes extends EventEmitter<{
@@ -23,7 +25,7 @@ class Sizes extends EventEmitter<{
   visible: boolean;
   aspectRatio: number;
   isLandscape: boolean;
-  isLandscapeMedia: MediaQueryList;
+
   constructor() {
     super();
     this.width = 0;
@@ -33,7 +35,6 @@ class Sizes extends EventEmitter<{
     this.breakpoint = "md";
     this.visible = true;
     this.isLandscape = false;
-    this.isLandscapeMedia = matchMedia("(orientation: landscape)");
 
     this.resize();
   }
@@ -53,8 +54,11 @@ class Sizes extends EventEmitter<{
     }
   }
 
-  atLeastBreakpoint(breakpoint: keyof typeof BREAKPOINTS) {
-    return this.width >= BREAKPOINTS[breakpoint];
+  matchMedia(breakpoint: keyof typeof BREAKPOINTS) {
+    const breakpointOrder: (keyof typeof BREAKPOINTS)[] = ["sm", "md", "lg", "xl"];
+    const currentIndex = breakpointOrder.indexOf(this.breakpoint);
+    const targetIndex = breakpointOrder.indexOf(breakpoint);
+    return currentIndex >= targetIndex;
   }
 
   setViewportUnits() {
@@ -76,11 +80,13 @@ class Sizes extends EventEmitter<{
     this.pixelRatio = Math.min(window.devicePixelRatio, 2);
     this.setViewportUnits();
 
-    this.breakpoint = getBreakpoint() as keyof typeof BREAKPOINTS;
+    this.breakpoint = getBreakpoint(this.width) as keyof typeof BREAKPOINTS;
 
     this.emit("resize", { width: this.width, height: this.height, pixelRatio: this.pixelRatio });
 
-    this.isLandscape = this.isLandscapeMedia.matches;
+    this.isLandscape = window.matchMedia("(orientation: landscape)").matches;
+
+    console.log(this.width, this.height, this.aspectRatio, this.isLandscape, this.breakpoint);
   }
 
   destroy() {

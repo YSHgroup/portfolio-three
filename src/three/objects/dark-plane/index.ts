@@ -77,7 +77,7 @@ const handleResize = () => {
   const aspectRatio = sizes.width / sizes.height;
   uniforms.uAspectRatio.value = aspectRatio;
 
-  const isMd = sizes.atLeastBreakpoint("md");
+  const isMd = sizes.matchMedia("md");
   uniforms.uRadius.value = (isMd ? 48 : 24) / sizes.height;
 };
 
