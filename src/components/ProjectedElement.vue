@@ -19,7 +19,7 @@ const updatePosition = () => {
   if (sceneWeightsInOut.about.in === 0) return;
   if (sceneWeightsInOut.about.out === 1) return;
 
-  const isLandscape = sizes.isLandscape();
+  const isLandscape = sizes.isLandscape;
   const { point } = props;
 
   const screenPos = isLandscape ? camera.project(point) : { x: 0, y: 0 };

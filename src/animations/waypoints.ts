@@ -41,7 +41,7 @@ let resolvedPoints: typeof points.landscape | typeof points.portrait = points.la
 
 // called when viewport or scene set changes
 function updateReferences() {
-  const isLandscape = sizes.isLandscape();
+  const isLandscape = sizes.isLandscape;
   resolvedPoints = isLandscape ? points.landscape : points.portrait;
 
   const active = Object.entries(sceneWeights).filter(([key, weight]) => weight > 0 && key in resolvedPoints) as [

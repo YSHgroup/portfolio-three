@@ -48,13 +48,13 @@ $media-direction: min;
 }
 
 @mixin landscape {
-  @media (min-aspect-ratio: 1) {
+  @media (orientation: landscape) {
     @content;
   }
 }
 
 @mixin landscape-large {
-  @media (min-aspect-ratio: 1) and (min-height: 480px) {
+  @media (orientation: landscape) and (min-height: 480px) {
     @content;
   }
 }

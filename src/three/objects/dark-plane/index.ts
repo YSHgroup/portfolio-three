@@ -96,7 +96,7 @@ const tick = () => {
     mesh.visible = true;
   }
 
-  const isLandscape = sizes.isLandscape();
+  const isLandscape = sizes.isLandscape;
 
   const aspectRatio = sizes.width / sizes.height;
   const sizeValue = mix(0.55, isLandscape ? 0.5 : 0.35, progress.in);

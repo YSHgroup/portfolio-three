@@ -54,7 +54,7 @@ const updateParallax = (object: Object3D) => {
 };
 
 const calculateContactTransform = () => {
-  const isLandscape = sizes.isLandscape();
+  const isLandscape = sizes.isLandscape;
   const breakpoint = isLandscape ? "landscape" : "portrait";
   const isMd = sizes.atLeastBreakpoint("md");
 

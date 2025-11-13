@@ -22,7 +22,8 @@ class Sizes extends EventEmitter<{
   breakpoint: keyof typeof BREAKPOINTS;
   visible: boolean;
   aspectRatio: number;
-
+  isLandscape: boolean;
+  isLandscapeMedia: MediaQueryList;
   constructor() {
     super();
     this.width = 0;
@@ -31,6 +32,8 @@ class Sizes extends EventEmitter<{
     this.pixelRatio = 1;
     this.breakpoint = "md";
     this.visible = true;
+    this.isLandscape = false;
+    this.isLandscapeMedia = matchMedia("(orientation: landscape)");
 
     this.resize();
   }
@@ -54,10 +57,6 @@ class Sizes extends EventEmitter<{
     return this.width >= BREAKPOINTS[breakpoint];
   }
 
-  isLandscape() {
-    return this.aspectRatio >= 1;
-  }
-
   setViewportUnits() {
     document.documentElement.style.setProperty("--vh", 0.01 * window.innerHeight + "px");
     document.documentElement.style.setProperty("--dvh", 0.01 * window.innerHeight + "px");
@@ -71,16 +70,17 @@ class Sizes extends EventEmitter<{
   }
 
   resize() {
-    this.width = window.innerWidth;
+    this.width = Math.max(window.innerWidth, document.documentElement.clientWidth);
     this.height = window.innerHeight;
-    this.aspectRatio = document.documentElement.clientWidth / document.documentElement.clientHeight;
+    this.aspectRatio = this.width / this.height;
     this.pixelRatio = Math.min(window.devicePixelRatio, 2);
-
     this.setViewportUnits();
 
     this.breakpoint = getBreakpoint() as keyof typeof BREAKPOINTS;
 
     this.emit("resize", { width: this.width, height: this.height, pixelRatio: this.pixelRatio });
+
+    this.isLandscape = matchMedia("(orientation: landscape)").matches;
   }
 
   destroy() {

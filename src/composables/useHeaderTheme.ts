@@ -31,7 +31,7 @@ export const useHeaderTheme = ({
 
     if (aboutElement) {
       const aboutBounding = aboutElement.getBoundingClientRect();
-      const isLandscape = sizes.isLandscape();
+      const isLandscape = sizes.isLandscape;
       const isScrolledIntoView = aboutBounding.top - (isLandscape ? sizes.height * 0.225 : 0) < 0;
       const isScrolledPast = aboutBounding.bottom - 36 < 0;
 
