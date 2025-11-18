@@ -5,6 +5,7 @@ import Notch from "../../../components/Notch.vue";
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
 const mediaRef = ref<HTMLVideoElement | HTMLImageElement | null>(null);
+const mediaContentRef = ref<HTMLDivElement | null>(null);
 const isMounted = ref(false);
 
 export interface Props {
@@ -36,7 +37,7 @@ watchEffect(async (onInvalidate) => {
       toggleActions: "play none none reset",
     },
   });
-  tl.fromTo(wrapperRef.value, { scale: 0.8 }, { scale: 1, duration: 0.4, ease: "power1.out" }, 0);
+  tl.fromTo(mediaContentRef.value, { scale: 0.8 }, { scale: 1, duration: 0.4, ease: "power1.out" }, 0);
   tl.fromTo(mediaRef.value, { scale: 1.2 }, { scale: 1, duration: 0.4, ease: "power1.out" }, 0);
 
   onInvalidate(() => {
@@ -51,7 +52,7 @@ onMounted(async () => {
 
 <template>
   <div :class="wrapperClasses" ref="wrapperRef">
-    <div class="project-media-content">
+    <div class="project-media-content" ref="mediaContentRef">
       <img
         v-if="props.type === 'image'"
         :src="props.src"
