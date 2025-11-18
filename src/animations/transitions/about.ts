@@ -7,7 +7,7 @@ import gsap from "gsap";
 
 let inMM: gsap.MatchMedia | null = null;
 let outTl: gsap.core.Timeline | null = null;
-let progressTl: gsap.core.Timeline | null = null;
+let progressMm: gsap.MatchMedia | null = null;
 let sectionsMm: gsap.MatchMedia | null = null;
 let scenesMm: gsap.MatchMedia | null = null;
 
@@ -21,6 +21,7 @@ const setup = ({
   contentServices,
   tlDetails,
   contentDetails,
+  contentProgressCount,
 }: {
   about: HTMLElement;
   tlDescription: gsap.core.Timeline;
@@ -29,6 +30,7 @@ const setup = ({
   contentServices: HTMLDivElement;
   tlDetails: gsap.core.Timeline;
   contentDetails: HTMLDivElement;
+  contentProgressCount: HTMLDivElement;
 }) => {
   setupInAnimation(about);
   setupProgressAnimation(about);
@@ -40,26 +42,28 @@ const setup = ({
     contentServices,
     tlDetails,
     contentDetails,
+    contentProgressCount,
   });
   setupOutAnimation(about);
   setupScenesAnimation(about);
 };
 
 const setupProgressAnimation = (about: HTMLElement) => {
-  progressTl = gsap.timeline({
-    duration: 1,
-    scrollTrigger: {
-      trigger: about,
-      start: "top bottom",
-      end: "bottom bottom",
-      scrub: true,
-    },
+  progressMm = createMatchMedia((_context, { isLandscape }) => {
+    const tl = gsap.timeline({
+      duration: 1,
+      scrollTrigger: {
+        trigger: about,
+        start: isLandscape ? "top bottom" : "top 75%",
+        end: "bottom bottom",
+        scrub: true,
+      },
+    });
+    const completed = { value: false };
+    tl.to(completed, { value: true, duration: 0 }, 1);
+
+    tl.fromTo(aboutProgress, { value: 0 }, { value: 1, duration: 0.95, ease: "none" }, 0);
   });
-
-  const completed = { value: false };
-  progressTl.to(completed, { value: true, duration: 0 }, 1);
-
-  progressTl.fromTo(aboutProgress, { value: 0 }, { value: 1, duration: 0.95, ease: "none" }, 0);
 };
 
 const setupInAnimation = (about: HTMLElement) => {
@@ -102,7 +106,6 @@ const setupInAnimation = (about: HTMLElement) => {
 
     if (isLandscape) {
       //lab
-      //tl.fromTo(lab.group.position, { x: -1, y: -2, z: 6 }, { x: -1, y: 0, z: 6, duration: 1, ease: "power.1out" }, 0);
       tl.fromTo(lab.group.position, { x: 0, y: 0, z: 6 }, { x: 0, y: 0, z: 6, duration: 1, ease: "power.1out" }, 0);
 
       tl.fromTo(waypointsPosition, { x: 2, y: 0, z: 0 }, { x: 0, y: 0, z: 6, duration: 1, ease: "power1.out" }, 0);
@@ -120,8 +123,6 @@ const setupInAnimation = (about: HTMLElement) => {
         0,
       );
     } else {
-      //tl.to("#hero-content-inner", { y: "40vh", scale: 0.7, duration: 1, ease: "none" }, 0);
-
       //lab
       tl.fromTo(lab.group.position, { x: 0, y: 0, z: 6 }, { x: 0, y: 0, z: 6, duration: 1, ease: "none" }, 0);
 
@@ -185,11 +186,13 @@ const setupSectionsAnimation = ({
   contentServices,
   tlDetails,
   contentDetails,
+  contentProgressCount,
 }: {
   about: HTMLElement;
   contentDescription: HTMLDivElement;
   contentServices: HTMLDivElement;
   contentDetails: HTMLDivElement;
+  contentProgressCount: HTMLDivElement;
   tlDescription: gsap.core.Timeline;
   tlServices: gsap.core.Timeline;
   tlDetails: gsap.core.Timeline;
@@ -268,13 +271,21 @@ const setupSectionsAnimation = ({
       tl.add(() => {
         tlServices?.play();
       }, SERVICES_DELAY);
+
+      // ProgressCount animation - fade in on portrait, never fade out
+      tl.fromTo(
+        contentProgressCount,
+        { opacity: 0, y: "10vh" },
+        { opacity: 1, y: "0vh", duration: 0.15, ease: "power1.out" },
+        DESCRIPTION_DELAY,
+      );
     }
   });
 };
 
 const destroy = () => {
   if (inMM) inMM.revert();
-  if (progressTl) progressTl.revert();
+  if (progressMm) progressMm.revert();
   if (outTl) outTl.revert();
   if (sectionsMm) sectionsMm.revert();
   if (scenesMm) scenesMm.revert();

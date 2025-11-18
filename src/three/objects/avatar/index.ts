@@ -104,7 +104,7 @@ const setupMesh = () => {
       if (!mat) return;
       child.material = mat;
       child.frustumCulled = false;
-      child.renderOrder = child.name === "face" ? 23 : 22;
+      child.renderOrder = child.name === "face" ? 25 : 24;
 
       const hasMatcap = assignMatcap(child);
       if (hasMatcap) {

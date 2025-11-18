@@ -4,10 +4,12 @@ import { transitions } from "../../animations";
 import BoxDescription from "./BoxDescription.vue";
 import BoxServices from "./BoxServices.vue";
 import BoxDetails from "./BoxDetails.vue";
+import ProgressCount from "./ProgressCount.vue";
 
 const contentDescriptionRef = ref<HTMLDivElement | null>(null);
 const contentServicesRef = ref<HTMLDivElement | null>(null);
 const contentDetailsRef = ref<HTMLDivElement | null>(null);
+const contentProgressCountRef = ref<HTMLDivElement | null>(null);
 const tlDescriptionRef = ref<gsap.core.Timeline | null>(null);
 const tlServicesRef = ref<gsap.core.Timeline | null>(null);
 const tlDetailsRef = ref<gsap.core.Timeline | null>(null);
@@ -24,7 +26,8 @@ watchEffect((onInvalidate) => {
     tlServicesRef.value &&
     contentServicesRef.value &&
     contentDetailsRef.value &&
-    tlDetailsRef.value
+    tlDetailsRef.value &&
+    contentProgressCountRef.value
   ) {
     transitions.about.setup({
       about: props.spacerRef,
@@ -34,6 +37,7 @@ watchEffect((onInvalidate) => {
       tlServices: tlServicesRef.value,
       contentDetails: contentDetailsRef.value,
       tlDetails: tlDetailsRef.value,
+      contentProgressCount: contentProgressCountRef.value,
     });
   }
 
@@ -54,6 +58,9 @@ watchEffect((onInvalidate) => {
     <div ref="contentServicesRef" class="about-services">
       <BoxServices @timeline:created="(tl: gsap.core.Timeline) => (tlServicesRef = tl)" />
     </div>
+    <div ref="contentProgressCountRef" class="about-progress-count">
+      <ProgressCount />
+    </div>
   </div>
 </template>
 
@@ -68,7 +75,9 @@ watchEffect((onInvalidate) => {
     padding: var(--space-outer);
     left: 50%;
     transform: translateX(-50%);
-    height: calc(var(--svh) * 100);
+    height: calc(var(--lvh) * 100);
+
+    --count-height: calc(max(calc((var(--lvh) - var(--svh)) * 100), 36px) + var(--space-outer));
   }
 
   &-details,
@@ -89,6 +98,14 @@ watchEffect((onInvalidate) => {
       height: 0;
       top: 50%;
     }
+  }
+
+  &-progress-count {
+    will-change: transform, opacity;
+    position: absolute;
+    bottom: 0;
+    left: var(--space-outer);
+    width: calc(100% - var(--space-outer) * 2);
   }
 }
 </style>

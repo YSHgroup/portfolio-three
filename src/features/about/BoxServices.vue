@@ -161,7 +161,7 @@ const services = computed(() => {
   --line-length: min(48px, calc(var(--svw) * 5));
 
   position: absolute;
-  bottom: var(--space-outer);
+  bottom: var(--count-height);
   width: calc(100% - var(--space-outer) * 2);
   left: var(--space-outer);
 

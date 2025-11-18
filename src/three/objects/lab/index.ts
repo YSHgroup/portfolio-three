@@ -31,7 +31,7 @@ const init = () => {
   };
 
   Object.values(objects).forEach((object) => {
-    object.renderOrder = object.name === "shine" ? 21 : 20;
+    object.renderOrder = object.name === "shine" ? 30 : 20;
     group.add(object);
   });
 

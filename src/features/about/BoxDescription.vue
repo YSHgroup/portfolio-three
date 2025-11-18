@@ -102,7 +102,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
           <p class="box-description-details-name">David</p>
           <div class="box-description-details-location">
             <PinIcon class="box-description-details-location-icon" />
-            <p class="box-description-details-location-copy">{{ t('germany') }}</p>
+            <p class="box-description-details-location-copy">{{ t("germany") }}</p>
           </div>
         </div>
         <div class="box-description-line"></div>
@@ -125,7 +125,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 
   gap: var(--space-xxs);
   position: absolute;
-  bottom: var(--space-outer);
+  bottom: var(--count-height);
   width: calc(100% - var(--space-outer) * 2);
   left: var(--space-outer);
 

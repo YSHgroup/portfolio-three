@@ -78,7 +78,7 @@ const setupMesh = () => {
   mesh.rotation.z = 0;
 
   mesh.frustumCulled = false;
-  mesh.renderOrder = 21;
+  mesh.renderOrder = 23;
 
   avatar.transform.add(transform);
   transform.add(mesh);
