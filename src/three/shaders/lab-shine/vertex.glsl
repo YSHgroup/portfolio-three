@@ -16,5 +16,5 @@ void main() {
   float waveZ = sin(position.z * 10.0 + uTime * 2.5);
   float wave = (waveX + waveZ) * 0.5 * .2;
   vWave = wave * -1.;
-  vLightY = position.y * (2. - uProgress) - wave;
+  vLightY = position.y * (2. - uProgress) * 0.5 - wave;
 }

@@ -2,6 +2,8 @@ import { PlaneGeometry, ShaderMaterial, InstancedMesh, Matrix4, InstancedBufferA
 import vertexShader from "../../shaders/digital-numbers/vertex.glsl";
 import fragmentShader from "../../shaders/digital-numbers/fragment.glsl";
 import { resources } from "../../../utils/resources";
+import { sizes } from "../../../utils/sizes";
+import gsap from "gsap";
 
 import type { Object3D, Texture, Vector3 } from "three";
 
@@ -40,6 +42,8 @@ export class DigitalNumbers {
     this.color = props.color || new Color(1, 1, 1);
     this.uniforms.uColor.value = this.color;
     this.init();
+
+    gsap.ticker.add(this.tick.bind(this));
   }
 
   private init() {
@@ -106,5 +110,14 @@ export class DigitalNumbers {
     }
 
     this.frameAttribute.needsUpdate = true;
+  }
+
+  private tick() {
+    if (!this.mesh) return;
+    this.mesh.visible = sizes.isLandscape;
+  }
+
+  public destroy() {
+    gsap.ticker.remove(this.tick);
   }
 }

@@ -1,5 +1,5 @@
 export const features = {
-  sounds: false,
+  sounds: true,
   introWave: false,
 };
 

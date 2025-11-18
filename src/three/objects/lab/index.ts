@@ -15,6 +15,7 @@ const group = new Group();
 let objects: {
   base: Mesh;
   shine: Mesh;
+  display: Mesh;
 } | null = null;
 
 let aboutNumbers: DigitalNumbers | null = null;
@@ -26,6 +27,7 @@ const init = () => {
   objects = {
     base: resource.scene.children.find((child: Object3D) => child.name === "base"),
     shine: resource.scene.children.find((child: Object3D) => child.name === "shine"),
+    display: resource.scene.children.find((child: Object3D) => child.name === "display"),
   };
 
   Object.values(objects).forEach((object) => {
@@ -36,7 +38,7 @@ const init = () => {
   scene.instance.add(group);
 
   if (objects?.shine) labShine.init(objects.shine);
-  if (objects?.base) labBase.init(objects.base);
+  if (objects?.base) labBase.init(objects.base, objects.display);
 
   labParticles.init();
 
@@ -63,6 +65,7 @@ const destroy = () => {
   labShine.destroy();
   labBase.destroy();
   labParticles.destroy();
+  aboutNumbers?.destroy();
   aboutNumbers = null;
   group.clear();
   //objects = null;
