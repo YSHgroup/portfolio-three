@@ -2,6 +2,7 @@ import { animations as avatarAnimations } from "../three/objects/avatar/animatio
 import { isFeatureEnabled } from "../utils/features";
 import { room } from "../three/objects/room";
 import gsap from "gsap";
+import { mouse } from "../three/objects/room/mouse";
 
 const play = () => {
   if (!isFeatureEnabled("introWave")) return;
@@ -15,6 +16,8 @@ const play = () => {
     0.65,
   );
   tl.to(room.chairIntroRotation, { x: 0, y: 0, z: 0, duration: 0.2, ease: "power1.out" });
+
+  tl.set(mouse.enabled, { value: true }, 0.3);
 };
 
 export const intro = { play };
