@@ -14,7 +14,10 @@ import { music } from "./music";
 import type { Object3D } from "three";
 
 const group = new Group();
-const chairRotation = new Euler();
+const chairScrollRotation = new Euler();
+const chairIntroRotation = new Euler();
+//chairIntroRotation.x = 0.12;
+//chairIntroRotation.z = -0.12;
 
 let objects: {
   blackboard: Mesh;
@@ -89,7 +92,10 @@ const tick = () => {
   group.visible = sceneWeights.hero > 0.001;
 
   if (objects?.chair) {
-    objects.chair.rotation.copy(chairRotation);
+    objects.chair.rotation.copy(chairScrollRotation);
+    objects.chair.rotation.x += chairIntroRotation.x * sceneWeights.hero;
+    objects.chair.rotation.y += chairIntroRotation.y * sceneWeights.hero;
+    objects.chair.rotation.z += chairIntroRotation.z * sceneWeights.hero;
   }
 
   penguin.tick();
@@ -107,4 +113,4 @@ const destroy = () => {
   music.destroy();
 };
 
-export const room = { init, destroy, group, chairRotation };
+export const room = { init, destroy, group, chairScrollRotation, chairIntroRotation };
