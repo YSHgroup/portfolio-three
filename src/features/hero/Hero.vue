@@ -1,8 +1,8 @@
 <script setup>
 import Button from "../../components/Button.vue";
 import Banner from "../../components/Banner.vue";
-import { t } from "../../i18n/utils/translate";
 import { preloaderVisible } from "../../composables/usePreloader";
+import { t } from "../../i18n/utils/translate";
 import AppearingText from "../../components/AppearingText.vue";
 </script>
 
