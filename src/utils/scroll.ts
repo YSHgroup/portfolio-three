@@ -16,7 +16,7 @@ class Scroll {
   init() {
     gsap.ticker.add((time) => {
       if (lenis.value?.isScrolling && Math.abs(lenis.value?.velocity) > 0) {
-        this.velocity = Math.min(Math.abs(lenis.value?.velocity) || 0, 1);
+        this.velocity = Math.min(Math.abs(lenis.value?.velocity * 0.75) || 0, 1);
       }
 
       if (lenis.value) {
