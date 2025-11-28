@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref, watchEffect } from "vue";
-import { lenis } from "../utils/scroll";
+import { lenis } from "../composables/useScroll";
 import ArrowRight from "./icons/ArrowRight.vue";
 import gsap from "gsap";
 import SwipeUp from "./icons/SwipeUp.vue";

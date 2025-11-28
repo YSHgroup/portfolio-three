@@ -4,7 +4,7 @@ import Logo from "./Logo.vue";
 import { computed, ref } from "vue";
 import { t } from "../i18n/utils/translate";
 import { useHeaderTheme } from "../composables/useHeaderTheme";
-import { lenis } from "../utils/scroll";
+import { lenis } from "../composables/useScroll";
 import { useRoute, useRouter } from "vue-router";
 import { social } from "../content/social";
 import ButtonRound from "./ButtonRound.vue";

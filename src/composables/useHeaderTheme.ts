@@ -1,6 +1,6 @@
 import { ref, watch, watchEffect } from "vue";
 import { useRoute } from "vue-router";
-import { lenis } from "../utils/scroll";
+import { lenis } from "./useScroll";
 import { sizes } from "../utils/sizes";
 
 export const useHeaderTheme = ({

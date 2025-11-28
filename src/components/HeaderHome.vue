@@ -2,7 +2,7 @@
 import HeaderLink from "./HeaderLink.vue";
 import { onMounted, ref } from "vue";
 import { t } from "../i18n/utils/translate";
-import { lenis } from "../utils/scroll";
+import { lenis } from "../composables/useScroll";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useHeaderTheme } from "../composables/useHeaderTheme";
 

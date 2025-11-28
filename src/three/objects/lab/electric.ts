@@ -1,9 +1,8 @@
 import { ShaderMaterial } from "three";
 import gsap from "gsap";
-
+import { velocity } from "../../../composables/useScroll";
 import vertexShader from "../../shaders/lab-electric/vertex.glsl";
 import fragmentShader from "../../shaders/lab-electric/fragment.glsl";
-import { scroll } from "../../../utils/scroll";
 
 import type { Mesh } from "three";
 
@@ -31,7 +30,7 @@ const init = (_mesh: Mesh) => {
 const tick = () => {
   if (!material) return;
   material.uniforms.uTime!.value = gsap.ticker.time;
-  const opacity = scroll.velocity * 0.75;
+  const opacity = velocity.value * 0.75;
   material.uniforms.uOpacity!.value = opacity;
 
   if (mesh) {

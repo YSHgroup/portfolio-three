@@ -6,7 +6,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { createWebHistory, createRouter } from "vue-router";
 import { routes } from "./routes";
 import { ROUTE_TRANSITION_DURATION } from "./animations/route";
-import { lenis } from "./utils/scroll";
+import { lenis } from "./composables/useScroll";
 
 gsap.registerPlugin(ScrollTrigger);
 
