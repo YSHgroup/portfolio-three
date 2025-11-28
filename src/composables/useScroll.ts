@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ref, watch } from "vue";
 import { onMounted, onUnmounted } from "vue";
 import { useRoute } from "vue-router";
+import { ROUTE_TRANSITION_DURATION } from "../animations/route";
 
 export const lenis = ref<Lenis | null>(null);
 export const velocity = ref(0);
@@ -48,9 +49,18 @@ export const useScroll = () => {
     createNewLenis();
   });
 
-  watch(route, () => {
-    createNewLenis();
-  });
+  watch(
+    () => route.path,
+    (_newVal, _oldVal, onInvalidate) => {
+      const timeout = setTimeout(() => {
+        createNewLenis();
+      }, ROUTE_TRANSITION_DURATION * 1000);
+
+      onInvalidate(() => {
+        clearTimeout(timeout);
+      });
+    },
+  );
 
   onUnmounted(() => {
     gsap.ticker.remove(tick);
