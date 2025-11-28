@@ -5,7 +5,6 @@ import { RouterView } from "vue-router";
 import Header from "./components/Header.vue";
 import { sizes } from "./utils/sizes";
 import { three } from "./three";
-import ProjectBackground from "./features/projects/components/ProjectBackground.vue";
 import { useTranslations } from "./i18n/composables/useTranslations";
 import { usePreloader } from "./composables/usePreloader";
 import Cursor from "./components/Cursor.vue";
@@ -30,7 +29,6 @@ onMounted(() => {
 
 <template>
   <Header />
-  <ProjectBackground />
   <div class="router-view-wrapper">
     <RouterView v-slot="{ Component, route: routeData }">
       <Transition name="fade" mode="out-in">

@@ -61,6 +61,7 @@ const footerClassNames = computed(() => {
 .project {
   min-height: calc(var(--lvh) * 100);
   z-index: var(--z-index-layout);
+  background-color: var(--color-background-300);
 
   &-footer {
     position: relative;
