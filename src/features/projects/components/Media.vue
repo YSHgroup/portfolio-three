@@ -42,6 +42,8 @@ watchEffect(async (onInvalidate) => {
 
   onInvalidate(() => {
     tl.kill();
+    gsap.set(mediaContentRef.value, { scale: 1 });
+    gsap.set(mediaRef.value, { scale: 1 });
   });
 });
 

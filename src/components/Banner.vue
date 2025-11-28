@@ -43,22 +43,10 @@ watchEffect((onInvalidate) => {
   // Animate background scale up while text is animating
   const textDuration = appearingTl.value.duration();
   gsap.set(backgroundRef.value, { scaleX: 0 });
-  tl.to(
-    backgroundRef.value,
-    {
-      scaleX: 1,
-      duration: textDuration,
-      ease: "power2.out",
-    },
-    0,
-  );
+  tl.fromTo(backgroundRef.value, { scaleX: 0 }, { scaleX: 1, duration: textDuration, ease: "power2.out" }, 0);
 
   onInvalidate(() => {
     tl.kill();
-    // Reset background scale when timeline is invalidated
-    if (backgroundRef.value) {
-      gsap.set(backgroundRef.value, { scaleX: 0 });
-    }
   });
 });
 </script>

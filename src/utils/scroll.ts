@@ -15,7 +15,7 @@ class Scroll {
 
   init() {
     gsap.ticker.add((time) => {
-      if (lenis.value?.isScrolling && Math.abs(lenis.value?.velocity) > 0) {
+      if (lenis.value?.isScrolling === "smooth" && Math.abs(lenis.value?.velocity) > 0) {
         this.velocity = Math.min(Math.abs(lenis.value?.velocity * 0.75) || 0, 1);
       }
 
@@ -38,6 +38,8 @@ class Scroll {
       lenis.value.destroy();
       lenis.value = null;
     }
+
+    this.velocity = 0;
 
     lenis.value = new Lenis({
       anchors: { lerp: 0.08 },

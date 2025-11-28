@@ -1,0 +1,1 @@
+export const ROUTE_TRANSITION_DURATION = 0.4;

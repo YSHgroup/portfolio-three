@@ -100,34 +100,36 @@ const handleProjectsLoaded = () => {
 </script>
 
 <template>
-  <ScrollIcon />
-  <Layout>
-    <div class="intro-wrapper" ref="introRef">
-      <div
-        class="intro-sticky"
-        :class="{ 'intro-sticky-visible': isStickyVisible }"
-        :style="{ '--contact-bottom': `${contactBottom}px` }"
-      >
+  <div class="home-page">
+    <ScrollIcon />
+    <Layout>
+      <div class="intro-wrapper" ref="introRef">
         <div
-          ref="stickyContentRef"
-          :class="['intro-sticky-content', { 'intro-sticky-content-contact': !isStickyVisible }]"
-        ></div>
-        <div :class="{ 'intro-about-hidden': !isStickyVisible }">
-          <About :spacer-ref="aboutSpacerRef" />
+          class="intro-sticky"
+          :class="{ 'intro-sticky-visible': isStickyVisible }"
+          :style="{ '--contact-bottom': `${contactBottom}px` }"
+        >
+          <div
+            ref="stickyContentRef"
+            :class="['intro-sticky-content', { 'intro-sticky-content-contact': !isStickyVisible }]"
+          ></div>
+          <div :class="{ 'intro-about-hidden': !isStickyVisible }">
+            <About :spacer-ref="aboutSpacerRef" />
+          </div>
         </div>
+        <Hero class="intro-hero" id="hero" />
+        <div class="intro-wrapper-spacer"></div>
+        <div class="about-spacer" ref="aboutSpacerRef" id="about"></div>
+        <!--      <About :spacer-ref="aboutSpacerRef" />-->
       </div>
-      <Hero class="intro-hero" id="hero" />
-      <div class="intro-wrapper-spacer"></div>
-      <div class="about-spacer" ref="aboutSpacerRef" id="about"></div>
-      <!--      <About :spacer-ref="aboutSpacerRef" />-->
-    </div>
-    <Projects id="projects" @loaded="handleProjectsLoaded" />
-    <div ref="contactRef" class="home-contact">
-      <Contact id="contact" v-if="projectsLoaded" />
-    </div>
-    <Footer :withSocial="false"></Footer>
-  </Layout>
-  <HeaderHome v-if="projectsLoaded" />
+      <Projects id="projects" @loaded="handleProjectsLoaded" />
+      <div ref="contactRef" class="home-contact">
+        <Contact id="contact" v-if="projectsLoaded" />
+      </div>
+      <Footer :withSocial="false"></Footer>
+    </Layout>
+    <HeaderHome v-if="projectsLoaded" />
+  </div>
 </template>
 
 <style scoped lang="scss">
