@@ -7,6 +7,7 @@ export const lenis = ref<Lenis | null>(null);
 
 class Scroll {
   hasScrolled = false;
+  velocity = 0;
 
   constructor() {
     this.init();
@@ -14,6 +15,10 @@ class Scroll {
 
   init() {
     gsap.ticker.add((time) => {
+      if (lenis.value?.isScrolling && Math.abs(lenis.value?.velocity) > 0) {
+        this.velocity = Math.min(Math.abs(lenis.value?.velocity) || 0, 1);
+      }
+
       if (lenis.value) {
         lenis.value.raf(time * 1000);
       }

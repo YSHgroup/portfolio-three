@@ -12,6 +12,7 @@ interface Props {
   scene: Object3D;
   position: Vector3;
   scale: number;
+  renderOrder?: number;
   color?: Color;
 }
 
@@ -20,6 +21,7 @@ export class DigitalNumbers {
   private scene: Object3D;
   private position: Vector3;
   private scale: number;
+  private renderOrder: number;
   private color: Color;
   private mesh: InstancedMesh | null = null;
   private geometry: PlaneGeometry | null = null;
@@ -39,6 +41,7 @@ export class DigitalNumbers {
     this.scene = props.scene;
     this.position = props.position;
     this.scale = props.scale;
+    this.renderOrder = props.renderOrder || 22;
     this.color = props.color || new Color(1, 1, 1);
     this.uniforms.uColor.value = this.color;
     this.init();
@@ -63,7 +66,7 @@ export class DigitalNumbers {
 
     this.mesh = new InstancedMesh(this.geometry, this.material, this.count);
 
-    this.mesh.renderOrder = 20;
+    this.mesh.renderOrder = this.renderOrder;
     this.mesh.scale.set(this.scale, this.scale, this.scale);
 
     const centerIndex = Math.floor(this.count / 2);
@@ -83,7 +86,7 @@ export class DigitalNumbers {
     this.frameAttribute = new InstancedBufferAttribute(frameArray, 1);
     this.geometry.setAttribute("frame", this.frameAttribute);
 
-    this.mesh.renderOrder = 20;
+    this.mesh.renderOrder = 22;
     this.mesh.position.copy(this.position);
 
     this.scene.add(this.mesh);

@@ -4,6 +4,7 @@ import { scene } from "../../core/scene";
 import { labShine } from "./shine";
 import { labBase } from "./base";
 import { labParticles } from "./particles";
+import { labElectric } from "./electric";
 import { DigitalNumbers } from "../digital-numbers";
 import { aboutProgress } from "../../../animations/transitions/about";
 import gsap from "gsap";
@@ -16,6 +17,7 @@ let objects: {
   base: Mesh;
   shine: Mesh;
   display: Mesh;
+  electric: Mesh;
 } | null = null;
 
 let aboutNumbers: DigitalNumbers | null = null;
@@ -28,10 +30,14 @@ const init = () => {
     base: resource.scene.children.find((child: Object3D) => child.name === "base"),
     shine: resource.scene.children.find((child: Object3D) => child.name === "shine"),
     display: resource.scene.children.find((child: Object3D) => child.name === "display"),
+    electric: resource.scene.children.find((child: Object3D) => child.name === "electric"),
   };
 
   Object.values(objects).forEach((object) => {
-    object.renderOrder = object.name === "shine" ? 30 : 20;
+    if (object.name === "shine") object.renderOrder = 30;
+    if (object.name === "electric") object.renderOrder = 25;
+    if (object.name === "base") object.renderOrder = 20;
+    if (object.name === "display") object.renderOrder = 21;
     group.add(object);
   });
 
@@ -39,6 +45,7 @@ const init = () => {
 
   if (objects?.shine) labShine.init(objects.shine);
   if (objects?.base) labBase.init(objects.base, objects.display);
+  if (objects?.electric) labElectric.init(objects.electric);
 
   labParticles.init();
 
@@ -47,6 +54,7 @@ const init = () => {
     scene: group,
     position: new Vector3(0, -0.23, 1.07),
     scale: 0.17,
+    renderOrder: 22,
     color: new Color("#bae9ff"),
   });
   aboutNumbers.updateFrames(0);
@@ -64,6 +72,7 @@ const destroy = () => {
   gsap.ticker.remove(tick);
   labShine.destroy();
   labBase.destroy();
+  labElectric.destroy();
   labParticles.destroy();
   aboutNumbers?.destroy();
   aboutNumbers = null;
