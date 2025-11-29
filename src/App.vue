@@ -29,44 +29,17 @@ onMounted(() => {
 
 <template>
   <Header />
-  <div class="router-view-wrapper">
-    <RouterView v-slot="{ Component, route: routeData }">
-      <Transition name="fade" mode="out-in">
-        <component :is="Component" v-if="Component" :key="routeData.path" />
-      </Transition>
-    </RouterView>
-  </div>
+  <RouterView v-slot="{ Component, route: routeData }">
+    <Transition name="fade" mode="out-in">
+      <component :is="Component" v-if="Component" :key="routeData.path" />
+    </Transition>
+  </RouterView>
   <Cursor v-if="!isTouch" />
 </template>
 
 <style lang="scss">
-.router-view-wrapper {
-  position: relative;
-  min-height: 100%;
-
-  > * {
-    opacity: 1;
-  }
-}
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.4s ease-in-out;
-}
-
-.fade-enter-from {
-  opacity: 0;
-}
-
-.fade-enter-to {
-  opacity: 1;
-}
-
-.fade-leave-from {
-  opacity: 1;
-}
-
-.fade-leave-to {
-  opacity: 0;
 }
 </style>
