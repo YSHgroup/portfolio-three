@@ -3,7 +3,6 @@ import { onMounted, ref } from "vue";
 import { resources } from "./utils/resources";
 import Header from "./components/Header.vue";
 import { sizes } from "./utils/sizes";
-import { three } from "./three";
 import { useTranslations } from "./i18n/composables/useTranslations";
 import { usePreloader } from "./composables/usePreloader";
 import Cursor from "./components/Cursor.vue";
@@ -31,7 +30,6 @@ const { isTouch } = useAgent();
 
 onMounted(() => {
   sizes.init();
-  three.init();
   resources.startLoading();
 });
 </script>

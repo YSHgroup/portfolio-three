@@ -8,18 +8,10 @@ import { raycast } from "./utils/raycast";
 
 let canvas: HTMLCanvasElement | null = null;
 
-const getCanvas = () => {
-  if (canvas) return canvas;
-  canvas = document.createElement("canvas");
-  canvas.classList.add("three-canvas");
+const init = (_canvas: HTMLCanvasElement) => {
+  canvas = _canvas;
 
-  return canvas;
-};
-
-const init = () => {
-  const canvas = getCanvas();
-
-  threeSizes.init(canvas);
+  threeSizes.init(_canvas);
   camera.init();
   renderTarget.init();
   renderer.init(canvas);
@@ -27,22 +19,6 @@ const init = () => {
   resources.once("ready", () => {
     objects.init();
     raycast.init();
-  });
-};
-
-const updateParent = (parent: HTMLElement) => {
-  const canvas = getCanvas();
-  // Ensure parent has dimensions before appending canvas
-  const rect = parent.getBoundingClientRect();
-  if (rect.width && rect.height) {
-    // Set initial canvas dimensions based on parent to prevent layout shift
-    canvas.width = Math.floor(rect.width);
-    canvas.height = Math.floor(rect.height);
-  }
-  parent.appendChild(canvas);
-  // Trigger immediate resize after DOM insertion
-  requestAnimationFrame(() => {
-    threeSizes.resize();
   });
 };
 
@@ -55,4 +31,4 @@ const destroy = () => {
   canvas = null;
 };
 
-export const three = { init, destroy, updateParent, getCanvas };
+export const three = { init, destroy };

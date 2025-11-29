@@ -25,6 +25,7 @@ const contactRef = ref<HTMLElement | null>(null);
 const contactBottom = ref<number>(0);
 const aboutSpacerRef = ref<HTMLElement | null>(null);
 const isHoveringObject3D = ref<boolean>(false);
+const threeCanvasRef = ref<HTMLCanvasElement | null>(null);
 const { isTouch } = useAgent();
 
 const handleIntersection = (entries: IntersectionObserverEntry[]) => {
@@ -75,7 +76,9 @@ onMounted(() => {
   stickyObserver.value = new IntersectionObserver(handleIntersection);
   stickyObserver.value.observe(introRef.value as HTMLElement);
 
-  three.updateParent(stickyContentRef.value as HTMLElement);
+  if (threeCanvasRef.value) {
+    three.init(threeCanvasRef.value);
+  }
 
   gsap.ticker.add(updateCursor);
 });
@@ -83,6 +86,8 @@ onMounted(() => {
 onUnmounted(() => {
   stickyObserver.value?.disconnect();
   stickyObserver.value = null;
+
+  three.destroy();
 
   document.documentElement.style.cursor = "";
 
@@ -108,7 +113,9 @@ const handleProjectsLoaded = () => {
           <div
             ref="stickyContentRef"
             :class="['intro-sticky-content', { 'intro-sticky-content-contact': !isStickyVisible }]"
-          ></div>
+          >
+            <canvas class="three-canvas" ref="threeCanvasRef"></canvas>
+          </div>
           <div :class="{ 'intro-about-hidden': !isStickyVisible }">
             <About :spacer-ref="aboutSpacerRef" />
           </div>
@@ -116,7 +123,6 @@ const handleProjectsLoaded = () => {
         <Hero class="intro-hero" id="hero" />
         <div class="intro-wrapper-spacer"></div>
         <div class="about-spacer" ref="aboutSpacerRef" id="about"></div>
-        <!--      <About :spacer-ref="aboutSpacerRef" />-->
       </div>
       <Projects id="projects" @loaded="handleProjectsLoaded" />
       <div ref="contactRef" class="home-contact">
@@ -129,6 +135,11 @@ const handleProjectsLoaded = () => {
 </template>
 
 <style scoped lang="scss">
+.three-canvas {
+  width: 100%;
+  height: calc(var(--lvh, 1lvh) * 100);
+}
+
 .home {
   &-contact {
     width: 100%;
