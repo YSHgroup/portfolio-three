@@ -1,5 +1,5 @@
 import { ref, watchEffect } from "vue";
-import { lenis } from "./useScroll";
+import { lenisHome } from "./useScroll";
 import { sizes } from "../utils/sizes";
 
 export const useHeaderTheme = ({
@@ -32,13 +32,13 @@ export const useHeaderTheme = ({
   };
 
   watchEffect((onInvalidate) => {
-    if (lenis.value) {
-      lenis.value.on("scroll", handleScroll);
+    if (lenisHome.value) {
+      lenisHome.value.on("scroll", handleScroll);
     }
 
     onInvalidate(() => {
-      if (lenis.value) {
-        lenis.value.off("scroll", handleScroll);
+      if (lenisHome.value) {
+        lenisHome.value.off("scroll", handleScroll);
       }
     });
   });

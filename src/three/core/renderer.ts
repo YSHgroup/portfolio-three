@@ -10,7 +10,6 @@ import { threeSizes } from "../utils/sizes";
 import type { Camera, Object3D, Scene } from "three";
 
 let instance: WebGLRenderer | null = null;
-let active = false;
 let canvas: HTMLCanvasElement | null = null;
 let visible = true;
 
@@ -49,7 +48,7 @@ const tick = () => {
     visible = shouldBeVisible;
   }
 
-  if (!instance || !active || !shouldBeVisible) return;
+  if (!instance || !shouldBeVisible) return;
 
   if (sceneWeights.about > 0.001) {
     renderTarget.render();
@@ -58,10 +57,6 @@ const tick = () => {
   const color = sceneWeights.contact > 0.001 ? colors.beigeDark : colors.beigeLight;
   instance.setClearColor(color);
   instance.render(scene.instance, camera.instance);
-};
-
-const setActive = (value: boolean) => {
-  active = value;
 };
 
 const compile = async () => {
@@ -112,8 +107,7 @@ const destroy = () => {
   instance.dispose();
   gsap.ticker.remove(tick);
   instance = null;
-  active = false;
   visible = true;
 };
 
-export const renderer = { init, destroy, getInstance, setActive, compile };
+export const renderer = { init, destroy, getInstance, compile };

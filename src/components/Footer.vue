@@ -7,7 +7,7 @@ import NotchSection from "./NotchSection.vue";
 import { t } from "../i18n/utils/translate";
 import { locale } from "../i18n/store";
 import ButtonRound from "./ButtonRound.vue";
-import { lenis } from "../composables/useScroll";
+import { lenisHome } from "../composables/useScroll";
 import ArrowRightLong from "./icons/ArrowRightLong.vue";
 
 interface Props {
@@ -15,8 +15,8 @@ interface Props {
 }
 
 const handleBackToTop = () => {
-  if (!lenis.value) return;
-  lenis.value.scrollTo(0);
+  if (!lenisHome.value) return;
+  lenisHome.value.scrollTo(0);
 };
 
 const { withSocial = true } = defineProps<Props>();

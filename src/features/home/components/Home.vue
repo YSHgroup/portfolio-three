@@ -72,7 +72,6 @@ const updateCursor = () => {
 };
 
 onMounted(() => {
-  three.setActive(true);
 
   stickyObserver.value = new IntersectionObserver(handleIntersection);
   stickyObserver.value.observe(introRef.value as HTMLElement);
@@ -83,7 +82,6 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  three.setActive(false);
 
   stickyObserver.value?.disconnect();
   stickyObserver.value = null;

@@ -55,4 +55,4 @@ const destroy = () => {
   canvas = null;
 };
 
-export const three = { init, destroy, setActive: renderer.setActive, updateParent, getCanvas };
+export const three = { init, destroy, updateParent, getCanvas };
