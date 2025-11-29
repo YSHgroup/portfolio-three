@@ -1,11 +1,17 @@
 <script setup lang="ts">
-import { projectId } from "../../../composables/useRouteObserver";
+import { projectId, recentProjectId } from "../../../composables/useRouteObserver";
+import { isTransitioning } from "../../../composables/useProjectTransition";
 </script>
 
 <template>
   <div
     ref="projectRef"
-    :class="['project', projectId !== null && `project-${projectId}`, projectId !== null && `project-visible`]"
+    :class="[
+      'project',
+      recentProjectId !== null && `project-${recentProjectId}`,
+      isTransitioning && `project-transitioning`,
+      projectId !== null && `project-visible`,
+    ]"
   >
     <h1>test</h1>
     <h1>test</h1>
@@ -19,6 +25,7 @@ import { projectId } from "../../../composables/useRouteObserver";
 <style scoped lang="scss">
 .project {
   //min-height: calc(var(--lvh) * 100);
+  background-color: var(--color-background-300);
   min-height: calc(var(--lvh) * 500);
   display: flex;
   flex-direction: column;

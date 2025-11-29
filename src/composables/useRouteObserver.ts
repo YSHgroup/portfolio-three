@@ -1,5 +1,10 @@
 import { ref, onMounted, onUnmounted, watch } from "vue";
 
+export const isProjectRoute = (path: string) => {
+  const projectMatch = path.match(/^\/project\/([^/]+)$/);
+  return projectMatch ? (projectMatch[1] as string) : null;
+};
+
 // Global reactive refs for projectId and path
 export const projectId = ref<string | null>(null);
 export const recentProjectId = ref<string | null>(null);
@@ -68,8 +73,7 @@ export const useRouteObserver = () => {
   watch(
     localPath,
     (newPath) => {
-      const projectMatch = newPath.match(/^\/project\/([^/]+)$/);
-      const projId = projectMatch ? (projectMatch[1] as string) : null;
+      const projId = isProjectRoute(newPath);
       localProjectId.value = projId;
       projectId.value = projId;
       if (typeof projId === "string") {

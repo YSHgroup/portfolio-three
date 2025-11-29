@@ -92,7 +92,7 @@ onMounted(() => {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  z-index: var(--z-index-header);
+  z-index: var(--z-index-header-home);
   height: var(--height-header);
   align-items: center;
   justify-content: center;
