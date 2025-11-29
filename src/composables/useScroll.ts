@@ -48,8 +48,6 @@ export const useScroll = ({ projectWrapperRef, projectContentRef }: Props) => {
       anchors: { lerp: 0.08 },
     });
 
-    console.log(projectWrapperRef.value, projectContentRef.value);
-
     lenisProject.value = new Lenis({
       anchors: { lerp: 0.08 },
       wrapper: projectWrapperRef.value!,

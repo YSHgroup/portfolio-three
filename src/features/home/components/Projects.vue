@@ -16,7 +16,10 @@ const emit = defineEmits<{
 }>();
 
 const loadPreviews = async () => {
-  const module = await previews[locale.value as keyof typeof previews]();
+  if (!locale.value) return;
+  const func = previews[locale.value as keyof typeof previews];
+  if (!func) return;
+  const module = await func();
   loadedPreviews.value = module.default;
   emit("loaded", module.default);
 };

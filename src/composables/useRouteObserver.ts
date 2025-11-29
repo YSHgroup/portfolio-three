@@ -73,7 +73,6 @@ export const useRouteObserver = () => {
       localProjectId.value = projId;
       projectId.value = projId;
       if (typeof projId === "string") {
-        console.log("recentProjectId", projId);
         recentProjectId.value = projId;
       }
     },
