@@ -1,5 +1,5 @@
 import { ref, watch, watchEffect } from "vue";
-import { useRoute } from "vue-router";
+import { projectId } from "./useRouteObserver";
 import { lenis } from "./useScroll";
 import { sizes } from "../utils/sizes";
 
@@ -15,10 +15,9 @@ export const useHeaderTheme = ({
   let aboutElement: HTMLElement | null = null;
   const isDarkTheme = ref(false);
   const hasScrolledIntoView = ref(false);
-  const route = useRoute();
 
   const handleScroll = () => {
-    if (route.path !== "/") {
+    if (projectId.value !== null) {
       if (typeof onAboutElementChange === "function") {
         onAboutElementChange(null, null, false);
       }
@@ -57,16 +56,16 @@ export const useHeaderTheme = ({
   });
 
   watch(
-    () => route.path,
+    projectId,
     () => {
       aboutElement = null;
     },
   );
 
   watch(
-    () => route.path,
+    projectId,
     () => {
-      if (route.path !== "/") {
+      if (projectId.value !== null) {
         isDarkTheme.value = false;
       }
     },

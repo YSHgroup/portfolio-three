@@ -3,7 +3,7 @@ import Lenis from "lenis";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ref } from "vue";
 import { onMounted, onUnmounted } from "vue";
-import { useRoute } from "vue-router";
+import { path } from "./useRouteObserver";
 
 export const lenis = ref<Lenis | null>(null);
 export const velocity = ref(0);
@@ -31,14 +31,12 @@ export const createNewLenis = (path: string) => {
   lenis.value = new Lenis({
     anchors: { lerp: 0.08 },
   });
-  console.log(isHome, homeScrollPosition.value);
+
   lenis.value.scrollTo(isHome ? homeScrollPosition.value : 0, { immediate: true, force: true });
   lenis.value.on("scroll", handleScroll);
 };
 
 export const useScroll = () => {
-  const route = useRoute();
-
   const tick = (time: number) => {
     if (lenis.value?.isScrolling === "smooth" && Math.abs(lenis.value?.velocity) > 0) {
       velocity.value = Math.min(Math.abs(lenis.value?.velocity * 0.75) || 0, 1);
@@ -52,7 +50,10 @@ export const useScroll = () => {
   onMounted(() => {
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
-    createNewLenis(route.path);
+    console.log(path.value);
+    if (path.value) {
+      createNewLenis(path.value);
+    }
   });
 
   onUnmounted(() => {

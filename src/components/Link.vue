@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { computed, useAttrs } from "vue";
-import { RouterLink } from "vue-router";
+import { useRouter } from "../composables/useRouter";
 
 const attrs = useAttrs();
+const router = useRouter();
 
 const props = defineProps<{
   external?: boolean;
@@ -23,6 +24,23 @@ const resolvedTo = computed(() => {
 
   return path;
 });
+
+const handleClick = (event: MouseEvent) => {
+  // Don't interfere with external links or if modifier keys are pressed
+  if (props.external || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) {
+    return;
+  }
+
+  // Prevent default navigation
+  event.preventDefault();
+
+  // Use replace if specified, otherwise use push
+  if (props.replace) {
+    router.replace(resolvedTo.value);
+  } else {
+    router.push(resolvedTo.value);
+  }
+};
 </script>
 
 <template>
@@ -37,7 +55,13 @@ const resolvedTo = computed(() => {
     <slot></slot>
   </component>
 
-  <RouterLink v-else :to="resolvedTo" v-bind="attrs" :replace="props.replace">
+  <component
+    v-else
+    :is="props.renderAs || 'a'"
+    :href="resolvedTo"
+    @click="handleClick"
+    v-bind="attrs"
+  >
     <slot></slot>
-  </RouterLink>
+  </component>
 </template>

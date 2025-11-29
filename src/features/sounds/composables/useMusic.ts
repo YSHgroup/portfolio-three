@@ -1,5 +1,5 @@
 import { onMounted, onUnmounted, watchEffect } from "vue";
-import { useRoute } from "vue-router";
+import { path } from "../../../composables/useRouteObserver";
 import gsap from "gsap";
 import { BASE_VOLUMES, musicTracks } from "../definitions/music";
 import { sceneWeights } from "../../../animations/scenes";
@@ -11,11 +11,9 @@ import { isFeatureEnabled } from "../../../utils/features";
 import type { MusicTrack } from "../types";
 
 export const useMusic = () => {
-  const route = useRoute();
-
   const tickVolumes = () => {
     // If not on home route, always use base volume
-    if (route.path !== "/") {
+    if (path.value !== "/") {
       musicTracks.luci.volume(BASE_VOLUMES.luci);
       musicTracks.about.volume(0);
       return;

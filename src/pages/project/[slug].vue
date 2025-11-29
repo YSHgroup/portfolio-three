@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import { ref, watch, computed } from "vue";
-import { useRoute } from "vue-router";
 import { projectModules } from "../../content/projects/index";
 import ProjectContent from "../../features/projects/components/ProjectContent.vue";
 import Footer from "../../components/Footer.vue";
 import { locale } from "../../i18n/store";
+import { projectId } from "../../composables/useRouteObserver";
 
 import type { Locale } from "../../i18n/types";
-
-const route = useRoute();
-const projectId = computed(() => route.meta.project as string);
 
 const loading = ref(true);
 const content = ref(null);
@@ -30,7 +27,9 @@ const fetchProject = async (project: string | undefined) => {
 watch(
   [projectId, locale],
   () => {
-    fetchProject(projectId.value);
+    if (projectId.value) {
+      fetchProject(projectId.value);
+    }
   },
   { immediate: true },
 );
@@ -52,7 +51,7 @@ const footerClassNames = computed(() => {
 
 <template>
   <div :class="classNames">
-    <ProjectContent v-if="content" :content="content" :projectId="projectId" />
+    <ProjectContent v-if="content && projectId" :content="content" :projectId="projectId" />
     <Footer :class="footerClassNames" />
   </div>
 </template>

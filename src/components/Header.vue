@@ -5,14 +5,14 @@ import { computed, ref } from "vue";
 import { t } from "../i18n/utils/translate";
 import { useHeaderTheme } from "../composables/useHeaderTheme";
 import { lenis } from "../composables/useScroll";
-import { useRoute, useRouter } from "vue-router";
+import { projectId } from "../composables/useRouteObserver";
 import { social } from "../content/social";
 import ButtonRound from "./ButtonRound.vue";
 import ArrowRight from "./icons/ArrowRight.vue";
 import SoundsToggle from "./SoundsToggle.vue";
 import { isFeatureEnabled } from "../utils/features";
+import { useRouter } from "../composables/useRouter";
 
-const route = useRoute();
 const router = useRouter();
 
 const scrolledPastHeroVisible = ref(false);
@@ -36,21 +36,19 @@ const handleLogoClick = () => {
   lenis.value.scrollTo(0);
 };
 
-const isProjectPage = computed(() => route.meta.project !== undefined);
-
 const classNames = computed(() => {
   return {
     header: true,
     "header-dark": isDarkTheme.value,
     "header-scrolled": scrolledPastHeroVisible.value,
-    [`project-${route.meta.project as string}`]: isProjectPage.value,
+    [`project-${projectId.value}`]: projectId.value !== null,
   };
 });
 
 const getInTouchClassNames = computed(() => {
   return {
     "header-get-in-touch": true,
-    "header-get-in-touch-isProjectPage": isProjectPage.value,
+    "header-get-in-touch-isProjectPage": projectId.value !== null,
   };
 });
 </script>
@@ -59,17 +57,17 @@ const getInTouchClassNames = computed(() => {
   <header :class="classNames">
     <div class="header-left">
       <ButtonRound
-        v-if="isProjectPage"
+        v-if="projectId !== null"
         variant="accent"
         @click="router.back()"
         :aria-label="t('back-to-home')"
-        :class="{ 'header-back': true, 'header-back-isProjectPage': isProjectPage }"
+        :class="{ 'header-back': true, 'header-back-isProjectPage': projectId !== null }"
         data-cursor="circle-white"
       >
         <ArrowRight class="header-back-icon" />
       </ButtonRound>
     </div>
-    <div :class="{ 'header-logo': true, 'header-logo-isProjectPage': isProjectPage }" @click="handleLogoClick">
+    <div :class="{ 'header-logo': true, 'header-logo-isProjectPage': projectId !== null }" @click="handleLogoClick">
       <Logo class="header-logo-image" />
     </div>
     <div class="header-right">

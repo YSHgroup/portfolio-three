@@ -3,14 +3,10 @@ import "./assets/styles/index.scss";
 import App from "./App.vue";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { createWebHistory, createRouter } from "vue-router";
-import { routes } from "./routes";
-import { lenis, homeScrollPosition, createNewLenis } from "./composables/useScroll";
-import { ROUTE_TRANSITION_DURATION } from "./animations/route";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const router = createRouter({
+/**const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior(to, from, savedPosition) {
@@ -46,5 +42,5 @@ const router = createRouter({
     });
   },
 });
-
-createApp(App).use(router).mount("#app");
+ */
+createApp(App).mount("#app");

@@ -3,7 +3,7 @@ import { onMounted, onUnmounted, ref, watch } from "vue";
 import { lerp } from "../utils/math";
 import gsap from "gsap";
 import ArrowRightLong from "./icons/ArrowRightLong.vue";
-import { useRoute } from "vue-router";
+import { path } from "../composables/useRouteObserver";
 import { raycast } from "../three/utils/raycast";
 
 const cursorWrapperRef = ref<HTMLElement | null>(null);
@@ -15,8 +15,6 @@ const currentY = ref(0);
 const isVisible = ref(false);
 const cursorType = ref<"circle-black" | "arrow" | "circle-white" | null>(null);
 const detectedType = ref<"circle-black" | "arrow" | "circle-white" | null>(null);
-
-const route = useRoute();
 
 const lerpSpeed = 0.1;
 
@@ -86,7 +84,7 @@ onMounted(() => {
 
 // Watch for route changes and reset cursor
 watch(
-  () => route.path,
+  () => path.value,
   () => {
     isVisible.value = false;
     cursorType.value = null;
@@ -100,11 +98,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div
-    ref="cursorWrapperRef"
-    class="cursor-wrapper"
-    :class="{ [`project-${route.meta.project}`]: typeof route.meta.project === 'string' }"
-  >
+  <div ref="cursorWrapperRef" class="cursor-wrapper" :class="{ [`project-${path}`]: typeof path === 'string' }">
     <div ref="cursorScaleRef" class="cursor-scale">
       <div class="cursor cursor-circle-black" :class="{ 'cursor-active': cursorType === 'circle-black' }" />
       <div class="cursor cursor-circle-white" :class="{ 'cursor-active': cursorType === 'circle-white' }" />
