@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import Lenis from "lenis";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ref } from "vue";
+import { ref, watch, type Ref } from "vue";
 import { onMounted, onUnmounted } from "vue";
 import { projectId } from "./useRouteObserver";
 
@@ -21,7 +21,12 @@ const createNewLenis = () => {
   lenisHome.value.on("scroll", handleScroll);
 };
 
-export const useScroll = () => {
+interface Props {
+  projectWrapperRef: Ref<HTMLElement | null>;
+  projectContentRef: Ref<HTMLElement | null>;
+}
+
+export const useScroll = ({ projectWrapperRef, projectContentRef }: Props) => {
   const tick = (time: number) => {
     const instance = projectId.value === null ? lenisHome.value : lenisProject.value;
     if (!instance) return;
@@ -43,12 +48,26 @@ export const useScroll = () => {
       anchors: { lerp: 0.08 },
     });
 
+    console.log(projectWrapperRef.value, projectContentRef.value);
+
     lenisProject.value = new Lenis({
       anchors: { lerp: 0.08 },
+      wrapper: projectWrapperRef.value!,
+      content: projectContentRef.value!,
     });
 
     lenisHome.value.on("scroll", handleScroll);
     lenisProject.value.on("scroll", handleScroll);
+  });
+
+  watch(projectId, (newProjectId) => {
+    if (newProjectId === null) {
+      lenisProject?.value?.stop();
+      lenisHome?.value?.start();
+    } else {
+      lenisHome?.value?.stop();
+      lenisProject?.value?.start();
+    }
   });
 
   onUnmounted(() => {

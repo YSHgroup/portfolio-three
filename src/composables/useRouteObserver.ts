@@ -2,6 +2,7 @@ import { ref, onMounted, onUnmounted, watch } from "vue";
 
 // Global reactive refs for projectId and path
 export const projectId = ref<string | null>(null);
+export const recentProjectId = ref<string | null>(null);
 export const path = ref<string>(typeof window !== "undefined" ? window.location.pathname : "/");
 
 // Shared state and listeners to avoid multiple interceptors
@@ -70,7 +71,11 @@ export const useRouteObserver = () => {
       const projectMatch = newPath.match(/^\/project\/([^/]+)$/);
       const projId = projectMatch ? (projectMatch[1] as string) : null;
       localProjectId.value = projId;
-      projectId.value = projId; // Keep global projectId ref up to date
+      projectId.value = projId;
+      if (typeof projId === "string") {
+        console.log("recentProjectId", projId);
+        recentProjectId.value = projId;
+      }
     },
     { immediate: true },
   );

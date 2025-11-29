@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import { resources } from "./utils/resources";
 import Header from "./components/Header.vue";
 import { sizes } from "./utils/sizes";
@@ -14,12 +14,17 @@ import ProjectBackground from "./features/projects/components/ProjectBackground.
 import { useScroll } from "./composables/useScroll";
 import Home from "./features/home/components/Home.vue";
 import { useRouteObserver } from "./composables/useRouteObserver";
+import Project from "./features/projects/components/Project.vue";
+import { projectId } from "./composables/useRouteObserver";
+
+const projectWrapperRef = ref<HTMLElement | null>(null);
+const projectContentRef = ref<HTMLElement | null>(null);
 
 useTranslations();
 usePreloader();
 useMusic();
 useHowler();
-useScroll();
+useScroll({ projectWrapperRef, projectContentRef });
 useRouteObserver();
 const { isTouch } = useAgent();
 
@@ -34,11 +39,29 @@ onMounted(() => {
   <Header />
   <Home />
   <ProjectBackground />
+  <div :class="['project-wrapper', projectId !== null && `project-wrapper-visible`]" ref="projectWrapperRef">
+    <div class="project-content" ref="projectContentRef">
+      <Project />
+    </div>
+  </div>
   <Cursor v-if="!isTouch" />
 </template>
 <style lang="scss">
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.4s ease-in-out;
+.project-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-index-layout-project);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-route-duration) var(--transition-route-ease);
+
+  &-visible {
+    overflow-y: scroll;
+    pointer-events: auto;
+    opacity: 1;
+  }
 }
 </style>

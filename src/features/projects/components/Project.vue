@@ -1,10 +1,18 @@
+<script setup lang="ts">
+import { projectId } from "../../../composables/useRouteObserver";
+</script>
+
 <template>
-  <div class="project">
+  <div
+    ref="projectRef"
+    :class="['project', projectId !== null && `project-${projectId}`, projectId !== null && `project-visible`]"
+  >
     <h1>test</h1>
     <h1>test</h1>
     <h1>test</h1>
     <h1>test</h1>
     <h1>test</h1>
+    <button>Close</button>
   </div>
 </template>
 
@@ -12,7 +20,6 @@
 .project {
   //min-height: calc(var(--lvh) * 100);
   min-height: calc(var(--lvh) * 500);
-  z-index: var(--z-index-layout-project);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
