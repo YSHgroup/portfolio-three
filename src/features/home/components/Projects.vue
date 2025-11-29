@@ -2,7 +2,7 @@
 import { ref, watch, onMounted } from "vue";
 import { previews } from "../../../content/projects/previews";
 import { locale } from "../../../i18n/store";
-import PreviewCard from "./PreviewCard.vue";
+import PreviewCard from "../../projects/components/PreviewCard.vue";
 import NotchSection from "../../../components/NotchSection.vue";
 import Banner from "../../../components/Banner.vue";
 import { t } from "../../../i18n/utils/translate";

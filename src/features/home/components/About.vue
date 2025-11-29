@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watchEffect } from "vue";
-import { transitions } from "../../animations";
+import { transitions } from "../../../animations";
 import BoxDescription from "./BoxDescription.vue";
 import BoxServices from "./BoxServices.vue";
 import BoxDetails from "./BoxDetails.vue";

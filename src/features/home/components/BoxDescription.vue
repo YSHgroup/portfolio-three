@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref, watchEffect, onBeforeUnmount } from "vue";
 import gsap from "gsap";
-import { BREAKPOINTS } from "../../utils/sizes";
+import { BREAKPOINTS } from "../../../utils/sizes";
 import { Vector3 } from "three";
-import ProjectedElement from "../../components/ProjectedElement.vue";
-import { t } from "../../i18n/utils/translate";
-import AppearingText from "../../components/AppearingText.vue";
-import PinIcon from "../../components/icons/Pin.vue";
+import ProjectedElement from "../../../components/ProjectedElement.vue";
+import { t } from "../../../i18n/utils/translate";
+import AppearingText from "../../../components/AppearingText.vue";
+import PinIcon from "../../../components/icons/Pin.vue";
 
 const point = new Vector3(-0.9, 2, 6.75);
 

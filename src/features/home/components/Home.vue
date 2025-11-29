@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import Layout from "../components/Layout.vue";
-import Hero from "../features/hero/Hero.vue";
-import About from "../features/about/About.vue";
+import Layout from "../../../components/Layout.vue";
+import Hero from "./Hero.vue";
+import About from "./About.vue";
 //import AboutSections from "../features/about/Sections.vue";
-import Projects from "../features/projects/components/Projects.vue";
-import Contact from "../features/contact/Contact.vue";
-import Footer from "../components/Footer.vue";
+import Projects from "./Projects.vue";
+import Contact from "./Contact.vue";
+import Footer from "../../../components/Footer.vue";
 import { ref, onMounted, onUnmounted, watchEffect, computed, watch } from "vue";
-import { three } from "../three";
-import { animations } from "../animations";
-import HeaderHome from "../components/HeaderHome.vue";
-import { preloaderVisible } from "../composables/usePreloader";
-import ScrollIcon from "../components/ScrollIcon.vue";
-import { raycast } from "../three/utils/raycast";
+import { three } from "../../../three";
+import { animations } from "../../../animations";
+import HeaderHome from "../../../components/HeaderHome.vue";
+import { preloaderVisible } from "../../../composables/usePreloader";
+import ScrollIcon from "../../../components/ScrollIcon.vue";
+import { raycast } from "../../../three/utils/raycast";
 import gsap from "gsap";
-import { useAgent } from "../composables/useAgent";
+import { useAgent } from "../../../composables/useAgent";
 
 const introRef = ref<HTMLElement | null>(null);
 const stickyContentRef = ref<HTMLElement | null>(null);

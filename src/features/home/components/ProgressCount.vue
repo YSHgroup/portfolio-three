@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import gsap from "gsap";
-import { aboutProgress } from "../../animations/transitions/about";
+import { aboutProgress } from "../../../animations/transitions/about";
 
 const progressPercentage = ref(0);
 

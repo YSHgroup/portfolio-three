@@ -12,7 +12,7 @@ import { useMusic } from "./features/sounds/composables/useMusic";
 import { useHowler } from "./features/sounds/composables/useHowler";
 import ProjectBackground from "./features/projects/components/ProjectBackground.vue";
 import { useScroll } from "./composables/useScroll";
-import Home from "./pages/Home.vue";
+import Home from "./features/home/components/Home.vue";
 import { useRouteObserver } from "./composables/useRouteObserver";
 
 useTranslations();

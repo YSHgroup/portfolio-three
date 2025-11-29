@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
-import { transitions } from "../../animations";
-import { t } from "../../i18n/utils/translate";
-import Social from "../../components/Social.vue";
+import { transitions } from "../../../animations";
+import { t } from "../../../i18n/utils/translate";
+import Social from "../../../components/Social.vue";
 
 const contactElement = ref<HTMLElement | null>(null);
 
