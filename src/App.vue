@@ -10,6 +10,7 @@ import Cursor from "./components/Cursor.vue";
 import { useAgent } from "./composables/useAgent";
 import { useMusic } from "./features/sounds/composables/useMusic";
 import { useHowler } from "./features/sounds/composables/useHowler";
+import ProjectBackground from "./features/projects/components/ProjectBackground.vue";
 import { useScroll } from "./composables/useScroll";
 import Home from "./pages/Home.vue";
 import { useRouteObserver } from "./composables/useRouteObserver";
@@ -32,6 +33,7 @@ onMounted(() => {
 <template>
   <Header />
   <Home />
+  <ProjectBackground />
   <Cursor v-if="!isTouch" />
 </template>
 <style lang="scss">

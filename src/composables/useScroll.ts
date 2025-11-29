@@ -50,7 +50,7 @@ export const useScroll = () => {
   onMounted(() => {
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
-    console.log(path.value);
+
     if (path.value) {
       createNewLenis(path.value);
     }

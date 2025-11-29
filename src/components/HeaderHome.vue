@@ -100,7 +100,7 @@ onMounted(() => {
   opacity: 0;
   transition:
     opacity 0.3s ease-in-out,
-    transform 0.3s ease-in-out;
+    transform var(--transition-route-duration) var(--transition-route-ease);
 
   &-isProjectPage {
     transform: translateX(-50%) translateY(-100%);
