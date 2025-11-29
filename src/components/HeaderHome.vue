@@ -5,6 +5,7 @@ import { t } from "../i18n/utils/translate";
 import { lenis } from "../composables/useScroll";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useHeaderTheme } from "../composables/useHeaderTheme";
+import { projectId } from "../composables/useRouteObserver";
 
 const handleLinkClick = (link: string) => {
   if (!lenis.value) return;
@@ -61,7 +62,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :class="['header-home', { 'header-home-mounted': isMounted }]">
+  <div :class="['header-home', { 'header-home-mounted': isMounted, 'header-home-isProjectPage': projectId !== null }]">
     <div :class="['header-home-links', { 'header-home-links-dark': isDarkTheme }]">
       <div
         :class="[
@@ -97,8 +98,13 @@ onMounted(() => {
   justify-content: center;
   display: none;
   opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-  transition-delay: 0.3s;
+  transition:
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+
+  &-isProjectPage {
+    transform: translateX(-50%) translateY(-100%);
+  }
 
   &-mounted {
     opacity: 1;

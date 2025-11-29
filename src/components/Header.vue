@@ -17,7 +17,7 @@ const router = useRouter();
 
 const scrolledPastHeroVisible = ref(false);
 const { isDarkTheme } = useHeaderTheme({
-  onAboutElementChange: (element, boundingClientRect, hasScrolledIntoView) => {
+  onUpdate: (element, boundingClientRect, hasScrolledIntoView) => {
     if (!element || !boundingClientRect) {
       scrolledPastHeroVisible.value = false;
       return;
@@ -110,7 +110,9 @@ const getInTouchClassNames = computed(() => {
 
   &-back {
     pointer-events: none;
-    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    transition-delay: 0.1s;
     pointer-events: auto;
 
     &-icon {
@@ -121,7 +123,7 @@ const getInTouchClassNames = computed(() => {
 
     &-isProjectPage {
       pointer-events: auto;
-      visibility: visible;
+      opacity: 1;
     }
   }
 
@@ -184,7 +186,9 @@ const getInTouchClassNames = computed(() => {
     }
 
     &-isProjectPage {
+      transition: opacity 0.2s ease-in-out;
       pointer-events: none;
+      opacity: 0;
     }
 
     &-image {
