@@ -71,6 +71,7 @@ watch(
     z-index: calc(var(--z-index-layout-project) + 1);
     transition: opacity calc(var(--transition-route-duration) - 0.2s) var(--transition-route-ease);
     transition-delay: 0.2s;
+    pointer-events: none;
 
     &-visible {
       opacity: 0;

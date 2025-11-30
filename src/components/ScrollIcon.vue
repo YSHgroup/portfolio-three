@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref, watchEffect } from "vue";
-import { lenisHome } from "../composables/useScroll";
+import { lenis } from "../composables/useScroll";
 import ArrowRight from "./icons/ArrowRight.vue";
 import gsap from "gsap";
 import SwipeUp from "./icons/SwipeUp.vue";
@@ -18,7 +18,7 @@ onMounted(() => {
 
 const tick = () => {
   if (projectId.value !== null) return;
-  if (lenisHome.value?.isScrolling) {
+  if (lenis.value?.isScrolling) {
     hasScrolled.value = true;
   }
 };

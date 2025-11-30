@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted } from "vue";
 import { resources } from "./utils/resources";
 import Header from "./components/Header.vue";
 import { sizes } from "./utils/sizes";
@@ -9,22 +9,19 @@ import Cursor from "./components/Cursor.vue";
 import { useAgent } from "./composables/useAgent";
 import { useMusic } from "./features/sounds/composables/useMusic";
 import { useHowler } from "./features/sounds/composables/useHowler";
-import { useScroll } from "./composables/useScroll";
+import { useRouteObserver, projectId } from "./composables/useRouteObserver";
 import Home from "./features/home/components/Home.vue";
-import { useRouteObserver } from "./composables/useRouteObserver";
 import Project from "./features/projects/components/Project.vue";
-import { projectId } from "./composables/useRouteObserver";
 import { useProjectTransition } from "./composables/useProjectTransition";
-
-const projectWrapperRef = ref<HTMLElement | null>(null);
-const projectContentRef = ref<HTMLElement | null>(null);
+import { useScroll } from "./composables/useScroll";
 
 const { isTransitioning } = useProjectTransition();
+
 useTranslations();
 usePreloader();
 useMusic();
 useHowler();
-useScroll({ projectWrapperRef, projectContentRef });
+useScroll(); // <-- single Lenis instance
 useRouteObserver();
 const { isTouch } = useAgent();
 
@@ -36,42 +33,64 @@ onMounted(() => {
 
 <template>
   <Header />
-  <Home />
+
+  <!-- main page -->
+  <div :class="{ 'home-wrapper-projectIsReady': projectId !== null && !isTransitioning }">
+    <Home v-show="projectId === null || isTransitioning" />
+  </div>
+
+  <!-- overlay page -->
   <div
-    :class="[
-      'project-wrapper',
-      projectId !== null && `project-wrapper-visible`,
-      isTransitioning && `project-wrapper-transitioning`,
-    ]"
-    ref="projectWrapperRef"
+    class="project-wrapper"
+    :class="{
+      'project-wrapper-visible': projectId !== null,
+      'project-wrapper-transitioning': isTransitioning,
+      'project-wrapper-isReady': projectId !== null && !isTransitioning,
+    }"
   >
-    <div :class="['project-content', projectId !== null && `project-content-visible`]" ref="projectContentRef">
-      <Project />
+    <div class="project-content">
+      <Project v-show="projectId !== null || isTransitioning" />
     </div>
   </div>
+
   <Cursor v-if="!isTouch" />
 </template>
 
 <style lang="scss">
-.project-wrapper {
+.home-wrapper-projectIsReady {
+  visibility: hidden;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
+}
+
+.project-wrapper {
+  position: fixed; /* <-- key */
+  inset: 0;
+  overflow: hidden; /* new page must NOT scroll during transition */
   z-index: var(--z-index-layout-project);
   clip-path: circle(0%);
   transition: clip-path var(--transition-route-duration) var(--transition-route-ease);
-  overflow-y: scroll;
   visibility: hidden;
+  pointer-events: none; /* avoid interaction before fully opened */
 
   &-visible {
-    clip-path: circle(100%);
     visibility: visible;
+    clip-path: circle(100%);
+    pointer-events: auto; /* re-enable interaction */
   }
 
   &-transitioning {
     visibility: visible;
   }
+
+  &-isReady {
+    position: static;
+  }
+}
+
+.project-content {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* ensure no scroll container */
 }
 </style>

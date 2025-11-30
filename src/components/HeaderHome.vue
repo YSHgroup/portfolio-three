@@ -2,14 +2,14 @@
 import HeaderLink from "./HeaderLink.vue";
 import { onMounted, ref } from "vue";
 import { t } from "../i18n/utils/translate";
-import { lenisHome } from "../composables/useScroll";
+import { lenis } from "../composables/useScroll";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useHeaderTheme } from "../composables/useHeaderTheme";
 import { projectId } from "../composables/useRouteObserver";
 
 const handleLinkClick = (link: string) => {
-  if (!lenisHome.value) return;
-  lenisHome.value.scrollTo(link);
+  if (!lenis.value) return;
+  lenis.value.scrollTo(link);
 };
 
 type ActiveLink = "about" | "projects" | "contact";

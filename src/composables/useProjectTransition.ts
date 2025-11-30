@@ -1,43 +1,43 @@
 import { ref, watch } from "vue";
 import { projectId } from "./useRouteObserver";
-import { isProjectRoute } from "./useRouteObserver";
 
 export const ROUTE_TRANSITION_DURATION = 800;
-
 export const isTransitioning = ref(false);
 
-let isInitialized = typeof window !== "undefined" && !isProjectRoute(window.location.pathname) ? true : false;
+let hasLoaded = false;
+let timeout: ReturnType<typeof setTimeout> | null = null;
 
 export const useProjectTransition = () => {
-  watch(
-    projectId,
-    (newProjectId, oldProjectId, onInvalidate) => {
-      // Skip transition on initial load
-      if (!isInitialized) {
-        isInitialized = true;
-        return;
-      }
+  watch(projectId, (newId, oldId, onInvalidate) => {
+    // skip first load entirely
+    if (!hasLoaded) {
+      hasLoaded = true;
+      return;
+    }
 
-      // Transition when navigating TO a project or FROM a project back to home
-      const navigatingToProject = newProjectId !== null && newProjectId !== oldProjectId;
-      const navigatingFromProject = oldProjectId !== null && newProjectId === null;
+    // if neither entering nor leaving project → do nothing
+    const entering = oldId === null && newId !== null;
+    const leaving = oldId !== null && newId === null;
 
-      if (navigatingToProject || navigatingFromProject) {
-        isTransitioning.value = true;
+    if (!entering && !leaving) return;
 
-        const timeout = setTimeout(() => {
-          isTransitioning.value = false;
-        }, ROUTE_TRANSITION_DURATION);
+    // clear old timeout
+    if (timeout) {
+      clearTimeout(timeout);
+      timeout = null;
+    }
 
-        onInvalidate(() => {
-          clearTimeout(timeout);
-        });
-      }
-    },
-    { immediate: false },
-  );
+    isTransitioning.value = true;
 
-  return {
-    isTransitioning,
-  };
+    timeout = setTimeout(() => {
+      isTransitioning.value = false;
+      timeout = null;
+    }, ROUTE_TRANSITION_DURATION);
+
+    onInvalidate(() => {
+      if (timeout) clearTimeout(timeout);
+    });
+  });
+
+  return { isTransitioning };
 };

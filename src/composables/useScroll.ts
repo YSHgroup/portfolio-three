@@ -1,34 +1,21 @@
 import gsap from "gsap";
 import Lenis from "lenis";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ref, watch, type Ref } from "vue";
-import { onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, watch } from "vue";
+import { isTransitioning } from "./useProjectTransition";
 import { projectId } from "./useRouteObserver";
 
-export const lenisHome = ref<Lenis | null>(null);
-export const lenisProject = ref<Lenis | null>(null);
+export const lenis = ref<Lenis | null>(null);
+export const projectLenis = ref<Lenis | null>(null);
 export const velocity = ref(0);
 
 const handleScroll = () => {
   ScrollTrigger.update();
 };
 
-const createNewLenis = () => {
-  lenisHome.value = new Lenis({
-    anchors: { lerp: 0.08 },
-  });
-
-  lenisHome.value.on("scroll", handleScroll);
-};
-
-interface Props {
-  projectWrapperRef: Ref<HTMLElement | null>;
-  projectContentRef: Ref<HTMLElement | null>;
-}
-
-export const useScroll = ({ projectWrapperRef, projectContentRef }: Props) => {
+export const useScroll = () => {
   const tick = (time: number) => {
-    const instance = projectId.value === null ? lenisHome.value : lenisProject.value;
+    const instance = lenis.value;
     if (!instance) return;
 
     if (instance.isScrolling === "smooth" && Math.abs(instance.velocity) > 0) {
@@ -38,33 +25,38 @@ export const useScroll = ({ projectWrapperRef, projectContentRef }: Props) => {
     instance.raf(time * 1000);
   };
 
+  const createNewLenis = () => {
+    if (lenis.value) {
+      lenis.value.destroy();
+      lenis.value.off("scroll", handleScroll);
+      lenis.value = null;
+    }
+
+    lenis.value = new Lenis({
+      lerp: 0.08,
+    });
+
+    lenis.value.on("scroll", handleScroll);
+  };
+
   onMounted(() => {
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
 
     createNewLenis();
-
-    lenisHome.value = new Lenis({
-      anchors: { lerp: 0.08 },
-    });
-
-    lenisProject.value = new Lenis({
-      anchors: { lerp: 0.08 },
-      wrapper: projectWrapperRef.value!,
-      content: projectContentRef.value!,
-    });
-
-    lenisHome.value.on("scroll", handleScroll);
-    lenisProject.value.on("scroll", handleScroll);
   });
 
-  watch(projectId, (newProjectId) => {
-    if (newProjectId === null) {
-      lenisProject?.value?.stop();
-      lenisHome?.value?.start();
+  watch(isTransitioning, (newIsTransitioning) => {
+    console.log("isTransitioning", newIsTransitioning, projectId.value);
+    if (newIsTransitioning) {
+      lenis.value?.stop();
     } else {
-      lenisHome?.value?.stop();
-      lenisProject?.value?.start();
+      lenis.value?.start();
+
+      if (projectId.value !== null) {
+        console.log("scrollTo 0");
+        lenis.value?.scrollTo(0, { immediate: true });
+      }
     }
   });
 

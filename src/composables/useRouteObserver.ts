@@ -1,107 +1,87 @@
-import { ref, onMounted, onUnmounted, watch } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
+
+// -----------------------------------------------------------------------------
+// GLOBAL REACTIVE PATH
+// -----------------------------------------------------------------------------
+
+export const path = ref(typeof window !== "undefined" ? window.location.pathname : "/");
+
+// -----------------------------------------------------------------------------
+// COMPUTED HELPERS
+// -----------------------------------------------------------------------------
 
 export const isProjectRoute = (path: string) => {
-  const projectMatch = path.match(/^\/project\/([^/]+)$/);
-  return projectMatch ? (projectMatch[1] as string) : null;
+  return path.match(/^\/project\/([^/]+)$/);
 };
 
-// Global reactive refs for projectId and path
-export const projectId = ref<string | null>(null);
-export const recentProjectId = ref<string | null>(null);
-export const path = ref<string>(typeof window !== "undefined" ? window.location.pathname : "/");
+export const projectId = computed(() => {
+  const match = isProjectRoute(path.value);
+  return match ? match[1] : null;
+});
 
-// Shared state and listeners to avoid multiple interceptors
-let listeners: Set<() => void> = new Set();
-let isHistoryIntercepted = false;
-let originalPushState: typeof history.pushState;
-let originalReplaceState: typeof history.replaceState;
+export const recentProject = ref<string | null>(null);
 
-const updateAllListeners = () => {
-  listeners.forEach((listener) => listener());
-};
+export const recentProjectId = computed(() => {
+  if (projectId.value) {
+    recentProject.value = projectId.value;
+  }
+  return recentProject.value;
+});
 
-const interceptHistory = () => {
-  if (typeof window === "undefined" || isHistoryIntercepted) return;
+// -----------------------------------------------------------------------------
+// HISTORY PATCH (safe & minimal)
+// -----------------------------------------------------------------------------
 
-  originalPushState = history.pushState;
-  originalReplaceState = history.replaceState;
+let historyPatched = false;
 
-  history.pushState = function (...args) {
-    originalPushState.apply(history, args);
-    updateAllListeners();
+function patchHistory() {
+  if (historyPatched || typeof window === "undefined") return;
+  historyPatched = true;
+
+  const wrap = (key: "pushState" | "replaceState") => {
+    const original = history[key];
+    history[key] = function (...args) {
+      // @ts-ignore
+      original.apply(this, args);
+
+      // IMPORTANT FIX: delay events to avoid reactivity collisions
+      queueMicrotask(() => {
+        window.dispatchEvent(new Event("route-change"));
+      });
+    };
   };
 
-  history.replaceState = function (...args) {
-    originalReplaceState.apply(history, args);
-    updateAllListeners();
-  };
+  wrap("pushState");
+  wrap("replaceState");
+}
 
-  isHistoryIntercepted = true;
-};
+// -----------------------------------------------------------------------------
+// COMPOSABLE
+// -----------------------------------------------------------------------------
 
-const restoreHistory = () => {
-  if (typeof window === "undefined" || !isHistoryIntercepted) return;
-
-  if (originalPushState) {
-    history.pushState = originalPushState;
-  }
-  if (originalReplaceState) {
-    history.replaceState = originalReplaceState;
-  }
-
-  isHistoryIntercepted = false;
-};
-
-export const useRouteObserver = () => {
-  // Local refs to compute and mirror the global ones for reactivity
-  const localPath = ref(typeof window !== "undefined" ? window.location.pathname : "/");
-  const localProjectId = ref<string | null>(null);
-
-  const updatePath = () => {
-    if (typeof window !== "undefined") {
-      const currentPath = window.location.pathname;
-      localPath.value = currentPath;
-      path.value = currentPath; // Keep global path ref up to date
+export function useRouteObserver() {
+  const update = () => {
+    const newPath = window.location.pathname;
+    if (newPath !== path.value) {
+      path.value = newPath;
     }
   };
-
-  const handlePopState = () => {
-    updatePath();
-  };
-
-  // Extract and keep projectId in sync
-  watch(
-    localPath,
-    (newPath) => {
-      const projId = isProjectRoute(newPath);
-      localProjectId.value = projId;
-      projectId.value = projId;
-      if (typeof projId === "string") {
-        recentProjectId.value = projId;
-      }
-    },
-    { immediate: true },
-  );
-
   onMounted(() => {
-    if (typeof window !== "undefined") {
-      // Initialize values immediately on mount
-      updatePath();
+    patchHistory();
+    update();
 
-      listeners.add(updatePath);
-      window.addEventListener("popstate", handlePopState);
-      interceptHistory();
-    }
+    window.addEventListener("popstate", update);
+    window.addEventListener("route-change", update);
   });
 
   onUnmounted(() => {
-    if (typeof window !== "undefined") {
-      listeners.delete(updatePath);
-      window.removeEventListener("popstate", handlePopState);
-
-      if (listeners.size === 0) {
-        restoreHistory();
-      }
-    }
+    window.removeEventListener("popstate", update);
+    window.removeEventListener("route-change", update);
   });
-};
+
+  return {
+    path,
+    projectId,
+    recentProjectId,
+  };
+}

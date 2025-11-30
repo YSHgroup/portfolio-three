@@ -63,13 +63,19 @@ const { content } = defineProps<{
     justify-content: center;
     gap: var(--space-sm);
     margin-top: var(--space-md);
+    width: 100%;
+    grid-column: 1 / 13;
 
     @include mixins.mq("md") {
       gap: var(--space-md);
       width: fit-content;
-      grid-column: 2 / 13;
+      grid-column: 1 / 6;
       grid-row: 2;
       margin-top: 0;
+    }
+
+    @include mixins.mq("lg") {
+      grid-column: 2 / 6;
     }
   }
 
@@ -129,8 +135,8 @@ const { content } = defineProps<{
     flex-direction: column;
     gap: var(--space-sm);
     grid-row: 1;
-    grid-column: 1 / 13;
     align-self: top;
+    grid-column: 1 / 13;
 
     @include mixins.mq("md") {
       grid-column: 1 / 6;

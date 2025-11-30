@@ -2,6 +2,7 @@
 import { computed, ref, onMounted, watchEffect } from "vue";
 import gsap from "gsap";
 import Notch from "../../../components/Notch.vue";
+import { projectId } from "../../../composables/useRouteObserver";
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
 const mediaRef = ref<HTMLVideoElement | HTMLImageElement | null>(null);

@@ -4,7 +4,7 @@ import Logo from "./Logo.vue";
 import { computed, ref } from "vue";
 import { t } from "../i18n/utils/translate";
 import { useHeaderTheme } from "../composables/useHeaderTheme";
-import { lenisHome } from "../composables/useScroll";
+import { lenis } from "../composables/useScroll";
 import { projectId } from "../composables/useRouteObserver";
 import { social } from "../content/social";
 import ButtonRound from "./ButtonRound.vue";
@@ -32,8 +32,8 @@ const { isDarkTheme } = useHeaderTheme({
 });
 
 const handleLogoClick = () => {
-  if (!lenisHome.value) return;
-  lenisHome.value.scrollTo(0);
+  if (!lenis.value) return;
+  lenis.value.scrollTo(0);
 };
 
 const classNames = computed(() => {
