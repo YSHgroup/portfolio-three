@@ -7,6 +7,7 @@ import { sceneWeights } from "../../../animations/scenes";
 import { face } from "./face";
 import { sleepingSprite } from "../contact/sleeping-sprite";
 import { playSound } from "../../../features/sounds/utils/sounds";
+import { isFeatureEnabled } from "../../../utils/features";
 
 import type { AnimationClip, Object3D } from "three";
 
@@ -14,7 +15,7 @@ let mixer: AnimationMixer;
 let activeAction: string | null = null;
 const actions = new Map<string, AnimationAction>();
 let isAwake = false;
-const wavingStrength = { value: 0 };
+const wavingStrength = { value: isFeatureEnabled("introWave") ? 1 : 0 };
 let hologramMixer: AnimationMixer;
 const hologramActions = new Map<string, AnimationAction>();
 
@@ -148,11 +149,12 @@ const updateIntro = () => {
 };
 
 const wave = () => {
-  const tl = gsap.timeline();
   //get wave duration from action
   const waveAction = actions.get("wave");
   const hologramWaveAction = hologramActions.get("wave");
   if (!waveAction) return;
+  const tl = gsap.timeline();
+
   const waveDuration = waveAction.getClip().duration;
   waveAction.play();
   hologramWaveAction?.play();
