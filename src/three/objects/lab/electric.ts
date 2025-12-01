@@ -32,10 +32,6 @@ const tick = () => {
   material.uniforms.uTime!.value = gsap.ticker.time;
   const opacity = velocity.value * 0.75;
   material.uniforms.uOpacity!.value = opacity;
-
-  if (mesh) {
-    mesh.visible = opacity > 0.01;
-  }
 };
 
 const destroy = () => {

@@ -5,8 +5,8 @@ uniform float uOpacity;
 #define LINE_WIDTH 0.05
 #define WAVE_COUNT 50.0
 #define PI 3.14159265359
-#define MIN_LINE_STRENGTH 0.2
-#define LINE_STRENGTH_SPEED 4.0
+#define MIN_LINE_STRENGTH 0.1
+#define LINE_STRENGTH_SPEED 6.0
 
 #define COLOR vec3(0.3, 1., 1.)
 
@@ -26,15 +26,18 @@ void main() {
     strengthPattern3 = smoothstep(0.0, 0.5, strengthPattern3);
     
     // Map patterns to range between MIN_LINE_STRENGTH and 1.0
-    float multiplier1 = MIN_LINE_STRENGTH + (1.0 - MIN_LINE_STRENGTH) * strengthPattern1;
-    float multiplier2 = MIN_LINE_STRENGTH + (1.0 - MIN_LINE_STRENGTH) * strengthPattern2;
-    float multiplier3 = MIN_LINE_STRENGTH + (1.0 - MIN_LINE_STRENGTH) * strengthPattern3;
+    // The MIN_LINE_STRENGTH is always visible, only the animated part above it is affected by uOpacity
+    float animatedPart1 = (1.0 - MIN_LINE_STRENGTH) * strengthPattern1;
+    float animatedPart2 = (1.0 - MIN_LINE_STRENGTH) * strengthPattern2;
+    float animatedPart3 = (1.0 - MIN_LINE_STRENGTH) * strengthPattern3;
+    
+    // Combine: MIN_LINE_STRENGTH (always visible) + animated part (affected by uOpacity)
+    float multiplier1 = MIN_LINE_STRENGTH + animatedPart1 * uOpacity;
+    float multiplier2 = MIN_LINE_STRENGTH + animatedPart2 * uOpacity;
+    float multiplier3 = MIN_LINE_STRENGTH + animatedPart3 * uOpacity;
     
     // Apply animated strength to each line and combine
     float strength = baseStrength1 * multiplier1 + baseStrength2 * multiplier2 + baseStrength3 * multiplier3;
     
-    // Apply scroll intensity to control opacity (0-1)
-    strength *= uOpacity;
-    
-    gl_FragColor = vec4(COLOR, strength * uOpacity);
+    gl_FragColor = vec4(COLOR, strength);
 }
