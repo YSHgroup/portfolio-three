@@ -56,8 +56,8 @@ watchEffect((onInvalidate) => {
   });
 });
 
-watch([projectsLoaded, threeInitialized], (loaded) => {
-  if (projectsLoaded.value && threeInitialized.value) {
+watch([projectsLoaded, threeInitialized], ([projectsLoaded, threeInitialized]) => {
+  if (projectsLoaded && threeInitialized) {
     animations.init();
   }
 });
