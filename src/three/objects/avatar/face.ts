@@ -96,13 +96,9 @@ const wakeUp = () => {
 const wave = () => {
   const tl = gsap.timeline();
 
-  const PROUD_AFTER = 1;
-  const RESE_AFTER = 3;
-  tl.set(sceneFrames, { intro: "contact-transition-0" }, 0);
-  tl.set(sceneFrames, { intro: "contact-transition-1" }, PROUD_AFTER);
-  tl.set(sceneFrames, { intro: "contact-transition-2" }, PROUD_AFTER + 0.03);
-  tl.set(sceneFrames, { intro: "proud-0" }, PROUD_AFTER + 0.06);
-  tl.set(sceneFrames, { intro: "default-0" }, RESE_AFTER);
+  const RESET_AFTER = 3;
+  tl.set(sceneFrames, { intro: "proud-0" }, 0);
+  tl.set(sceneFrames, { intro: "default-0" }, RESET_AFTER);
 
   return tl;
 };
