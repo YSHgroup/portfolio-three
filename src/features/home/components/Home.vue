@@ -26,6 +26,7 @@ const contactBottom = ref<number>(0);
 const aboutSpacerRef = ref<HTMLElement | null>(null);
 const isHoveringObject3D = ref<boolean>(false);
 const threeCanvasRef = ref<HTMLCanvasElement | null>(null);
+const threeInitialized = ref<boolean>(false);
 const { isTouch } = useAgent();
 
 const handleIntersection = (entries: IntersectionObserverEntry[]) => {
@@ -55,8 +56,8 @@ watchEffect((onInvalidate) => {
   });
 });
 
-watch(projectsLoaded, (loaded) => {
-  if (loaded) {
+watch([projectsLoaded, threeInitialized], (loaded) => {
+  if (projectsLoaded.value && threeInitialized.value) {
     animations.init();
   }
 });
@@ -76,8 +77,9 @@ onMounted(() => {
   stickyObserver.value = new IntersectionObserver(handleIntersection);
   stickyObserver.value.observe(introRef.value as HTMLElement);
 
-  if (threeCanvasRef.value) {
+  if (threeCanvasRef.value && !threeInitialized.value) {
     three.init(threeCanvasRef.value);
+    threeInitialized.value = true;
   }
 
   gsap.ticker.add(updateCursor);
