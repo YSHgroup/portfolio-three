@@ -27,6 +27,8 @@ const init = () => {
   setupHologramActions();
 
   play("desktop-idle");
+
+  wave();
 };
 
 const getActionFromMesh = (name: string) => {
