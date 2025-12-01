@@ -149,11 +149,14 @@ const updateIntro = () => {
 };
 
 const wave = () => {
+  console.log("wave func");
   //get wave duration from action
   const waveAction = actions.get("wave");
   const hologramWaveAction = hologramActions.get("wave");
   if (!waveAction) return;
+  console.log("wave action found");
   const tl = gsap.timeline();
+  console.log("timeline created");
 
   const waveDuration = waveAction.getClip().duration;
   waveAction.play();
