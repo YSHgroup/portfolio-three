@@ -15,6 +15,9 @@
   &-svg {
     width: 120px;
     height: 120px;
+    transition:
+      transform 0.2s var(--ease-power2-in),
+      opacity 0.2s var(--ease-power2-in);
   }
 
   &-rect {
@@ -28,6 +31,15 @@
 
   &-hidden {
     opacity: 0;
-    visibility: hidden;
+    pointer-events: none !important;
+
+    * {
+      pointer-events: none !important;
+    }
+
+    svg {
+      transform: scale(0.4);
+      opacity: 0;
+    }
   }
 }
