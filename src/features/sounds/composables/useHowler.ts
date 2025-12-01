@@ -14,7 +14,6 @@ export const useHowler = () => {
 
   const handleUnlocked = () => {
     howlerUnlocked.value = true;
-    console.log("[Howler] Unlocked");
     const storeItem = localStorage.getItem("portfolio-soundsEnabled");
     if (storeItem) {
       soundsEnabled.value = storeItem === "true";

@@ -47,14 +47,12 @@ export const useScroll = () => {
   });
 
   watch(isTransitioning, (newIsTransitioning) => {
-    console.log("isTransitioning", newIsTransitioning, projectId.value);
     if (newIsTransitioning) {
       lenis.value?.stop();
     } else {
       lenis.value?.start();
 
       if (projectId.value !== null) {
-        console.log("scrollTo 0");
         lenis.value?.scrollTo(0, { immediate: true });
       }
     }

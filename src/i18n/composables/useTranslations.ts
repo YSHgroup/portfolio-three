@@ -11,7 +11,7 @@ export const useTranslations = () => {
     locale.value = window.localStorage.getItem("portfolio-locale") as Locale;
     if (!locale.value) {
       const preferredLocale = navigator.language.split("-")[0] as Locale;
-      console.log(preferredLocale, LOCALES);
+
       if (preferredLocale in LOCALES) {
         locale.value = preferredLocale;
       } else {

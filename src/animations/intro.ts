@@ -4,9 +4,8 @@ import gsap from "gsap";
 import { mouse } from "../three/objects/room/mouse";
 
 const play = () => {
-  console.log("wave enabled", isFeatureEnabled("introWave"));
   if (!isFeatureEnabled("introWave")) return;
-  console.log("wave start");
+
   //avatarAnimations.wave();
 
   const tl = gsap.timeline();
