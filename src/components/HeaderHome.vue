@@ -40,7 +40,7 @@ onMounted(() => {
   sections.forEach((section) => {
     ScrollTrigger.create({
       trigger: `#${section}`,
-      start: section === "about" ? "top top" : "top center",
+      start: section === "about" ? "top 22.5%" : "top center",
       end: "bottom center",
       onEnter: () => {
         activeLink.value = section;
