@@ -7,12 +7,12 @@ const buildVersion = execSync("git rev-parse --short HEAD").toString().trim();
 
 export default defineConfig({
   plugins: [
+    vue(),
     glsl({
       include: ["**/*.glsl", "**/*.vert", "**/*.frag"],
       defaultExtension: "glsl",
       warnDuplicatedImports: false,
     }),
-    vue(),
   ],
   server: {
     port: 3000,
