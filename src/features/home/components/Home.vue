@@ -81,7 +81,7 @@ onMounted(() => {
   stickyObserver.value.observe(introRef.value as HTMLElement);
 
   if (threeCanvasRef.value && !threeInitialized.value) {
-    three.init(threeCanvasRef.value);
+    //three.init(threeCanvasRef.value);
     threeInitialized.value = true;
   }
 
@@ -139,7 +139,7 @@ watch(
           :style="{ '--contact-bottom': `${contactBottom}px` }"
         >
           <div :class="['intro-sticky-content', { 'intro-sticky-content-contact': !isStickyVisible }]">
-
+            <canvas class="three-canvas" ref="threeCanvasRef"></canvas>
           </div>
           <div :class="{ 'intro-about-hidden': !isStickyVisible }">
             <About :spacer-ref="aboutSpacerRef" />
