@@ -11,12 +11,12 @@ let canvas: HTMLCanvasElement | null = null;
 const init = (_canvas: HTMLCanvasElement) => {
   canvas = _canvas;
 
-  threeSizes.init(_canvas);
-  camera.init();
-  renderTarget.init();
-  renderer.init(canvas);
-
   resources.once("ready", () => {
+    threeSizes.init(_canvas);
+    camera.init();
+    renderTarget.init();
+    renderer.init(canvas);
+
     objects.init();
     raycast.init();
   });

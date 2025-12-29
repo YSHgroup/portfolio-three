@@ -81,7 +81,7 @@ onMounted(() => {
   stickyObserver.value.observe(introRef.value as HTMLElement);
 
   if (threeCanvasRef.value && !threeInitialized.value) {
-    //three.init(threeCanvasRef.value);
+    three.init(threeCanvasRef.value);
     threeInitialized.value = true;
   }
 
@@ -164,7 +164,6 @@ watch(
   width: calc(var(--svw) * 100);
   min-height: calc(var(--lvh) * 100);
   max-height: calc(var(--lvh) * 100);
-  border: 10px solid red;
 }
 
 .home {
@@ -219,7 +218,6 @@ watch(
   z-index: -1;
   display: flex;
   align-items: flex-end;
-  border: 10px solid yellow;
 
   &-visible {
     position: sticky;
@@ -232,7 +230,7 @@ watch(
   max-height: calc(var(--lvh) * 100);
   position: relative;
   overflow: hidden;
-  border: 10px solid blue;
+
   &-contact {
     position: absolute;
     bottom: var(--contact-bottom);
