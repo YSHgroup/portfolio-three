@@ -74,3 +74,4 @@ class Resources extends EventEmitter<{
 }
 
 export const resources = new Resources();
+resources.startLoading();

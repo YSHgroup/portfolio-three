@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
-import { resources } from "./utils/resources";
 import Header from "./components/Header.vue";
 import { sizes } from "./utils/sizes";
 import { useTranslations } from "./i18n/composables/useTranslations";
@@ -28,7 +27,6 @@ const { isTouch } = useAgent();
 
 onMounted(() => {
   sizes.init();
-  resources.startLoading();
 });
 </script>
 
