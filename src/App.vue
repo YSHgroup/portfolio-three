@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
 import Header from "./components/Header.vue";
-import { sizes } from "./utils/sizes";
 import { useTranslations } from "./i18n/composables/useTranslations";
 import { usePreloader } from "./composables/usePreloader";
 import Cursor from "./components/Cursor.vue";
@@ -24,10 +22,6 @@ useHowler();
 useScroll();
 useRouteObserver();
 const { isTouch } = useAgent();
-
-onMounted(() => {
-  sizes.init();
-});
 </script>
 
 <template>

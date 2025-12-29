@@ -37,6 +37,7 @@ class Sizes extends EventEmitter<{
     this.isLandscape = false;
 
     this.resize();
+    this.init();
   }
 
   init() {
