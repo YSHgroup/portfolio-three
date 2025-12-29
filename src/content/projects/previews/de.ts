@@ -1,5 +1,5 @@
 import thumbnailCubeWar from "../../../assets/thumbnails/cubewar.webp";
-import thumbnailGamedo from "../../../assets/thumbnails/gamedo.webp";
+import thumbnailQuibbo from "../../../assets/thumbnails/quibbo.webp";
 import thumbnailParticles from "../../../assets/thumbnails/particles.webp";
 import thumbnailPokedex from "../../../assets/thumbnails/pokedex.webp";
 
@@ -13,10 +13,11 @@ export default [
     description: "Multiplayer-Strategiespiel",
   },
   {
-    title: "Gamedo",
-    slug: "gamedo",
-    thumbnail: thumbnailGamedo,
+    title: "Quibbo",
+    slug: "quibbo",
+    thumbnail: thumbnailQuibbo,
     description: "Multiplayer-Gaming-Plattform",
+    
   },
   {
     title: "WebGL Partikel",

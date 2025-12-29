@@ -1,28 +1,28 @@
-import videoGamedo from "../../../assets/videos/gamedo.mp4";
+import videoQuibbo from "../../../assets/videos/quibbo.mp4";
 
-import gamedo0 from "../../../assets/images/projects/gamedo/gamedo-0.webp";
-import gamedo1 from "../../../assets/images/projects/gamedo/gamedo-1.webp";
-import gamedo2 from "../../../assets/images/projects/gamedo/gamedo-2.webp";
-import gamedo3 from "../../../assets/images/projects/gamedo/gamedo-3.webp";
-import gamedo4 from "../../../assets/images/projects/gamedo/gamedo-4.webp";
-import gamedo5 from "../../../assets/images/projects/gamedo/gamedo-5.webp";
+import quibbo0 from "../../../assets/images/projects/quibbo/quibbo-0.webp";
+import quibbo1 from "../../../assets/images/projects/quibbo/quibbo-1.webp";
+import quibbo2 from "../../../assets/images/projects/quibbo/quibbo-2.webp";
+import quibbo3 from "../../../assets/images/projects/quibbo/quibbo-3.webp";
+import quibbo4 from "../../../assets/images/projects/quibbo/quibbo-4.webp";
+import quibbo5 from "../../../assets/images/projects/quibbo/quibbo-5.webp";
 
 import type { ProjectContent } from "../../types";
 
 export default {
-  title: "Gamedo",
+  title: "Quibbo",
   theme: "light",
   tags: ["three", "node", "kubernetes", "redis", "postgresql"],
-  video: videoGamedo,
+  video: videoQuibbo,
   videoBorder: true,
   description:
-    "Gamedo ist eine Plattform für schnelle, rundenbasierte Multiplayer-Spiele. Sie verbindet Matchmaking, anpassbare 3D-Avatare und Account-Integration mit einem Rangsystem auf ELO-Basis.<br/><br/>Das Projekt begann als technisches Experiment und entwickelte sich zu einem skalierbaren System, um neue Spielideen auszuprobieren.",
+    "Quibbo ist eine Plattform für schnelle, rundenbasierte Multiplayer-Spiele. Sie verbindet Matchmaking, anpassbare 3D-Avatare und Account-Integration mit einem Rangsystem auf ELO-Basis.<br/><br/>Das Projekt begann als technisches Experiment und entwickelte sich zu einem skalierbaren System, um neue Spielideen auszuprobieren.",
   components: [
     {
       type: "media",
       props: {
         type: "video",
-        src: videoGamedo,
+        src: videoQuibbo,
         caption: "Benutzeroberfläche",
       },
     },
@@ -30,7 +30,7 @@ export default {
       type: "media",
       props: {
         type: "image",
-        src: gamedo0,
+        src: quibbo0,
         alt: "Avatar Ersteller",
         caption: "Avatar Ersteller",
       },
@@ -39,7 +39,7 @@ export default {
       type: "media",
       props: {
         type: "image",
-        src: gamedo1,
+        src: quibbo1,
         alt: "Mehrspieler Tic-Tac-Toe",
         caption: "Mehrspieler Tic-Tac-Toe",
       },
@@ -48,7 +48,7 @@ export default {
       type: "media",
       props: {
         type: "image",
-        src: gamedo2,
+        src: quibbo2,
         alt: "Verschiedene Minispiele",
         caption: "Verschiedene Minispiele",
       },
@@ -57,7 +57,7 @@ export default {
       type: "media",
       props: {
         type: "image",
-        src: gamedo3,
+        src: quibbo3,
         alt: "Avatar Variationen",
         caption: "Avatar Variationen",
       },
@@ -66,7 +66,7 @@ export default {
       type: "media",
       props: {
         type: "image",
-        src: gamedo4,
+        src: quibbo4,
         alt: "Responsives Design",
         caption: "Responsives Design",
       },
@@ -75,7 +75,7 @@ export default {
       type: "media",
       props: {
         type: "image",
-        src: gamedo5,
+        src: quibbo5,
         alt: "Dunkles Design",
         caption: "Dunkles Design",
       },
