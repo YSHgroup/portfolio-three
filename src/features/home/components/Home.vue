@@ -138,10 +138,7 @@ watch(
           :class="{ 'intro-sticky-visible': isStickyVisible }"
           :style="{ '--contact-bottom': `${contactBottom}px` }"
         >
-          <div
-            ref="stickyContentRef"
-            :class="['intro-sticky-content', { 'intro-sticky-content-contact': !isStickyVisible }]"
-          >
+          <div :class="['intro-sticky-content', { 'intro-sticky-content-contact': !isStickyVisible }]">
             <canvas class="three-canvas" ref="threeCanvasRef"></canvas>
           </div>
           <div :class="{ 'intro-about-hidden': !isStickyVisible }">
@@ -167,6 +164,7 @@ watch(
   width: calc(var(--svw) * 100);
   min-height: calc(var(--lvh) * 100);
   max-height: calc(var(--lvh) * 100);
+  border: 10px solid red;
 }
 
 .home {
@@ -221,6 +219,7 @@ watch(
   z-index: -1;
   display: flex;
   align-items: flex-end;
+  border: 10px solid yellow;
 
   &-visible {
     position: sticky;
@@ -233,7 +232,7 @@ watch(
   max-height: calc(var(--lvh) * 100);
   position: relative;
   overflow: hidden;
-
+  border: 10px solid blue;
   &-contact {
     position: absolute;
     bottom: var(--contact-bottom);
