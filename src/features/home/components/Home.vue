@@ -138,9 +138,6 @@ watch(
           :class="{ 'intro-sticky-visible': isStickyVisible }"
           :style="{ '--contact-bottom': `${contactBottom}px` }"
         >
-          <div :class="['intro-sticky-content', { 'intro-sticky-content-contact': !isStickyVisible }]">
-            <canvas class="three-canvas" ref="threeCanvasRef"></canvas>
-          </div>
           <div :class="{ 'intro-about-hidden': !isStickyVisible }">
             <About :spacer-ref="aboutSpacerRef" />
           </div>
