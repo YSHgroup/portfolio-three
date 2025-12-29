@@ -160,7 +160,8 @@ watch(
 <style scoped lang="scss">
 .three-canvas {
   width: 100%;
-  height: calc(var(--lvh, 1lvh) * 100);
+  min-height: calc(var(--lvh) * 100);
+  max-height: calc(var(--lvh) * 100);
 }
 
 .home {
