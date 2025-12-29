@@ -3,7 +3,6 @@ import Lenis from "lenis";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ref, onMounted, onUnmounted, watch } from "vue";
 import { isTransitioning } from "./useProjectTransition";
-import { projectId } from "./useRouteObserver";
 
 export const lenis = ref<Lenis | null>(null);
 export const projectLenis = ref<Lenis | null>(null);
@@ -51,10 +50,6 @@ export const useScroll = () => {
       lenis.value?.stop();
     } else {
       lenis.value?.start();
-
-      if (projectId.value !== null) {
-        lenis.value?.scrollTo(0, { immediate: true });
-      }
     }
   });
 

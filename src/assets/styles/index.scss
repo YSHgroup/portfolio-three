@@ -12,14 +12,10 @@ html {
   color: var(--color-text-400);
   font-family: "Urbanist";
   letter-spacing: 0.02em;
-}
-
-body {
-  overflow-y: scroll;
+  overflow-y: scroll !important;
 }
 
 .is-loading {
-  overflow-y: scroll;
   overscroll-behavior: none;
   position: fixed;
   width: 100%;

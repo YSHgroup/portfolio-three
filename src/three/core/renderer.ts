@@ -12,6 +12,7 @@ import type { Camera, Object3D, Scene } from "three";
 let instance: WebGLRenderer | null = null;
 let canvas: HTMLCanvasElement | null = null;
 let visible = true;
+let isActive = false;
 
 const emptyVector = new Vector3();
 
@@ -41,7 +42,7 @@ const resize = () => {
 };
 
 const tick = () => {
-  const shouldBeVisible = !camera.instance.position.equals(emptyVector);
+  const shouldBeVisible = !camera.instance.position.equals(emptyVector) && isActive;
 
   if (canvas && shouldBeVisible !== visible) {
     canvas.style.visibility = shouldBeVisible ? "visible" : "hidden";
@@ -61,6 +62,10 @@ const tick = () => {
 
 const compile = async () => {
   await Promise.all([compileScene(camera.instance, scene.instance), compileScene(camera.instance, renderTarget.scene)]);
+};
+
+const setIsActive = (value: boolean) => {
+  isActive = value;
 };
 
 const compileScene = async (camera: Camera, sceneToCompile: Scene) => {
@@ -110,4 +115,4 @@ const destroy = () => {
   visible = true;
 };
 
-export const renderer = { init, destroy, getInstance, compile };
+export const renderer = { init, destroy, getInstance, compile, setIsActive };

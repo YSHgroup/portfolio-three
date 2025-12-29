@@ -6,6 +6,7 @@ import { projectModules } from "../../../content/projects";
 import ProjectContent from "./ProjectContent.vue";
 import Footer from "../../../components/Footer.vue";
 import { locale } from "../../../i18n/store";
+import { lenis } from "../../../composables/useScroll";
 
 import type { Locale } from "../../../i18n/types";
 
@@ -34,6 +35,11 @@ watch(
   },
   { immediate: true },
 );
+
+watch([projectId, isTransitioning, locale], () => {
+  if (!projectId.value || isTransitioning.value) return;
+  lenis.value?.scrollTo(0, { immediate: true });
+});
 </script>
 
 <template>

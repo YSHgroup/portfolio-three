@@ -14,6 +14,7 @@ import Home from "./features/home/components/Home.vue";
 import Project from "./features/projects/components/Project.vue";
 import { useProjectTransition } from "./composables/useProjectTransition";
 import { useScroll } from "./composables/useScroll";
+import { projectVisible } from "./composables/useRouteObserver";
 
 const { isTransitioning } = useProjectTransition();
 
@@ -21,7 +22,7 @@ useTranslations();
 usePreloader();
 useMusic();
 useHowler();
-useScroll(); // <-- single Lenis instance
+useScroll();
 useRouteObserver();
 const { isTouch } = useAgent();
 
@@ -35,21 +36,20 @@ onMounted(() => {
   <Header />
 
   <!-- main page -->
-  <div :class="{ 'home-wrapper-projectIsReady': projectId !== null && !isTransitioning }">
-    <Home v-show="projectId === null || isTransitioning" />
+  <div :class="{ 'home-wrapper-projectIsReady': projectVisible }">
+    <Home />
   </div>
 
   <!-- overlay page -->
   <div
     class="project-wrapper"
     :class="{
-      'project-wrapper-visible': projectId !== null,
+      'project-wrapper-visible': projectVisible,
       'project-wrapper-transitioning': isTransitioning,
-      'project-wrapper-isReady': projectId !== null && !isTransitioning,
     }"
   >
     <div class="project-content">
-      <Project v-show="projectId !== null || isTransitioning" />
+      <Project v-show="projectId !== null && !isTransitioning" />
     </div>
   </div>
 
@@ -68,22 +68,12 @@ onMounted(() => {
   inset: 0;
   overflow: hidden; /* new page must NOT scroll during transition */
   z-index: var(--z-index-layout-project);
-  clip-path: circle(0%);
-  transition: clip-path var(--transition-route-duration) var(--transition-route-ease);
   visibility: hidden;
   pointer-events: none; /* avoid interaction before fully opened */
 
   &-visible {
     visibility: visible;
-    clip-path: circle(100%);
-    pointer-events: auto; /* re-enable interaction */
-  }
-
-  &-transitioning {
-    visibility: visible;
-  }
-
-  &-isReady {
+    pointer-events: auto;
     position: static;
   }
 }

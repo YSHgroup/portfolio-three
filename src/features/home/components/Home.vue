@@ -15,9 +15,11 @@ import ScrollIcon from "../../../components/ScrollIcon.vue";
 import { raycast } from "../../../three/utils/raycast";
 import gsap from "gsap";
 import { useAgent } from "../../../composables/useAgent";
+import { projectId, projectVisible } from "../../../composables/useRouteObserver";
+import { isTransitioning } from "../../../composables/useProjectTransition";
+import { renderer } from "../../../three/core/renderer";
 
 const introRef = ref<HTMLElement | null>(null);
-const stickyContentRef = ref<HTMLElement | null>(null);
 const stickyObserver = ref<IntersectionObserver | null>(null);
 const scrolledPastIntro = ref(false);
 const projectsLoaded = ref(false);
@@ -54,12 +56,6 @@ watchEffect((onInvalidate) => {
   onInvalidate(() => {
     observer.disconnect();
   });
-});
-
-watch([projectsLoaded, threeInitialized], ([projectsLoaded, threeInitialized]) => {
-  if (projectsLoaded && threeInitialized) {
-    animations.init();
-  }
 });
 
 const updateCursor = () => {
@@ -100,6 +96,24 @@ onUnmounted(() => {
 const handleProjectsLoaded = () => {
   projectsLoaded.value = true;
 };
+
+watchEffect((onInvalidate) => {
+  if (projectsLoaded && threeInitialized && (projectId.value === null || isTransitioning.value)) {
+    animations.init();
+  }
+
+  onInvalidate(() => {
+    animations.destroy();
+  });
+});
+
+watch(
+  projectVisible,
+  (newVal) => {
+    renderer.setIsActive(!newVal);
+  },
+  { immediate: true },
+);
 </script>
 
 <template>

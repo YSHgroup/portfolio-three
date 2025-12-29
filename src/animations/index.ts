@@ -9,15 +9,21 @@ export const transitions = {
   contact,
 };
 
+let isInitialized = false;
+
 const init = () => {
+  if (isInitialized) return;
   scenes.init();
   waypoints.init();
   intro.play();
+  isInitialized = true;
 };
 
 const destroy = () => {
+  if (!isInitialized) return;
   scenes.destroy();
   waypoints.destroy();
+  isInitialized = false;
 };
 
 export const animations = { init, destroy };
