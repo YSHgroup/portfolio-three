@@ -39,22 +39,29 @@ const isStickyVisible = computed(() => {
   return scrolledPastIntro.value || !projectsLoaded.value;
 });
 
+const updateContactBottomOffset = () => {
+  if (!contactRef.value) return;
+  const bounding = contactRef.value.getBoundingClientRect();
+  const documentBottom = document.documentElement.scrollHeight;
+  const elementBottom = bounding.bottom + window.scrollY;
+  // distance from bottom of document to bottom of contact section
+  contactBottom.value = documentBottom - elementBottom;
+};
+
+watch(projectVisible, (newVal) => {
+  if (!newVal) {
+    updateContactBottomOffset();
+  }
+});
+
 watchEffect((onInvalidate) => {
   if (!contactRef.value || preloaderVisible.value) return;
-  const updateContactBottomOffset = () => {
-    if (!contactRef.value) return;
-    const bounding = contactRef.value.getBoundingClientRect();
-    const documentBottom = document.documentElement.scrollHeight;
-    const elementBottom = bounding.bottom + window.scrollY;
-    // distance from bottom of document to bottom of contact section
-    contactBottom.value = documentBottom - elementBottom;
-  };
 
-  const observer = new ResizeObserver(updateContactBottomOffset);
-  observer.observe(contactRef.value as HTMLElement);
+  const resizeObserver = new ResizeObserver(updateContactBottomOffset);
+  resizeObserver.observe(contactRef.value as HTMLElement);
 
   onInvalidate(() => {
-    observer.disconnect();
+    resizeObserver.disconnect();
   });
 });
 

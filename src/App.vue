@@ -9,7 +9,7 @@ import Cursor from "./components/Cursor.vue";
 import { useAgent } from "./composables/useAgent";
 import { useMusic } from "./features/sounds/composables/useMusic";
 import { useHowler } from "./features/sounds/composables/useHowler";
-import { useRouteObserver, projectId } from "./composables/useRouteObserver";
+import { useRouteObserver } from "./composables/useRouteObserver";
 import Home from "./features/home/components/Home.vue";
 import Project from "./features/projects/components/Project.vue";
 import { useProjectTransition } from "./composables/useProjectTransition";
@@ -49,7 +49,7 @@ onMounted(() => {
     }"
   >
     <div class="project-content">
-      <Project v-show="projectId !== null && !isTransitioning" />
+      <Project />
     </div>
   </div>
 

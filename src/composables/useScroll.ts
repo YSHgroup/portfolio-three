@@ -28,7 +28,6 @@ export const useScroll = () => {
     if (lenis.value) {
       lenis.value.destroy();
       lenis.value.off("scroll", handleScroll);
-      lenis.value = null;
     }
 
     lenis.value = new Lenis({
@@ -50,6 +49,7 @@ export const useScroll = () => {
       lenis.value?.stop();
     } else {
       lenis.value?.start();
+      ScrollTrigger.update();
     }
   });
 

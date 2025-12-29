@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { projectId, recentProjectId } from "../../../composables/useRouteObserver";
+import { projectId, projectVisible, recentProjectId } from "../../../composables/useRouteObserver";
 import { isTransitioning } from "../../../composables/useProjectTransition";
 import { ref, watch } from "vue";
 import { projectModules } from "../../../content/projects";
@@ -36,10 +36,14 @@ watch(
   { immediate: true },
 );
 
-watch([projectId, isTransitioning, locale], () => {
-  if (!projectId.value || isTransitioning.value) return;
-  lenis.value?.scrollTo(0, { immediate: true });
-});
+watch(
+  [projectId, isTransitioning, locale],
+  () => {
+    if (!projectId.value || isTransitioning.value) return;
+    lenis.value?.scrollTo(0, { immediate: true });
+  },
+  { immediate: true },
+);
 </script>
 
 <template>
@@ -52,7 +56,11 @@ watch([projectId, isTransitioning, locale], () => {
       projectId !== null && `project-visible`,
     ]"
   >
-    <ProjectContent v-if="content && recentProjectId" :content="content" :projectId="recentProjectId" />
+    <ProjectContent
+      v-if="content && recentProjectId && projectVisible"
+      :content="content"
+      :projectId="recentProjectId"
+    />
     <Footer :class="['project-footer', `project-${recentProjectId}`]"></Footer>
     <div :class="['project-blend', projectId !== null && `project-blend-visible`]"></div>
   </div>
