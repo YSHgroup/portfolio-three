@@ -164,7 +164,7 @@ watch(
 
 <style scoped lang="scss">
 .three-canvas {
-  width: 100%;
+  width: calc(var(--svw) * 100);
   min-height: calc(var(--lvh) * 100);
   max-height: calc(var(--lvh) * 100);
 }
@@ -228,11 +228,10 @@ watch(
 }
 
 .intro-sticky-content {
-  width: 100%;
+  width: calc(var(--svw) * 100);
   height: calc(var(--lvh) * 100);
   max-height: calc(var(--lvh) * 100);
   position: relative;
-  contain: layout style paint;
   overflow: hidden;
 
   &-contact {

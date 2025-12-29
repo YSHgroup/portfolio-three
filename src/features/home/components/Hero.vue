@@ -21,6 +21,7 @@ import AppearingText from "../../../components/AppearingText.vue";
 
 <style scoped lang="scss">
 .hero {
+  max-height: calc(var(--lvh) * 100);
   height: calc(var(--lvh) * 100);
   width: 100%;
   display: flex;
