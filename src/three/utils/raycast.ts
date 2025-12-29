@@ -1,6 +1,7 @@
 import gsap from "gsap";
 import { Ray, Vector2, Vector3 } from "three";
 import { camera } from "../core/camera";
+import {threeSizes} from "./sizes";
 
 import type { ClickableBox3 } from "../types";
 
@@ -14,8 +15,8 @@ const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
 const updatePointer = (clientX: number, clientY: number) => {
   // Convert to normalized device coordinates (-1 to 1)
-  pointer.x = (clientX / window.innerWidth) * 2 - 1;
-  pointer.y = -(clientY / window.innerHeight) * 2 + 1;
+  pointer.x = (clientX / threeSizes.width) * 2 - 1;
+  pointer.y = -(clientY / threeSizes.height) * 2 + 1;
 };
 
 const performRaycast = () => {

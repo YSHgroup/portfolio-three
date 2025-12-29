@@ -73,6 +73,8 @@ watch(
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  max-width: calc(var(--lvw) * 100);
+  overflow: hidden;
 
   &-blend {
     position: absolute;
