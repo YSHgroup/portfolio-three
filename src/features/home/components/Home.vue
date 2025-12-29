@@ -222,6 +222,7 @@ watch(
 .intro-sticky-content {
   width: 100%;
   height: calc(var(--lvh) * 100);
+  max-height: calc(var(--lvh) * 100);
   position: relative;
   contain: layout style paint;
   overflow: hidden;
@@ -232,6 +233,7 @@ watch(
     left: 0;
     width: 100%;
     height: calc(var(--lvh) * 100);
+    max-height: calc(var(--lvh) * 100);
   }
 }
 </style>
