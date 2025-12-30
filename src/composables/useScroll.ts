@@ -47,6 +47,7 @@ export const useScroll = () => {
   watch(isTransitioning, (newIsTransitioning) => {
     if (newIsTransitioning) {
       lenis.value?.stop();
+      ScrollTrigger.clearScrollMemory();
     } else {
       lenis.value?.start();
       ScrollTrigger.update();
