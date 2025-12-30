@@ -29,10 +29,11 @@ onUnmounted(() => {
 <style scoped lang="scss">
 .contact {
   width: 100%;
+  max-width: calc(var(--svw) * 100);
+  overflow: hidden;
   min-height: calc(var(--lvh) * 100);
   padding: var(--space-outer);
   padding-top: var(--space-lg);
-  overflow: hidden;
 
   @include mixins.mq("md") {
     padding-top: var(--space-xxl);

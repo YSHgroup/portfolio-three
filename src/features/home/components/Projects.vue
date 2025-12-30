@@ -56,6 +56,8 @@ onMounted(loadPreviews);
   justify-content: center;
   position: relative;
   width: 100%;
+  max-width: calc(var(--svw) * 100);
+  overflow: hidden;
   gap: var(--space-xl);
   padding-left: var(--space-outer);
   padding-right: var(--space-outer);
