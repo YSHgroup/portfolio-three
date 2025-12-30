@@ -53,15 +53,17 @@ watch(
       'project',
       recentProjectId !== null && `project-${recentProjectId}`,
       isTransitioning && `project-transitioning`,
-      projectId !== null && `project-visible`,
+      projectVisible && `project-visible`,
     ]"
   >
-    <ProjectContent
-      v-if="content && recentProjectId && projectVisible"
-      :content="content"
-      :projectId="recentProjectId"
-    />
-    <Footer :class="['project-footer', `project-${recentProjectId}`]"></Footer>
+    <div :class="['project-content-wrapper', projectVisible && `project-content-wrapper-visible`]">
+      <ProjectContent
+        v-if="content && recentProjectId && projectVisible"
+        :content="content"
+        :projectId="recentProjectId"
+      />
+      <Footer :class="['project-footer', `project-${recentProjectId}`]"></Footer>
+    </div>
   </div>
 </template>
 
@@ -69,11 +71,21 @@ watch(
 .project {
   min-height: calc(var(--lvh) * 100);
   background-color: var(--color-background-300);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
   max-width: calc(var(--lvw) * 100);
   overflow: hidden;
+
+  &-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.4s ease-out;
+
+    &-visible {
+      opacity: 1;
+    }
+  }
 
   &-footer {
     position: relative;

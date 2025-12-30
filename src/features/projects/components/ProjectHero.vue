@@ -21,7 +21,7 @@ const { content } = defineProps<{
     </div>
     <p class="project-hero-description" v-html="content.description"></p>
     <div class="project-hero-buttons">
-      <Link v-if="content.live" :href="content.live" external class="project-hero-button" data-cursor="circle-white">
+      <Link v-if="content.live" :href="content.live" external class="project-hero-button" data-cursor="arrow-external">
         <Button renderAs="div" variant="accent">{{ t("live-view") }}</Button>
       </Link>
       <Link
@@ -29,7 +29,7 @@ const { content } = defineProps<{
         :href="content.source"
         external
         class="project-hero-button"
-        :data-cursor="content.theme === 'dark' ? 'circle-white' : 'circle-black'"
+        data-cursor="arrow-external"
       >
         <Button renderAs="div" variant="border">{{ t("source-code") }}</Button>
       </Link>

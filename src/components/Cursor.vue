@@ -5,6 +5,7 @@ import gsap from "gsap";
 import ArrowRightLong from "./icons/ArrowRightLong.vue";
 import { path } from "../composables/useRouteObserver";
 import { raycast } from "../three/utils/raycast";
+import { projectId } from "../composables/useRouteObserver";
 
 const cursorWrapperRef = ref<HTMLElement | null>(null);
 const cursorScaleRef = ref<HTMLElement | null>(null);
@@ -13,8 +14,8 @@ const mouseY = ref(0);
 const currentX = ref(0);
 const currentY = ref(0);
 const isVisible = ref(false);
-const cursorType = ref<"circle-black" | "arrow" | "circle-white" | null>(null);
-const detectedType = ref<"circle-black" | "arrow" | "circle-white" | null>(null);
+const cursorType = ref<"circle-black" | "arrow" | "arrow-external" | "circle-white" | null>(null);
+const detectedType = ref<"circle-black" | "arrow" | "arrow-external" | "circle-white" | null>(null);
 
 const lerpSpeed = 0.1;
 
@@ -54,11 +55,13 @@ const tick = () => {
   }
 };
 
-const checkIfHasCursorAttribute = (element: Element | null): "circle-black" | "arrow" | "circle-white" | null => {
+const checkIfHasCursorAttribute = (
+  element: Element | null,
+): "circle-black" | "arrow" | "arrow-external" | "circle-white" | null => {
   if (!element) return null;
   if (element instanceof HTMLElement) {
     const cursor = element.dataset.cursor;
-    if (cursor === "circle-black" || cursor === "arrow" || cursor === "circle-white") {
+    if (cursor === "circle-black" || cursor === "arrow" || cursor === "arrow-external" || cursor === "circle-white") {
       return cursor;
     }
   }
@@ -98,12 +101,15 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div ref="cursorWrapperRef" class="cursor-wrapper" :class="{ [`project-${path}`]: typeof path === 'string' }">
+  <div ref="cursorWrapperRef" class="cursor-wrapper" :class="{ [`project-${projectId}`]: projectId !== null }">
     <div ref="cursorScaleRef" class="cursor-scale">
       <div class="cursor cursor-circle-black" :class="{ 'cursor-active': cursorType === 'circle-black' }" />
       <div class="cursor cursor-circle-white" :class="{ 'cursor-active': cursorType === 'circle-white' }" />
       <div class="cursor cursor-arrow" :class="{ 'cursor-active': cursorType === 'arrow' }">
         <ArrowRightLong class="cursor-arrow-icon" />
+      </div>
+      <div class="cursor cursor-arrow-external" :class="{ 'cursor-active': cursorType === 'arrow-external' }">
+        <ArrowRightLong class="cursor-arrow-external-icon" />
       </div>
     </div>
   </div>
@@ -174,6 +180,26 @@ onUnmounted(() => {
     &-icon {
       color: var(--color-white-400);
       width: 24px;
+    }
+  }
+
+  &-arrow-external {
+    width: 54px;
+    height: 54px;
+    transition:
+      background-color 0.1s ease-in-out,
+      opacity 0.1s ease-in-out;
+    background-color: var(--color-accent-400, var(--color-orange-400));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    //border: var(--stroke-md) solid var(--color-white-400);
+
+    &-icon {
+      color: var(--color-white-400);
+      width: 24px;
+      transform: rotate(-45deg);
     }
   }
 }
