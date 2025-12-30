@@ -54,12 +54,10 @@ const { isTouch } = useAgent();
 .home-wrapper-projectIsReady {
   visibility: hidden;
   position: fixed;
-  inset: 0;
 }
 
 .project-wrapper {
   position: fixed; /* <-- key */
-  inset: 0;
   overflow: hidden; /* new page must NOT scroll during transition */
   z-index: var(--z-index-layout-project);
   visibility: hidden;

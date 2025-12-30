@@ -129,7 +129,7 @@ watch(
 </script>
 
 <template>
-  <div class="home-page">
+  <div :class="['home-wrapper', typeof projectId === 'string' && `home-wrapper-out`]">
     <ScrollIcon />
     <Layout>
       <div class="intro-wrapper" ref="introRef">
@@ -153,8 +153,8 @@ watch(
       </div>
       <Footer :withSocial="false"></Footer>
     </Layout>
-    <HeaderHome v-if="projectsLoaded" />
   </div>
+  <HeaderHome v-if="projectsLoaded" />
 </template>
 
 <style scoped lang="scss">
@@ -176,6 +176,18 @@ watch(
 }
 
 .home {
+  &-wrapper {
+    transition: transform calc(var(--transition-route-duration) * 0.75) var(--transition-route-ease);
+
+    &-out {
+      transform: translate3d(-2rem, 0, 0);
+
+      @include mixins.mq("md") {
+        transform: translate3d(0, -5rem, 0);
+      }
+    }
+  }
+
   &-contact {
     width: 100%;
     min-height: calc(var(--lvh) * 100);

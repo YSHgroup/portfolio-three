@@ -32,7 +32,8 @@ onMounted(loadPreviews);
 
 <template>
   <div class="projects">
-    <NotchSection class="projects-notch" />
+    <NotchSection class="projects-notch-start" />
+    <NotchSection class="projects-notch-end" />
     <div class="grid">
       <div class="projects-title">
         <Banner class="projects-title-banner" :copy="t('selected')" size="sm" animated />
@@ -56,15 +57,11 @@ onMounted(loadPreviews);
   justify-content: center;
   position: relative;
   width: 100%;
-  max-width: calc(var(--svw) * 100);
-  overflow: hidden;
   gap: var(--space-xl);
   padding-left: var(--space-outer);
   padding-right: var(--space-outer);
   background-color: var(--color-beige-400);
   min-height: calc(var(--lvh) * 100 + var(--radius-xxl));
-  border-bottom-left-radius: var(--radius-xxl);
-  border-bottom-right-radius: var(--radius-xxl);
   padding-top: 96px;
   padding-bottom: 96px;
 
@@ -119,11 +116,20 @@ onMounted(loadPreviews);
   }
 
   &-notch {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translateY(-100%);
-    color: var(--color-beige-400);
+    &-start {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateY(-100%);
+      color: var(--color-beige-400);
+    }
+
+    &-end {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      color: var(--color-beige-600);
+    }
   }
 
   &-cards {

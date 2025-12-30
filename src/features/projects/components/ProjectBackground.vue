@@ -35,7 +35,7 @@ import { ROUTE_TRANSITION_DURATION } from "../../../composables/useProjectTransi
   border-radius: var(--radius-xxl) 0 0 0;
   z-index: calc(var(--z-index-project-background) - 3);
   pointer-events: none;
-  transition: transform var(--transitionDuration) var(--ease-smooth);
+  transition: transform var(--transitionDuration) var(--transition-route-ease);
   visibility: hidden;
   transform: translate3d(100%, 0, 0);
 

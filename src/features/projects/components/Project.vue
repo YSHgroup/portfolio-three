@@ -62,7 +62,6 @@ watch(
       :projectId="recentProjectId"
     />
     <Footer :class="['project-footer', `project-${recentProjectId}`]"></Footer>
-    <div :class="['project-blend', projectId !== null && `project-blend-visible`]"></div>
   </div>
 </template>
 
@@ -75,24 +74,6 @@ watch(
   justify-content: space-around;
   max-width: calc(var(--lvw) * 100);
   overflow: hidden;
-
-  &-blend {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--color-background-300);
-    opacity: 1;
-    z-index: calc(var(--z-index-layout-project) + 1);
-    transition: opacity calc(var(--transition-route-duration) - 0.2s) var(--transition-route-ease);
-    transition-delay: 0.2s;
-    pointer-events: none;
-
-    &-visible {
-      opacity: 0;
-    }
-  }
 
   &-footer {
     position: relative;
