@@ -19,6 +19,12 @@ export default [
     description: "Multiplayer gaming platform",
   },
   {
+    title: "Sharkie",
+    slug: "sharkie",
+    thumbnail: thumbnailPokedex,
+    description: "2D adventure game",
+  },
+  {
     title: "WebGL Particles",
     slug: "particles",
     thumbnail: thumbnailParticles,

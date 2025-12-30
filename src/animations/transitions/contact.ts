@@ -42,7 +42,7 @@ const setup = (contact: HTMLElement) => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: contact,
-        start: isMobile ? "center 60%" : "center 75%",
+        start: isMobile ? "top 10%" : "top 15%",
       },
     });
     tl.call(avatarAnimations.wakeUp, [0.25]);

@@ -17,7 +17,12 @@ export default [
     slug: "quibbo",
     thumbnail: thumbnailQuibbo,
     description: "Multiplayer-Gaming-Plattform",
-    
+  },
+  {
+    title: "Sharkie",
+    slug: "sharkie",
+    thumbnail: thumbnailPokedex,
+    description: "2D-Abenteuerspiel",
   },
   {
     title: "WebGL Partikel",
