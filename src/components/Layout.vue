@@ -4,7 +4,7 @@
 
 <style scoped lang="scss">
 .layout {
-  width: 100%;
+  width: calc(var(--svw) * 100);
   display: flex;
   flex-direction: column;
   align-items: center;
