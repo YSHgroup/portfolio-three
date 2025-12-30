@@ -45,16 +45,31 @@ const handleScroll = () => {
   lastScrollY = currentScrollY;
 
   // Calculate velocity based on scroll delta (normalized to 0-1 range)
-  touchVelocity = Math.min(delta * 0.01, 1);
+  const newVelocity = Math.min(delta, 1);
 
-  // Clear existing timeout
+  // Kill any existing reset animation
+  gsap.killTweensOf({ value: touchVelocity });
+
+  // Immediately set new velocity (no animation on scroll in)
+  touchVelocity = newVelocity;
+
+  // Clear existing timeout and set new one to animate back to 0
   if (touchVelocityTimeout) {
     clearTimeout(touchVelocityTimeout);
   }
 
-  // Set timeout to decay velocity
   touchVelocityTimeout = window.setTimeout(() => {
-    touchVelocity = 0;
+    gsap.to(
+      { value: touchVelocity },
+      {
+        value: 0,
+        duration: 0.5,
+        ease: "power2.out",
+        onUpdate: function () {
+          touchVelocity = this.targets()[0].value;
+        },
+      },
+    );
   }, 100);
 };
 
@@ -70,6 +85,9 @@ const tick = () => {
 
 const destroy = () => {
   gsap.ticker.remove(tick);
+
+  // Kill any ongoing velocity animations
+  gsap.killTweensOf({ value: touchVelocity });
 
   // Clean up touch fallback
   if (isTouch.value) {
