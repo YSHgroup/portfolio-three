@@ -1,14 +1,13 @@
 import { ref, watch } from "vue";
 import { projectId } from "./useRouteObserver";
 
-export const ROUTE_TRANSITION_DURATION = 800;
+export const ROUTE_TRANSITION_DURATION = 400;
 export const isTransitioning = ref(false);
 
 let timeout: ReturnType<typeof setTimeout> | null = null;
 
 export const useProjectTransition = () => {
   watch(projectId, (newId, oldId, onInvalidate) => {
-
     // if neither entering nor leaving project → do nothing
     const entering = oldId === null && newId !== null;
     const leaving = oldId !== null && newId === null;

@@ -12,6 +12,7 @@ import Project from "./features/projects/components/Project.vue";
 import { useProjectTransition } from "./composables/useProjectTransition";
 import { useScroll } from "./composables/useScroll";
 import { projectVisible } from "./composables/useRouteObserver";
+import ProjectBackground from "./features/projects/components/ProjectBackground.vue";
 
 const { isTransitioning } = useProjectTransition();
 
@@ -33,6 +34,7 @@ const { isTouch } = useAgent();
   </div>
 
   <!-- overlay page -->
+  <ProjectBackground />
   <div
     class="project-wrapper"
     :class="{
