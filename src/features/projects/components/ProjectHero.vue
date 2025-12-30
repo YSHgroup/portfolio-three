@@ -3,18 +3,31 @@ import Tag from "../../../components/Tag.vue";
 import Button from "../../../components/Button.vue";
 import { t } from "../../../i18n/utils/translate";
 import Link from "../../../components/Link.vue";
+import { projectId } from "../../../composables/useRouteObserver";
+import { ref, watch } from "vue";
 
 import type { ProjectContent } from "../../../content/types";
 
 const { content } = defineProps<{
   content: ProjectContent;
 }>();
+
+const animationKey = ref(0);
+
+// Force animation restart when projectId changes
+watch(projectId, () => {
+  animationKey.value++;
+});
 </script>
 
 <template>
   <div class="project-hero grid">
     <div class="project-hero-top">
-      <h1 class="project-hero-title">{{ content.title }}</h1>
+      <div class="project-hero-title-wrapper">
+        <h1 class="project-hero-title" :key="animationKey">
+          {{ content.title }}
+        </h1>
+      </div>
       <div class="project-hero-tags">
         <Tag v-for="tag in content.tags" :key="tag" :variant="tag" />
       </div>
@@ -102,9 +115,24 @@ const { content } = defineProps<{
     font-size: var(--font-size-title-lg);
     color: var(--color-text-400);
     line-height: var(--line-height-title);
+    transform: translateY(0%);
+    animation: project-hero-title-visible 0.5s var(--ease-smooth);
 
     @include mixins.mq("md") {
       font-size: var(--font-size-title-xl);
+    }
+
+    @keyframes project-hero-title-visible {
+      from {
+        transform: translateY(100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    &-wrapper {
+      overflow: hidden;
     }
   }
 
