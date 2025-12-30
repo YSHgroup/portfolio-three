@@ -1,8 +1,8 @@
 import { onMounted, ref } from "vue";
 
-export const useAgent = () => {
-  const isTouch = ref(false);
+export const isTouch = ref(false);
 
+export const useAgent = () => {
   onMounted(() => {
     isTouch.value =
       "ontouchstart" in window ||
