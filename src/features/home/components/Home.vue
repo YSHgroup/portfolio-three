@@ -48,8 +48,8 @@ const updateContactBottomOffset = () => {
   contactBottom.value = documentBottom - elementBottom;
 };
 
-watch(projectVisible, (newVal) => {
-  if (!newVal) {
+watch(projectVisible, () => {
+  if (!projectVisible.value) {
     updateContactBottomOffset();
   }
 });
@@ -60,8 +60,12 @@ watchEffect((onInvalidate) => {
   const resizeObserver = new ResizeObserver(updateContactBottomOffset);
   resizeObserver.observe(contactRef.value as HTMLElement);
 
+  const intersectionObserver = new IntersectionObserver(updateContactBottomOffset);
+  intersectionObserver.observe(contactRef.value as HTMLElement);
+
   onInvalidate(() => {
     resizeObserver.disconnect();
+    intersectionObserver.disconnect();
   });
 });
 
@@ -183,7 +187,7 @@ watch(
       transform: translate3d(-2rem, 0, 0);
 
       @include mixins.mq("md") {
-        transform: translate3d(0, -5rem, 0);
+        transform: translate3d(0, -4rem, 0);
       }
     }
   }
