@@ -27,17 +27,17 @@ import { ROUTE_TRANSITION_DURATION } from "../../../composables/useProjectTransi
 <style scoped lang="scss">
 .project-background {
   position: fixed;
-  top: 0;
-  left: calc(var(--radius-xxl) * -1);
-  width: calc(100% + var(--radius-xxl));
-  height: 100%;
+  top: calc(var(--radius-xxl) * -1);
+  left: 0;
+  height: calc(100% + var(--radius-xxl));
+  width: 100%;
   background-color: var(--color-background-300);
-  border-radius: var(--radius-xxl) 0 0 0;
   z-index: calc(var(--z-index-project-background) - 3);
   pointer-events: none;
   transition: transform var(--transitionDuration) var(--transition-route-ease);
   visibility: hidden;
-  transform: translate3d(100%, 0, 0);
+  transform: translate3d(0, 100%, 0);
+  border-radius: var(--radius-xxl) var(--radius-xxl) 0 0;
 
   &-blend {
     position: fixed;
@@ -59,15 +59,6 @@ import { ROUTE_TRANSITION_DURATION } from "../../../composables/useProjectTransi
     &-transitioning {
       visibility: visible;
     }
-  }
-
-  @include mixins.mq("md") {
-    transform: translate3d(0, 100%, 0);
-    border-radius: var(--radius-xxl) var(--radius-xxl) 0 0;
-    top: calc(var(--radius-xxl) * -1);
-    left: 0;
-    height: calc(100% + var(--radius-xxl));
-    width: 100%;
   }
 
   &-visible {

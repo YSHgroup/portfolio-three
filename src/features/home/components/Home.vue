@@ -184,11 +184,7 @@ watch(
     transition: transform calc(var(--transition-route-duration) * 0.75) var(--transition-route-ease);
 
     &-out {
-      transform: translate3d(-2rem, 0, 0);
-
-      @include mixins.mq("md") {
-        transform: translate3d(0, -4rem, 0);
-      }
+      transform: translate3d(0, -4rem, 0);
     }
   }
 
