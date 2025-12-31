@@ -2,6 +2,7 @@ import thumbnailCubeWar from "../../../assets/thumbnails/cubewar.webp";
 import thumbnailQuibbo from "../../../assets/thumbnails/quibbo.webp";
 import thumbnailParticles from "../../../assets/thumbnails/particles.webp";
 import thumbnailPokedex from "../../../assets/thumbnails/pokedex.webp";
+import thumbnailSharkie from "../../../assets/thumbnails/sharkie.webp";
 
 import type { ProjectPreview } from "../../types";
 
@@ -21,7 +22,7 @@ export default [
   {
     title: "Sharkie",
     slug: "sharkie",
-    thumbnail: thumbnailPokedex,
+    thumbnail: thumbnailSharkie,
     description: "2D adventure game",
   },
   {
