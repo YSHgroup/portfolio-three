@@ -17,6 +17,7 @@ import matcapWhite from "./assets/textures/matcap-white.webp";
 import numbersBitmap from "./assets/textures/numbers-bitmap.webp";
 import roomTexture from "./assets/textures/room.webp";
 import roomShadowTexture from "./assets/textures/room-shadow.webp";
+import hologramPlaneTexture from "./assets/textures/hologram-plane.webp";
 
 type Source = {
   name: string;
@@ -38,6 +39,7 @@ export const sources = [
   { name: "diffuse-map", type: "texture", path: diffuseMap },
   { name: "face-texture", type: "texture", path: faceTexture },
   { name: "head-texture", type: "texture", path: headTexture },
+  { name: "hologram-plane-texture", type: "texture", path: hologramPlaneTexture },
   { name: "icon-spritesheet", type: "texture", path: iconSpritesheet },
   { name: "matcap-black", type: "texture", path: matcapBlack },
   { name: "matcap-gray", type: "texture", path: matcapGray },

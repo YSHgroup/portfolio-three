@@ -5,6 +5,7 @@ import { labShine } from "./shine";
 import { labBase } from "./base";
 import { labParticles } from "./particles";
 import { labElectric } from "./electric";
+import { labPlane } from "./plane";
 import { DigitalNumbers } from "../digital-numbers";
 import { aboutProgress } from "../../../animations/transitions/about";
 import gsap from "gsap";
@@ -48,6 +49,11 @@ const init = () => {
   if (objects?.electric) labElectric.init(objects.electric);
 
   labParticles.init();
+  labPlane.init();
+
+  if (labPlane.mesh) {
+    group.add(labPlane.mesh);
+  }
 
   aboutNumbers = new DigitalNumbers({
     count: 3,
@@ -74,6 +80,7 @@ const destroy = () => {
   labBase.destroy();
   labElectric.destroy();
   labParticles.destroy();
+  labPlane.destroy();
   aboutNumbers?.destroy();
   aboutNumbers = null;
   group.clear();
