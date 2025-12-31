@@ -112,7 +112,7 @@ watchEffect((onInvalidate) => {
   if (
     projectsLoaded &&
     threeInitialized &&
-    (projectId.value === null || isTransitioning.value) &&
+    //(projectId.value === null || isTransitioning.value) &&
     !preloaderVisible.value
   ) {
     animations.init();
@@ -133,7 +133,13 @@ watch(
 </script>
 
 <template>
-  <div :class="['home-wrapper', typeof projectId === 'string' && `home-wrapper-out`]">
+  <div
+    :class="[
+      'home-wrapper',
+      typeof projectId === 'string' && isTransitioning && `home-wrapper-out`,
+      typeof projectId !== 'string' && isTransitioning && `home-wrapper-in`,
+    ]"
+  >
     <ScrollIcon />
     <Layout>
       <div class="intro-wrapper" ref="introRef">
@@ -181,10 +187,32 @@ watch(
 
 .home {
   &-wrapper {
-    transition: transform calc(var(--transition-route-duration) * 0.75) var(--transition-route-ease);
+    transform-origin: center center;
 
     &-out {
-      transform: translate3d(0, -4rem, 0);
+      animation: home-wrapper-out var(--transition-route-duration) var(--transition-route-ease);
+    }
+
+    &-in {
+      animation: home-wrapper-in var(--transition-route-duration) var(--transition-route-ease);
+    }
+
+    @keyframes home-wrapper-out {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(0.95);
+      }
+    }
+
+    @keyframes home-wrapper-in {
+      0% {
+        transform: scale(0.95);
+      }
+      100% {
+        transform: scale(1);
+      }
     }
   }
 
