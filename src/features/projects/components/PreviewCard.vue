@@ -77,7 +77,7 @@ onUnmounted(() => {
     </div>
   </Link>
 
-  <Link v-else class="preview-card" data-cursor="circle-black" external :href="social[0].url">
+  <Link v-else class="preview-card" data-cursor="arrow-external" external :href="social[0].url">
     <div class="preview-card-top preview-card-top-empty">
       <Plus class="preview-card-top-empty-icon" />
     </div>
