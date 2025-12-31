@@ -11,7 +11,6 @@ export default {
   theme: "dark",
   tags: ["ogl", "javascript", "glsl"],
   live: "https://particles.david-hckh.com/",
-  video: videoParticles,
   videoBorder: false,
   description:
     "Ein experimentelles WebGL-Projekt mit OGL.js, das Partikel mithilfe mathematischer Formeln und Noise-Funktionen animiert.<br/><br/>Die Partikel bewegen sich fließend zwischen verschiedenen 3D-Formen, die ineinander übergehen.",

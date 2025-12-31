@@ -13,7 +13,6 @@ export default {
   title: "CubeWar",
   theme: "dark",
   tags: ["three", "node", "websockets", "kubernetes", "redis"],
-  video: videoCubeWar,
   videoBorder: false,
   live: "https://cubewar.io",
   description:

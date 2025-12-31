@@ -13,7 +13,6 @@ export default {
   title: "Quibbo",
   theme: "light",
   tags: ["three", "node", "kubernetes", "redis", "postgresql"],
-  video: videoQuibbo,
   videoBorder: true,
   description:
     "Quibbo is a platform for fast, round-based multiplayer games. It brings together matchmaking, customizable 3D avatars, and account integration with ranked rewards.<br/><br/>The project started as a technical experiment and grew into a scalable system for testing new game ideas.",

@@ -10,7 +10,6 @@ export interface ProjectContent {
   theme: "light" | "dark";
   tags: TagVariant[];
   description?: string;
-  video: string;
   videoBorder?: boolean;
   live?: string;
   source?: string;
