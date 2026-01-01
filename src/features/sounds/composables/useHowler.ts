@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { lerp } from "../../../utils/math";
 import { Howler } from "howler";
 import { isFeatureEnabled } from "../../../utils/features";
+import { tick as contactTick } from "../core/contact";
 import { stopSnoreRepetition } from "../core/contact";
 
 export const howlerUnlocked = ref(false);
@@ -29,7 +30,8 @@ export const useHowler = () => {
       if (Howler.ctx.state !== "running") return;
       handleUnlocked();
     } else {
-      //lerp howler.volume to targetVolume
+      contactTick();
+
       const currentVolume = Howler.volume();
       if (currentVolume > 0.99 && enabledVolume.value === 1) {
         return;

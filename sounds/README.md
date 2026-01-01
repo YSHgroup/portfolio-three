@@ -1,0 +1,1 @@
+audiosprite *.mp3 -o output/sprite --gap 0.2

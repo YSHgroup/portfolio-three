@@ -1,7 +1,12 @@
-import { sounds } from "../definitions/sounds";
+import { playSound } from "../utils/sounds";
+import { sprites } from "../definitions/sprites";
+import { sceneWeights } from "../../../animations/scenes";
+import { clamp } from "../../../utils/math";
 
-// Snore repetition logic
+const SNORE_INTERVAL = 3300;
+
 let snoreTimeout: number | null = null;
+let currentId: number | undefined;
 
 const scheduleNextSnore = () => {
   if (snoreTimeout) {
@@ -9,16 +14,25 @@ const scheduleNextSnore = () => {
   }
 
   snoreTimeout = window.setTimeout(() => {
-    sounds.snore.play();
-  }, 1800);
+    currentId = playSound("snore");
+    scheduleNextSnore();
+  }, SNORE_INTERVAL);
 };
 
-// Set up event listener for when snore ends to schedule next play
-sounds.snore.on("end", scheduleNextSnore);
+scheduleNextSnore();
+playSound("snore");
+
+export const tick = () => {
+  sprites.contact.howl.volume(clamp(sceneWeights.contact * 2, 0, 1));
+};
 
 export const stopSnoreRepetition = () => {
   if (snoreTimeout) {
     clearTimeout(snoreTimeout);
     snoreTimeout = null;
+  }
+  if (currentId) {
+    sprites.contact.howl.stop(currentId);
+    currentId = undefined;
   }
 };
