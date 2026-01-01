@@ -63,7 +63,7 @@ const handleScroll = () => {
       { value: touchVelocity },
       {
         value: 0,
-        duration: 0.5,
+        duration: 1,
         ease: "power2.out",
         onUpdate: function () {
           touchVelocity = this.targets()[0].value;

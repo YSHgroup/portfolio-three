@@ -7,8 +7,10 @@ let plane: Mesh | null = null;
 
 const START_Y = -0.2;
 const END_Y = 4.5;
-const VISIBLE_START_PROGRESS = 0.2;
-const VISIBLE_END_PROGRESS = 0.3;
+const FADE_IN_START = 0.2;
+const FADE_IN_END = 0.3;
+const FADE_OUT_START = 0.7;
+const FADE_OUT_END = 0.9;
 
 const init = () => {
   if (plane) return;
@@ -42,18 +44,25 @@ const tick = () => {
   const yPosition = START_Y + progress * (END_Y - START_Y);
   plane.position.y = yPosition + 0.01;
 
-  // Calculate opacity based on progress
+  // Calculate opacity based on progress - fade in and out
   let opacity = 0;
-  if (progress <= VISIBLE_START_PROGRESS) {
-    // Before VISIBLE_START_PROGRESS: opacity 0
+  if (progress <= FADE_IN_START) {
+    // Before FADE_IN_START: opacity 0
     opacity = 0;
-  } else if (progress >= VISIBLE_END_PROGRESS) {
-    // After VISIBLE_END_PROGRESS: opacity 1 (fully visible)
+  } else if (progress <= FADE_IN_END) {
+    // Fade in phase: 0.2 to 0.3
+    const fadeInProgress = (progress - FADE_IN_START) / (FADE_IN_END - FADE_IN_START);
+    opacity = fadeInProgress;
+  } else if (progress <= FADE_OUT_START) {
+    // Fully visible phase: 0.3 to 0.7
     opacity = 1;
+  } else if (progress <= FADE_OUT_END) {
+    // Fade out phase: 0.7 to 1.0
+    const fadeOutProgress = (progress - FADE_OUT_START) / (FADE_OUT_END - FADE_OUT_START);
+    opacity = 1 - fadeOutProgress;
   } else {
-    // Between VISIBLE_START_PROGRESS and VISIBLE_END_PROGRESS: fade from 0 to 1
-    const fadeProgress = (progress - VISIBLE_START_PROGRESS) / (VISIBLE_END_PROGRESS - VISIBLE_START_PROGRESS);
-    opacity = fadeProgress;
+    // After FADE_OUT_END: opacity 0
+    opacity = 0;
   }
 
   // Calculate scale - fade between 0 (scale=1), 0.5 (scale=1.5) and 1 (scale=1)
