@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { lerp } from "../../../utils/math";
 import { Howler } from "howler";
 import { isFeatureEnabled } from "../../../utils/features";
+import { stopSnoreRepetition } from "../core/contact";
 
 export const howlerUnlocked = ref(false);
 export const soundsEnabled = ref(false);
@@ -72,5 +73,6 @@ export const useHowler = () => {
     gsap.ticker.remove(tick);
     window.removeEventListener("visibilitychange", handleVisibilityChange);
     window.removeEventListener("keydown", handleKeyPress);
+    stopSnoreRepetition();
   });
 };
