@@ -77,8 +77,6 @@ const tick = () => {
 
   // Apply scale to X and Z axes
   plane.scale.x = scale;
-  plane.scale.z = scale;
-
   // Update material opacity
   if (plane.material instanceof MeshBasicMaterial) {
     plane.material.opacity = opacity;
