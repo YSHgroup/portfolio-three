@@ -2,6 +2,7 @@ import { ShaderMaterial } from "three";
 import gsap from "gsap";
 import { velocity } from "../../../composables/useScroll";
 import { isTouch } from "../../../composables/useAgent";
+import { lerp } from "../../../utils/math";
 import vertexShader from "../../shaders/lab-electric/vertex.glsl";
 import fragmentShader from "../../shaders/lab-electric/fragment.glsl";
 
@@ -11,7 +12,8 @@ let material: ShaderMaterial | null = null;
 let mesh: Mesh | null = null;
 let lastScrollY = 0;
 let touchVelocity = 0;
-let touchVelocityTimeout: number | null = null;
+let touchVelocityTarget = 0;
+let scrollTimeout: number | null = null;
 const uniforms = {
   uTime: { value: 0 },
   uOpacity: { value: 0 },
@@ -44,38 +46,28 @@ const handleScroll = () => {
   const delta = Math.abs(currentScrollY - lastScrollY);
   lastScrollY = currentScrollY;
 
-  // Calculate velocity based on scroll delta (normalized to 0-1 range)
-  const newVelocity = Math.min(delta, 1);
+  // If we're scrolling (delta > 0), set target to 1
+  if (delta > 0) {
+    touchVelocityTarget = 1;
 
-  // Kill any existing reset animation
-  gsap.killTweensOf({ value: touchVelocity });
+    // Clear existing timeout and set new one to detect when scrolling stops
+    if (scrollTimeout) {
+      clearTimeout(scrollTimeout);
+    }
 
-  // Immediately set new velocity (no animation on scroll in)
-  touchVelocity = newVelocity;
-
-  // Clear existing timeout and set new one to animate back to 0
-  if (touchVelocityTimeout) {
-    clearTimeout(touchVelocityTimeout);
+    scrollTimeout = window.setTimeout(() => {
+      touchVelocityTarget = 0;
+      scrollTimeout = null;
+    }, 150); // 150ms delay to detect scroll stop
   }
-
-  touchVelocityTimeout = window.setTimeout(() => {
-    gsap.to(
-      { value: touchVelocity },
-      {
-        value: 0,
-        duration: 1,
-        ease: "power2.out",
-        onUpdate: function () {
-          touchVelocity = this.targets()[0].value;
-        },
-      },
-    );
-  }, 100);
 };
 
 const tick = () => {
   if (!material) return;
   material.uniforms.uTime!.value = gsap.ticker.time;
+
+  // Lerp touchVelocity towards target with delta 0.06
+  touchVelocity = lerp(touchVelocity, touchVelocityTarget, 0.06);
 
   // Use touch velocity fallback if main velocity is 0 (e.g., on touch devices)
   const currentVelocity = velocity.value > 0 ? velocity.value : touchVelocity;
@@ -86,16 +78,15 @@ const tick = () => {
 const destroy = () => {
   gsap.ticker.remove(tick);
 
-  // Kill any ongoing velocity animations
-  gsap.killTweensOf({ value: touchVelocity });
-
   // Clean up touch fallback
   if (isTouch.value) {
     window.removeEventListener("scroll", handleScroll);
   }
 
-  if (touchVelocityTimeout) {
-    clearTimeout(touchVelocityTimeout);
+  // Clear any pending scroll timeout
+  if (scrollTimeout) {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = null;
   }
 };
 
