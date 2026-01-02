@@ -8,6 +8,7 @@ import gsap from "gsap";
 import { sceneWeights } from "../../../animations/scenes";
 import { animations as avatarAnimations } from "../avatar/animations";
 import { leftDesktop as avatarLeftDesktop } from "../avatar/left-desktop";
+import { playSound } from "../../../features/sounds/utils/sounds";
 
 import type { Object3D, Material, BufferGeometry } from "three";
 
@@ -102,6 +103,8 @@ const scroll = () => {
   const scrollDepth = Math.random() * (-0.25 - 0.25) + 0.25;
 
   gsap.to(uniforms.uScrollDepth, { value: scrollDepth, duration: 1 });
+
+  playSound("mouseWheel");
 };
 
 const showMessage = () => {

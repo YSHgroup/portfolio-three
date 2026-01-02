@@ -4,11 +4,12 @@ import { desktops } from "../room/desktops";
 import { sceneWeights } from "../../../animations/scenes";
 import { messagePopup } from "../room/message-popup";
 import { sizes } from "../../../utils/sizes";
+import { playSound } from "../../../features/sounds/utils/sounds";
 
 let ctx: gsap.Context | null = null;
 const isActive = { value: false };
 
-const INTERVAL_DURATION = 10;
+const INTERVAL_DURATION = 7;
 
 const init = () => {
   startInterval();
@@ -24,7 +25,6 @@ const startInterval = () => {
   if (ctx) ctx.kill();
 
   const calcDelay = () => {
-    //return 6;
     return Math.floor(INTERVAL_DURATION + Math.random() * 6 + clip.duration);
   };
 
@@ -47,6 +47,10 @@ const startInterval = () => {
     tl.add(() => {
       avatarAnimations.play("left-desktop", 0.3);
     }, 0.2);
+
+    tl.add(() => {
+      playSound("keyboard");
+    }, 1.6);
 
     desktops.showMessage();
     messagePopup.show();
