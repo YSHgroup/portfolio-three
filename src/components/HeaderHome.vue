@@ -80,6 +80,7 @@ onMounted(() => {
         :is-dark-theme="isDarkTheme"
         :aria-label="ariaLabels[section]"
         data-sound="click"
+        data-hoversound="hover"
       >
         {{ t(section) }}
       </HeaderLink>

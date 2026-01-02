@@ -24,7 +24,7 @@ scheduleNextSnore();
 playSound("snore");
 
 export const tick = () => {
-  const volume = projectVisible.value ? 0 : clamp(sceneWeights.contact * 2, 0, 1);
+  const volume = projectVisible.value ? 0 : clamp(sceneWeights.contact * 1, 0, 1);
   sprites.contact.howl.volume(volume);
 };
 

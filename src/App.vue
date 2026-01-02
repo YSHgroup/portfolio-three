@@ -14,6 +14,7 @@ import { useScroll } from "./composables/useScroll";
 import { projectVisible } from "./composables/useRouteObserver";
 import ProjectBackground from "./features/projects/components/ProjectBackground.vue";
 import { useClickSound } from "./features/sounds/composables/useClickSounds";
+import { useHoverSound } from "./features/sounds/composables/useHoverSounds";
 
 const { isTransitioning } = useProjectTransition();
 
@@ -24,6 +25,7 @@ useHowler();
 useScroll();
 useRouteObserver();
 useClickSound();
+useHoverSound();
 const { isTouch } = useAgent();
 </script>
 
