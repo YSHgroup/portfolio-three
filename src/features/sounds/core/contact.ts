@@ -4,7 +4,7 @@ import { sceneWeights } from "../../../animations/scenes";
 import { clamp } from "../../../utils/math";
 import { projectVisible } from "../../../composables/useRouteObserver";
 
-const SNORE_INTERVAL = 3300;
+const SNORE_INTERVAL = 2.0833332538604736 * 1000 * 2;
 
 let snoreTimeout: number | null = null;
 let currentId: number | undefined;
