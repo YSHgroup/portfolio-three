@@ -1,8 +1,8 @@
-import { sounds as items } from "../definitions/sounds";
+import { sounds as items, pools } from "../definitions/sounds";
 import { sprites } from "../definitions/sprites";
 import { isFeatureEnabled } from "../../../utils/features";
 
-import type { SoundKey } from "../types";
+import type { SoundKey, PoolKey } from "../types";
 
 export const getSoundsHowl = (sound: SoundKey) => {
   const data = items[sound];
@@ -12,11 +12,25 @@ export const getSoundsHowl = (sound: SoundKey) => {
   return data.howl;
 };
 
-export const playSound = (soundKey: SoundKey) => {
-  if (!isFeatureEnabled("sounds")) return;
-  const data = items[soundKey];
+//when soundKey is the key of a pool, play a random sound from the pool
+const playPoolSound = (poolKey: PoolKey) => {
+  const pool = pools[poolKey];
+  const randomSound = pool[Math.floor(Math.random() * pool.length)];
+  playSound(randomSound as SoundKey);
+};
 
-  const howl = getSoundsHowl(soundKey);
+export const playSound = (key: SoundKey | PoolKey) => {
+  if (!isFeatureEnabled("sounds")) return;
+
+  if (key in pools) {
+    playPoolSound(key as PoolKey);
+    return;
+  }
+
+  const data = items[key as SoundKey];
+  if (!data) return;
+
+  const howl = getSoundsHowl(key as SoundKey);
 
   let id: number | undefined;
   if ("spriteKey" in data) {

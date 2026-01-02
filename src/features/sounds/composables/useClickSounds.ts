@@ -1,6 +1,5 @@
 import { onMounted, onBeforeUnmount } from "vue";
 import { playSound } from "../utils/sounds";
-import { sounds as items } from "../definitions/sounds";
 
 import type { SoundKey } from "../types";
 
@@ -17,7 +16,7 @@ export function useClickSound(): void {
   const playSoundForElement = (el: HTMLElement | null) => {
     if (!el) return;
     const soundName = el.dataset.sound;
-    if (soundName && soundName in items) {
+    if (soundName) {
       playSound(soundName as SoundKey);
     }
   };

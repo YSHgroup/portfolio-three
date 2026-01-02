@@ -1,7 +1,7 @@
 import { onMounted, onBeforeUnmount } from "vue";
 import { playSound } from "../utils/sounds";
-import { sounds as items } from "../definitions/sounds";
 import { useAgent } from "../../../composables/useAgent";
+import { isTransitioning } from "../../../composables/useProjectTransition";
 
 import type { SoundKey } from "../types";
 
@@ -16,9 +16,9 @@ export function useHoverSound(): void {
   };
 
   const playSoundForElement = (el: HTMLElement | null) => {
-    if (!el) return;
+    if (!el || isTransitioning.value) return;
     const soundName = el.dataset.hoversound;
-    if (soundName && soundName in items) {
+    if (soundName) {
       playSound(soundName as SoundKey);
     }
   };
