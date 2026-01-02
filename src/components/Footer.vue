@@ -33,9 +33,10 @@ const { withSocial = true } = defineProps<Props>();
         @keydown.enter="handleBackToTop"
         data-cursor="circle-white"
         data-sound="click"
-        data-hoversound="hover"
       >
-        <ButtonRound renderAs="div" variant="border"><ArrowRightLong class="footer-back-to-top-icon children-unclickable" /></ButtonRound>
+        <ButtonRound renderAs="div" variant="border" class="children-unclickable" data-hoversound="hover">
+          <ArrowRightLong class="footer-back-to-top-icon" />
+        </ButtonRound>
       </div>
       <div class="footer-top">
         <Social v-if="withSocial" />

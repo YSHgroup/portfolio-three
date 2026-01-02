@@ -59,7 +59,6 @@ onMounted(loadPreviews);
         class="project-content-next-project"
         data-cursor="arrow"
         data-sound="click"
-        data-hoversound="hover"
       >
         <NextProject :project="nextProject" />
       </Link>
