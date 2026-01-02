@@ -32,6 +32,7 @@ const init = (_mesh: Mesh, _wings: { left: Mesh; right: Mesh }) => {
 
   box3 = new Box3().setFromObject(mesh);
   box3.onClick = handleClick;
+  box3.hoverSound = "hover";
 
   raycast.boxesToCheck.push(box3);
 };

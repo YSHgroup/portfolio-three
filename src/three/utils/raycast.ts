@@ -1,11 +1,13 @@
 import gsap from "gsap";
 import { Ray, Vector2, Vector3 } from "three";
 import { camera } from "../core/camera";
-import {threeSizes} from "./sizes";
+import { threeSizes } from "./sizes";
+import { playSound } from "../../features/sounds/utils/sounds";
 
 import type { ClickableBox3 } from "../types";
 
 let hoveringBox: ClickableBox3 | null = null;
+let previousHoveringBox: ClickableBox3 | null = null;
 const boxesToCheck: ClickableBox3[] = [];
 const pointer = new Vector2();
 const ndcPointer = new Vector3();
@@ -67,6 +69,15 @@ const tick = () => {
   // Only perform continuous raycast for non-touch devices
   if (!isTouchDevice) {
     performRaycast();
+
+    // Check for hover state changes and play sounds
+    if (hoveringBox !== previousHoveringBox) {
+      // If we started hovering over a new box with a hover sound
+      if (hoveringBox && hoveringBox.hoverSound && !previousHoveringBox) {
+        playSound(hoveringBox.hoverSound as any);
+      }
+      previousHoveringBox = hoveringBox;
+    }
   }
 };
 
