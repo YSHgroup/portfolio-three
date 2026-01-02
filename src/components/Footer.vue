@@ -32,6 +32,7 @@ const { withSocial = true } = defineProps<Props>();
         @click="handleBackToTop"
         @keydown.enter="handleBackToTop"
         data-cursor="circle-white"
+        data-sound="click"
       >
         <ButtonRound renderAs="div" variant="border"><ArrowRightLong class="footer-back-to-top-icon" /></ButtonRound>
       </div>
@@ -45,6 +46,7 @@ const { withSocial = true } = defineProps<Props>();
                 class="footer-link"
                 :external="true"
                 data-cursor="circle-white"
+                data-sound="click"
                 >{{ t("privacy") }}</Link
               >
             </Clickable>
@@ -54,6 +56,7 @@ const { withSocial = true } = defineProps<Props>();
                 class="footer-link"
                 :external="true"
                 data-cursor="circle-white"
+                data-sound="click"
                 >{{ t("legal") }}</Link
               >
             </Clickable>

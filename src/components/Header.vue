@@ -63,11 +63,21 @@ const getInTouchClassNames = computed(() => {
         :aria-label="t('back-to-home')"
         :class="{ 'header-back': true, 'header-back-isProjectPage': projectId !== null }"
         data-cursor="circle-white"
+        data-sound="click"
       >
         <ArrowRight class="header-back-icon" />
       </ButtonRound>
     </div>
-    <div :class="{ 'header-logo': true, 'header-logo-isProjectPage': projectId !== null }" @click="handleLogoClick">
+    <div
+      :class="{
+        'header-logo': true,
+        'header-logo-isProjectPage': projectId !== null,
+        'header-logo-clickable': scrolledPastHeroVisible,
+      }"
+      @click="handleLogoClick"
+      data-sound="click"
+      data-cursor="circle-white"
+    >
       <Logo class="header-logo-image" />
     </div>
     <div class="header-right">
@@ -179,7 +189,11 @@ const getInTouchClassNames = computed(() => {
     gap: var(--space-xs);
     transition: color 0.2s ease-in-out;
     opacity: var(--scrolled);
-    pointer-events: auto;
+    pointer-events: none;
+
+    &-clickable {
+      pointer-events: auto;
+    }
 
     @include mixins.mq("md") {
       gap: var(--space-sm);

@@ -4,6 +4,7 @@ import { isFeatureEnabled } from "../../../utils/features";
 import { room } from ".";
 import { soundsEnabled } from "../../../features/sounds/composables/useHowler";
 import { notes } from "./notes";
+import { playSound } from "../../../features/sounds/utils/sounds";
 
 import type { ClickableBox3 } from "../../types";
 
@@ -12,6 +13,7 @@ let box3: ClickableBox3 | null = null;
 
 const handleClick = () => {
   soundsEnabled.value = !soundsEnabled.value;
+  playSound("click");
 };
 
 const init = (_mesh: Mesh) => {

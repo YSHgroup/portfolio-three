@@ -51,6 +51,7 @@ onUnmounted(() => {
     :to="`/project/${props.preview.slug}`"
     :aria-label="t('switch-to-project', { project: props.preview.title })"
     data-cursor="arrow"
+    data-sound="click"
     v-if="props.preview"
   >
     <div class="preview-card-top" ref="wrapperRef">
