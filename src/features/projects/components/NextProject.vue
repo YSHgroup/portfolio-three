@@ -10,7 +10,7 @@ const { project } = defineProps<{
 </script>
 
 <template>
-  <div class="next-project">
+  <div class="next-project children-unclickable">
     <img :src="project.thumbnail" :alt="project.title" class="next-project-image" />
     <div class="next-project-content">
       <p class="next-project-prefix">{{ t("next-project") }}:</p>

@@ -74,6 +74,7 @@ const getInTouchClassNames = computed(() => {
         'header-logo': true,
         'header-logo-isProjectPage': projectId !== null,
         'header-logo-clickable': scrolledPastHeroVisible,
+        'children-unclickable': true,
       }"
       @click="handleLogoClick"
       data-sound="click"

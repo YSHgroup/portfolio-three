@@ -75,7 +75,11 @@ onMounted(() => {
         v-for="section in sections"
         :key="section"
         :is-active="activeLink === section"
-        :class="['header-home-link', { 'header-home-link-active': activeLink === section && hasScrolledIntoView }]"
+        :class="[
+          'header-home-link',
+          { 'header-home-link-active': activeLink === section && hasScrolledIntoView },
+          'children-unclickable',
+        ]"
         @click="handleLinkClick('#' + section)"
         :is-dark-theme="isDarkTheme"
         :aria-label="ariaLabels[section]"

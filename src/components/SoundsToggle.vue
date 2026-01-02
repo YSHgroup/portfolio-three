@@ -16,7 +16,7 @@ const toggleSounds = () => {
 <template>
   <ButtonRound
     variant="theme"
-    :class="{ 'music-toggle': true, 'music-toggle-dark': props.isDarkTheme }"
+    :class="{ 'music-toggle': true, 'music-toggle-dark': props.isDarkTheme, 'children-unclickable': true }"
     @click="toggleSounds"
     :aria-label="soundsEnabled && howlerUnlocked ? t('disable-sounds') : t('enable-sounds')"
     data-cursor="circle-white"

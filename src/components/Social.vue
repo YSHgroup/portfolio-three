@@ -38,7 +38,7 @@ const getAriaLabel = (name: string) => `${t("go-to")} ${name.charAt(0).toUpperCa
       data-cursor="circle-white"
       data-hoversound="hover"
     >
-      <ButtonRound renderAs="div" :variant="props.variant ?? 'theme'">
+      <ButtonRound renderAs="div" :variant="props.variant ?? 'theme'" class="children-unclickable">
         <component :is="icons[item.name]" :aria-label="getAriaLabel(item.name)" external />
       </ButtonRound>
     </Link>

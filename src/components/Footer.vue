@@ -35,7 +35,7 @@ const { withSocial = true } = defineProps<Props>();
         data-sound="click"
         data-hoversound="hover"
       >
-        <ButtonRound renderAs="div" variant="border"><ArrowRightLong class="footer-back-to-top-icon" /></ButtonRound>
+        <ButtonRound renderAs="div" variant="border"><ArrowRightLong class="footer-back-to-top-icon children-unclickable" /></ButtonRound>
       </div>
       <div class="footer-top">
         <Social v-if="withSocial" />
@@ -55,7 +55,7 @@ const { withSocial = true } = defineProps<Props>();
             <Clickable renderAs="div">
               <Link
                 :href="locale === 'de' ? '/de/legal' : '/legal'"
-                class="footer-link"
+                class="footer-link children-unclickable"
                 :external="true"
                 data-cursor="circle-white"
                 data-sound="click"
@@ -75,7 +75,7 @@ const { withSocial = true } = defineProps<Props>();
           <Clickable renderAs="div">
             <Link
               href="https://soundcloud.com/hmsurf"
-              class="footer-link"
+              class="footer-link children-unclickable"
               external
               data-cursor="circle-white"
               data-hoversound="hover"

@@ -10,7 +10,7 @@ export interface Props extends ButtonWrapperProps {
 
 const props = defineProps<Props>();
 
-const classes = computed(() => ["button", `button-size-${props.size ?? "md"}`]);
+const classes = computed(() => ["button", `button-size-${props.size ?? "md"}`, "children-unclickable"]);
 </script>
 
 <template>
