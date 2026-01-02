@@ -64,6 +64,7 @@ const getInTouchClassNames = computed(() => {
         :class="{ 'header-back': true, 'header-back-isProjectPage': projectId !== null }"
         data-cursor="circle-white"
         data-sound="click"
+        data-hoversound="hover"
       >
         <ArrowRight class="header-back-icon" />
       </ButtonRound>
@@ -76,6 +77,7 @@ const getInTouchClassNames = computed(() => {
       }"
       @click="handleLogoClick"
       data-sound="click"
+      data-hoversound="hover"
       data-cursor="circle-white"
     >
       <Logo class="header-logo-image" />
@@ -89,6 +91,7 @@ const getInTouchClassNames = computed(() => {
         external
         :class="getInTouchClassNames"
         data-cursor="circle-white"
+        data-hoversound="hover"
         >{{ t("get-in-touch") }}</Button
       >
       <SoundsToggle class="header-sounds-toggle" :isDarkTheme="isDarkTheme" v-if="isFeatureEnabled('sounds')" />
@@ -192,7 +195,7 @@ const getInTouchClassNames = computed(() => {
     pointer-events: none;
 
     &-clickable {
-      pointer-events: auto;
+      pointer-events: all;
     }
 
     @include mixins.mq("md") {

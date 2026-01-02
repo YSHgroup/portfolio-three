@@ -21,6 +21,7 @@ const toggleSounds = () => {
     :aria-label="soundsEnabled && howlerUnlocked ? t('disable-sounds') : t('enable-sounds')"
     data-cursor="circle-white"
     data-sound="click"
+    data-hoversound="hover"
   >
     <Volume :active="soundsEnabled && howlerUnlocked" />
   </ButtonRound>

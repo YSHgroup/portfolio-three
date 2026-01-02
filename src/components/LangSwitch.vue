@@ -9,7 +9,13 @@ const handleLangSwitch = () => {
 </script>
 
 <template>
-  <Button variant="border" size="sm" @click="handleLangSwitch" data-cursor="circle-white" data-sound="click">{{
-    locale === "de" ? "EN" : "DE"
-  }}</Button>
+  <Button
+    variant="border"
+    size="sm"
+    @click="handleLangSwitch"
+    data-cursor="circle-white"
+    data-sound="click"
+    data-hoversound="hover"
+    >{{ locale === "de" ? "EN" : "DE" }}</Button
+  >
 </template>

@@ -33,6 +33,7 @@ const { withSocial = true } = defineProps<Props>();
         @keydown.enter="handleBackToTop"
         data-cursor="circle-white"
         data-sound="click"
+        data-hoversound="hover"
       >
         <ButtonRound renderAs="div" variant="border"><ArrowRightLong class="footer-back-to-top-icon" /></ButtonRound>
       </div>
@@ -47,6 +48,7 @@ const { withSocial = true } = defineProps<Props>();
                 :external="true"
                 data-cursor="circle-white"
                 data-sound="click"
+                data-hoversound="hover"
                 >{{ t("privacy") }}</Link
               >
             </Clickable>
@@ -57,6 +59,7 @@ const { withSocial = true } = defineProps<Props>();
                 :external="true"
                 data-cursor="circle-white"
                 data-sound="click"
+                data-hoversound="hover"
                 >{{ t("legal") }}</Link
               >
             </Clickable>
@@ -70,7 +73,12 @@ const { withSocial = true } = defineProps<Props>();
             {{ t("music-produced-by") }}
           </p>
           <Clickable renderAs="div">
-            <Link href="https://soundcloud.com/hmsurf" class="footer-link" external data-cursor="circle-white"
+            <Link
+              href="https://soundcloud.com/hmsurf"
+              class="footer-link"
+              external
+              data-cursor="circle-white"
+              data-hoversound="hover"
               >HM Surf</Link
             >
           </Clickable>

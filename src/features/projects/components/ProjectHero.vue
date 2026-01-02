@@ -34,7 +34,14 @@ watch(projectId, () => {
     </div>
     <p class="project-hero-description" v-html="content.description"></p>
     <div class="project-hero-buttons">
-      <Link v-if="content.live" :href="content.live" external class="project-hero-button" data-cursor="arrow-external">
+      <Link
+        v-if="content.live"
+        :href="content.live"
+        external
+        class="project-hero-button"
+        data-cursor="arrow-external"
+        data-hoversound="hover"
+      >
         <Button renderAs="div" variant="accent">{{ t("live-view") }}</Button>
       </Link>
       <Link
@@ -43,6 +50,7 @@ watch(projectId, () => {
         external
         class="project-hero-button"
         data-cursor="arrow-external"
+        data-hoversound="hover"
       >
         <Button renderAs="div" variant="border">{{ t("source-code") }}</Button>
       </Link>
