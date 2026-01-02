@@ -2,6 +2,7 @@ import { playSound } from "../utils/sounds";
 import { sprites } from "../definitions/sprites";
 import { sceneWeights } from "../../../animations/scenes";
 import { clamp } from "../../../utils/math";
+import { projectVisible } from "../../../composables/useRouteObserver";
 
 const SNORE_INTERVAL = 3300;
 
@@ -23,7 +24,8 @@ scheduleNextSnore();
 playSound("snore");
 
 export const tick = () => {
-  sprites.contact.howl.volume(clamp(sceneWeights.contact * 2, 0, 1));
+  const volume = projectVisible.value ? 0 : clamp(sceneWeights.contact * 2, 0, 1);
+  sprites.contact.howl.volume(volume);
 };
 
 export const stopSnoreRepetition = () => {

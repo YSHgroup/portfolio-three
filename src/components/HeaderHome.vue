@@ -79,6 +79,7 @@ onMounted(() => {
         @click="handleLinkClick('#' + section)"
         :is-dark-theme="isDarkTheme"
         :aria-label="ariaLabels[section]"
+        data-sound="click"
       >
         {{ t(section) }}
       </HeaderLink>
