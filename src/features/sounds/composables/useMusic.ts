@@ -7,10 +7,13 @@ import { sizes } from "../../../utils/sizes";
 import { howlerUnlocked, soundsEnabled } from "./useHowler";
 import { clamp } from "../../../utils/math";
 import { isFeatureEnabled } from "../../../utils/features";
+import { useAgent } from "../../../composables/useAgent";
 
 import type { MusicTrack } from "../types";
 
 export const useMusic = () => {
+  const { isTouch } = useAgent();
+
   const tickVolumes = () => {
     // If not on home route, always use base volume
     if (path.value !== "/") {
@@ -25,12 +28,12 @@ export const useMusic = () => {
 
   const tick = () => {
     if (!sizes.visible) return;
-    if (!soundsEnabled.value || !howlerUnlocked.value) return;
+    if (!soundsEnabled.value || !howlerUnlocked.value || isTouch.value) return;
     tickVolumes();
   };
 
   const play = (trackId: MusicTrack) => {
-    if (!isFeatureEnabled("sounds")) return;
+    if (!isFeatureEnabled("sounds") || isTouch.value) return;
     const track = musicTracks[trackId];
     if (!track || track.playing()) return;
     track.load();
@@ -39,7 +42,7 @@ export const useMusic = () => {
 
   watchEffect(() => {
     if (!isFeatureEnabled("sounds")) return;
-    if (!howlerUnlocked.value || !soundsEnabled.value) return;
+    if (!howlerUnlocked.value || !soundsEnabled.value || isTouch.value) return;
 
     play("luci");
     play("about");
