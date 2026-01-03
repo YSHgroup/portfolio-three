@@ -25,6 +25,7 @@ class Sizes extends EventEmitter<{
   visible: boolean;
   aspectRatio: number;
   isLandscape: boolean;
+  resizeObserver: ResizeObserver | null;
 
   constructor() {
     super();
@@ -35,13 +36,21 @@ class Sizes extends EventEmitter<{
     this.breakpoint = "md";
     this.visible = true;
     this.isLandscape = false;
+    this.resizeObserver = null;
 
     this.resize();
     this.init();
   }
 
   init() {
-    window.addEventListener("resize", this.resize.bind(this));
+    // Use ResizeObserver for more accurate and performant resize detection
+    this.resizeObserver = new ResizeObserver(() => {
+      this.resize();
+    });
+
+    // Observe the document element for size changes
+    this.resizeObserver.observe(document.documentElement);
+
     window.addEventListener("visibilitychange", this.visibilityChange.bind(this));
     this.resize();
   }
@@ -89,7 +98,10 @@ class Sizes extends EventEmitter<{
   }
 
   destroy() {
-    window.removeEventListener("resize", this.resize.bind(this));
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+      this.resizeObserver = null;
+    }
     window.removeEventListener("visibilitychange", this.visibilityChange.bind(this));
   }
 }
