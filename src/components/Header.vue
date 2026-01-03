@@ -177,10 +177,6 @@ const getInTouchClassNames = computed(() => {
 
   &-get-in-touch {
     display: none;
-    transition:
-      opacity 0.2s ease-in-out,
-      color 0.2s ease-in-out,
-      background-color 0.2s ease-in-out;
 
     @include mixins.mq("md") {
       display: flex;

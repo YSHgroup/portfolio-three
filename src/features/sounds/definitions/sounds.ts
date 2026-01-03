@@ -15,18 +15,18 @@ import soundNotification from "../../../assets/sounds/notification.mp3";
 import soundKeyboard from "../../../assets/sounds/keyboard.mp3";
 
 export const sounds = {
-  bird: { howl: new Howl({ src: [soundBird], loop: false, volume: 0.75 }) },
-  click: { howl: new Howl({ src: [soundClick], loop: false, volume: 1 }) },
+  bird: { howl: new Howl({ src: [soundBird], loop: false, volume: 0.75, preload: false }) },
+  click: { howl: new Howl({ src: [soundClick], loop: false, volume: 1, preload: false }) },
   gasp: { spriteKey: "contact", name: "gasp" },
-  hover0: { howl: new Howl({ src: [soundHover0], loop: false, volume: 0.075 }) },
-  hover1: { howl: new Howl({ src: [soundHover1], loop: false, volume: 0.075 }) },
-  hover2: { howl: new Howl({ src: [soundHover2], loop: false, volume: 0.075 }) },
-  hover3: { howl: new Howl({ src: [soundHover3], loop: false, volume: 0.075 }) },
-  keyboard: { howl: new Howl({ src: [soundKeyboard], loop: false, volume: 1 }) },
-  mouseWheel0: { howl: new Howl({ src: [soundMouseWheel0], loop: false, volume: 1 }) },
-  mouseWheel1: { howl: new Howl({ src: [soundMouseWheel1], loop: false, volume: 1 }) },
-  mouseWheel2: { howl: new Howl({ src: [soundMouseWheel2], loop: false, volume: 1 }) },
-  notification: { howl: new Howl({ src: [soundNotification], loop: false, volume: 0.5 }) },
+  hover0: { howl: new Howl({ src: [soundHover0], loop: false, volume: 0.05, preload: false }) },
+  hover1: { howl: new Howl({ src: [soundHover1], loop: false, volume: 0.05, preload: false }) },
+  hover2: { howl: new Howl({ src: [soundHover2], loop: false, volume: 0.05, preload: false }) },
+  hover3: { howl: new Howl({ src: [soundHover3], loop: false, volume: 0.05, preload: false }) },
+  keyboard: { howl: new Howl({ src: [soundKeyboard], loop: false, volume: 1, preload: false }) },
+  mouseWheel0: { howl: new Howl({ src: [soundMouseWheel0], loop: false, volume: 1, preload: false }) },
+  mouseWheel1: { howl: new Howl({ src: [soundMouseWheel1], loop: false, volume: 1, preload: false }) },
+  mouseWheel2: { howl: new Howl({ src: [soundMouseWheel2], loop: false, volume: 1, preload: false }) },
+  notification: { howl: new Howl({ src: [soundNotification], loop: false, volume: 0.5, preload: false }) },
   snore: { spriteKey: "contact", name: "snore" },
 } as const satisfies SoundsData;
 
