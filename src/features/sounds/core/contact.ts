@@ -3,21 +3,22 @@ import { sprites } from "../definitions/sprites";
 import { sceneWeights } from "../../../animations/scenes";
 import { clamp } from "../../../utils/math";
 import { projectVisible } from "../../../composables/useRouteObserver";
+import gsap from "gsap";
 
-const SNORE_INTERVAL = 2.0833332538604736 * 1000 * 2;
+const SNORE_INTERVAL = 2.0833332538604736 * 2;
 
-let snoreTimeout: number | null = null;
+let snoreTimeout: gsap.core.Tween | null = null;
 let currentId: number | undefined;
 
 const scheduleNextSnore = () => {
   if (snoreTimeout) {
-    clearTimeout(snoreTimeout);
+    snoreTimeout.kill();
   }
 
-  snoreTimeout = window.setTimeout(() => {
+  snoreTimeout = gsap.delayedCall(SNORE_INTERVAL, () => {
     currentId = playSound("snore");
     scheduleNextSnore();
-  }, SNORE_INTERVAL);
+  });
 };
 
 scheduleNextSnore();
@@ -30,7 +31,7 @@ export const tick = () => {
 
 export const stopSnoreRepetition = () => {
   if (snoreTimeout) {
-    clearTimeout(snoreTimeout);
+    snoreTimeout.kill();
     snoreTimeout = null;
   }
   if (currentId) {

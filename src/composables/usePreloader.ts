@@ -1,5 +1,6 @@
 import { ref, watch, onMounted } from "vue";
 import { resources } from "../utils/resources";
+import gsap from "gsap";
 
 export const preloaderVisible = ref(true);
 
@@ -27,11 +28,11 @@ export const usePreloader = () => {
       const rect = document.querySelector(".preloader-rect") as HTMLElement;
       const preloader = document.querySelector(".preloader") as HTMLElement;
       if (newProgress === 1) {
-        setTimeout(() => {
+        gsap.delayedCall(0.2, () => {
           document.body.classList.remove("is-loading");
           preloader.classList.add("preloader-hidden");
           preloaderVisible.value = false;
-        }, 200);
+        });
       }
 
       if (rect) rect.style.transform = `scaleY(${newProgress})`;
