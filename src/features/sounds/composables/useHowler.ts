@@ -6,8 +6,10 @@ import { isFeatureEnabled } from "../../../utils/features";
 import { tick as contactTick } from "../core/contact";
 import { useAgent } from "../../../composables/useAgent";
 import { stopSnoreRepetition } from "../core/contact";
+import { tick as roomTick } from "../core/room";
 import { sounds } from "../definitions/sounds";
 import { getSoundsHowl } from "../utils/sounds";
+
 import type { SoundKey } from "../types";
 
 export const howlerUnlocked = ref(false);
@@ -44,6 +46,7 @@ export const useHowler = () => {
     } else if (!isTouch.value) {
       // Only process sounds on non-touch devices
       contactTick();
+      roomTick();
 
       const currentVolume = Howler.volume();
       if (currentVolume > 0.99 && enabledVolume.value === 1) {
