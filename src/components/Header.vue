@@ -12,8 +12,10 @@ import ArrowRight from "./icons/ArrowRight.vue";
 import SoundsToggle from "./SoundsToggle.vue";
 import { isFeatureEnabled } from "../utils/features";
 import { useRouter } from "../composables/useRouter";
+import { useFirstRoute } from "../composables/useFirstRoute";
 
 const router = useRouter();
+const { isFirstRoute } = useFirstRoute();
 
 const scrolledPastHeroVisible = ref(false);
 const { isDarkTheme } = useHeaderTheme({
@@ -30,6 +32,16 @@ const { isDarkTheme } = useHeaderTheme({
     }
   },
 });
+
+const handleBackClick = () => {
+  // If it's the first route the user visited, navigate to home
+  // Otherwise, go back in browser history
+  if (isFirstRoute.value) {
+    router.push("/");
+  } else {
+    router.back();
+  }
+};
 
 const handleLogoClick = () => {
   if (!lenis.value) return;
@@ -59,7 +71,7 @@ const getInTouchClassNames = computed(() => {
       <ButtonRound
         v-if="projectId !== null"
         variant="accent"
-        @click="router.back()"
+        @click="handleBackClick"
         :aria-label="t('back-to-home')"
         :class="{ 'header-back': true, 'header-back-isProjectPage': projectId !== null }"
         data-cursor="circle-white"
