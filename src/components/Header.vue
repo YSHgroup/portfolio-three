@@ -143,7 +143,6 @@ const getInTouchClassNames = computed(() => {
 
     &-icon {
       width: 100%;
-      color: var(--color-accent-text-400);
       transform: rotate(180deg);
     }
 
