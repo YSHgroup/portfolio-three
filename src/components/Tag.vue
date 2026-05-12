@@ -1,47 +1,17 @@
 <script setup lang="ts">
 import { computed } from "vue";
-
-export type TagVariant =
-  | "three"
-  | "websockets"
-  | "react"
-  | "redis"
-  | "gray"
-  | "html"
-  | "css"
-  | "javascript"
-  | "node"
-  | "kubernetes"
-  | "postgresql"
-  | "ogl"
-  | "glsl";
+import { tagLabels, type TagVariant } from "./tagVariants";
 
 const props = defineProps<{
   variant: TagVariant;
 }>();
-
-const COPYS = {
-  three: "Three.js",
-  websockets: "WebSockets",
-  react: "React",
-  redis: "Redis",
-  gray: "Gray",
-  html: "HTML",
-  css: "CSS",
-  javascript: "JavaScript",
-  node: "Node.js",
-  kubernetes: "Kubernetes",
-  postgresql: "PostgreSQL",
-  ogl: "OGL.js",
-  glsl: "GLSL",
-} as const satisfies Record<TagVariant, string>;
 
 const classes = computed(() => ["tag", `tag-variant-${props.variant}`]);
 </script>
 
 <template>
   <div :class="classes">
-    <p class="tag-copy">{{ COPYS[props.variant] }}</p>
+    <p class="tag-copy">{{ tagLabels[props.variant] }}</p>
   </div>
 </template>
 
@@ -95,6 +65,11 @@ const classes = computed(() => ["tag", `tag-variant-${props.variant}`]);
     &-node {
       background-color: #237d23;
       color: white;
+    }
+
+    &-next {
+      background-color: white;
+      color: black;
     }
 
     &-kubernetes {

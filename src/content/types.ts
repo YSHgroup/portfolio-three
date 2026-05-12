@@ -1,6 +1,6 @@
 import { projectIds } from "./projects/index";
 
-import type { TagVariant } from "../components/Tag.vue";
+import type { TagVariant } from "../components/tagVariants";
 import type { ProjectComponent } from "../features/projects/types";
 
 export type ProjectId = (typeof projectIds)[number];
