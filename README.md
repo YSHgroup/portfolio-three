@@ -1,5 +1,26 @@
-# Vue 3 + TypeScript + Vite
+# Portfolio (2025)
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Personal portfolio site: project case studies, lightweight 3D and shader demos, bilingual copy (English and German).
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+Built with **Vue 3**, **TypeScript**, and **Vite**. Motion via **GSAP** and **Lenis**, 3D via **three.js**, audio via **Howler**. GLSL is compiled through **vite-plugin-glsl**.
+
+## Scripts
+
+| Command        | Description                          |
+| -------------- | ------------------------------------ |
+| `npm run dev`   | Dev server on port **3000** (`strictPort`) |
+| `npm run build` | `vue-tsc` then production bundle to `dist/` |
+| `npm run preview` | Serve the production build locally |
+| `npm run typecheck` | Typecheck only (`vue-tsc -b`) |
+
+## Content
+
+- **Projects**: `src/content/projects/{en,de}/<slug>.ts` — copy, tags, media, links. Slugs must align with `projectIds` in `src/content/projects/index.ts`.
+- **Previews / listing**: `src/content/projects/previews/`.
+- **Tags**: variants and labels live in `src/components/tagVariants.ts` (used by `Tag.vue` and content types).
+
+## Stack (high level)
+
+- Vue 3 (`<script setup>`), SCSS with shared mixins (`src/assets/styles/`)
+- i18n helpers under `src/i18n/`
+- WebGL / GLSL under `src/three/` where applicable
