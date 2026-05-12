@@ -1,11 +1,7 @@
-import videoCubeWar from "../../../assets/videos/cubewar.mp4";
-
-import cubewar0 from "../../../assets/images/projects/cubewar/cubewar-0.webp";
-import cubewar1 from "../../../assets/images/projects/cubewar/cubewar-1.webp";
-import cubewar2 from "../../../assets/images/projects/cubewar/cubewar-2.webp";
-import cubewar3 from "../../../assets/images/projects/cubewar/cubewar-3.webp";
-import cubewar4 from "../../../assets/images/projects/cubewar/cubewar-4.webp";
-import cubewar5 from "../../../assets/images/projects/cubewar/cubewar-5.webp";
+import streakon0 from "../../../assets/images/projects/streakon/streakon-0.webp";
+import streakon1 from "../../../assets/images/projects/streakon/streakon-1.webp";
+import streakon2 from "../../../assets/images/projects/streakon/streakon-2.webp";
+import streakon3 from "../../../assets/images/projects/streakon/streakon-3.webp";
 
 import type { ProjectContent } from "../../types";
 
@@ -21,63 +17,37 @@ export default {
     {
       type: "media",
       props: {
-        type: "video",
-        src: videoCubeWar,
-        caption: "Gameplay",
+        type: "image",
+        src: streakon0,
+        alt: "Solo- und Gruppen-Streaks",
+        caption: "Solo- und Gruppen-Streaks",
       },
     },
     {
       type: "media",
       props: {
         type: "image",
-        src: cubewar0,
-        alt: "Tutorial",
-        caption: "Tutorial",
+        src: streakon1,
+        alt: "Streak-Fortschritt",
+        caption: "Streak-Fortschritt",
       },
     },
     {
       type: "media",
       props: {
         type: "image",
-        src: cubewar1,
-        alt: "Karten Themen",
-        caption: "Karten Themen",
+        src: streakon2,
+        alt: "Freunde anfeuern",
+        caption: "Freunde anfeuern",
       },
     },
     {
       type: "media",
       props: {
         type: "image",
-        src: cubewar2,
-        alt: "Authentifizierung",
-        caption: "Authentifizierung",
-      },
-    },
-    {
-      type: "media",
-      props: {
-        type: "image",
-        src: cubewar3,
-        alt: "Responsives Design",
-        caption: "Responsives Design",
-      },
-    },
-    {
-      type: "media",
-      props: {
-        type: "image",
-        src: cubewar4,
-        alt: "Mehrere Spielmodi",
-        caption: "Mehrere Spielmodi",
-      },
-    },
-    {
-      type: "media",
-      props: {
-        type: "image",
-        src: cubewar5,
-        alt: "Party-System",
-        caption: "Party-System",
+        src: streakon3,
+        alt: "Einladungs-Flow",
+        caption: "Einladungs-Flow",
       },
     },
   ],
