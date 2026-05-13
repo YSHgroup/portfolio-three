@@ -8,7 +8,7 @@ import type { ProjectContent } from "../../types";
 export default {
   title: "StreakOn",
   theme: "dark",
-  tags: ["three", "node", "websockets", "kubernetes", "redis"],
+  tags: ["next", "node", "postgresql", "redis"],
   videoBorder: false,
   live: "https://www.streakon.app",
   description:

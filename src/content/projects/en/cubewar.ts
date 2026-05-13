@@ -12,7 +12,7 @@ import type { ProjectContent } from "../../types";
 export default {
   title: "CubeWar",
   theme: "dark",
-  tags: ["three", "node", "websockets", "kubernetes", "redis"],
+  tags: ["three", "node", "websockets", "redis"],
   videoBorder: false,
   live: "https://cubewar.io",
   description:
