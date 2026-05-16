@@ -46,11 +46,13 @@ const classes = computed(() => [
   &-accent {
     background-color: var(--color-accent-400, var(--color-orange-400));
     color: var(--color-accent-text-400, var(--color-white-400));
+    --icon-color: var(--color-accent-text-400, var(--color-white-400));
 
     @include mixins.hover {
       &:hover {
         background-color: var(--color-hover, var(--color-black-400));
         color: var(--color-hover-text, var(--color-white-400));
+        --icon-color: var(--color-hover-text, var(--color-white-400));
       }
     }
   }
@@ -58,11 +60,13 @@ const classes = computed(() => [
   &-theme {
     background-color: var(--color-grayscale-500);
     color: var(--color-text-400);
+    --icon-color: var(--color-text-400);
 
     @include mixins.hover {
       &:hover {
-        background-color: var(--color-hover);
+        background-color: var(--color-hover, var(--color-black-400));
         color: var(--color-white-400);
+        --icon-color: var(--color-white-400);
       }
     }
   }
@@ -70,11 +74,13 @@ const classes = computed(() => [
   &-background {
     background-color: var(--color-background-400);
     color: var(--color-text-400);
+    --icon-color: var(--color-text-400);
 
     @include mixins.hover {
       &:hover {
         background-color: var(--color-text-400);
         color: var(--color-background-400);
+        --icon-color: var(--color-background-400);
       }
     }
   }
@@ -82,6 +88,7 @@ const classes = computed(() => [
   &-gray {
     background-color: var(--color-gray-400);
     color: var(--color-white-400);
+    --icon-color: var(--color-white-400);
 
     @include mixins.hover {
       &:hover {
@@ -93,11 +100,13 @@ const classes = computed(() => [
   &-border {
     border: 2px solid var(--color-grayscale-400);
     color: var(--color-text-400);
+    --icon-color: var(--color-text-400);
 
     @include mixins.hover {
       &:hover {
         background-color: var(--color-hover, var(--color-black-400));
         color: var(--color-white-400);
+        --icon-color: var(--color-white-400);
         border-color: var(--color-hover, var(--color-black-400));
       }
     }

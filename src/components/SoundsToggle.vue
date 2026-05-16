@@ -36,6 +36,7 @@ const toggleSounds = () => {
   &-dark {
     background-color: var(--color-dark-blue-500);
     color: var(--color-white-400);
+    --icon-color: var(--color-white-400);
   }
 }
 </style>

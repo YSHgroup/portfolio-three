@@ -6,6 +6,6 @@
 
 <style scoped lang="scss">
 .logo-svg {
-  fill: currentColor;
+  fill: var(--icon-color);
 }
 </style>

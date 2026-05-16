@@ -122,6 +122,7 @@ onMounted(loadPreviews);
       left: 0;
       transform: translateY(-100%);
       color: var(--color-beige-400);
+      --icon-color: var(--color-beige-400);
     }
 
     &-end {
@@ -129,6 +130,7 @@ onMounted(loadPreviews);
       bottom: 0;
       left: 0;
       color: var(--color-beige-600);
+      --icon-color: var(--color-beige-600);
     }
   }
 

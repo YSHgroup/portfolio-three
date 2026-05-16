@@ -27,6 +27,7 @@ const { project } = defineProps<{
   padding-right: var(--space-sm);
   border-radius: var(--radius-md);
   color: var(--color-text-400);
+  --icon-color: var(--color-text-400);
   transition: background-color 0.1s ease-in-out;
   display: flex;
   flex-direction: row;
@@ -81,6 +82,7 @@ const { project } = defineProps<{
   &-arrow {
     width: var(--icon-size-md);
     color: var(--color-text-300);
+    --icon-color: var(--color-text-400);
   }
 
   &-image {

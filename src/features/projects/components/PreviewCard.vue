@@ -146,6 +146,7 @@ onUnmounted(() => {
   &-notch {
     position: absolute;
     color: var(--color-beige-400);
+    --icon-color: var(--color-beige-400);
     transform: scale(-1) rotate(90deg);
     height: var(--radius-lg);
 
@@ -214,6 +215,7 @@ onUnmounted(() => {
       &-icon {
         width: var(--icon-size-lg);
         color: var(--color-text-300);
+        --icon-color: var(--color-text-300);
         --stroke-width: 4px;
       }
     }

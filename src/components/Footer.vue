@@ -184,6 +184,7 @@ const { withSocial = true } = defineProps<Props>();
     left: 0;
     transform: translateY(-100%);
     color: var(--color-background-300, var(--color-beige-400));
+    --icon-color: var(--color-background-300, var(--color-beige-400));
   }
 }
 </style>

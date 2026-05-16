@@ -184,6 +184,7 @@ const getInTouchClassNames = computed(() => {
 
   &-dark {
     color: var(--color-white-400);
+    --icon-color: var(--color-white-400);
   }
 
   &-get-in-touch {

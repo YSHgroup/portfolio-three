@@ -6,14 +6,14 @@
       width="236"
       height="174"
       rx="20"
-      stroke="currentColor"
+      stroke="var(--icon-color)"
       stroke-width="var(--stroke-md)"
       vector-effect="non-scaling-stroke"
       fill="none"
     />
     <path
       d="M16.5 46.5L114.918 126.742C122.25 132.72 132.768 132.743 140.126 126.797L239.5 46.5"
-      stroke="currentColor"
+      stroke="var(--icon-color)"
       stroke-width="var(--stroke-md)"
       vector-effect="non-scaling-stroke"
       stroke-linecap="round"

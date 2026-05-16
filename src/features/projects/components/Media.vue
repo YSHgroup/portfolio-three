@@ -124,6 +124,7 @@ onMounted(async () => {
     &-notch {
       position: absolute;
       color: var(--color-background-400);
+      --icon-color: var(--color-background-400);
       width: var(--radius-md);
 
       @include mixins.mq("md") {

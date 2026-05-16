@@ -179,6 +179,7 @@ onUnmounted(() => {
 
     &-icon {
       color: var(--color-accent-text-400, var(--color-white-400));
+      --icon-color: var(--color-accent-text-400, var(--color-white-400));
       width: 24px;
     }
   }
@@ -198,6 +199,7 @@ onUnmounted(() => {
 
     &-icon {
       color: var(--color-accent-text-400, var(--color-white-400));
+      --icon-color: var(--color-accent-text-400, var(--color-white-400));
       width: 24px;
       transform: rotate(-45deg);
     }

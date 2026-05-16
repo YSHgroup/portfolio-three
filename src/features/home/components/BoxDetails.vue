@@ -213,6 +213,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
   &-icon {
     width: var(--icon-size-xxs);
     transform: translateY(-1px);
+    --icon-color: var(--color-white-400);
 
     @include mixins.mq("md") {
       width: var(--icon-size-xs);
