@@ -24,3 +24,20 @@ Built with **Vue 3**, **TypeScript**, and **Vite**. Motion via **GSAP** and **Le
 - Vue 3 (`<script setup>`), SCSS with shared mixins (`src/assets/styles/`)
 - i18n helpers under `src/i18n/`
 - WebGL / GLSL under `src/three/` where applicable
+
+## Credits & Attribution
+
+This project was created and designed by David Hckh.
+
+If you use this project or substantial parts of its source code as a base for your own portfolio or work, attribution must be preserved.
+
+Please keep:
+
+- existing credit comments in the source code
+- this attribution section in the README
+- a visible reference to the original project/repository in derivative works
+
+Original portfolio:
+-> https://david-hckh.com
+
+Commercial reuse or redistribution of substantial portions of this project without permission is prohibited.
