@@ -27,7 +27,7 @@ Built with **Vue 3**, **TypeScript**, and **Vite**. Motion via **GSAP** and **Le
 
 ## Credits & Attribution
 
-This project was created and designed by David Hckh.
+This project was created and designed by David Heckhoff.
 
 If you use this project or substantial parts of its source code as a base for your own portfolio or work, attribution must be preserved.
 
