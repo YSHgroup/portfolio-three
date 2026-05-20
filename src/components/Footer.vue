@@ -20,6 +20,7 @@ const handleBackToTop = () => {
 };
 
 const { withSocial = true } = defineProps<Props>();
+const showAttribution = import.meta.env.VITE_SHOW_ATTRIBUTION !== "false";
 </script>
 
 <template>
@@ -69,9 +70,9 @@ const { withSocial = true } = defineProps<Props>();
         </div>
       </div>
       <div class="footer-credits">
-        <div class="footer-credits-built">
+        <div v-if="showAttribution" class="footer-credits-built">
           <p>
-            {{ t("built-by") }}
+            {{ t("original-concept-by") }}
           </p>
           <Clickable renderAs="div">
             <Link
@@ -184,6 +185,7 @@ const { withSocial = true } = defineProps<Props>();
     gap: var(--space-sm);
     width: 100%;
     font-size: var(--font-size-sm);
+    text-align: center;
 
     &-built,
     &-music {
