@@ -1,11 +1,11 @@
-Copyright (c) 2026 David Heckhoff
+Copyright (c) 2026 David Chan
 
 Original portfolio:
-https://david-hckh.com
+https://david-chan.com
 
 Permission is hereby granted to use, copy, modify, and distribute this software for personal and educational purposes only, subject to the following conditions:
 
-1. Attribution to the original author (David Heckhoff) and the original portfolio link (https://david-hckh.com) must be clearly visible in:
+1. Attribution to the original author (David Chan) and the original portfolio link (https://david-chan.com) must be clearly visible in:
    - the source code,
    - the repository README,
    - and any public deployment using substantial portions of this project.
